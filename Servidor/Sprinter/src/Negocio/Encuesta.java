@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Negocio;
 
 /**
  *
  * @author usuario
  */
-public class SprintBacklog extends Backlog {
+public class Encuesta {
     
-    int cantidadSeleccionada;
-    
-    public void definirCantidad(){        
+    public void empezarEncuesta(IntegranteScrumTeam integrante){
     }
     
 }

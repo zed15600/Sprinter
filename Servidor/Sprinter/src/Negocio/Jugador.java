@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Negocio;
 
 import java.util.ArrayList;
 
@@ -11,17 +11,16 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class Configuracion {
+public class Jugador {
     
-    private Partida partida;
-    private ArrayList<Proyecto> listaDeProyectos;
-    
-    public void crearPartida(){
+    private String nombre;
+    private String ID;
+
+    public Jugador(String nombre, String ID) {
+        this.nombre = nombre;
+        this.ID = ID;
     }
     
-    public void descargarDatos(){        
-    }
-    
-    public void agregarProyecto(){        
+    public void votar(HistoriaDeUsuario HU){
     }
 }

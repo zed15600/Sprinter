@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Negocio;
 
 /**
  *
  * @author usuario
  */
-public class Encuesta {
+public class Criterio {
     
-    public void empezarEncuesta(IntegranteScrumTeam integrante){
+    String descripcion;
+    
+    boolean completitud;
+    
+    public Criterio(String descripcion){
+        this.descripcion = descripcion;
     }
-    
 }

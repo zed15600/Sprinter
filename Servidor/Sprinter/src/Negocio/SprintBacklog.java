@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Negocio;
 
 /**
  *
  * @author usuario
  */
-public class Criterio {
+public class SprintBacklog extends Backlog {
     
-    String descripcion;
+    int cantidadSeleccionada;
     
-    boolean completitud;
-    
-    public Criterio(String descripcion){
-        this.descripcion = descripcion;
+    public void definirCantidad(){        
     }
+    
 }
