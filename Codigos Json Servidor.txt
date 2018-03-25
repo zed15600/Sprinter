@@ -1,0 +1,3 @@
+código	proceso
+0001	terminar sprint
+0002	terminar día

@@ -33,4 +33,8 @@ public class Partida {
     public void quitarJugador (Jugador jugador){        
     }
     
+    public Proyecto getProyecto(){
+        return this.proyecto;
+    }
+    
 }

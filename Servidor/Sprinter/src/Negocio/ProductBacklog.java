@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-class ProductBacklog extends Backlog{
+public class ProductBacklog extends Backlog{
 
     private ArrayList<HistoriaDeUsuario> listaDeCompletadas;
     

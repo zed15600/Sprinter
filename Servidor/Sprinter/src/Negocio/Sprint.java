@@ -9,17 +9,25 @@ package Negocio;
  *
  * @author usuario
  */
-class Sprint {
+public class Sprint {
     private SprintBacklog sprintBacklog;
     private int duracion;
     private String numeroDeSprint;
-    private int diaActual;
+    private boolean estado;
 
     public Sprint(SprintBacklog sprintBacklog, int duracion, String numeroDeSprint) {
         this.sprintBacklog = sprintBacklog;
         this.duracion = duracion;
         this.numeroDeSprint = numeroDeSprint;
-        this.diaActual = 0;
+        this.estado = false;
+    }
+    
+    public void terminarSprint(){
+        this.estado = true;
+    }
+    
+    public SprintBacklog getSprintBacklog(){
+        return this.sprintBacklog;
     }
     
     public void elegirHistoria(){

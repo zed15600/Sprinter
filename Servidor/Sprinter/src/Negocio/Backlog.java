@@ -26,4 +26,8 @@ public class Backlog {
     public void quitarHistoria(HistoriaDeUsuario historia){
         
     }
+    
+    public ArrayList<HistoriaDeUsuario> getHUs(){
+        return this.listaDeHistorias;
+    }
 }
