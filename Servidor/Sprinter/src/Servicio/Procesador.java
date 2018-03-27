@@ -44,7 +44,7 @@ public class Procesador {
         Proyecto p = partidas.get(partidaID).getProyecto();
         Sprint actual = p.getSprints().get(p.getSprintActual());
         actual.terminarSprint();
-        p.nexSprint();
+        p.nextSprint();
         return JsonStrings.terminarSprint(actual.getSprintBacklog());
     }
     

@@ -30,7 +30,7 @@ public class Proyecto {
     public void terminarJuego(){        
     }
     
-    public void nexSprint(){
+    public void nextSprint(){
         this.sprintActual++;
     }
     
