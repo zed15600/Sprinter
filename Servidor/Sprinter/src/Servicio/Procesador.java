@@ -69,14 +69,14 @@ public class Procesador {
     
     
     public void sembrarPartida(){
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario("Descripción HU 1 Ganada");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario("Descripción HU 2 Ganada");
+        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada");
+        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada");
         ProductBacklog productBacklogGanado = new ProductBacklog();
         ArrayList<Sprint> sprintsGanados = new ArrayList<Sprint>();
             SprintBacklog sprintBacklogGanado1 = new SprintBacklog();
                 sprintBacklogGanado1.agregarHistoria(huGanada1);
                 sprintBacklogGanado1.agregarHistoria(huGanada2);
-            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 5, "1");
+            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 1);
             sprintsGanados.add(sprintGanado1);
         Proyecto proyectoGanado = new Proyecto(5);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);

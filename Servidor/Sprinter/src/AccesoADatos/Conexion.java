@@ -8,6 +8,7 @@ package AccesoADatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,9 +23,17 @@ public class Conexion {
      * @throws SQLException
      */
     public Connection conectar() throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        try {
         Class.forName("com.mysql.jdbc.Driver");
-        //Insertar aqui los datos de su base de datos: puerto de localhost, usuario de base de datos en MySQL, contraseña.
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sprinter", "root", "Azopardo234432qw");
+        String servidor = "jdbc:mysql://localhost:3306/sprinter";
+        String usuario = "root";
+        String contraseña = "Azopardo234432qw";
+        DriverManager.getConnection(servidor, usuario, contraseña);
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
+                    + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }        
         return conn;
     }
 }

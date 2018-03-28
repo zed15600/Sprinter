@@ -11,10 +11,10 @@ package Negocio;
  */
 public class Sprint {
     private SprintBacklog sprintBacklog;
-    private String numeroDeSprint;
+    private int numeroDeSprint;
     private boolean estado;
 
-    public Sprint(SprintBacklog sprintBacklog, String numeroDeSprint) {
+    public Sprint(SprintBacklog sprintBacklog, int numeroDeSprint) {
         this.sprintBacklog = sprintBacklog;
         this.numeroDeSprint = numeroDeSprint;
         this.estado = false;
