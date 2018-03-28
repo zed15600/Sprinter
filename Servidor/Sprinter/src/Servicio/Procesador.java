@@ -32,12 +32,20 @@ public class Procesador {
             Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(json!=null){
+            int pID = (int)json.get("partidaID");
             switch((int)json.get("code")){
-                case 1:
-                    return terminarSprint((int)json.get("partidaID"));
+                case 1: return terminarSprint(pID);
+                case 2: return determinarVictoria(pID);
+                case 3: return terminarDia(pID);
             }
         }
         return "";
+    }
+    
+    private String terminarDia(int partidaID){
+        Proyecto p = partidas.get(partidaID).getProyecto();
+        p.nextDia();
+        return JsonStrings.terminarDia(p);
     }
     
     private String terminarSprint(int partidaID){
@@ -48,8 +56,11 @@ public class Procesador {
         return JsonStrings.terminarSprint(actual.getSprintBacklog());
     }
     
-    private String determinarVictoria(){
-        return "";
+    private String determinarVictoria(int partidaID){
+        Proyecto p = partidas.get(partidaID).getProyecto();
+        boolean resultado = p.terminarJuego();
+        partidas.remove(partidaID);
+        return JsonStrings.determinarVictoria(resultado);
     }
     
     
@@ -58,16 +69,16 @@ public class Procesador {
     
     
     public void sembrarPartida(){
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario("Descripción HU 1 Ganada");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario("Descripción HU 2 Ganada");
+        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada");
+        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada");
         ProductBacklog productBacklogGanado = new ProductBacklog();
         ArrayList<Sprint> sprintsGanados = new ArrayList<Sprint>();
             SprintBacklog sprintBacklogGanado1 = new SprintBacklog();
                 sprintBacklogGanado1.agregarHistoria(huGanada1);
                 sprintBacklogGanado1.agregarHistoria(huGanada2);
-            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 5, "1");
+            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 1);
             sprintsGanados.add(sprintGanado1);
-        Proyecto proyectoGanado = new Proyecto(sprintsGanados, productBacklogGanado, 5);
+        Proyecto proyectoGanado = new Proyecto(5);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
         partidas.put(123, partidaGanada);
     }

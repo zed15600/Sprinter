@@ -19,15 +19,25 @@ public class Proyecto {
     private int diaActual;
     private int sprintActual;
     
-    public Proyecto (ArrayList<Sprint> listaDeSprints, ProductBacklog productBacklog, int duracionDeSprints){
-        this.listaDeSprints = listaDeSprints;
-        this.productBacklog = productBacklog;
+    public Proyecto (int duracionDeSprints){
+        this.listaDeSprints = new ArrayList();
+        this.productBacklog = new ProductBacklog();
         this.duracionDeSprints = duracionDeSprints;
         this.diaActual = 1;
         this.sprintActual = 1;
     }
     
-    public void terminarJuego(){        
+    public boolean terminarJuego(){
+        boolean victoria = true;
+        ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
+        for(int i=0; i<historias.size(); i++){
+            victoria &= historias.get(i).getEstado();
+        }
+        return victoria;
+    }
+    
+    public void nextDia(){
+        this.diaActual++;
     }
     
     public void nextSprint(){
@@ -36,6 +46,10 @@ public class Proyecto {
     
     public ArrayList<Sprint> getSprints(){
         return this.listaDeSprints;
+    }
+    
+    public int getDiaActual(){
+        return this.diaActual;
     }
     
     public int getSprintActual(){

@@ -1,2 +1,4 @@
-Código	vista a mostrar
-0001	retrospectiva
+Código	vista a mostrar		ejemplo
+0001	retrospectiva		{"codigo":0001, "HUs":{"1":739, "2":1250, "3":987}}
+0002	fin del juego		{"codigo":0002, "resultado":"victoria"}
+0003	spritn			{"codigo":0003, "sprintActual":2, "diaActual":9, "HUs":{"1":5, "2":7}}
