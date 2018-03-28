@@ -1,2 +1,3 @@
-Código	vista a mostrar
-0001	retrospectiva
+Código	vista a mostrar		ejemplo
+0001	retrospectiva		{"codigo":0001, "hus":{"1":739, "2":1250, "3":987}}
+0002	fin del juego		{"codigo":0002, "resultado":"victoria"}

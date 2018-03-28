@@ -13,14 +13,18 @@ import java.util.ArrayList;
  */
 public class ProductBacklog extends Backlog{
 
-    private ArrayList<HistoriaDeUsuario> listaDeCompletadas;
+    private ArrayList<HistoriaDeUsuario> listaDeHistorias;
     
     public ProductBacklog(){
-        this.listaDeCompletadas = new ArrayList();
+        this.listaDeHistorias = new ArrayList();
     }
     
-    public void agregarACompletadas(HistoriaDeUsuario historia){
+    public void terminarHistoria(HistoriaDeUsuario historia){
         
+    }
+    
+    public ArrayList<HistoriaDeUsuario> getHistorias(){
+        return listaDeHistorias;
     }
     
 }

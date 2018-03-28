@@ -11,13 +11,11 @@ package Negocio;
  */
 public class Sprint {
     private SprintBacklog sprintBacklog;
-    private int duracion;
     private String numeroDeSprint;
     private boolean estado;
 
-    public Sprint(SprintBacklog sprintBacklog, int duracion, String numeroDeSprint) {
+    public Sprint(SprintBacklog sprintBacklog, String numeroDeSprint) {
         this.sprintBacklog = sprintBacklog;
-        this.duracion = duracion;
         this.numeroDeSprint = numeroDeSprint;
         this.estado = false;
     }
@@ -26,9 +24,6 @@ public class Sprint {
         this.estado = true;
     }
     
-    public SprintBacklog getSprintBacklog(){
-        return this.sprintBacklog;
-    }
     
     public void elegirHistoria(){
         
@@ -38,4 +33,7 @@ public class Sprint {
         
     }
     
+    public SprintBacklog getSprintBacklog(){
+        return this.sprintBacklog;
+    }
 }
