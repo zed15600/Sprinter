@@ -5,21 +5,12 @@
  */
 package Servicio;
 
-import Negocio.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -27,22 +18,27 @@ import org.json.simple.parser.ParseException;
  */
 public class ConexionTCP {
     
+    /*
+    Aquí se crea la conexión del servidor hacia el mundo.
+    Se crea un objeto Procesador que es el que lleva a cabo todas las acciones
+    en base al String que la conexión lee desde el puerto (5173).
+    socket.accept() abre el puerto y se queda esperando hasta que recibe una conexión.
+    inData.readLine() almacena en una variable String el mensaje que recibe por el puerto.
+    proc.procesarJson(in) envía el String de entrada al procesador y retorna un String respuesta.
+    outData.writeBytes(out + "\n") devuelve a quién inició la conexión el String respuesta,
+    el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
+    */
     public static void main(String args[]) throws IOException{
         Procesador proc = new Procesador();
         ServerSocket socket = new ServerSocket(5173);
-            //System.out.println("Creado");
         String in, out;
         while(true){
-            //System.out.println("Abriendo socket");
             Socket connectionSocket = socket.accept();
-            //System.out.println("Abierto");
             InputStreamReader isr = new InputStreamReader(connectionSocket.getInputStream());
             BufferedReader inData = new BufferedReader(isr);
             DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
-            //System.out.println("Leyendo");
             in = inData.readLine();
             out = proc.procesarJson(in);
-            //System.out.println("Leido");
             outData.writeBytes(out + "\n");
         }
     }

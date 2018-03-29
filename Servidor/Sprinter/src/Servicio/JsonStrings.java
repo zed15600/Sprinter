@@ -16,6 +16,11 @@ import java.util.ArrayList;
  */
 public class JsonStrings {
     
+    /*
+    Recibe un Proyecto y retorna un String con el código para la vista Sprint, 
+    el sprint actual, el día actual del proyecto y una lista con los identificadores
+    de las historias de usaurio correspondientes, en formato Json.
+    */
     protected static String terminarDia(Proyecto p){
         String res = "{\"codigo\":0003, "
                 + "\"sprintActual\":"+p.getSprintActual()+", "
@@ -29,6 +34,11 @@ public class JsonStrings {
         return res;
     }
     
+    /*
+    Recibe un SprintBacklog y retorna un String con el código para la vista 
+    Retrospectiva y una lista con los identificadores de las historias de usuario,
+    en formato Json.
+    */
     protected static String terminarSprint(SprintBacklog sprntBcklg){
         ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHUs();
         String HUs = "{\"codigo\":0001, "
@@ -41,6 +51,10 @@ public class JsonStrings {
         return HUs;
     }
     
+    /*
+    Recibe un booleano y retorna un String con el código para la vista Fin del 
+    Juego y el resultado de la partida (Victoria o Derrota), en formato Json.
+    */
     protected static String determinarVictoria(boolean resultado){
         String res = "{"
                 + "\"codigo\":0002, "
