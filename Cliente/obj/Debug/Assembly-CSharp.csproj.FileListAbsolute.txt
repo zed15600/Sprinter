@@ -1,0 +1,2 @@
+C:\Users\usuario\Git\Sprinter\Cliente\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\usuario\Git\Sprinter\Cliente\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

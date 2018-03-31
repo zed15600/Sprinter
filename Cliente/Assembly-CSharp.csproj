@@ -51,6 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ClientApplication.cs" />
+     <Compile Include="Assets\ClienteControlador.cs" />
+     <Compile Include="Assets\ClienteModelo.cs" />
+     <Compile Include="Assets\ClienteVista.cs" />
      <Compile Include="Assets\Modern UI Pack\Scripts\LaunchURL.cs" />
      <Compile Include="Assets\Modern UI Pack\Scripts\PBFilled.cs" />
      <Compile Include="Assets\Modern UI Pack\Scripts\ProgressBar.cs" />
