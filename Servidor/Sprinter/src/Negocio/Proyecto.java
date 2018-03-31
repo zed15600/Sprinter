@@ -15,11 +15,15 @@ public class Proyecto {
     
     private ArrayList<Sprint> listaDeSprints;
     private ProductBacklog productBacklog;
+    private String nombre;
+    private String descripcion;
     private int duracionDeSprints;
     private int diaActual;
     private int sprintActual;
     
-    public Proyecto (int duracionDeSprints){
+    public Proyecto (String nombre, String descripcion, int duracionDeSprints){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.listaDeSprints = new ArrayList();
         this.productBacklog = new ProductBacklog();
         this.duracionDeSprints = duracionDeSprints;
@@ -50,6 +54,14 @@ public class Proyecto {
     
     public int getDiaActual(){
         return this.diaActual;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
     
     public int getSprintActual(){

@@ -257,6 +257,9 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/usuario/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -278,17 +281,14 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/usuario/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Modern UI Pack\Scripts\LaunchURL.cs" />
-    <Compile Include="Assets\Modern UI Pack\Scripts\PBFilled.cs" />
-    <Compile Include="Assets\Modern UI Pack\Scripts\ProgressBar.cs" />
-    <Compile Include="Assets\Modern UI Pack\Scripts\RatingSystem.cs" />
-    <Compile Include="Assets\Modern UI Pack\Scripts\SwitchAnim.cs" />
-    <Compile Include="Assets\Modern UI Pack\Scripts\ToggleAnim.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\LaunchURL.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\PBFilled.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\ProgressBar.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\RatingSystem.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\SwitchAnim.cs" />
+    <Compile Include="Assets\Assets\Modern UI Pack\Scripts\ToggleAnim.cs" />
     <Compile Include="Assets\Scripts\ClientApplication.cs" />
     <Compile Include="Assets\Scripts\Controlador\ClienteControlador.cs" />
     <Compile Include="Assets\Scripts\Modelo\ClienteModelo.cs" />
@@ -296,7 +296,7 @@
     <Compile Include="Assets\Scripts\Vista\VistaScrumPlanning.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Modern UI Pack\Read Me.txt" />
+    <None Include="Assets\Assets\Modern UI Pack\Read Me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

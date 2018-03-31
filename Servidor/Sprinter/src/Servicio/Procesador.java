@@ -45,6 +45,7 @@ public class Procesador {
                 case 1: return terminarSprint(pID);
                 case 2: return determinarVictoria(pID);
                 case 3: return terminarDia(pID);
+                case 4: return scrumPlanning(pID);
             }
         }
         return "";
@@ -99,6 +100,20 @@ public class Procesador {
         return JsonStrings.determinarVictoria(resultado);
     }
     
+    /**
+    * Recibe el id de una partida y obtiene los datos de su proyecto asociado, 
+    * llama el metodo scrumPlanning de JsonStrings para crear el Json de la vista
+    * correspondiente.
+    * @param partidaID id de la partida.
+    * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
+    */
+    private String scrumPlanning(int partidaID){
+        Proyecto p = partidas.get(partidaID).getProyecto();
+        String nombre = p.getNombre();
+        String descripcion = p.getDescripcion();
+        return JsonStrings.scrumPlanning(nombre, descripcion);
+    }
+    
     
     
     
@@ -118,7 +133,7 @@ public class Procesador {
                 sprintBacklogGanado1.agregarHistoria(huGanada2);
             Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 1);
             sprintsGanados.add(sprintGanado1);
-        Proyecto proyectoGanado = new Proyecto(5);
+        Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
         partidas.put(123, partidaGanada);
     }

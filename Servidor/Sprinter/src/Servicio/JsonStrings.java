@@ -62,5 +62,20 @@ public class JsonStrings {
                 + "}";
         return res;
     }
+
+    /**
+     * Retorna el String en formato Json con los datos del proyecto: nombre y descripcion.
+     * @param nombre nombre del proyecto.
+     * @param descripcion descripcion del proyecto.
+     * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
+     */
+    protected static String scrumPlanning(String nombre, String descripcion) {
+        String res = "{"
+                + "\"codigo\":0004, "
+                + "\"nombre\":\""+nombre+"\","
+                + "\"descripcion\":\""+descripcion+"\""
+                + "}";
+        return res;
+    }
     
 }
