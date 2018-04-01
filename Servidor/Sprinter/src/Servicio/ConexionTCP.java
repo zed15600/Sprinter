@@ -29,7 +29,10 @@ public class ConexionTCP {
     el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
     */
     public static void main(String args[]) throws IOException{
+        
         Procesador proc = new Procesador();
+        //Partida Sembrada
+        proc.sembrarPartida();
         ServerSocket socket = new ServerSocket(5173);
         String in, out;
         while(true){

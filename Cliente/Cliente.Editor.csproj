@@ -293,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\Modern UI Pack\Read Me.txt" />
+    <None Include="Assets\Boomlagoon\JSON\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

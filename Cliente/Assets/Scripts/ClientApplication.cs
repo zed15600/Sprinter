@@ -9,11 +9,10 @@ public class ClientApplication : MonoBehaviour {
 	public ClienteModelo modelo;
 	public ClienteVista vista;
 	public ClienteControlador controlador;
+    public WebClient webClient;
+    public JsonString JsonString;
 
 	// Use this for initialization
 	void Start () {
-        modelo = new ClienteModelo();
-        vista = new ClienteVista();
-        controlador = new ClienteControlador();
 	}
 }

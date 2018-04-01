@@ -1,6 +1,6 @@
 ﻿public class Proyecto {
-    private string nombre;
-    private string descripcion;
+    private string nombre = "";
+    private string descripcion = "";
 
     public Proyecto(string nombre, string descripcion)
     {
@@ -19,11 +19,36 @@
     }
 }
 
-public class ClienteModelo : ClientElement {
-    private Proyecto proyecto = new Proyecto("Castillo", "Construir un Castillo");
+public class Partida
+{
+    private string id;
 
+    public Partida(string id) { 
+        this.id = id;
+    }
+
+    public string getID()
+    {
+        return id;
+    }
+}
+
+public class ClienteModelo : ClientElement {
+
+    private Partida partida = new Partida("1234");
+
+    private Proyecto proyecto = new Proyecto("", "");
 
     public Proyecto getProyecto() {
         return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto)
+    {
+        this.proyecto = proyecto;
+    }
+    public Partida getPartida()
+    {
+        return partida;
     }
 }

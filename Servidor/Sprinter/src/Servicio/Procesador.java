@@ -40,8 +40,8 @@ public class Procesador {
             Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(json!=null){
-            int pID = (int)json.get("partidaID");
-            switch((int)json.get("code")){
+            int pID = Integer.valueOf(json.get("partidaID").toString());
+            switch(Integer.valueOf(json.get("codigo").toString())){
                 case 1: return terminarSprint(pID);
                 case 2: return determinarVictoria(pID);
                 case 3: return terminarDia(pID);
@@ -135,6 +135,6 @@ public class Procesador {
             sprintsGanados.add(sprintGanado1);
         Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
-        partidas.put(123, partidaGanada);
+        partidas.put(1234, partidaGanada);
     }
 }

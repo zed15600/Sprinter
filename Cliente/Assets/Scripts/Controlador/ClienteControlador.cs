@@ -11,14 +11,4 @@ public class ClienteControlador : ClientElement {
     public string obtenerDescripcionProyecto(){
         return app.modelo.getProyecto().getDescripcion();
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -15,7 +15,7 @@ public class VistaScrumPlanning : ClientElement {
         descripcion.text = app.controlador.obtenerDescripcionProyecto();
     }
 	// Use this for initialization
-	public void Start () {
+	public void Update () {
         establecerProyecto();
 	}
 }
