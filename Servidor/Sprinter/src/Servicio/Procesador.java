@@ -5,10 +5,8 @@
  */
 package Servicio;
 
-import Negocio.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import Negocio.Procesos.InterfazMensajes;
+import Negocio.Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
@@ -17,10 +15,9 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author EDISON
+ * @author usuario
  */
 public class Procesador {
-    private Map<Integer, Partida> partidas = new HashMap<>();
     
     /*
     Recibe un String y lo transforma a Json.
@@ -31,6 +28,8 @@ public class Procesador {
     resouesta para el Cliente.
     */
     public String procesarJson(String mensaje){
+        InterfazMensajes mensajes = new ImplMensajes();
+        Proceso proceso = new Proceso(mensajes);
         JSONParser parser = new JSONParser();
         JSONObject json;
         try {
@@ -42,99 +41,12 @@ public class Procesador {
         if(json!=null){
             int pID = Integer.valueOf(json.get("partidaID").toString());
             switch(Integer.valueOf(json.get("codigo").toString())){
-                case 1: return terminarSprint(pID);
-                case 2: return determinarVictoria(pID);
-                case 3: return terminarDia(pID);
-                case 4: return scrumPlanning(pID);
+                case 1: return proceso.terminarSprint(pID);
+                case 2: return proceso.determinarVictoria(pID);
+                case 3: return proceso.terminarDia(pID);
+                case 4: return proceso.scrumPlanning(pID);
             }
         }
         return "";
-    }
-    
-    /*
-    Termina el día actual del proyecto.
-    Recibe el ID de la partida y obtiene el proyecto correspondiente.
-    p.nextDia() incrementa el día actual del proyecto.
-    JsonStrings.terminarDia(p) recibe un proyecto y retorna un String en formato
-    Json.
-    */
-    private String terminarDia(int partidaID){
-        Proyecto p = partidas.get(partidaID).getProyecto();
-        p.nextDia();
-        return JsonStrings.terminarDia(p);
-    }
-    
-    /*
-    Termina el sprint actual del proyecto.
-    Recibe el ID de la partida y obtiene el proyecto correspondiente.
-    p.getSprints retorna un ArrayList con todos los sprints del proyecto.
-    p.getSprintActual retorna un entero que es el id del sprint actual.
-    actual.terminarSprint() cambia un booleano a true que representa un sprint
-    terminado.
-    p.nextSprint() incrementa el contador de sprints del proyecto.
-    JsonStrings.terminarSprint(actual.getSprintBacklog()) recibe un SprintBacklog
-    y retorna un String en formato Json.
-    */
-    private String terminarSprint(int partidaID){
-        Proyecto p = partidas.get(partidaID).getProyecto();
-        Sprint actual = p.getSprints().get(p.getSprintActual()-1);
-        actual.terminarSprint();
-        p.nextSprint();
-        return JsonStrings.terminarSprint(actual.getSprintBacklog());
-    }
-    
-    /*
-    Determina si la partida actual terminó en victoria o derrota.
-    Recibe el ID de la partida y obtiene el proyecto correspondiendte.
-    p.terminarJuego() analiza las condiciones de victoria y retorna un booleano
-    que representa victoria (true) o derrota (false).
-    partidas.remove(partidaID) elimina de la lista de partidas en curso la partida
-    indicada.
-    JsonStrings.determinarVictoria(resultado) recibe un booleano y retorna un
-    String en formato Json.
-    */
-    private String determinarVictoria(int partidaID){
-        Proyecto p = partidas.get(partidaID).getProyecto();
-        boolean resultado = p.terminarJuego();
-        partidas.remove(partidaID);
-        return JsonStrings.determinarVictoria(resultado);
-    }
-    
-    /**
-    * Recibe el id de una partida y obtiene los datos de su proyecto asociado, 
-    * llama el metodo scrumPlanning de JsonStrings para crear el Json de la vista
-    * correspondiente.
-    * @param partidaID id de la partida.
-    * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
-    */
-    private String scrumPlanning(int partidaID){
-        Proyecto p = partidas.get(partidaID).getProyecto();
-        String nombre = p.getNombre();
-        String descripcion = p.getDescripcion();
-        return JsonStrings.scrumPlanning(nombre, descripcion);
-    }
-    
-    
-    
-    
-    
-    
-    /*
-    Crea una partida básica para hacer pruebas.
-    Pendiente de terminar.
-    */
-    public void sembrarPartida(){
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada");
-        ProductBacklog productBacklogGanado = new ProductBacklog();
-        ArrayList<Sprint> sprintsGanados = new ArrayList<Sprint>();
-            SprintBacklog sprintBacklogGanado1 = new SprintBacklog();
-                sprintBacklogGanado1.agregarHistoria(huGanada1);
-                sprintBacklogGanado1.agregarHistoria(huGanada2);
-            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 1);
-            sprintsGanados.add(sprintGanado1);
-        Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5);
-        Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
-        partidas.put(1234, partidaGanada);
     }
 }

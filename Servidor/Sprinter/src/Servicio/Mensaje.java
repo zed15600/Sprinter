@@ -5,16 +5,16 @@
  */
 package Servicio;
 
-import Negocio.HistoriaDeUsuario;
-import Negocio.Proyecto;
-import Negocio.SprintBacklog;
+import Negocio.Entidades.HistoriaDeUsuario;
+import Negocio.Entidades.Proyecto;
+import Negocio.Entidades.SprintBacklog;
 import java.util.ArrayList;
 
 /**
  *
  * @author EDISON
  */
-public class JsonStrings {
+public class Mensaje {
     
     /*
     Recibe un Proyecto y retorna un String con el código para la vista Sprint, 

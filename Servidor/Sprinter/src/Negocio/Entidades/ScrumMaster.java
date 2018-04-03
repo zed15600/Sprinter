@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio;
+package Negocio.Entidades;
 
 /**
  *
  * @author usuario
  */
-public class Encuesta {
+public class ScrumMaster extends Jugador {
     
-    public void empezarEncuesta(IntegranteScrumTeam integrante){
+    public ScrumMaster(String nombre, String ID) {
+        super(nombre, ID);
     }
     
+    public void marcarCriterios (Criterio criterio){        
+    }
 }

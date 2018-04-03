@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio;
+package Negocio.Entidades;
 
 /**
  *
  * @author usuario
  */
-public class ScrumMaster extends Jugador {
+public class Criterio {
     
-    public ScrumMaster(String nombre, String ID) {
-        super(nombre, ID);
-    }
+    String descripcion;
     
-    public void marcarCriterios (Criterio criterio){        
+    boolean completitud;
+    
+    public Criterio(String descripcion){
+        this.descripcion = descripcion;
     }
 }

@@ -5,6 +5,8 @@
  */
 package Servicio;
 
+import Negocio.Procesos.InterfazMensajes;
+import Negocio.Procesos.Proceso;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class ConexionTCP {
     
     /*
     Aquí se crea la conexión del servidor hacia el mundo.
-    Se crea un objeto Procesador que es el que lleva a cabo todas las acciones
+    Se crea un objeto Proceso que es el que lleva a cabo todas las acciones
     en base al String que la conexión lee desde el puerto (5173).
     socket.accept() abre el puerto y se queda esperando hasta que recibe una conexión.
     inData.readLine() almacena en una variable String el mensaje que recibe por el puerto.
@@ -31,8 +33,13 @@ public class ConexionTCP {
     public static void main(String args[]) throws IOException{
         
         Procesador proc = new Procesador();
-        //Partida Sembrada
-        proc.sembrarPartida();
+        //Este bloque solo se requiere para sembrar una partida, no es necesario
+        //en la Versión Final.
+        // *********************************************************************
+        InterfazMensajes mensajes = new ImplMensajes();
+        Proceso proceso = new Proceso(mensajes);
+        proceso.sembrarPartida();
+        // *********************************************************************
         ServerSocket socket = new ServerSocket(5173);
         String in, out;
         while(true){
