@@ -20,10 +20,10 @@ import java.util.Map;
  * @author EDISON
  */
 public class Proceso {
-    private final InterfazMensajes mensajes;
+    private final IMensajes mensajes;
     private final Map<Integer, Partida> partidas = new HashMap<>();
 
-    public Proceso(InterfazMensajes mensajes) {
+    public Proceso(IMensajes mensajes) {
         this.mensajes = mensajes;
     }
     

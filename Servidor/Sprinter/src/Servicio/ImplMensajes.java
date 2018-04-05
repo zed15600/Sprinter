@@ -7,13 +7,13 @@ package Servicio;
 
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.SprintBacklog;
-import Negocio.Procesos.InterfazMensajes;
+import Negocio.Procesos.IMensajes;
 
 /**
  *
  * @author usuario
  */
-public class ImplMensajes implements InterfazMensajes {
+public class ImplMensajes implements IMensajes {
 
     @Override
     public String terminarDia(Proyecto p) {

@@ -5,13 +5,13 @@
  */
 package Servicio;
 
-import Negocio.Procesos.InterfazMensajes;
 import Negocio.Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import Negocio.Procesos.IMensajes;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Procesador {
     resouesta para el Cliente.
     */
     public String procesarJson(String mensaje){
-        InterfazMensajes mensajes = new ImplMensajes();
+        IMensajes mensajes = new ImplMensajes();
         Proceso proceso = new Proceso(mensajes);
         JSONParser parser = new JSONParser();
         JSONObject json;

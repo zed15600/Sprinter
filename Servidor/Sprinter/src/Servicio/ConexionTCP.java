@@ -5,7 +5,6 @@
  */
 package Servicio;
 
-import Negocio.Procesos.InterfazMensajes;
 import Negocio.Procesos.Proceso;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import Negocio.Procesos.IMensajes;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ConexionTCP {
         //Este bloque solo se requiere para sembrar una partida, no es necesario
         //en la Versión Final.
         // *********************************************************************
-        InterfazMensajes mensajes = new ImplMensajes();
+        IMensajes mensajes = new ImplMensajes();
         Proceso proceso = new Proceso(mensajes);
         proceso.sembrarPartida();
         // *********************************************************************

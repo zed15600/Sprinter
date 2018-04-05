@@ -12,7 +12,7 @@ import Negocio.Entidades.SprintBacklog;
  *
  * @author usuario
  */
-public interface InterfazMensajes {
+public interface IMensajes {
     
     public String terminarDia(Proyecto p);
     public String terminarSprint(SprintBacklog sprntBcklg);
