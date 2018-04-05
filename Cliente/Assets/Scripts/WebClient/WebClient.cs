@@ -23,7 +23,6 @@ public class WebClient : ClientElement {
 
     void Update()
     {
-        obtenerProyecto();
     }
 
 
