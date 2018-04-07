@@ -37,4 +37,8 @@ public class Partida {
         return this.proyecto;
     }
     
+    public String getNombre(){
+        return this.nombre;
+    }
+    
 }

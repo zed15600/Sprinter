@@ -30,7 +30,9 @@ public class WebClient : ClientElement {
     void Awake()
     {
         setupSocket();
-        
+        string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
+        Debug.Log("Sending: " + json);
+        writeSocket(json);
     }
 
     void OnApplicationQuit()
@@ -90,9 +92,7 @@ public class WebClient : ClientElement {
 
     public void obtenerProyecto() {
         string received_data = readSocket();
-        string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
-        Debug.Log("Sending: " + json);
-        writeSocket(json);
+        
         
         if (received_data != "")
         {

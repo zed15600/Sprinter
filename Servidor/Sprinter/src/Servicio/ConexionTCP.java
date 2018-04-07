@@ -5,6 +5,7 @@
  */
 package Servicio;
 
+import Negocio.Entidades.Partida;
 import Negocio.Procesos.Proceso;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -25,7 +26,7 @@ public class ConexionTCP {
     Se crea un objeto Proceso que es el que lleva a cabo todas las acciones
     en base al String que la conexión lee desde el puerto (5173).
     socket.accept() abre el puerto y se queda esperando hasta que recibe una conexión.
-    inData.readLine() almacena en una variable String el mensaje que recibe por el puerto.
+    inData.readLine() almacena en una variable String el mensaje     que recibe por el puerto.
     proc.procesarJson(in) envía el String de entrada al procesador y retorna un String respuesta.
     outData.writeBytes(out + "\n") devuelve a quién inició la conexión el String respuesta,
     el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
@@ -48,7 +49,6 @@ public class ConexionTCP {
             BufferedReader inData = new BufferedReader(isr);
             DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
             in = inData.readLine();
-            System.out.println(in);
             out = proc.procesarJson(in);
             outData.writeBytes(out + "\n");
         }

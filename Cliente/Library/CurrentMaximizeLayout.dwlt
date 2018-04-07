@@ -20,10 +20,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 675
-  m_MinSize: {x: 683, y: 471}
-  m_MaxSize: {x: 14002, y: 14021}
+  m_MinSize: {x: 683, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 6420
+  controlID: 4251
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -121,10 +121,10 @@ MonoBehaviour:
     y: 0
     width: 1086
     height: 675
-  m_MinSize: {x: 406, y: 471}
-  m_MaxSize: {x: 10000, y: 14021}
+  m_MinSize: {x: 406, y: 492}
+  m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 6388
+  controlID: 4252
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 6389
+  controlID: 4253
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 102
+    y: 92
     width: 245
     height: 383
   m_PersistentViewDataDictionary: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 28080000
     m_LastClickedID: 0
-    m_ExpandedIDs: 84f3fdffeef5ffff00000000e8340000143500003a35000094350000c635000006360000
+    m_ExpandedIDs: e6f5ffff000000005c350000ba350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 249
-    y: 102
+    y: 92
     width: 835
     height: 383
   m_PersistentViewDataDictionary: {fileID: 0}
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 506
+    y: 496
     width: 1084
     height: 250
   m_PersistentViewDataDictionary: {fileID: 0}
@@ -495,13 +495,13 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts/WebClient
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\usuario\Git\Sprinter\Cliente
+  m_LastProjectPath: C:\Users\EDISON\Desktop\GIT\Sprinter\Cliente
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 103}
-    m_SelectedIDs: 6c340000
-    m_LastClickedID: 13420
-    m_ExpandedIDs: 00000000aa330000de330000203400004e34000062360000643600006636000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 139}
+    m_SelectedIDs: 76340000
+    m_LastClickedID: 13430
+    m_ExpandedIDs: 00000000b2330000e63300002a3400005834000086360000883600008a36000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -529,7 +529,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa330000de330000203400004e34000062360000643600006636000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000b2330000e63300002a3400005834000086360000883600008a36000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1088
-    y: 102
+    y: 92
     width: 278
     height: 654
   m_PersistentViewDataDictionary: {fileID: 0}

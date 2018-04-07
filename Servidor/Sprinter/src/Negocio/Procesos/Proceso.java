@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class Proceso {
     private final IMensajes mensajes;
-    private final Map<Integer, Partida> partidas = new HashMap<>();
+    private static Map<Integer, Partida> partidas = new HashMap<>();
 
     public Proceso(IMensajes mensajes) {
         this.mensajes = mensajes;
@@ -85,8 +85,8 @@ public class Proceso {
     * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
     */
     public String scrumPlanning(int partidaID){
-        Partida par = partidas.get(partidaID);
-        Proyecto p = par.getProyecto();
+        Partida par = (Partida)partidas.get(partidaID);
+        Proyecto p = (Proyecto)par.getProyecto();
         String nombre = p.getNombre();
         String descripcion = p.getDescripcion();
         return mensajes.scrumPlanning(nombre, descripcion);
@@ -110,4 +110,5 @@ public class Proceso {
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
         partidas.put(1234, partidaGanada);
     }
+    
 }
