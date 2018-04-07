@@ -23,12 +23,14 @@ public class WebClient : ClientElement {
 
     void Update()
     {
+        obtenerProyecto();
     }
 
 
     void Awake()
     {
         setupSocket();
+        
     }
 
     void OnApplicationQuit()

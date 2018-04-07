@@ -85,7 +85,8 @@ public class Proceso {
     * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
     */
     public String scrumPlanning(int partidaID){
-        Proyecto p = partidas.get(partidaID).getProyecto();
+        Partida par = partidas.get(partidaID);
+        Proyecto p = par.getProyecto();
         String nombre = p.getNombre();
         String descripcion = p.getDescripcion();
         return mensajes.scrumPlanning(nombre, descripcion);
