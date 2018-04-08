@@ -61,6 +61,21 @@ public class HistoriaDeUsuario {
         this.puntos = puntos;
         this.criterios = criterios;
     }
+
+    public string getDescripcion()
+    {
+        return nombre;
+    }
+
+    public string getPrioridad()
+    {
+        return prioridad;
+    }
+
+    public string getPuntos()
+    {
+        return puntos;
+    }
 } 
 
 public class ClienteModelo : ClientElement {

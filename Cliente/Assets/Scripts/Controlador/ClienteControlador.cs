@@ -11,4 +11,9 @@ public class ClienteControlador : ClientElement {
     public string obtenerDescripcionProyecto(){
         return app.modelo.getProyecto().getDescripcion();
     }
+
+    public List<HistoriaDeUsuario> obtenerHistorias()
+    {
+        return app.modelo.getProyecto().getHistorias();
+    }
 }
