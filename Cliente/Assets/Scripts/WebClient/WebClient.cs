@@ -19,7 +19,7 @@ public class WebClient : ClientElement {
     StreamWriter socket_writer;
     StreamReader socket_reader;
 
-
+    public bool proyectoObtenido = false;
 
     void Update()
     {
@@ -35,6 +35,8 @@ public class WebClient : ClientElement {
     void Start()
     {
         obtenerProyecto();
+        this.proyectoObtenido = true;
+        Debug.Log(proyectoObtenido);
     }
 
     void OnApplicationQuit()
