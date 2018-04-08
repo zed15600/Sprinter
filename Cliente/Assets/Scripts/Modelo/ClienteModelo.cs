@@ -1,11 +1,18 @@
-﻿public class Proyecto {
+﻿using System.Collections.Generic;
+
+public class Proyecto {
+
     private string nombre = "";
+
     private string descripcion = "";
 
-    public Proyecto(string nombre, string descripcion)
+    private List<HistoriaDeUsuario> historias;
+
+    public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias)
     {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.historias = historias;
     }
 
     public string getNombre()
@@ -16,6 +23,11 @@
     public string getDescripcion()
     {
         return descripcion;
+    }
+
+    public List<HistoriaDeUsuario> getHistorias()
+    {
+        return historias;
     }
 }
 
@@ -33,11 +45,29 @@ public class Partida
     }
 }
 
+public class HistoriaDeUsuario {
+
+    private string nombre;
+
+    private string prioridad;
+
+    private string puntos;
+
+    private List<string> criterios;
+
+    public HistoriaDeUsuario (string nombre, string prioridad, string puntos, List<string> criterios) {
+        this.nombre = nombre;
+        this.prioridad = prioridad;
+        this.puntos = puntos;
+        this.criterios = criterios;
+    }
+} 
+
 public class ClienteModelo : ClientElement {
 
     private Partida partida = new Partida("1234");
 
-    private Proyecto proyecto = new Proyecto("", "");
+    private Proyecto proyecto = new Proyecto("", "", null);
 
     public Proyecto getProyecto() {
         return proyecto;

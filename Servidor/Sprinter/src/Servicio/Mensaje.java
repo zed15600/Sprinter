@@ -5,6 +5,7 @@
  */
 package Servicio;
 
+import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.SprintBacklog;
@@ -26,7 +27,7 @@ public class Mensaje {
                 + "\"sprintActual\":"+p.getSprintActual()+", "
                 + "\"diaActual\""+p.getDiaActual()+", "
                 + "\"HUs\":{";
-        ArrayList<HistoriaDeUsuario> historias = p.getSprints().get(p.getSprintActual()).getSprintBacklog().getHUs();
+        ArrayList<HistoriaDeUsuario> historias = p.getSprints().get(p.getSprintActual()).getSprintBacklog().getHistorias();
         for(int i=0; i<historias.size(); i++){
             res += "\""+(i+1)+"\":"+historias.get(i).getId()+", ";
         }
@@ -34,18 +35,20 @@ public class Mensaje {
         return res;
     }
     
+    
     /*
     Recibe un SprintBacklog y retorna un String con el código para la vista 
     Retrospectiva y una lista con los identificadores de las historias de usuario,
     en formato Json.
     */
     protected static String terminarSprint(SprintBacklog sprntBcklg){
-        ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHUs();
+        ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHistorias();
         String HUs = "{\"codigo\":0001, "
                 + " \"HUs\":\"{";
         for(int i=0; i<historias.size(); i++){
-            if(historias.get(i).getEstado())
+            if(historias.get(i).getEstado()){
                 HUs += "\""+(i+1)+"\":"+historias.get(i).getPuntuacion()+", ";
+            }
         }
         HUs += "}\"}";
         return HUs;
@@ -67,15 +70,34 @@ public class Mensaje {
      * Retorna el String en formato Json con los datos del proyecto: nombre y descripcion.
      * @param nombre nombre del proyecto.
      * @param descripcion descripcion del proyecto.
+     * @param HUs
      * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
      */
-    protected static String scrumPlanning(String nombre, String descripcion) {
+    protected static String traerProyecto(String nombre, String descripcion, 
+            ArrayList<HistoriaDeUsuario> HUs) {
         String res = "{"
                 + "\"codigo\":0004, "
                 + "\"nombre\":\""+nombre+"\","
-                + "\"descripcion\":\""+descripcion+"\""
-                + "}";
-        return res;
+                + "\"descripcion\":\""+descripcion+"\", "
+                                + " \"HUs\":[";
+        for(int i=0; i<HUs.size(); i++){
+                res += "\""+HUs.get(i).getId()+"\", ";
+        }
+        return res += "]}";
+    }
+    
+    protected static String traerHU(String descripcion, String puntos, String prioridad,
+    ArrayList<Criterio> criterios){
+        String res = "{"
+                + "\"codigo\":0005, "
+                + "\"descripcion\":\""+descripcion+"\","
+                + "\"puntos\":\""+puntos+"\","
+                + "\"prioridad\":\""+prioridad+"\","
+                                + " \"criterios\":[";
+        for(int i=0; i<criterios.size(); i++){
+                res += "\""+criterios.get(i).getDescripcion() +"\", ";
+        }
+        return res += "]}";
     }
     
 }

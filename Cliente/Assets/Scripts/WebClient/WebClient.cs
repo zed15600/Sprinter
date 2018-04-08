@@ -23,16 +23,18 @@ public class WebClient : ClientElement {
 
     void Update()
     {
-        obtenerProyecto();
+        
     }
 
 
     void Awake()
     {
         setupSocket();
-        string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
-        Debug.Log("Sending: " + json);
-        writeSocket(json);
+    }
+
+    void Start()
+    {
+        obtenerProyecto();
     }
 
     void OnApplicationQuit()
@@ -72,11 +74,16 @@ public class WebClient : ClientElement {
     public String readSocket()
     {
         if (!socket_ready)
+        {
+            Debug.Log("Socketno estálisto");
             return "";
+        }
 
-        if (net_stream.DataAvailable)
-            return socket_reader.ReadLine();
-        return "";
+        //if (net_stream.DataAvailable) {
+            string inp = socket_reader.ReadLine();
+            return inp;
+        //}
+        //return "";
     }
 
     public void closeSocket()
@@ -91,18 +98,46 @@ public class WebClient : ClientElement {
     }
 
     public void obtenerProyecto() {
+        string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
+        writeSocket(json);
         string received_data = readSocket();
-        
+        //closeSocket();
         
         if (received_data != "")
         {
             Debug.Log(received_data);
             JSONObject respuesta = JSONObject.Parse(received_data);
-            String nombre = respuesta["nombre"].Str;
-            String descripcion = respuesta["descripcion"].Str;
+            string nombre = respuesta["nombre"].Str;
+            string descripcion = respuesta["descripcion"].Str;
+            JSONArray IDs = respuesta.GetArray("HUs");
+            List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
+
+            for (int i = 0; i < IDs.Length; i++)
+            {
+                string historia = JsonString.pedirHistoria(app.modelo.getPartida().getID(), IDs[i].Str);
+                setupSocket();
+                writeSocket(historia);
+                string recibida = readSocket();
+                JSONObject histRespuesta = JSONObject.Parse(recibida);
+                Debug.Log(histRespuesta);
+                List<string> criterios = new List<string>();
+                string nombreHU = histRespuesta["descripcion"].Str;
+                string puntos = histRespuesta["puntos"].Str;
+                string prioridad = histRespuesta["prioridad"].Str;
+                JSONArray crit = histRespuesta.GetArray("criterios");
+
+                for (int j = 0; j < crit.Length; j++)
+                {
+                    criterios.Add(crit[j].Str);
+                }
+
+                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, puntos, prioridad, criterios);
+                historias.Add(historiaDeUsuario);
+            }
+
             Debug.Log(nombre);
             Debug.Log(descripcion);
-            Proyecto proyecto = new Proyecto(nombre, descripcion);
+            Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
             app.modelo.setProyecto(proyecto);
         }
     }

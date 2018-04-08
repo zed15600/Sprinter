@@ -5,8 +5,11 @@
  */
 package Negocio.Procesos;
 
+import Negocio.Entidades.Criterio;
+import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.SprintBacklog;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,5 +20,7 @@ public interface IMensajes {
     public String terminarDia(Proyecto p);
     public String terminarSprint(SprintBacklog sprntBcklg);
     public String determinarVictoria(boolean resultado);
-    public String scrumPlanning(String nombre, String descripcion);
+    public String traerProyecto(String nombre, String descripcion, ArrayList<HistoriaDeUsuario> historias);
+    public String enviarHU(String descripcion, String puntos, String prioridad,
+    ArrayList<Criterio> criterios);
 }

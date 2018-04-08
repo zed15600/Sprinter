@@ -44,7 +44,10 @@ public class Procesador {
                 case 1: return proceso.terminarSprint(pID);
                 case 2: return proceso.determinarVictoria(pID);
                 case 3: return proceso.terminarDia(pID);
-                case 4: return proceso.scrumPlanning(pID);
+                case 4: return proceso.enviarProyecto(pID);
+                case 5:
+                    String hID = (String)json.get("ID");
+                    return proceso.enviarHistoria(pID, hID);
             }
         }
         return "";

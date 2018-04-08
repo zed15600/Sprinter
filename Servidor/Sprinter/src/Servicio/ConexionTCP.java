@@ -5,7 +5,6 @@
  */
 package Servicio;
 
-import Negocio.Entidades.Partida;
 import Negocio.Procesos.Proceso;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

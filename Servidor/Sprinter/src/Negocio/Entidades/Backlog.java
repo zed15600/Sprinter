@@ -13,13 +13,14 @@ import java.util.ArrayList;
  */
 public class Backlog {
     
-    private ArrayList<HistoriaDeUsuario> listaDeHistorias;
+    private final ArrayList<HistoriaDeUsuario> listaDeHistorias;
     
     public Backlog (){
-        this.listaDeHistorias = new ArrayList();
+        this.listaDeHistorias = new ArrayList<>();
     }
     
     public void agregarHistoria(HistoriaDeUsuario historia){
+        this.listaDeHistorias.add(historia);
         
     }
     
@@ -27,7 +28,7 @@ public class Backlog {
         
     }
     
-    public ArrayList<HistoriaDeUsuario> getHUs(){
+    public ArrayList<HistoriaDeUsuario> getHistorias() {
         return this.listaDeHistorias;
     }
 }

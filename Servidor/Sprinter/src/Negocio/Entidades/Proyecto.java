@@ -6,6 +6,9 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -21,11 +24,12 @@ public class Proyecto {
     private int diaActual;
     private int sprintActual;
     
-    public Proyecto (String nombre, String descripcion, int duracionDeSprints){
+    public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
+            ProductBacklog productBacklog){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.listaDeSprints = new ArrayList();
-        this.productBacklog = new ProductBacklog();
+        this.productBacklog = productBacklog;
         this.duracionDeSprints = duracionDeSprints;
         this.diaActual = 1;
         this.sprintActual = 1;
@@ -33,9 +37,10 @@ public class Proyecto {
     
     public boolean terminarJuego(){
         boolean victoria = true;
+        
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
-        for(int i=0; i<historias.size(); i++){
-            victoria &= historias.get(i).getEstado();
+        for(HistoriaDeUsuario hist: historias) {
+        victoria &= hist.getEstado();
         }
         return victoria;
     }
@@ -66,6 +71,10 @@ public class Proyecto {
     
     public int getSprintActual(){
         return this.sprintActual;
+    }
+
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
     }
     
 }

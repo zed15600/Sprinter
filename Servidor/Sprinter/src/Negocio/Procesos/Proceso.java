@@ -5,8 +5,8 @@
  */
 package Negocio.Procesos;
 
+import Negocio.Entidades.Criterio;
 import Negocio.Entidades.Sprint;
-import Negocio.Entidades.SprintBacklog;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.ProductBacklog;
 import Negocio.Entidades.HistoriaDeUsuario;
@@ -84,29 +84,48 @@ public class Proceso {
     * @param partidaID id de la partida.
     * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
     */
-    public String scrumPlanning(int partidaID){
-        Partida par = (Partida)partidas.get(partidaID);
-        Proyecto p = (Proyecto)par.getProyecto();
+    
+    public String enviarProyecto(int partidaID){
+        Partida par = partidas.get(partidaID);
+        Proyecto p = par.getProyecto();
         String nombre = p.getNombre();
         String descripcion = p.getDescripcion();
-        return mensajes.scrumPlanning(nombre, descripcion);
+        ArrayList<HistoriaDeUsuario>  lista = p.getProductBacklog().getHistorias();
+        return mensajes.traerProyecto(nombre, descripcion, lista);
     }
-
+    
+    public String enviarHistoria(int partidaID, String ID){
+        Partida par = partidas.get(partidaID);
+        Proyecto p = par.getProyecto(); 
+        ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
+        HistoriaDeUsuario historia = null;
+        for (int i = 0; i<historias.size();i++){
+            if (historias.get(i).getId() == Integer.valueOf(ID)){
+                historia = historias.get(i);
+            }
+        }
+        String descHU = historia.getDescripcion();
+        String prioHU = historia.getPrioridad();
+        String punHU = historia.getPuntosHistoria();
+        ArrayList<Criterio> criterios = historia.getListaCriterios();
+        return mensajes.enviarHU(descHU, punHU, prioHU, criterios);
+    }
     /*
     Crea una partida básica para hacer pruebas.
     Pendiente de terminar.
     */
     public void sembrarPartida(){
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada");
+        Criterio criterio1 = new Criterio ("El puente debe ser azul.");
+        Criterio criterio2 = new Criterio ("El puente debe ser verde.");
+        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada", "5", "4");
+        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada", "3", "2");
+        huGanada1.agregarCriterio(criterio1);
+        huGanada2.agregarCriterio(criterio2);
         ProductBacklog productBacklogGanado = new ProductBacklog();
-        ArrayList<Sprint> sprintsGanados = new ArrayList<Sprint>();
-            SprintBacklog sprintBacklogGanado1 = new SprintBacklog();
-                sprintBacklogGanado1.agregarHistoria(huGanada1);
-                sprintBacklogGanado1.agregarHistoria(huGanada2);
-            Sprint sprintGanado1 = new Sprint(sprintBacklogGanado1, 1);
-            sprintsGanados.add(sprintGanado1);
-        Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5);
+        productBacklogGanado.agregarHistoria(huGanada1);
+        productBacklogGanado.agregarHistoria(huGanada2);
+        Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
+        productBacklogGanado);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
         partidas.put(1234, partidaGanada);
     }

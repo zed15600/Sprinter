@@ -12,4 +12,14 @@ public class JsonString : ClientElement {
                 + "}";
         return res;
     }
+
+    public static string pedirHistoria(string partida, string idHistoria)
+    {
+        string res = "{"
+        + "\"codigo\":0005, "
+        + "\"partidaID\":\"" + partida + "\","
+        + "\"ID\":\"" + idHistoria + "\""
+        + "}";
+        return res;
+    }
 }

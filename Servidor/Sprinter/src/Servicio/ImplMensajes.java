@@ -5,9 +5,12 @@
  */
 package Servicio;
 
+import Negocio.Entidades.Criterio;
+import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.SprintBacklog;
 import Negocio.Procesos.IMensajes;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,22 +20,30 @@ public class ImplMensajes implements IMensajes {
 
     @Override
     public String terminarDia(Proyecto p) {
-        return Mensaje.terminarDia(p);
+        return null;
+        /*return Mensaje.terminarDia(p);*/
     }
 
     @Override
     public String terminarSprint(SprintBacklog sprntBcklg) {
-        return Mensaje.terminarSprint(sprntBcklg);
+        return null;
+        /*return Mensaje.terminarSprint(sprntBcklg);*/
     }
 
     @Override
     public String determinarVictoria(boolean resultado) {
         return Mensaje.determinarVictoria(resultado);
     }
+    
+    @Override
+    public String traerProyecto(String nombre, String descripcion,
+            ArrayList<HistoriaDeUsuario> historias) {
+        return Mensaje.traerProyecto(nombre, descripcion, historias);
+    }
 
     @Override
-    public String scrumPlanning(String nombre, String descripcion) {
-        return Mensaje.scrumPlanning(nombre, descripcion);
+    public String enviarHU(String descripcion, String puntos, String prioridad, ArrayList<Criterio> criterios) {
+        return Mensaje.traerHU(descripcion, puntos, prioridad, criterios);
     }
     
 }

@@ -5,26 +5,18 @@
  */
 package Negocio.Entidades;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author usuario
  */
 public class ProductBacklog extends Backlog{
-
-    private ArrayList<HistoriaDeUsuario> listaDeHistorias;
     
     public ProductBacklog(){
-        this.listaDeHistorias = new ArrayList();
     }
     
     public void terminarHistoria(HistoriaDeUsuario historia){
         
     }
-    
-    public ArrayList<HistoriaDeUsuario> getHistorias(){
-        return listaDeHistorias;
-    }
-    
 }

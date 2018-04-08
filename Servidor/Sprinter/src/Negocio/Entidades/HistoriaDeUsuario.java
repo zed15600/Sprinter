@@ -20,9 +20,29 @@ public class HistoriaDeUsuario {
     private String descripcion;
     private int contadorVotos;
     private ArrayList<Criterio> listaCriterios;
+    private String puntosHistoria;
+    private String prioridad;
 
-    public HistoriaDeUsuario(int id, String descripcion){
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public ArrayList<Criterio> getListaCriterios() {
+        return listaCriterios;
+    }
+
+    public String getPuntosHistoria() {
+        return puntosHistoria;
+    }
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, String prioridad){
         this.id = id;
+        this.puntosHistoria = puntosHistoria;
+        this.prioridad = prioridad;
         this.puntuacion = 0;
         this.estado = false;
         this.descripcion = descripcion;
@@ -47,5 +67,9 @@ public class HistoriaDeUsuario {
     }
     
     public void aumentarVoto(){
+    }
+    
+    public void agregarCriterio(Criterio criterio){
+        this.listaCriterios.add(criterio);
     }
 }
