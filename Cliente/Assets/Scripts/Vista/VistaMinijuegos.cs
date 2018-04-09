@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VistaMinijuegos : MonoBehaviour {
 
     public GameObject table;
-    public GameObject timer;
+    public Text timer;
     public GameObject category;
     public GameObject HUnumber;
     public GameObject continuar;
@@ -28,6 +29,7 @@ public class VistaMinijuegos : MonoBehaviour {
     void Timer() {
 
         targetTime -= Time.deltaTime;
+        timer.text = ((int)(targetTime/60)).ToString()+":"+((int)targetTime%60).ToString();
 
         if (targetTime <= 0.0f) {
 
@@ -38,5 +40,8 @@ public class VistaMinijuegos : MonoBehaviour {
     {
        //UIText timerText = Timer.Get
         //mer.text = "tiempo";
+    }
+    public void restart() {
+        targetTime=120.0f;
     }
 }
