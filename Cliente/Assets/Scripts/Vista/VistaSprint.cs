@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaScrumPlanning : ClientElement {
-
-    [SerializeField]
-    private Text proyecto = null;
-    [SerializeField]
-    private Text descripcion = null;
+public class VistaSprint : ClientElement {
 
     public GameObject prefabDesc;
     public GameObject prefabPrio;
@@ -17,11 +12,6 @@ public class VistaScrumPlanning : ClientElement {
     public VerticalLayoutGroup colDesc;
     public VerticalLayoutGroup colPrio;
     public VerticalLayoutGroup colPunt;
-
-    public void establecerProyecto() {
-        proyecto.text = app.controlador.obtenerNombreProyecto();
-        descripcion.text = app.controlador.obtenerDescripcionProyecto();
-    }
 
     public void llenarTabla()
     {
@@ -41,29 +31,25 @@ public class VistaScrumPlanning : ClientElement {
             prioridad.text = historias[i].getPrioridad();
             puntos.text = historias[i].getPuntos();
 
-            //descripcion.transform.parent = contenidoHistoria.transform;
-            //prioridad.transform.parent = contenidoPrioridad.transform;
-            //puntos.transform.parent = contenidoPuntos.transform;
-
             contenidoHistoria.transform.SetParent(colDesc.transform, false);
             contenidoPrioridad.transform.SetParent(colPrio.transform, false);
             contenidoPuntos.transform.SetParent(colPunt.transform, false);
-            
+
         }
     }
 
-    public void Start()
+    void Start()
     {
-        establecerProyecto();
-        Debug.Log(app.controlador.obtenerHistorias().ToArray().Length);
         while (app.controlador.obtenerHistorias().ToArray().Length == 0)
         {
             Debug.Log(app.controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
     }
-    // Use this for initialization
-    public void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
 }

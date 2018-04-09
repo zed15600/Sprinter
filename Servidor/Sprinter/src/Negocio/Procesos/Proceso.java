@@ -110,6 +110,15 @@ public class Proceso {
         ArrayList<Criterio> criterios = historia.getListaCriterios();
         return mensajes.enviarHU(descHU, punHU, prioHU, criterios);
     }
+    
+    public String sprintPlanning(int ID){
+        Partida par = partidas.get(ID);
+        Proyecto p = par.getProyecto();
+        ArrayList<Sprint> sprints = p.getSprints();
+        int actual = p.getSprintActual();
+        int restantes = Math.abs(sprints.size() - actual);
+        return mensajes.sprintPlanning(restantes, actual);
+    }
     /*
     Crea una partida básica para hacer pruebas.
     Pendiente de terminar.
@@ -125,7 +134,7 @@ public class Proceso {
         productBacklogGanado.agregarHistoria(huGanada1);
         productBacklogGanado.agregarHistoria(huGanada2);
         Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
-        productBacklogGanado);
+        productBacklogGanado, 3);
         Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
         partidas.put(1234, partidaGanada);
     }

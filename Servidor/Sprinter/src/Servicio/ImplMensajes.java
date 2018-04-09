@@ -45,5 +45,10 @@ public class ImplMensajes implements IMensajes {
     public String enviarHU(String descripcion, String puntos, String prioridad, ArrayList<Criterio> criterios) {
         return Mensaje.traerHU(descripcion, puntos, prioridad, criterios);
     }
+
+    @Override
+    public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
+        return Mensaje.sprintPlanning(sprintsRestantes, numeroDeSprint);
+    }
     
 }

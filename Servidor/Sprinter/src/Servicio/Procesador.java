@@ -48,6 +48,7 @@ public class Procesador {
                 case 5:
                     String hID = (String)json.get("ID");
                     return proceso.enviarHistoria(pID, hID);
+                case 6: return proceso.sprintPlanning(pID);
             }
         }
         return "";

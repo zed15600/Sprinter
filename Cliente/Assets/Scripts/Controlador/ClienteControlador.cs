@@ -16,4 +16,14 @@ public class ClienteControlador : ClientElement {
     {
         return app.modelo.getProyecto().getHistorias();
     }
+
+    public string obtenerSprintsRestantes()
+    {
+        return app.modelo.getProyecto().getRestantes().ToString();
+    }
+
+    public string obtenerActual()
+    {
+        return app.modelo.getProyecto().getActual().ToString();
+    }
 }

@@ -100,4 +100,11 @@ public class Mensaje {
         return res += "]}";
     }
     
+    protected static String sprintPlanning(int sprintsRestantes, int numeroDeSprint){
+        String res = "{"
+                +   "\"codigo\":0006, "
+                +   "\"restantes\":"+sprintsRestantes+","
+                +   "\"numero\":"+numeroDeSprint+"}";
+        return res;
+    }
 }

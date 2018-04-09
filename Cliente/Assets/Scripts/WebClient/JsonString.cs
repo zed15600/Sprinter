@@ -22,4 +22,13 @@ public class JsonString : ClientElement {
         + "}";
         return res;
     }
+
+    public static string sprintPlanning(string partida)
+    {
+        string res = "{"
+                + "\"codigo\":0006, "
+                + "\"partidaID\":\"" + partida + "\""
+                + "}";
+        return res;
+    }
 }

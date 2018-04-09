@@ -6,7 +6,11 @@ public class Proyecto {
 
     private string descripcion = "";
 
-    private List<HistoriaDeUsuario> historias;
+    private List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
+
+    private int SprintActual = 0;
+
+    private int SprintRestantes = 0;
 
     public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias)
     {
@@ -28,6 +32,26 @@ public class Proyecto {
     public List<HistoriaDeUsuario> getHistorias()
     {
         return historias;
+    }
+
+    public int getRestantes()
+    {
+        return SprintRestantes;
+    }
+
+    public int getActual()
+    {
+        return SprintActual;
+    }
+
+    public void setSprintRestante(int restante)
+    {
+        this.SprintRestantes = restante;
+    }
+
+    public void setSprintActual (int actual)
+    {
+        this.SprintActual = actual;
     }
 }
 
@@ -77,6 +101,7 @@ public class HistoriaDeUsuario {
         return puntos;
     }
 } 
+
 
 public class ClienteModelo : ClientElement {
 

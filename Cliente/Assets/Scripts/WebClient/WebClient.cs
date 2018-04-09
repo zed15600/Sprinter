@@ -29,14 +29,12 @@ public class WebClient : ClientElement {
 
     void Awake()
     {
-        setupSocket();
+
     }
 
     void Start()
     {
-        obtenerProyecto();
-        this.proyectoObtenido = true;
-        Debug.Log(proyectoObtenido);
+
     }
 
     void OnApplicationQuit()
@@ -99,15 +97,32 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
 
+    public void obtenerSprint()
+    {
+        setupSocket();
+        string json = JsonString.sprintPlanning(app.modelo.getPartida().getID());
+        writeSocket(json);
+        string receieved_data = readSocket();
+
+        if (receieved_data != "")
+        {
+            JSONObject respuesta = JSONObject.Parse(receieved_data);
+            int restantes = (int)respuesta["restantes"].Number;
+            int numero = (int)respuesta["numero"].Number;
+            app.modelo.getProyecto().setSprintRestante(restantes);
+            app.modelo.getProyecto().setSprintActual(numero);
+        }
+        closeSocket();
+    }
+
     public void obtenerProyecto() {
+        setupSocket();
         string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
         writeSocket(json);
         string received_data = readSocket();
-        //closeSocket();
         
         if (received_data != "")
         {
-            Debug.Log(received_data);
             JSONObject respuesta = JSONObject.Parse(received_data);
             string nombre = respuesta["nombre"].Str;
             string descripcion = respuesta["descripcion"].Str;
@@ -121,7 +136,6 @@ public class WebClient : ClientElement {
                 writeSocket(historia);
                 string recibida = readSocket();
                 JSONObject histRespuesta = JSONObject.Parse(recibida);
-                Debug.Log(histRespuesta);
                 List<string> criterios = new List<string>();
                 string nombreHU = histRespuesta["descripcion"].Str;
                 string puntos = histRespuesta["puntos"].Str;
@@ -136,11 +150,9 @@ public class WebClient : ClientElement {
                 HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, puntos, prioridad, criterios);
                 historias.Add(historiaDeUsuario);
             }
-
-            Debug.Log(nombre);
-            Debug.Log(descripcion);
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
             app.modelo.setProyecto(proyecto);
         }
+        closeSocket();
     }
 }

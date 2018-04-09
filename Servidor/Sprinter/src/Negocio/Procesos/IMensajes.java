@@ -23,4 +23,5 @@ public interface IMensajes {
     public String traerProyecto(String nombre, String descripcion, ArrayList<HistoriaDeUsuario> historias);
     public String enviarHU(String descripcion, String puntos, String prioridad,
     ArrayList<Criterio> criterios);
+    public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
 }

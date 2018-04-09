@@ -25,10 +25,10 @@ public class Proyecto {
     private int sprintActual;
     
     public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
-            ProductBacklog productBacklog){
+            ProductBacklog productBacklog, int tamaño){
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.listaDeSprints = new ArrayList();
+        this.listaDeSprints = new ArrayList(tamaño);
         this.productBacklog = productBacklog;
         this.duracionDeSprints = duracionDeSprints;
         this.diaActual = 1;
