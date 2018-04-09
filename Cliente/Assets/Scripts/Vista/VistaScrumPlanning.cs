@@ -25,8 +25,14 @@ public class VistaScrumPlanning : ClientElement {
 
     public void llenarTabla()
     {
+        foreach(GameObject child in colDesc.transform)
+            GameObject.Destroy(child.gameObject);
+        foreach(GameObject child in colPrio.transform)
+            GameObject.Destroy(child.gameObject);
+        foreach(GameObject child in colPunt.transform)
+            GameObject.Destroy(child.gameObject);
         List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
-        for (int i = 0; i < historias.Capacity-1; i++)
+        for (int i = 0; i < historias.Count; i++)
         {
 
             GameObject contenidoHistoria = Instantiate(prefabDesc);
@@ -41,13 +47,14 @@ public class VistaScrumPlanning : ClientElement {
             prioridad.text = historias[i].getPrioridad();
             puntos.text = historias[i].getPuntos();
 
-            descripcion.transform.parent = contenidoHistoria.transform;
-            prioridad.transform.parent = contenidoPrioridad.transform;
-            puntos.transform.parent = contenidoPuntos.transform;
+            //descripcion.transform.parent = contenidoHistoria.transform;
+            //prioridad.transform.parent = contenidoPrioridad.transform;
+            //puntos.transform.parent = contenidoPuntos.transform;
 
             contenidoHistoria.transform.SetParent(colDesc.transform);
             contenidoPrioridad.transform.SetParent(colPrio.transform);
             contenidoPuntos.transform.SetParent(colPunt.transform);
+            
         }
     }
 
