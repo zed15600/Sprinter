@@ -66,6 +66,9 @@ public class HistoriaDeUsuario {
         return this.estado;
     }
     
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
     public void aumentarVoto(){
     }
     

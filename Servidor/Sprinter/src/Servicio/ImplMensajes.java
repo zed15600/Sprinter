@@ -42,13 +42,13 @@ public class ImplMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarHU(String descripcion, String puntos, String prioridad, ArrayList<Criterio> criterios) {
-        return Mensaje.traerHU(descripcion, puntos, prioridad, criterios);
+    public String enviarHU(String descripcion, String puntos, String prioridad, ArrayList<Criterio> criterios,
+    boolean estado) {
+        return Mensaje.traerHU(descripcion, puntos, prioridad, criterios, estado);
     }
 
     @Override
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
         return Mensaje.sprintPlanning(sprintsRestantes, numeroDeSprint);
     }
-    
 }

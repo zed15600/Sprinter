@@ -22,6 +22,6 @@ public interface IMensajes {
     public String determinarVictoria(boolean resultado);
     public String traerProyecto(String nombre, String descripcion, ArrayList<HistoriaDeUsuario> historias);
     public String enviarHU(String descripcion, String puntos, String prioridad,
-    ArrayList<Criterio> criterios);
+    ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
 }

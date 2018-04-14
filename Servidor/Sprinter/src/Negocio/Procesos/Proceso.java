@@ -107,8 +107,9 @@ public class Proceso {
         String descHU = historia.getDescripcion();
         String prioHU = historia.getPrioridad();
         String punHU = historia.getPuntosHistoria();
+        boolean estado = historia.getEstado();
         ArrayList<Criterio> criterios = historia.getListaCriterios();
-        return mensajes.enviarHU(descHU, punHU, prioHU, criterios);
+        return mensajes.enviarHU(descHU, punHU, prioHU, criterios, estado);
     }
     
     public String sprintPlanning(int ID){
@@ -126,8 +127,10 @@ public class Proceso {
     public void sembrarPartida(){
         Criterio criterio1 = new Criterio ("El puente debe ser azul.");
         Criterio criterio2 = new Criterio ("El puente debe ser verde.");
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Descripción HU 1 Ganada", "5", "4");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Descripción HU 2 Ganada", "3", "2");
+        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", "4");
+        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", "2");
+        huGanada1.setEstado(true);
+        huGanada2.setEstado(false);
         huGanada1.agregarCriterio(criterio1);
         huGanada2.agregarCriterio(criterio2);
         ProductBacklog productBacklogGanado = new ProductBacklog();

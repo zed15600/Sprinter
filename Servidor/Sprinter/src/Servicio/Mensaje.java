@@ -87,11 +87,12 @@ public class Mensaje {
     }
     
     protected static String traerHU(String descripcion, String puntos, String prioridad,
-    ArrayList<Criterio> criterios){
+    ArrayList<Criterio> criterios, boolean estado){
         String res = "{"
                 + "\"codigo\":0005, "
                 + "\"descripcion\":\""+descripcion+"\","
                 + "\"puntos\":\""+puntos+"\","
+                + "\"estado\":"+estado+","
                 + "\"prioridad\":\""+prioridad+"\","
                                 + " \"criterios\":[";
         for(int i=0; i<criterios.size(); i++){

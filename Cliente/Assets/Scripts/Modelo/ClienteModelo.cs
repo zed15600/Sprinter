@@ -79,11 +79,14 @@ public class HistoriaDeUsuario {
 
     private List<string> criterios;
 
-    public HistoriaDeUsuario (string nombre, string prioridad, string puntos, List<string> criterios) {
+    private bool estado;
+
+    public HistoriaDeUsuario (string nombre, string prioridad, string puntos, List<string> criterios, bool estado) {
         this.nombre = nombre;
         this.prioridad = prioridad;
         this.puntos = puntos;
         this.criterios = criterios;
+        this.estado = estado;
     }
 
     public string getDescripcion()
@@ -99,6 +102,11 @@ public class HistoriaDeUsuario {
     public string getPuntos()
     {
         return puntos;
+    }
+
+    public bool getEstado()
+    {
+        return estado;
     }
 } 
 

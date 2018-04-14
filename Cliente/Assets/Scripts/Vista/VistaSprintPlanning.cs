@@ -14,10 +14,13 @@ public class VistaSprintPlanning : ClientElement {
     public GameObject prefabDesc;
     public GameObject prefabPrio;
     public GameObject prefabPunt;
+    public GameObject prefabCompletada;
+    public GameObject prefabVacio;
 
     public VerticalLayoutGroup colDesc;
     public VerticalLayoutGroup colPrio;
     public VerticalLayoutGroup colPunt;
+    public VerticalLayoutGroup colEstado;
 
     public void establecerSprint()
     {
@@ -34,6 +37,15 @@ public class VistaSprintPlanning : ClientElement {
             GameObject contenidoHistoria = Instantiate(prefabDesc);
             GameObject contenidoPrioridad = Instantiate(prefabPrio);
             GameObject contenidoPuntos = Instantiate(prefabPunt);
+            GameObject contenidoEstado = null;
+
+
+            if (historias[i].getEstado())
+            {
+                contenidoEstado = Instantiate(prefabCompletada);
+            } else {
+                contenidoEstado = Instantiate(prefabVacio);
+            }
 
             Text descripcion = contenidoHistoria.GetComponentInChildren<Text>();
             Text prioridad = contenidoPrioridad.GetComponentInChildren<Text>();
@@ -46,7 +58,7 @@ public class VistaSprintPlanning : ClientElement {
             contenidoHistoria.transform.SetParent(colDesc.transform, false);
             contenidoPrioridad.transform.SetParent(colPrio.transform, false);
             contenidoPuntos.transform.SetParent(colPunt.transform, false);
-
+            contenidoEstado.transform.SetParent(colEstado.transform, false);
         }
     }
 
