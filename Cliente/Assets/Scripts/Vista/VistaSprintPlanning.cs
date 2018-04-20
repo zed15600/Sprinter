@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +6,10 @@ public class VistaSprintPlanning : ClientElement {
 
     [SerializeField]
     private Text restantes = null;
+
     [SerializeField]
     private Text actual = null;
-    // Use this for initialization
-
+    
     public GameObject prefabDesc;
     public GameObject prefabPrio;
     public GameObject prefabPunt;
@@ -70,11 +69,5 @@ public class VistaSprintPlanning : ClientElement {
         }
         llenarTabla();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
-
 
 }

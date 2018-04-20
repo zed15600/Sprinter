@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class JsonString : ClientElement {
+﻿public class JsonString : ClientElement {
 
     public static string scrumPlanning(string partida)
     {

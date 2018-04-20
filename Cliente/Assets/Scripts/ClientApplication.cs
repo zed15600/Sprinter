@@ -11,8 +11,4 @@ public class ClientApplication : MonoBehaviour {
 	public ClienteControlador controlador;
     public WebClient webClient;
     public JsonString JsonString;
-
-	// Use this for initialization
-	void Start () {
-	}
 }

@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VistaScrumPlanning : ClientElement {
 
+    // ---------------------------------------------- Contenidos ---------------------------------------------------
     [SerializeField]
     private Text proyecto = null;
     [SerializeField]
@@ -17,7 +17,7 @@ public class VistaScrumPlanning : ClientElement {
     public VerticalLayoutGroup colDesc;
     public VerticalLayoutGroup colPrio;
     public VerticalLayoutGroup colPunt;
-
+    // -------------------------------------------------------------------------------------------------------------
     public void establecerProyecto() {
         proyecto.text = app.controlador.obtenerNombreProyecto();
         descripcion.text = app.controlador.obtenerDescripcionProyecto();
@@ -41,10 +41,6 @@ public class VistaScrumPlanning : ClientElement {
             prioridad.text = historias[i].getPrioridad();
             puntos.text = historias[i].getPuntos();
 
-            //descripcion.transform.parent = contenidoHistoria.transform;
-            //prioridad.transform.parent = contenidoPrioridad.transform;
-            //puntos.transform.parent = contenidoPuntos.transform;
-
             contenidoHistoria.transform.SetParent(colDesc.transform, false);
             contenidoPrioridad.transform.SetParent(colPrio.transform, false);
             contenidoPuntos.transform.SetParent(colPunt.transform, false);
@@ -62,8 +58,5 @@ public class VistaScrumPlanning : ClientElement {
         }
         llenarTabla();
     }
-    // Use this for initialization
-    public void Update () {
 
-    }
 }
