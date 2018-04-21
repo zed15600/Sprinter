@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public class Proyecto {
 
@@ -128,5 +128,19 @@ public class ClienteModelo : ClientElement {
     public Partida getPartida()
     {
         return partida;
+    }
+}
+
+public class Minijuego {
+
+    private HistoriaDeUsuario historiaActual;
+
+    public HistoriaDeUsuario getHistoriaActual() {
+        return historiaActual;
+    }
+
+    public void setHistoriaActual(HistoriaDeUsuario historiax) {
+
+        this.historiaActual = historiax;
     }
 }
