@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos : MonoBehaviour {
+public class VistaMinijuegos : ClientElement {
+    [SerializeField]
+    private Text historia;
 
     public GameObject table;
     public Text timer;
@@ -15,6 +17,9 @@ public class VistaMinijuegos : MonoBehaviour {
     public Sprite gatoAzul;
     public Sprite gatoNaranja;
     public Sprite gatoVerde;
+    public Color naranja;
+    public Color azul;
+    public Color verde; 
 
 
     int count = 0;
@@ -23,14 +28,23 @@ public class VistaMinijuegos : MonoBehaviour {
     void Start () {
 		
 	}
+
+    void OnEnable()
+    {
+        actualizar();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         Timer();
+
+        if (targetTime <= 0) {
+            actualizar();
+        }
 	}
 
-    void Continuar() {
-
+    public void Continuar() {
+        actualizar();
     }
 
     void Timer() {
@@ -59,14 +73,25 @@ public class VistaMinijuegos : MonoBehaviour {
             case 0:
                 incrementarContador();
                 category.text = "Diseño";
-                category.color = new Color(246, 161, 11, 255);
+                category.color = naranja;
                 gato.sprite = gatoNaranja;
                 count++;
                 break;
             case 1:
-
+                incrementarContador();
+                category.text = "Construcción";
+                category.color = verde;
+                gato.sprite = gatoVerde;
+                count++;
+                break;
             case 2:
-            break;
+                incrementarContador();
+                category.text = "Pruebas";
+                category.color = azul;
+                gato.sprite = gatoAzul;
+                count = 0;
+
+                break;
         } 
 
     }
@@ -74,5 +99,13 @@ public class VistaMinijuegos : MonoBehaviour {
     public void incrementarContador() {
 
         targetTime += 120;
+    }
+
+    public void mostrarHistoria() {
+        historia.text = app.controlador.obtenerHistoriaMinijuego();
+    }
+
+    public void mostrarCriterios() {
+
     }
 }

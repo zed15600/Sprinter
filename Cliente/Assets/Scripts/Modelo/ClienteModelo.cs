@@ -108,10 +108,28 @@ public class HistoriaDeUsuario {
     {
         return estado;
     }
-} 
+}
 
+public class Minijuego : ClientElement
+{
 
-public class ClienteModelo : ClientElement {
+    private HistoriaDeUsuario historiaActual;
+
+    public HistoriaDeUsuario getHistoriaActual()
+    {
+        return historiaActual;
+    }
+
+    public void setHistoriaActual(HistoriaDeUsuario historiax)
+    {
+
+        this.historiaActual = historiax;
+    }
+}
+
+public class ClienteModelo {
+
+    private Minijuego minijuego = new Minijuego();
 
     private Partida partida = new Partida("1234");
 
@@ -129,18 +147,9 @@ public class ClienteModelo : ClientElement {
     {
         return partida;
     }
-}
 
-public class Minijuego {
-
-    private HistoriaDeUsuario historiaActual;
-
-    public HistoriaDeUsuario getHistoriaActual() {
-        return historiaActual;
-    }
-
-    public void setHistoriaActual(HistoriaDeUsuario historiax) {
-
-        this.historiaActual = historiax;
+    public Minijuego getMinijuego() {
+        return minijuego;
     }
 }
+

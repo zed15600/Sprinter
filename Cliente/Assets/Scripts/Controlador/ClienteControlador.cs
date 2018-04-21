@@ -24,4 +24,11 @@ public class ClienteControlador : ClientElement {
     {
         return app.modelo.getProyecto().getActual().ToString();
     }
+
+    public string obtenerHistoriaMinijuego() {
+        app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
+        return app.modelo.getMinijuego().getHistoriaActual().getDescripcion();
+            
+    }
+
 }
