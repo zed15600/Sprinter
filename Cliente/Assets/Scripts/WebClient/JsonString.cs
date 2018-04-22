@@ -5,7 +5,7 @@
         string res = "{"
                 + "\"codigo\":0004, "
                 + "\"partidaID\":\"" + partida + "\""
-                + "}";
+                + "}\n";
         return res;
     }
 
@@ -15,7 +15,7 @@
         + "\"codigo\":0005, "
         + "\"partidaID\":\"" + partida + "\","
         + "\"ID\":\"" + idHistoria + "\""
-        + "}";
+        + "}\n";
         return res;
     }
 
@@ -24,7 +24,7 @@
         string res = "{"
                 + "\"codigo\":0006, "
                 + "\"partidaID\":\"" + partida + "\""
-                + "}";
+                + "}\n";
         return res;
     }
 }

@@ -20,6 +20,7 @@ public class VistaMinijuegos : ClientElement {
     public Color naranja;
     public Color azul;
     public Color verde; 
+    public GameObject criterios;
 
 
     int count = 0;
@@ -69,7 +70,6 @@ public class VistaMinijuegos : ClientElement {
     public void actualizar() {
 
         switch (count) {
-
             case 0:
                 incrementarContador();
                 category.text = "Diseño";
@@ -89,8 +89,11 @@ public class VistaMinijuegos : ClientElement {
                 category.text = "Pruebas";
                 category.color = azul;
                 gato.sprite = gatoAzul;
+                count++;
+                break;
+            case 3:
+                criterios.SetActive(true);
                 count = 0;
-
                 break;
         } 
 
