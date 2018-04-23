@@ -10,5 +10,4 @@ public class ClientApplication : MonoBehaviour {
 	public ClienteVista vista;
 	public ClienteControlador controlador;
     public WebClient webClient;
-    public JsonString JsonString;
 }

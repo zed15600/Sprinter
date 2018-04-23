@@ -48,6 +48,7 @@ public class ConexionTCP {
             BufferedReader inData = new BufferedReader(isr);
             DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
             in = inData.readLine();
+            System.out.println(in);
             out = proc.procesarJson(in);
             outData.writeBytes(out + "\n");
         }
