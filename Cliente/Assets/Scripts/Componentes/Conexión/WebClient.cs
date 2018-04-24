@@ -75,7 +75,6 @@ public class WebClient : ClientElement {
     {
         if (!socket_ready)
         {
-            Debug.Log("Socketno estálisto");
             return "";
         }
 
@@ -135,7 +134,6 @@ public class WebClient : ClientElement {
                 setupSocket();
                 writeSocket(historia);
                 string recibida = readSocket();
-                Debug.Log(recibida);
                 JSONObject histRespuesta = JSONObject.Parse(recibida);
                 List<string> criterios = new List<string>();
                 string nombreHU = histRespuesta["descripcion"].Str;
