@@ -1,4 +1,31 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ClienteModelo : ClientElement {
+
+    private Minijuego minijuego = new Minijuego();
+
+    private Partida partida = new Partida("1234");
+
+    private Proyecto proyecto = new Proyecto("", "", null);
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto)
+    {
+        this.proyecto = proyecto;
+    }
+    public Partida getPartida()
+    {
+        return partida;
+    }
+
+    public Minijuego getMinijuego() {
+        return minijuego;
+    }
+}
 
 public class Proyecto {
 
@@ -69,7 +96,7 @@ public class Partida
     }
 }
 
-public class HistoriaDeUsuario {
+public class HistoriaDeUsuario{
 
     private string nombre;
 
@@ -108,25 +135,24 @@ public class HistoriaDeUsuario {
     {
         return estado;
     }
-} 
+}
 
+public class Minijuego
+{
 
-public class ClienteModelo : ClientElement {
+    private HistoriaDeUsuario historiaActual;
 
-    private Partida partida = new Partida("1234");
-
-    private Proyecto proyecto = new Proyecto("", "", null);
-
-    public Proyecto getProyecto() {
-        return proyecto;
+    public HistoriaDeUsuario getHistoriaActual()
+    {
+        return historiaActual;
     }
 
-    public void setProyecto(Proyecto proyecto)
+    public void setHistoriaActual(HistoriaDeUsuario historiax)
     {
-        this.proyecto = proyecto;
-    }
-    public Partida getPartida()
-    {
-        return partida;
+
+        this.historiaActual = historiax;
     }
 }
+
+
+

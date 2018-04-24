@@ -50,11 +50,11 @@ public class VistaScrumPlanning : ClientElement {
 
     public void Start()
     {
+
+        FindObjectOfType<DialogTrigger>().TriggerDialog();
         establecerProyecto();
-        Debug.Log(app.controlador.obtenerHistorias().ToArray().Length);
         while (app.controlador.obtenerHistorias().ToArray().Length == 0)
         {
-            Debug.Log(app.controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
     }

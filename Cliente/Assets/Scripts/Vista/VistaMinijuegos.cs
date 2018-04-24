@@ -1,29 +1,51 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos : MonoBehaviour {
+public class VistaMinijuegos : ClientElement {
+    [SerializeField]
+    private Text historia;
 
     public GameObject table;
     public Text timer;
-    public GameObject category;
+    public Image gato;
+    public Text category;
     public GameObject HUnumber;
     public GameObject continuar;
-    public float targetTime = 120.0f;
+    public float targetTime = 0;
+    public Sprite gatoAzul;
+    public Sprite gatoNaranja;
+    public Sprite gatoVerde;
+    public Color naranja;
+    public Color azul;
+    public Color verde; 
+    public GameObject criterios;
+
+
+    int count = 0;
 
     // Use this for initialization
     void Start () {
 		
 	}
+
+    void OnEnable()
+    {
+        actualizar();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         Timer();
+
+        if (targetTime <= 0) {
+            actualizar();
+        }
 	}
 
-    void Continuar() {
-
+    public void Continuar() {
+        actualizar();
     }
 
     void Timer() {
@@ -43,5 +65,50 @@ public class VistaMinijuegos : MonoBehaviour {
     }
     public void restart() {
         targetTime=120.0f;
+    }
+
+    public void actualizar() {
+
+        switch (count) {
+            case 0:
+                incrementarContador();
+                category.text = "Diseño";
+                category.color = naranja;
+                gato.sprite = gatoNaranja;
+                count++;
+                break;
+            case 1:
+                incrementarContador();
+                category.text = "Construcción";
+                category.color = verde;
+                gato.sprite = gatoVerde;
+                count++;
+                break;
+            case 2:
+                incrementarContador();
+                category.text = "Pruebas";
+                category.color = azul;
+                gato.sprite = gatoAzul;
+                count++;
+                break;
+            case 3:
+                criterios.SetActive(true);
+                count = 0;
+                break;
+        } 
+
+    }
+
+    public void incrementarContador() {
+
+        targetTime += 120;
+    }
+
+    public void mostrarHistoria() {
+        historia.text = app.controlador.obtenerHistoriaMinijuego();
+    }
+
+    public void mostrarCriterios() {
+
     }
 }

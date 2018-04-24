@@ -47,6 +47,12 @@ public class ImplMensajes implements IMensajes {
         return Mensaje.traerHU(descripcion, puntos, prioridad, criterios, estado);
     }
 
+    /**
+     * 
+     * @param sprintsRestantes 
+     * @param numeroDeSprint
+     * @return 
+     */
     @Override
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
         return Mensaje.sprintPlanning(sprintsRestantes, numeroDeSprint);
