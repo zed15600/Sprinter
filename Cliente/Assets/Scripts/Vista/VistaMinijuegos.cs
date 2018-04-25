@@ -19,8 +19,16 @@ public class VistaMinijuegos : ClientElement {
     public Sprite gatoVerde;
     public Color naranja;
     public Color azul;
-    public Color verde; 
+    public Color verde;
+    public GameObject panelCriterios;
+
     public GameObject criterios;
+    public GameObject criteriosT;
+    public Toggle toggle;
+
+    public VerticalLayoutGroup colCriterios;
+    public VerticalLayoutGroup colCriteriosT;
+    public VerticalLayoutGroup colToggles;
 
 
     int count = 0;
@@ -28,6 +36,8 @@ public class VistaMinijuegos : ClientElement {
     // Use this for initialization
     void Start () {
         mostrarHistoria();
+        mostrarCriterios();
+        mostrarConToggles();
 	}
 
     void OnEnable()
@@ -92,7 +102,7 @@ public class VistaMinijuegos : ClientElement {
                 count++;
                 break;
             case 3:
-                criterios.SetActive(true);
+                panelCriterios.SetActive(true);
                 count = 0;
                 break;
         } 
@@ -111,5 +121,30 @@ public class VistaMinijuegos : ClientElement {
 
     public void mostrarCriterios() {
 
+        List<string> criteriosLista = app.controlador.obtenerCriteriosMinijuego();
+
+
+        foreach (string crit in criteriosLista)
+        {
+            GameObject criterioA = Instantiate(criterios);
+            Text descCriterio = criterioA.GetComponentInChildren<Text>();
+            descCriterio.text = crit;
+            Debug.Log(crit);
+            descCriterio.transform.SetParent(colCriterios.transform, false);
+        }
+    }
+
+    public void mostrarConToggles() {
+        List<string> criteriosLista = app.controlador.obtenerCriteriosMinijuego();
+
+        foreach (string crit in criteriosLista)
+        {
+            GameObject criterioT = Instantiate(criteriosT);
+            Toggle critToggle = Instantiate(toggle);
+            Text descCriterio = criterioT.GetComponentInChildren<Text>();
+            descCriterio.text = crit;
+            descCriterio.transform.SetParent(colCriteriosT.transform, false);
+            critToggle.transform.SetParent(colToggles.transform, false);
+        }
     }
 }

@@ -132,6 +132,8 @@ public class Proceso {
         huGanada1.setEstado(true);
         huGanada2.setEstado(false);
         huGanada1.agregarCriterio(criterio1);
+        huGanada1.agregarCriterio(criterio2);
+        huGanada2.agregarCriterio(criterio1);
         huGanada2.agregarCriterio(criterio2);
         ProductBacklog productBacklogGanado = new ProductBacklog();
         productBacklogGanado.agregarHistoria(huGanada1);

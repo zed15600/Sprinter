@@ -135,6 +135,11 @@ public class HistoriaDeUsuario{
     {
         return estado;
     }
+
+    public List<string> getCriterios()
+    {
+        return criterios;
+    }
 }
 
 public class Minijuego
