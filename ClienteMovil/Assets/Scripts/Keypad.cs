@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Keypad : MonoBehaviour {
     
+    public GameObject este;
+    public GameObject siguiente;
     public Text codigo;
     int[] word = new int[]{-2, -2, -2, -2, -2, -2};
     int cursor = 0;
@@ -40,6 +42,8 @@ public class Keypad : MonoBehaviour {
         } 
         if(key==10) {
             //enviar codigo
+            este.SetActive(false);
+            siguiente.SetActive(true);
         }
     }
 }
