@@ -30,7 +30,6 @@ public class VistaFinDelJuego : ClientElement {
         bool res = true;
         for (int i=0; i<historias.Count;i++) {
             if(!historias[i].getEstado()) {
-                Debug.Log(historias[i].getEstado());
                 res = false;
                 break;
             }

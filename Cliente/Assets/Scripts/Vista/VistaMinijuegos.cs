@@ -27,7 +27,7 @@ public class VistaMinijuegos : ClientElement {
 
     // Use this for initialization
     void Start () {
-		
+        mostrarHistoria();
 	}
 
     void OnEnable()
@@ -105,7 +105,8 @@ public class VistaMinijuegos : ClientElement {
     }
 
     public void mostrarHistoria() {
-        historia.text = app.controlador.obtenerHistoriaMinijuego();
+        string HU = app.controlador.obtenerHistoriaMinijuego();
+        historia.text = HU;
     }
 
     public void mostrarCriterios() {
