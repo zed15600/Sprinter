@@ -102,6 +102,7 @@ public class VistaMinijuegos : ClientElement {
                 count++;
                 break;
             case 3:
+                app.controlador.establecerTiempo(targetTime);
                 panelCriterios.SetActive(true);
                 count = 0;
                 break;
@@ -165,27 +166,4 @@ public class VistaMinijuegos : ClientElement {
         }
     }
 
-    public void verificarCompletitud()
-    {
-        List<string> criterios = app.controlador.obtenerCriteriosMinijuego();
-
-        foreach (string crit in criterios)
-        {
-            if (crit != null)
-            {
-                return;
-            }
-        }
-
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
-        string completada = app.controlador.obtenerHistoriaMinijuego();
-
-        foreach (HistoriaDeUsuario historia in historias)
-        {
-            if (completada.Equals(historia.getDescripcion()))
-            {
-                app.controlador.cambiarEstado(historia);
-            }
-        }
-    }
 }
