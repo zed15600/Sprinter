@@ -35,4 +35,8 @@ public class ClienteControlador : ClientElement {
         return app.modelo.getMinijuego().getHistoriaActual().getCriterios();
     }
 
+    public void eliminarCriterioMinijuego(int indice)
+    {
+        app.modelo.getMinijuego().eliminarCriterio(indice);
+    }
 }

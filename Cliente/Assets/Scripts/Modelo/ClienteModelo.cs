@@ -154,8 +154,13 @@ public class Minijuego
 
     public void setHistoriaActual(HistoriaDeUsuario historiax)
     {
-
         this.historiaActual = historiax;
+    }
+
+    public void eliminarCriterio(int indice)
+    {
+        List<string> criterios = historiaActual.getCriterios();
+        criterios[indice] = null;
     }
 }
 

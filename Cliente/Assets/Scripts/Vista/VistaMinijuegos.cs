@@ -126,6 +126,11 @@ public class VistaMinijuegos : ClientElement {
 
         foreach (string crit in criteriosLista)
         {
+            if (crit == null)
+            {
+                continue;
+            }
+
             GameObject criterioA = Instantiate(criterios);
             Text descCriterio = criterioA.GetComponentInChildren<Text>();
             descCriterio.text = crit;
@@ -139,12 +144,41 @@ public class VistaMinijuegos : ClientElement {
 
         foreach (string crit in criteriosLista)
         {
+            if (crit == null)
+            {
+                continue;
+            }
+
             GameObject criterioT = Instantiate(criteriosT);
             Toggle critToggle = Instantiate(toggle);
             Text descCriterio = criterioT.GetComponentInChildren<Text>();
             descCriterio.text = crit;
             descCriterio.transform.SetParent(colCriteriosT.transform, false);
             critToggle.transform.SetParent(colToggles.transform, false);
+        }
+    }
+
+    public void revisarCompletadas()
+    {
+        Toggle[] estados = colToggles.GetComponents<Toggle>();
+        for (int i = 0;i<estados.Length;i++)
+        {
+            if (estados[i].isOn)
+            {
+                app.controlador.eliminarCriterioMinijuego(i);
+            }
+        }
+    }
+
+    public void verificarCompletitud()
+    {
+        List<string> criterios = app.controlador.obtenerCriteriosMinijuego();
+        foreach (string crit in criterios)
+        {
+            if (crit != null)
+            {
+                return;
+            }
         }
     }
 }

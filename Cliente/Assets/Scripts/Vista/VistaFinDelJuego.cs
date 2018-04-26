@@ -25,7 +25,7 @@ public class VistaFinDelJuego : ClientElement {
 		
 	}
 
-    bool revisarHistorias() {
+    public bool revisarHistorias() {
         List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
         bool res = true;
         for (int i=0; i<historias.Count;i++) {

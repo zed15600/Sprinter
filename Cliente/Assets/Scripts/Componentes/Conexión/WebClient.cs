@@ -143,6 +143,7 @@ public class WebClient : ClientElement {
                 bool estado = histRespuesta["estado"].Boolean;
                 for (int j = 0; j < crit.Length; j++)
                 {
+                    Debug.Log(crit[j].Str);
                     criterios.Add(crit[j].Str);
                 }
 
