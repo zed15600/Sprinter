@@ -3,3 +3,5 @@ código	proceso			ejemplo
 0002	determinar victoria	{"codigo":0002, "partidaID":1234}
 0003	terminar dia		{"codigo":0003, "partidaID":1234}
 0004	scrum planning		{"codigo":0004, "partidaID":1234}
+
+0008	Unirse a partida	{"codigo":0005, "partCode":837085}

@@ -7,4 +7,4 @@ Código	vista a mostrar		ejemplo
 
 Móvil
 Código	Función			Ejemplo
-0005	Unirse a partida	{"codigo":0005, "partCode":985394}
+0007	Unirse a partida	{"codigo":0007, "pId":1234}

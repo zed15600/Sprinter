@@ -108,4 +108,13 @@ public class Mensaje {
                 +   "\"numero\":"+numeroDeSprint+"}";
         return res;
     }
+    
+    protected static String unirsePartida(int partidaID, boolean aceptado){
+        String res = "{"
+                + "\"codigo\":0007,"
+                + "\"pId\":"+partidaID+","
+                + "\"aceptado\":"+aceptado+""
+                + "}";
+        return res;
+    }
 }

@@ -15,16 +15,19 @@ import java.util.ArrayList;
 
 
 public class Partida {
-    private String codigo;
+    private int codigo;
+    private int codigoUnirse;
     private ArrayList<Jugador> listaJugadores;
     private String nombre;
     private Proyecto proyecto;
     
-    public Partida(String codigo, String nombre, Proyecto proyecto){
+    public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
         this.listaJugadores = new ArrayList();
         this.nombre = nombre;
         this.proyecto = proyecto;
+        //generar código aleatorio
+        codigoUnirse = 837085;
     }
     
     public void agregarJugador (Jugador jugador){    
@@ -33,12 +36,20 @@ public class Partida {
     public void quitarJugador (Jugador jugador){        
     }
     
+    public int getCodigo(){
+        return this.codigo;
+    }
+    
     public Proyecto getProyecto(){
         return this.proyecto;
     }
     
     public String getNombre(){
         return this.nombre;
+    }
+    
+    public int getUnion(){
+        return this.codigoUnirse;
     }
     
 }

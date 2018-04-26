@@ -7,6 +7,7 @@ public class Keypad : MonoBehaviour {
     
     public GameObject este;
     public GameObject siguiente;
+    public VistaConectarse self;
     public Text codigo;
     int[] word = new int[]{-2, -2, -2, -2, -2, -2};
     int cursor = 0;
@@ -41,9 +42,11 @@ public class Keypad : MonoBehaviour {
             cursor-=1;
         } 
         if(key==10) {
-            //enviar codigo
-            este.SetActive(false);
-            siguiente.SetActive(true);
+            int cod = word[0]*100000+word[1]*10000+word[2]*1000+word[3]*100+word[4]*10+word[5];
+            if(self.verificarCodigo(cod)){
+                este.SetActive(false);
+                siguiente.SetActive(true);
+            }
         }
     }
 }

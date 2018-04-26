@@ -24,4 +24,5 @@ public interface IMensajes {
     public String enviarHU(String descripcion, String puntos, String prioridad,
     ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
+    public String unirsePartida(int partidaID, boolean aceptado);
 }

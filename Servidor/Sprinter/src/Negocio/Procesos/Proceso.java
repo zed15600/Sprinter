@@ -12,6 +12,7 @@ import Negocio.Entidades.ProductBacklog;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Partida;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,6 +134,16 @@ public class Proceso {
         }
         historia.terminarHU();
     }
+    
+    public String unirsePartida(int codigo){
+        Collection<Partida> parts = partidas.values();
+        for(Partida partida: parts){
+            if(partida.getUnion()==codigo){
+                return mensajes.unirsePartida(partida.getCodigo(), true);
+            }
+        }
+        return mensajes.unirsePartida(0000, false);
+    }
     /*
     Crea una partida básica para hacer pruebas.
     Pendiente de terminar.
@@ -152,7 +163,7 @@ public class Proceso {
         productBacklogGanado.agregarHistoria(huGanada2);
         Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
         productBacklogGanado, 3);
-        Partida partidaGanada = new Partida("15600", "Partida de Edison", proyectoGanado);
+        Partida partidaGanada = new Partida(15600, "Partida de Edison", proyectoGanado);
         partidas.put(1234, partidaGanada);
     }
     

@@ -57,4 +57,9 @@ public class ImplMensajes implements IMensajes {
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
         return Mensaje.sprintPlanning(sprintsRestantes, numeroDeSprint);
     }
+    
+    @Override
+    public String unirsePartida(int partidaID, boolean aceptado){
+        return Mensaje.unirsePartida(partidaID, aceptado);
+    }
 }

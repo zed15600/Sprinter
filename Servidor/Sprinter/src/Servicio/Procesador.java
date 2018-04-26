@@ -39,7 +39,12 @@ public class Procesador {
             Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(json!=null){
-            int pID = Integer.valueOf(json.get("partidaID").toString());
+            int pID;
+            try{
+                pID = Integer.valueOf(json.get("partidaID").toString());
+            }catch(Exception ex){
+                pID = 0;
+            }
             switch(Integer.valueOf(json.get("codigo").toString())){
                 case 1: return proceso.terminarSprint(pID);
                 case 2: return proceso.determinarVictoria(pID);
@@ -52,6 +57,10 @@ public class Procesador {
                 case 7:
                     String completadaID = (String)json.get("ID");
                     proceso.establecerCompletada(pID, completadaID);
+                    break;
+                case 8:
+                    int codigoPartida = (int)(long)json.get("partCode");
+                    return proceso.unirsePartida(codigoPartida);
             }
         }
         return "";
