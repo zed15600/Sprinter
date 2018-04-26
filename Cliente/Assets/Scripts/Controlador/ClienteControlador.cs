@@ -26,7 +26,6 @@ public class ClienteControlador : ClientElement {
     }
 
     public string obtenerHistoriaMinijuego() {
-        app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
         return app.modelo.getMinijuego().getHistoriaActual().getDescripcion();   
     }
 
@@ -44,5 +43,48 @@ public class ClienteControlador : ClientElement {
     {
         historia.cambiarEstado();
         app.webClient.establecerCompletada(historia.getID());
+    }
+
+    public int obtenerPuntosHMinijuego()
+    {
+        int puntos = 0;
+        puntos = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPuntos());
+        return puntos;
+    }
+
+    public int obtenerPrioridadMinijuego()
+    {
+        int prioridad = 0;
+        prioridad = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPrioridad());
+        return prioridad;
+    }
+
+    public void establecerTiempo(float tiempo)
+    {
+        app.modelo.getMinijuego().setTiempoFinal(tiempo);
+    }
+
+    public float obtenerTiempoFinal()
+    {
+        float tiempoFinal = 0;
+        tiempoFinal = app.modelo.getMinijuego().getTiempoFinal();
+        return tiempoFinal;
+    }
+
+    public int obtenerIntentos()
+    {
+        return app.modelo.getMinijuego().getIntentos();
+    }
+
+    public void resetearIntentos() {
+        app.modelo.getMinijuego().resetearIntentos();
+    }
+
+    public void aumentarIntento() {
+        app.modelo.getMinijuego().aumentarIntentos();
+    }
+
+    public void obtenerPuntaje(HistoriaDeUsuario historia) {
+        app.modelo.getProyecto().getHistorias();
     }
 }

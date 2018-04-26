@@ -110,6 +110,8 @@ public class HistoriaDeUsuario{
 
     private bool estado;
 
+    private int puntaje;
+
     public HistoriaDeUsuario (string ID, string nombre, string prioridad, string puntos, List<string> criterios, bool estado) {
         this.ID = ID;
         this.nombre = nombre;
@@ -153,12 +155,24 @@ public class HistoriaDeUsuario{
     {
         this.estado = true;
     }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
 }
 
 public class Minijuego
 {
-
     private HistoriaDeUsuario historiaActual;
+
+    private float tiempoFinal = 0;
+
+    private int intentos = 1;
 
     public HistoriaDeUsuario getHistoriaActual()
     {
@@ -174,6 +188,30 @@ public class Minijuego
     {
         List<string> criterios = historiaActual.getCriterios();
         criterios[indice] = null;
+    }
+
+    public float getTiempoFinal()
+    {
+        return tiempoFinal;
+    }
+
+    public void setTiempoFinal(float tiempoFinal)
+    {
+        this.tiempoFinal = tiempoFinal;
+    }
+
+    public void aumentarIntentos()
+    {
+        this.intentos++;
+    }
+
+    public void resetearIntentos() {
+        this.intentos = 0;
+    }
+
+    public int getIntentos()
+    {
+        return intentos;
     }
 }
 

@@ -160,6 +160,7 @@ public class WebClient : ClientElement {
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
             app.modelo.setProyecto(proyecto);
+            app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
         }
         closeSocket();
     }
