@@ -120,6 +120,19 @@ public class Proceso {
         int restantes = Math.abs(sprints.size() - actual);
         return mensajes.sprintPlanning(restantes, actual);
     }
+    
+    public void establecerCompletada(int pID, String completadaID) {
+        Partida par = partidas.get(pID);
+        Proyecto p = par.getProyecto(); 
+        ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
+        HistoriaDeUsuario historia = null;
+        for (int i = 0; i<historias.size();i++){
+            if (historias.get(i).getId() == Integer.valueOf(completadaID)){
+                historia = historias.get(i);
+            }
+        }
+        historia.terminarHU();
+    }
     /*
     Crea una partida básica para hacer pruebas.
     Pendiente de terminar.
@@ -129,7 +142,7 @@ public class Proceso {
         Criterio criterio2 = new Criterio ("El puente debe ser verde.");
         HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", "4");
         HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", "2");
-        huGanada1.setEstado(true);
+        huGanada1.setEstado(false);
         huGanada2.setEstado(false);
         huGanada1.agregarCriterio(criterio1);
         huGanada1.agregarCriterio(criterio2);

@@ -49,6 +49,9 @@ public class Procesador {
                     String hID = (String)json.get("ID");
                     return proceso.enviarHistoria(pID, hID);
                 case 6: return proceso.sprintPlanning(pID);
+                case 7:
+                    String completadaID = (String)json.get("ID");
+                    proceso.establecerCompletada(pID, completadaID);
             }
         }
         return "";

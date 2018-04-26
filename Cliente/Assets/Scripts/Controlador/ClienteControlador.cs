@@ -39,4 +39,10 @@ public class ClienteControlador : ClientElement {
     {
         app.modelo.getMinijuego().eliminarCriterio(indice);
     }
+
+    public void cambiarEstado(HistoriaDeUsuario historia)
+    {
+        historia.cambiarEstado();
+        app.webClient.establecerCompletada(historia.getID());
+    }
 }

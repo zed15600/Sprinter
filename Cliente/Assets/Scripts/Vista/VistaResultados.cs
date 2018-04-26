@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VistaResultados : MonoBehaviour {
-    public GameObject
+
 	// Use this for initialization
 	void Start () {
 		

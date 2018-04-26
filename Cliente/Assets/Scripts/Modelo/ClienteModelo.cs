@@ -98,6 +98,8 @@ public class Partida
 
 public class HistoriaDeUsuario{
 
+    private string ID;
+
     private string nombre;
 
     private string prioridad;
@@ -108,12 +110,18 @@ public class HistoriaDeUsuario{
 
     private bool estado;
 
-    public HistoriaDeUsuario (string nombre, string prioridad, string puntos, List<string> criterios, bool estado) {
+    public HistoriaDeUsuario (string ID, string nombre, string prioridad, string puntos, List<string> criterios, bool estado) {
+        this.ID = ID;
         this.nombre = nombre;
         this.prioridad = prioridad;
         this.puntos = puntos;
         this.criterios = criterios;
         this.estado = estado;
+    }
+
+    public string getID()
+    {
+        return ID;
     }
 
     public string getDescripcion()
@@ -139,6 +147,11 @@ public class HistoriaDeUsuario{
     public List<string> getCriterios()
     {
         return criterios;
+    }
+
+    public void cambiarEstado()
+    {
+        this.estado = true;
     }
 }
 

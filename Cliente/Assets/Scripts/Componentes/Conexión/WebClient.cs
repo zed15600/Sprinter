@@ -96,6 +96,14 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
 
+    public void establecerCompletada(String huID)
+    {
+        setupSocket();
+        string json = JsonString.establecerCompletada(app.modelo.getPartida().getID(), huID);
+        writeSocket(json);
+        closeSocket();
+    }
+
     public void obtenerSprint()
     {
         setupSocket();
@@ -136,6 +144,7 @@ public class WebClient : ClientElement {
                 string recibida = readSocket();
                 JSONObject histRespuesta = JSONObject.Parse(recibida);
                 List<string> criterios = new List<string>();
+                string ID = IDs[i].Str;
                 string nombreHU = histRespuesta["descripcion"].Str;
                 string puntos = histRespuesta["puntos"].Str;
                 string prioridad = histRespuesta["prioridad"].Str;
@@ -143,11 +152,10 @@ public class WebClient : ClientElement {
                 bool estado = histRespuesta["estado"].Boolean;
                 for (int j = 0; j < crit.Length; j++)
                 {
-                    Debug.Log(crit[j].Str);
                     criterios.Add(crit[j].Str);
                 }
 
-                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, puntos, prioridad, criterios, estado);
+                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(ID, nombreHU, puntos, prioridad, criterios, estado);
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);

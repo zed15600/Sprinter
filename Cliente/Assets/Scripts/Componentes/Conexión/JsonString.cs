@@ -27,4 +27,14 @@
                 + "}\n";
         return res;
     }
+
+    public static string establecerCompletada(string partida, string idHistoria)
+    {
+        string res = "{"
+        + "\"codigo\":0007, "
+        + "\"partidaID\":\"" + partida + "\","
+        + "\"ID\":\"" + idHistoria + "\""
+        + "}\n";
+        return res;
+    }
 }
