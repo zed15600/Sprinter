@@ -30,7 +30,11 @@ public class Partida {
         codigoUnirse = 837085;
     }
     
-    public void agregarJugador (Jugador jugador){    
+    public int agregarJugador (){
+        int id = listaJugadores.size()+1;
+        Jugador jugador = new Jugador("Edison", id);
+        listaJugadores.add(jugador);
+        return id;
     }
     
     public void quitarJugador (Jugador jugador){        

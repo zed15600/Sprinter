@@ -3,11 +3,23 @@ using UnityEngine;
 
 public class ClienteModelo : ClientElement {
 
-    private Partida partida = new Partida("1234");
+    private Partida partida = new Partida(1234);
+    private Jugador jugador = new Jugador();
     
-    public Partida getPartida()
-    {
+    public Partida getPartida(){
         return partida;
+    }
+
+    public void setPartida(int pID) {
+        partida = new Partida(pID);
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(int id) {
+        jugador.setId(id);
     }
 
 }
@@ -15,14 +27,30 @@ public class ClienteModelo : ClientElement {
 
 public class Partida
 {
-    private string id;
+    private int id;
 
-    public Partida(string id) { 
+    public Partida(int id) { 
         this.id = id;
     }
 
-    public string getID()
+    public int getID()
     {
+        return id;
+    }
+
+
+}
+
+public class Jugador {
+
+    private int id;
+    private string nombre;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return id;
     }
 }

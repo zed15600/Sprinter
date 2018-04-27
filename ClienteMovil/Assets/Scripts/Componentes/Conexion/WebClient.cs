@@ -80,7 +80,7 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
     
-    public bool unirsePartida(int codigo) {
+    public void unirsePartida(string codigo) {
         string json = JsonString.unirseAPartida(codigo);
         setupSocket();
         writeSocket(json);
@@ -88,9 +88,44 @@ public class WebClient : ClientElement {
         closeSocket();
         if(dataIn != "") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
-            return jsRes["aceptado"].Boolean;
+            app.controlador.crearPartida((int)jsRes["pId"].Number);
+            app.controlador.responderConexion(jsRes["aceptado"].Boolean);
+            app.modelo.setJugador((int)jsRes["jugadorId"].Number);
         }
-        return false;
+    }
+
+    public void actualizarEstado(int pId, int player) {
+        string json = JsonString.actualizarEstado(pId, player);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn != "") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            if(jsRes["votacion"].Boolean) {
+                JSONArray arr = jsRes["HUs"].Array;
+                JSONArray desc = jsRes["HUsDesc"].Array;
+                int size = arr.Length;
+                int[] HUsId = new int[size];
+                string[] HUsDesc = new string[size];
+                for(int i=0; i<size; i++) {
+                    HUsId[i] = (int)arr[i].Number;
+                    HUsDesc[i] = desc[i].Str;
+                }
+                app.controlador.mostrarVotacion(HUsId, HUsDesc);
+            }
+        }
+    }
+
+    public void enviarVoto(int pID, string HUid, int player) {
+        string json = JsonString.enviarVoto(pID, HUid, player);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            //creo que no hay que hacer nada
+        }
     }
 
 }

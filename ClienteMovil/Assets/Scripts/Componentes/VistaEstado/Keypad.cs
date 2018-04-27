@@ -13,8 +13,8 @@ public class Keypad : MonoBehaviour {
     int cursor = 0;
 
 	// Use this for initialization
-	void Start () {
-		
+	void onEnable () {
+		word = new int[]{-2, -2, -2, -2, -2, -2};
 	}
 	
 	// Update is called once per frame
@@ -42,11 +42,8 @@ public class Keypad : MonoBehaviour {
             cursor-=1;
         } 
         if(key==10) {
-            int cod = word[0]*100000+word[1]*10000+word[2]*1000+word[3]*100+word[4]*10+word[5];
-            if(self.verificarCodigo(cod)){
-                este.SetActive(false);
-                siguiente.SetActive(true);
-            }
+            string cod = ""+word[0]+word[1]+word[2]+word[3]+word[4]+word[5];
+            self.verificarCodigo(cod);
         }
     }
 }

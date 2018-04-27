@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class VistaConectarse : ClientElement {
 
-    public bool verificarCodigo(int codigo) {
-        if(codigo<100000) {
+    public void verificarCodigo(string codigo) {
+        if(codigo.Contains("-2")) {
             Debug.Log("Código inválido");
-            return false;
         }
-        if(!app.controlador.conectarPartida(codigo)){
-            Debug.Log("Codigo no encontrado");
-            return false;
+        app.controlador.conectarPartida(codigo);
+    }
+
+    public void respuestaConexion(bool respuesta) {
+        if(respuesta) {
+            this.gameObject.SetActive(false);
+            app.vista.estado.gameObject.SetActive(true);
         }
-        Debug.Log("Conexion exitosa");
-        return true;
     }
 }

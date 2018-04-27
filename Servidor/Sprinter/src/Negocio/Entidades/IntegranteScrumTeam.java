@@ -15,7 +15,7 @@ public class IntegranteScrumTeam extends Jugador {
     
     private ArrayList<Impedimento> listaImpedimento;
     
-    public IntegranteScrumTeam(String nombre, String ID) {
+    public IntegranteScrumTeam(String nombre, int ID) {
         super(nombre, ID);
         this.listaImpedimento = new ArrayList<>();
     }

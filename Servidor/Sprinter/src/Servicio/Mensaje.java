@@ -109,11 +109,11 @@ public class Mensaje {
         return res;
     }
     
-    protected static String unirsePartida(int partidaID, boolean aceptado){
+    protected static String unirsePartida(int partidaID, int jugadorId, boolean aceptado){
         String res = "{"
                 + "\"codigo\":0007,"
                 + "\"pId\":"+partidaID+","
-                + "\"aceptado\":"+aceptado+""
+                + "\"jugadorId\":"+jugadorId+""
                 + "}";
         return res;
     }

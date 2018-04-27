@@ -11,7 +11,7 @@ package Negocio.Entidades;
  */
 public class ScrumMaster extends Jugador {
     
-    public ScrumMaster(String nombre, String ID) {
+    public ScrumMaster(String nombre, int ID) {
         super(nombre, ID);
     }
     

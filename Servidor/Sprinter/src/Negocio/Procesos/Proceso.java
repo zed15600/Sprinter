@@ -139,10 +139,10 @@ public class Proceso {
         Collection<Partida> parts = partidas.values();
         for(Partida partida: parts){
             if(partida.getUnion()==codigo){
-                return mensajes.unirsePartida(partida.getCodigo(), true);
+                return mensajes.unirsePartida(partida.getCodigo(), partida.agregarJugador(), true);
             }
         }
-        return mensajes.unirsePartida(0000, false);
+        return mensajes.unirsePartida(0000, 0, false);
     }
     /*
     Crea una partida básica para hacer pruebas.

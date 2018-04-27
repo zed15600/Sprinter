@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class Jugador {
     
     private String nombre;
-    private String ID;
+    private int ID;
 
-    public Jugador(String nombre, String ID) {
+    public Jugador(String nombre, int ID) {
         this.nombre = nombre;
         this.ID = ID;
     }
