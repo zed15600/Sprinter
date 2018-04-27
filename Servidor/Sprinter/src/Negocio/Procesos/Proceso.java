@@ -151,7 +151,13 @@ public class Proceso {
         Proyecto py = p.getProyecto();
         ArrayList<HistoriaDeUsuario> spBlog = py.getSprints().get(py.getSprintActual()).getSprintBacklog().getHistorias();
         HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[4];
-        for(int i=0; i<4; i++){
+        int size;
+        if(p.getTipoVotacion() == 1){
+            size = 6;
+        }else{
+            size = 4;
+        }
+        for(int i=0; i<size; i++){
             posibles[i] = spBlog.get(i);
         }
         return mensajes.actualizarEstadoJugador(p.getVotacion(), posibles);
