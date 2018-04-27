@@ -11,6 +11,7 @@ import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.ProductBacklog;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Partida;
+import Negocio.Entidades.SprintBacklog;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -144,6 +145,37 @@ public class Proceso {
         }
         return mensajes.unirsePartida(0000, 0, false);
     }
+    
+    public String actualizarEstadoJugador(int partidaID, int jugador){
+        Partida p = partidas.get(partidaID);
+        Proyecto py = p.getProyecto();
+        ArrayList<HistoriaDeUsuario> spBlog = py.getSprints().get(py.getSprintActual()).getSprintBacklog().getHistorias();
+        HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[4];
+        for(int i=0; i<4; i++){
+            posibles[i] = spBlog.get(i);
+        }
+        return mensajes.actualizarEstadoJugador(p.getVotacion(), posibles);
+        
+    }
+    
+    public void registrarVoto(int partidaID, int historiaID, int jugador){
+        Partida p = partidas.get(partidaID);
+        ArrayList<HistoriaDeUsuario> bcklog = p.getProyecto().getProductBacklog().getHistorias();
+        p.getJugadores().get(jugador).setVotar(false);
+        for(HistoriaDeUsuario historia: bcklog){
+            if(historia.getId()==historiaID){
+                historia.aumentarVoto();
+                return;
+            }
+        }
+    }
+    
+    public void establecerVotación(int partidaID, boolean votar, int tipo){
+        Partida p = partidas.get(partidaID);
+        p.setVotacion(votar);
+        p.setTipoVotación(tipo);
+    }
+    
     /*
     Crea una partida básica para hacer pruebas.
     Pendiente de terminar.

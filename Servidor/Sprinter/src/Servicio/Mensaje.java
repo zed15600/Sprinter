@@ -117,4 +117,21 @@ public class Mensaje {
                 + "}";
         return res;
     }
+    
+    protected static String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
+        String HUsID = "[";
+        String HUsDesc = "[";
+        for (HistoriaDeUsuario posible : posibles) {
+            HUsID += posible.getId() + ",";
+            HUsDesc += posible.getDescripcion() + ",";
+        }
+        HUsID = HUsID.substring(0, HUsID.length()-1) + "]";
+        HUsDesc = HUsDesc.substring(0, HUsDesc.length()-1) + "]";
+        String res = "{"
+                   + "\"votacion\":"+votar+","
+                   + "\"HUs\":"+HUsID+","
+                   + "\"HUsDesc\":"+HUsDesc+","
+                   + "}";
+        return res;
+    }
 }

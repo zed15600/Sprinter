@@ -1,8 +1,10 @@
-código	proceso			ejemplo
-0001	terminar sprint 	{"codigo":0001, "partidaID":1234}
-0002	determinar victoria	{"codigo":0002, "partidaID":1234}
-0003	terminar dia		{"codigo":0003, "partidaID":1234}
-0004	scrum planning		{"codigo":0004, "partidaID":1234}
-
-0008	Unirse a partida	{"codigo":0008, "partCode":837085}
-0009	Actualizar estado juga.	{"codigo":0009, "pId":1234, "player":1}
+código	proceso				Ejemplo
+0001	terminar sprint 		{"codigo":0001, "partidaID":1234}
+0002	determinar victoria		{"codigo":0002, "partidaID":1234}
+0003	terminar dia			{"codigo":0003, "partidaID":1234}
+0004	scrum planning			{"codigo":0004, "partidaID":1234}
+					
+0008	Unirse a partida		{"codigo":0008, "partCode":837085}
+0009	Actualizar estado jugador	{"codigo":0009, "partidaID":1234, "player":1}
+0010	Registrar voto			{"codigo":0010, "partidaID":1234, "HUid":1, "player":1}
+0011	Iniciar votacion		{"codigo":0011, "partidaID":1234, "votar":true, "tipoVoto":1}

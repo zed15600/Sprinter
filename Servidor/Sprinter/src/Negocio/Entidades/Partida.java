@@ -20,6 +20,8 @@ public class Partida {
     private ArrayList<Jugador> listaJugadores;
     private String nombre;
     private Proyecto proyecto;
+    private boolean votacion;
+    private int tipoVotacion;
     
     public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
@@ -28,6 +30,8 @@ public class Partida {
         this.proyecto = proyecto;
         //generar código aleatorio
         codigoUnirse = 837085;
+        votacion = false;
+        tipoVotacion = 0;
     }
     
     public int agregarJugador (){
@@ -54,6 +58,26 @@ public class Partida {
     
     public int getUnion(){
         return this.codigoUnirse;
+    }
+    
+    public boolean getVotacion(){
+        return votacion;
+    }
+    
+    public void setVotacion(boolean votacion){
+        this.votacion = votacion;
+    }
+    
+    public ArrayList<Jugador> getJugadores(){
+        return listaJugadores;
+    }
+    
+    public int getTipoVotacion(){
+        return tipoVotacion;
+    }
+    
+    public void setTipoVotación(int tipoVotacion){
+        this.tipoVotacion = tipoVotacion;
     }
     
 }

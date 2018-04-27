@@ -46,21 +46,20 @@ public class Procesador {
                 pID = 0;
             }
             switch(Integer.valueOf(json.get("codigo").toString())){
-                case 1: return proceso.terminarSprint(pID);
-                case 2: return proceso.determinarVictoria(pID);
-                case 3: return proceso.terminarDia(pID);
-                case 4: return proceso.enviarProyecto(pID);
-                case 5:
-                    String hID = (String)json.get("ID");
-                    return proceso.enviarHistoria(pID, hID);
-                case 6: return proceso.sprintPlanning(pID);
-                case 7:
-                    String completadaID = (String)json.get("ID");
-                    proceso.establecerCompletada(pID, completadaID);
+                case 1:  return proceso.terminarSprint(pID);
+                case 2:  return proceso.determinarVictoria(pID);
+                case 3:  return proceso.terminarDia(pID);
+                case 4:  return proceso.enviarProyecto(pID);
+                case 5:  return proceso.enviarHistoria(pID, (String)json.get("ID"));
+                case 6:  return proceso.sprintPlanning(pID);
+                case 7:  proceso.establecerCompletada(pID, (String)json.get("ID"));
                     break;
-                case 8:
-                    int codigoPartida = (int)(long)json.get("partCode");
-                    return proceso.unirsePartida(codigoPartida);
+                case 8:  return proceso.unirsePartida((int)(long)json.get("partCode"));
+                case 9:  return proceso.actualizarEstadoJugador(pID, (int)(long)json.get("player"));
+                case 10: proceso.registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
+                    break;
+                case 11: proceso.establecerVotación(pID, (boolean)json.get("votar"), (int)(long)json.get("tipoVoto"));
+                    break;
             }
         }
         return "";

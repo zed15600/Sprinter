@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class HistoriaDeUsuario {
     
-    private int puntuaciónRequerida;
+    private int puntuaciónRequerida;   //Creo que esto no se va a utilizar
     private int puntuacion;
     private boolean estado;
     private int id;
@@ -23,6 +23,17 @@ public class HistoriaDeUsuario {
     private String puntosHistoria;
     private String prioridad;
 
+    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, String prioridad){
+        this.id = id;
+        this.puntosHistoria = puntosHistoria;
+        this.prioridad = prioridad;
+        this.puntuacion = 0;
+        this.estado = false;
+        this.descripcion = descripcion;
+        this.contadorVotos = 0;
+        this.listaCriterios = new ArrayList<>();
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -37,17 +48,6 @@ public class HistoriaDeUsuario {
 
     public String getPrioridad() {
         return prioridad;
-    }
-
-    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, String prioridad){
-        this.id = id;
-        this.puntosHistoria = puntosHistoria;
-        this.prioridad = prioridad;
-        this.puntuacion = 0;
-        this.estado = false;
-        this.descripcion = descripcion;
-        this.contadorVotos = 0;
-        this.listaCriterios = new ArrayList<>();
     }
     
     public void terminarHU(){

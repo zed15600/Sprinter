@@ -8,19 +8,19 @@
         return res;
     }
 
-    public static string actualizarEstado(int pID, int player) {
+    public static string actualizarEstado(int partidaID, int player) {
         string res = "{" +
                      "\"codigo\":0009," +
-                     "\"pID\":"+pID+"," +
+                     "\"partidaID\":"+partidaID+"," +
                      "\"player\":"+player+"" +
                      "}";
         return res;
     }
 
-    public static string enviarVoto(int pID, string HUid, int player){
+    public static string enviarVoto(int partidaID, string HUid, int player){
         string res = "{" +
                      "\"codigo\":0010," +
-                     "\"pID\":"+pID+"," +
+                     "\"partidaID\":"+partidaID+"," +
                      "\"HUid\":"+HUid+"," +
                      "\"player\":"+player+"" +
             "}";

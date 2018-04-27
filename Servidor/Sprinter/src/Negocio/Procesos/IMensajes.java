@@ -25,4 +25,5 @@ public interface IMensajes {
     ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
     public String unirsePartida(int partidaID, int jugadorId, boolean aceptado);
+    public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
 }

@@ -62,4 +62,9 @@ public class ImplMensajes implements IMensajes {
     public String unirsePartida(int partidaID, int jugadorId, boolean aceptado){
         return Mensaje.unirsePartida(partidaID, jugadorId, aceptado);
     }
+    
+    @Override
+    public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
+        return Mensaje.actualizarEstadoJugador(votar, posibles);
+    }
 }
