@@ -57,6 +57,10 @@ public class Proyecto {
         return this.listaDeSprints;
     }
     
+    public void agregarSprint(Sprint sp){
+        listaDeSprints.add(sp);
+    }
+    
     public int getDiaActual(){
         return this.diaActual;
     }

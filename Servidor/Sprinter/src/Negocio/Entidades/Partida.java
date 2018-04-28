@@ -41,6 +41,12 @@ public class Partida {
         return id;
     }
     
+    public void reiniciarVotaciones(){
+        for(Jugador jugador: listaJugadores){
+            jugador.setVotar(true);
+        }
+    }
+    
     public void quitarJugador (Jugador jugador){        
     }
     

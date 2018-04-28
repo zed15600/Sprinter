@@ -164,4 +164,13 @@ public class WebClient : ClientElement {
         }
         closeSocket();
     }
+
+    public void establecerVotacion(string partidaID, bool votar, int tipoVoto) {
+        string json = JsonString.establecerVotacion(partidaID, votar, tipoVoto);
+        setupSocket();
+        writeSocket(json);
+        //string dataIn = readSocket();
+        closeSocket();
+
+    }
 }

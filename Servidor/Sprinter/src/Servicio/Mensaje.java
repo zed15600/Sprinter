@@ -113,7 +113,8 @@ public class Mensaje {
         String res = "{"
                 + "\"codigo\":0007,"
                 + "\"pId\":"+partidaID+","
-                + "\"jugadorId\":"+jugadorId+""
+                + "\"jugadorId\":"+jugadorId+","
+                + "\"aceptado\":"+aceptado+""
                 + "}";
         return res;
     }
@@ -123,14 +124,14 @@ public class Mensaje {
         String HUsDesc = "[";
         for (HistoriaDeUsuario posible : posibles) {
             HUsID += posible.getId() + ",";
-            HUsDesc += posible.getDescripcion() + ",";
+            HUsDesc += "\"" + posible.getDescripcion() + "\",";
         }
         HUsID = HUsID.substring(0, HUsID.length()-1) + "]";
         HUsDesc = HUsDesc.substring(0, HUsDesc.length()-1) + "]";
         String res = "{"
                    + "\"votacion\":"+votar+","
                    + "\"HUs\":"+HUsID+","
-                   + "\"HUsDesc\":"+HUsDesc+","
+                   + "\"HUsDesc\":"+HUsDesc+""
                    + "}";
         return res;
     }

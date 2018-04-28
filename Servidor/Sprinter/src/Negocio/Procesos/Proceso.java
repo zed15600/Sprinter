@@ -150,24 +150,26 @@ public class Proceso {
         Partida p = partidas.get(partidaID);
         Proyecto py = p.getProyecto();
         ArrayList<HistoriaDeUsuario> spBlog = py.getSprints().get(py.getSprintActual()).getSprintBacklog().getHistorias();
-        HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[4];
         int size;
         if(p.getTipoVotacion() == 1){
             size = 6;
         }else{
             size = 4;
         }
+        size = Math.min(size, spBlog.size());
+        HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[size];
         for(int i=0; i<size; i++){
-            posibles[i] = spBlog.get(i);
+            if(i < spBlog.size())
+                posibles[i] = spBlog.get(i);
         }
-        return mensajes.actualizarEstadoJugador(p.getVotacion(), posibles);
+        return mensajes.actualizarEstadoJugador(p.getVotacion()&&p.getJugadores().get(jugador-1).getVotar(), posibles);
         
     }
     
     public void registrarVoto(int partidaID, int historiaID, int jugador){
         Partida p = partidas.get(partidaID);
         ArrayList<HistoriaDeUsuario> bcklog = p.getProyecto().getProductBacklog().getHistorias();
-        p.getJugadores().get(jugador).setVotar(false);
+        p.getJugadores().get(jugador-1).setVotar(false);
         for(HistoriaDeUsuario historia: bcklog){
             if(historia.getId()==historiaID){
                 historia.aumentarVoto();
@@ -178,6 +180,7 @@ public class Proceso {
     
     public void establecerVotación(int partidaID, boolean votar, int tipo){
         Partida p = partidas.get(partidaID);
+        p.reiniciarVotaciones();
         p.setVotacion(votar);
         p.setTipoVotación(tipo);
     }
@@ -196,13 +199,21 @@ public class Proceso {
         huGanada1.agregarCriterio(criterio1);
         huGanada1.agregarCriterio(criterio2);
         huGanada2.agregarCriterio(criterio1);
+        SprintBacklog sprintBlog1 = new SprintBacklog();
+        sprintBlog1.agregarHistoria(huGanada1);
+        SprintBacklog sprintBlog2 = new SprintBacklog();
+        sprintBlog2.agregarHistoria(huGanada1);
+        Sprint sp1 = new Sprint(sprintBlog1, 1);
+        Sprint sp2 = new Sprint(sprintBlog2, 2);
         ProductBacklog productBacklogGanado = new ProductBacklog();
         productBacklogGanado.agregarHistoria(huGanada1);
         productBacklogGanado.agregarHistoria(huGanada2);
         Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
         productBacklogGanado, 3);
+        proyectoGanado.agregarSprint(sp1);
+        proyectoGanado.agregarSprint(sp2);
         Partida partidaGanada = new Partida(15600, "Partida de Edison", proyectoGanado);
-        partidas.put(1234, partidaGanada);
+        partidas.put(partidaGanada.getCodigo(), partidaGanada);
     }
     
 }

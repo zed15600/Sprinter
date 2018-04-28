@@ -5,7 +5,7 @@ public class ClienteModelo : ClientElement {
 
     private Minijuego minijuego = new Minijuego();
 
-    private Partida partida = new Partida("1234");
+    private Partida partida = new Partida("15600");
 
     private Proyecto proyecto = new Proyecto("", "", null);
 

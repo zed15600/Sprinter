@@ -37,4 +37,14 @@
         + "}\n";
         return res;
     }
+
+    public static string establecerVotacion(string partidaID, bool votar, int tipoVotacion) {
+        string res = "{" +
+                     "\"codigo\":0011," +
+                     "\"partidaID\":"+partidaID+"," +
+                     "\"votar\":\""+votar+"\"," +
+                     "\"tipoVoto\":"+tipoVotacion+"" +
+                     "}";
+        return res;
+    }
 }

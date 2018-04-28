@@ -58,7 +58,7 @@ public class Procesador {
                 case 9:  return proceso.actualizarEstadoJugador(pID, (int)(long)json.get("player"));
                 case 10: proceso.registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
                     break;
-                case 11: proceso.establecerVotación(pID, (boolean)json.get("votar"), (int)(long)json.get("tipoVoto"));
+                case 11: proceso.establecerVotación(pID, json.get("votar").equals("True"), (int)(long)json.get("tipoVoto"));
                     break;
             }
         }
