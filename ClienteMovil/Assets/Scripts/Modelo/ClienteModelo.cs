@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ClienteModelo : ClientElement {
 
-    private Partida partida = new Partida(1234);
+    private Partida partida = new Partida(15600);
     private Jugador jugador = new Jugador();
     
     public Partida getPartida(){
