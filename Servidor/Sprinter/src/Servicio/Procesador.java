@@ -60,6 +60,8 @@ public class Procesador {
                     break;
                 case 11: proceso.establecerVotación(pID, json.get("votar").equals("True"), (int)(long)json.get("tipoVoto"));
                     break;
+                case 12: return proceso.estadoVotacion(pID);
+                case 13: return proceso.enviarVotos(pID, (int)(long)json.get("tipoVotacion"));
             }
         }
         return "";

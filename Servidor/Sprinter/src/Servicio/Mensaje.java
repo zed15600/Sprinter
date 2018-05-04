@@ -86,7 +86,7 @@ public class Mensaje {
         return res += "]}";
     }
     
-    protected static String traerHU(String descripcion, String puntos, String prioridad,
+    protected static String traerHU(String descripcion, String puntos, int prioridad,
     ArrayList<Criterio> criterios, boolean estado){
         String res = "{"
                 + "\"codigo\":0005, "
@@ -133,6 +133,30 @@ public class Mensaje {
                    + "\"HUs\":"+HUsID+","
                    + "\"HUsDesc\":"+HUsDesc+""
                    + "}";
+        return res;
+    }
+    
+    protected static String estadoVotacion(boolean votamos, int tipoVotacion){
+        String res = "{"
+                   + "\"votamos\":"+votamos+","
+                   + "\"tipoVotacion\":"+tipoVotacion
+                   + "}";
+        return res;
+    }
+    
+    protected static String enviarVotos(int[][] listaVotos){
+        String hID = "[";
+        String votos = "[";
+        for(int i=0; i<listaVotos[0].length; i++){
+            hID += listaVotos[0][i]+",";
+            votos += listaVotos[1][i]+",";
+        }
+        hID = hID.substring(0, hID.length()-1)+"]";
+        votos = votos.substring(0, votos.length()-1)+"]";
+        String res = "{"
+                + "\"historiasID\":"+hID+","
+                + "\"votos\":"+votos
+                + "}";
         return res;
     }
 }

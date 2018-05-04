@@ -47,4 +47,21 @@
                      "}";
         return res;
     }
+
+    public static string terminarVotacion(string partidaID) {
+        string res = "{" +
+                     "\"codigo\":0012," +
+                     "\"partidaID\":"+partidaID +
+                     "}";
+        return res;
+    }
+
+    public static string obtenerVotos(string partidaID, int tipoVotacion) {
+        string res = "{" +
+                     "\"codigo\":0013," +
+                     "\"partidaID\":"+partidaID+"," +
+                     "\"tipoVotacion\":"+tipoVotacion +
+                     "}";
+        return res;
+    }
 }

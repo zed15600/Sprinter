@@ -107,7 +107,7 @@ public class Proceso {
             }
         }
         String descHU = historia.getDescripcion();
-        String prioHU = historia.getPrioridad();
+        int prioHU = historia.getPrioridad();
         String punHU = historia.getPuntosHistoria();
         boolean estado = historia.getEstado();
         ArrayList<Criterio> criterios = historia.getListaCriterios();
@@ -173,6 +173,7 @@ public class Proceso {
         for(HistoriaDeUsuario historia: bcklog){
             if(historia.getId()==historiaID){
                 historia.aumentarVoto();
+                //System.out.println("Proceso.registrarVoto() -> REGISTRÉ UN VOTO.");
                 return;
             }
         }
@@ -180,9 +181,28 @@ public class Proceso {
     
     public void establecerVotación(int partidaID, boolean votar, int tipo){
         Partida p = partidas.get(partidaID);
-        p.reiniciarVotaciones();
+        if(votar){
+            p.reiniciarVotaciones();
+        }
         p.setVotacion(votar);
         p.setTipoVotación(tipo);
+    }
+    
+    public String estadoVotacion(int partidaID){
+        Partida p = partidas.get(partidaID);
+        return mensajes.estadoVotacion(p.getVotacion(), p.getTipoVotacion());
+    }
+    
+    public String enviarVotos(int partidaID, int tipoVotacion){
+        Proyecto p = partidas.get(partidaID).getProyecto();
+        int respuestas = 0;
+        if(tipoVotacion == 1){
+            respuestas = 4;
+        }
+        if(tipoVotacion == 2){
+            respuestas = 1;
+        }
+        return mensajes.enviarVotos(p.getVotos(respuestas));
     }
     
     /*
@@ -192,8 +212,8 @@ public class Proceso {
     public void sembrarPartida(){
         Criterio criterio1 = new Criterio ("El puente debe ser azul.");
         Criterio criterio2 = new Criterio ("El puente debe ser verde.");
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", "4");
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", "2");
+        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", 4);
+        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", 2);
         huGanada1.setEstado(false);
         huGanada2.setEstado(false);
         huGanada1.agregarCriterio(criterio1);

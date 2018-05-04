@@ -7,4 +7,5 @@ public class ClienteVista : ClientElement {
     public VistaScrumPlanning scrumPlanning;
     public VistaSprintPlanning sprintPlanning;
     public VistaSprint vistaSprint;
+    public PanelVotacion panelVotacionSprint;
 }

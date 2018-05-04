@@ -21,7 +21,7 @@ public class Partida {
     private String nombre;
     private Proyecto proyecto;
     private boolean votacion;
-    private int tipoVotacion;
+    private int tipoVotacion; //1 -> votar historias de Sprint, 2 -> votar historia de día
     
     public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
@@ -45,6 +45,7 @@ public class Partida {
         for(Jugador jugador: listaJugadores){
             jugador.setVotar(true);
         }
+        proyecto.reiniciarVotacion();
     }
     
     public void quitarJugador (Jugador jugador){        
@@ -67,6 +68,11 @@ public class Partida {
     }
     
     public boolean getVotacion(){
+        boolean jugadoresPorVotar = false;
+        for(Jugador jugador: listaJugadores){
+            jugadoresPorVotar |= jugador.getVotar()&&jugador.getEstado();
+        }
+        votacion &= jugadoresPorVotar;
         return votacion;
     }
     

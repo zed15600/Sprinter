@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ClienteControlador : ClientElement {
 
@@ -86,5 +87,25 @@ public class ClienteControlador : ClientElement {
 
     public void obtenerPuntaje(HistoriaDeUsuario historia) {
         app.modelo.getProyecto().getHistorias();
+    }
+
+    public void establecerVotacion(bool votar, int tipoVoto) {
+        app.webClient.establecerVotacion(app.modelo.getPartida().getID(), votar, tipoVoto);
+    }
+
+    public void estadoVotacion() {
+        app.webClient.estadoVotacion(app.modelo.getPartida().getID());
+    }
+
+    public void terminarVotacionSprint() {
+        app.vista.panelVotacionSprint.terminarVotacion();
+    }
+
+    public void obtenerVotos(int tipoVotacion) {
+        app.webClient.obtenerVotos(app.modelo.getPartida().getID(), tipoVotacion);
+    }
+
+    public void mostrarVotos(int[] historiasID, int[] votos) {
+        app.vista.panelVotacionSprint.mostrarVotos(historiasID, votos);
     }
 }

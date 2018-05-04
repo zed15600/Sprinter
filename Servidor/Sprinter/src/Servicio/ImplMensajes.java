@@ -42,7 +42,7 @@ public class ImplMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarHU(String descripcion, String puntos, String prioridad, ArrayList<Criterio> criterios,
+    public String enviarHU(String descripcion, String puntos, int prioridad, ArrayList<Criterio> criterios,
     boolean estado) {
         return Mensaje.traerHU(descripcion, puntos, prioridad, criterios, estado);
     }
@@ -66,5 +66,15 @@ public class ImplMensajes implements IMensajes {
     @Override
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
         return Mensaje.actualizarEstadoJugador(votar, posibles);
+    }
+    
+    @Override
+    public String estadoVotacion(boolean votamos, int tipoVoto){
+        return Mensaje.estadoVotacion(votamos, tipoVoto);
+    }
+
+    @Override
+    public String enviarVotos(int[][] listaVotos) {
+        return Mensaje.enviarVotos(listaVotos);
     }
 }

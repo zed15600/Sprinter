@@ -35,6 +35,12 @@ public class Proyecto {
         this.sprintActual = 1;
     }
     
+    public void reiniciarVotacion(){
+        for(HistoriaDeUsuario historia: productBacklog.getHistorias()){
+            historia.reiniciarVotos();
+        }
+    }
+    
     public boolean terminarJuego(){
         boolean victoria = true;
         
@@ -76,6 +82,19 @@ public class Proyecto {
     public int getSprintActual(){
         return this.sprintActual;
     }
+    
+    public int[][] getVotos(int Maximo){
+        ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
+        int cantidad = Math.min(Maximo, historias.size());
+        int[][] votos = new int[2][cantidad];
+        historias.sort(null);
+        for(int i=0; i<cantidad; i++){
+            HistoriaDeUsuario h = historias.get(i);
+            votos[0][i] = h.getId();
+            votos[1][i] = h.getVotos();
+        }
+        return votos;
+    } 
 
     public ProductBacklog getProductBacklog() {
         return productBacklog;

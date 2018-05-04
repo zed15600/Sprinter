@@ -8,3 +8,5 @@ código	proceso				Ejemplo
 0009	Actualizar estado jugador	{"codigo":0009, "partidaID":1234, "player":1}
 0010	Registrar voto			{"codigo":0010, "partidaID":1234, "HUid":1, "player":1}
 0011	Iniciar votacion		{"codigo":0011, "partidaID":1234, "votar":true, "tipoVoto":1}
+0012	Terminar votación		{"codigo":0012, "partidaID":1234}
+0013	Obtener votos			{"codigo":0013, "partidaID":1234, "tipoVotacion":1}

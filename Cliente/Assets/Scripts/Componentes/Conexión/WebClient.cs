@@ -63,6 +63,7 @@ public class WebClient : ClientElement {
 
     public void writeSocket(string line)
     {
+        //Debug.Log("WebClient.writeSocket() -> out: "+line);
         if (!socket_ready)
             return;
 
@@ -80,6 +81,7 @@ public class WebClient : ClientElement {
 
         //if (net_stream.DataAvailable) {
             string inp = socket_reader.ReadLine();
+        //Debug.Log("WebClient.readSocket() -> in: "+inp);
             return inp;
         //}
         //return "";
@@ -172,5 +174,48 @@ public class WebClient : ClientElement {
         //string dataIn = readSocket();
         closeSocket();
 
+    } 
+
+    public void estadoVotacion(string partidaID) {
+        string json = JsonString.terminarVotacion(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            if(!jsRes["votamos"].Boolean && (int)jsRes["tipoVotacion"].Number==1) {
+                app.controlador.terminarVotacionSprint();
+            }
+        } else {
+            Debug.Log("WebClient.estadoVotacion() -> Json vacío.");
+        }
+    }
+
+    public void obtenerVotos(string partidaID, int tipoVotacion) {
+        string json = JsonString.obtenerVotos(partidaID, tipoVotacion);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            JSONArray historiasID = jsRes["historiasID"].Array;
+            JSONArray votos = jsRes["votos"].Array;
+            if(historiasID.Length ==votos.Length) {
+                int size = votos.Length;
+                int[] husID = new int[size];
+                int[] vots = new int[size];
+                for(int i=0; i<size;i++) {
+                    husID[i] = (int)historiasID[i].Number;
+                    vots[i] = (int)votos[i].Number;
+                }
+                app.controlador.mostrarVotos(husID, vots);
+            } else {
+                Debug.Log("WebClient.obtenerVotos() -> diferente número de historias y contadores de votos.");
+            }
+        } else {
+            Debug.Log("WebClient.obtenerVotos() -> Json vacío.");
+        }
     }
 }

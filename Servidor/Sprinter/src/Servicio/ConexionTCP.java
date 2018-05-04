@@ -49,6 +49,8 @@ public class ConexionTCP {
             DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
             in = inData.readLine();
             out = proc.procesarJson(in);
+            System.out.println("ConexionTCP.main()-> in: " + in);
+            System.out.println("ConexionTCP.main()-> out: " + out);
             outData.writeBytes(out + "\n");
         }
     }

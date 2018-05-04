@@ -100,7 +100,6 @@ public class WebClient : ClientElement {
         writeSocket(json);
         string dataIn = readSocket();
         closeSocket();
-        Debug.Log(dataIn);
         if(dataIn != "") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             if(jsRes["votacion"].Boolean) {

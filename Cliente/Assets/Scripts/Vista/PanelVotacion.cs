@@ -14,55 +14,64 @@ public class PanelVotacion : ClientElement {
 
     public Text historiaDescPrefab;
 
-    private float time = 21.0f;
+    private float time = 21.0f, revisarVotaciones = 2.0f;
     private bool contar = true;
-
-    bool llenarTabla = true;
+    
 
 	// Use this for initialization
     void Start() {
-        app.webClient.establecerVotacion("15600", true, tipoVoto);
+        
     }
 
-	void onEnable () {
-		time = 20.0f;
+	void OnEnable () {
+		time = 21.0f;
+        revisarVotaciones = 2.0f;
         contar = true;
         timertext.gameObject.SetActive(true);
         titulo.SetActive(false);
         pnlHistorias.SetActive(false);
         button.SetActive(false);
-        app.webClient.establecerVotacion("15600", true, tipoVoto);
+        app.controlador.establecerVotacion(true, tipoVoto);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if(contar) {
             time -= Time.deltaTime;
+            revisarVotaciones -= Time.deltaTime;
             timertext.text = ""+(int)time;
         }
-        if(time <=trampa && llenarTabla) {
-            llenarTabla = false;
+        if(contar && revisarVotaciones <= 0) {
+            revisarVotaciones = 2.0f;
+            app.controlador.estadoVotacion();
+        }
+        if(contar && time <=0) {
             terminarVotacion();
-            
         }
 	}
 
-    public void llenarHistorias() {
-        Text txt = Instantiate(historiaDescPrefab);
-        Text txt2 = Instantiate(historiaDescPrefab);
-        txt.text = "Historia 1";
-        txt2.text = "1";
-        txt.transform.SetParent(pnlHistorias.transform);
-        txt2.transform.SetParent(pnlHistorias.transform);
+    public void mostrarVotos(int[] historiasID, int[] votos) {
+        if(historiasID.Length == votos.Length){
+            for(int i=0; i<historiasID.Length; i++){
+                Text txt = Instantiate(historiaDescPrefab);
+                Text txt2 = Instantiate(historiaDescPrefab);
+                txt.text = "Historia " + (int)historiasID[i];
+                txt2.text = "" + votos[i];
+                txt.transform.SetParent(pnlHistorias.transform);
+                txt2.transform.SetParent(pnlHistorias.transform);
+            }
+        } else {
+            Debug.Log("PanelVotacion.llenarHistorias() -> Hay una cantidad diferente de historias y contadores de votos");
+        }
     }
 
     public void terminarVotacion() {
-        llenarHistorias();
         contar = false;
         timertext.gameObject.SetActive(false);
         titulo.SetActive(true);
         pnlHistorias.SetActive(true);
         button.SetActive(true);
-        app.webClient.establecerVotacion("15600", false, tipoVoto);
+        app.controlador.establecerVotacion(false, tipoVoto);
+        app.controlador.obtenerVotos(tipoVoto);
     }
 }

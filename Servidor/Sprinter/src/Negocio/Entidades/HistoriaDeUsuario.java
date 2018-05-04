@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class HistoriaDeUsuario {
+public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
     private int puntuaciónRequerida;   //Creo que esto no se va a utilizar
     private int puntuacion;
@@ -21,9 +21,9 @@ public class HistoriaDeUsuario {
     private int contadorVotos;
     private ArrayList<Criterio> listaCriterios;
     private String puntosHistoria;
-    private String prioridad;
+    private int prioridad;
 
-    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, String prioridad){
+    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad){
         this.id = id;
         this.puntosHistoria = puntosHistoria;
         this.prioridad = prioridad;
@@ -46,7 +46,7 @@ public class HistoriaDeUsuario {
         return puntosHistoria;
     }
 
-    public String getPrioridad() {
+    public int getPrioridad() {
         return prioridad;
     }
     
@@ -69,10 +69,40 @@ public class HistoriaDeUsuario {
     public void setEstado(boolean estado){
         this.estado = estado;
     }
+    
+    public int getVotos(){
+        return contadorVotos;
+    }
+    
     public void aumentarVoto(){
+        contadorVotos+=1;
+    }
+    
+    public void reiniciarVotos(){
+        contadorVotos = 0;
     }
     
     public void agregarCriterio(Criterio criterio){
         this.listaCriterios.add(criterio);
     }
+
+    
+    @Override
+    public int compareTo(HistoriaDeUsuario o) {
+        if(this.contadorVotos > o.contadorVotos){
+            return -1;
+        }
+        if(this.contadorVotos < o.contadorVotos){
+            return 1;
+        }
+        if(this.prioridad > o.prioridad){
+            return -1;
+        }
+        if(this.contadorVotos < o.prioridad){
+            return 1;
+        }
+        return 0;
+    }
+
+
 }

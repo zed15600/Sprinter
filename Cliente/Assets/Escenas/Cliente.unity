@@ -5544,6 +5544,7 @@ MonoBehaviour:
   scrumPlanning: {fileID: 942707180}
   sprintPlanning: {fileID: 365551453}
   vistaSprint: {fileID: 233536203}
+  panelVotacionSprint: {fileID: 731114937}
 --- !u!1 &1072391141
 GameObject:
   m_ObjectHideFlags: 0

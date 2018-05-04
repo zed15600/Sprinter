@@ -21,9 +21,11 @@ public interface IMensajes {
     public String terminarSprint(SprintBacklog sprntBcklg);
     public String determinarVictoria(boolean resultado);
     public String traerProyecto(String nombre, String descripcion, ArrayList<HistoriaDeUsuario> historias);
-    public String enviarHU(String descripcion, String puntos, String prioridad,
+    public String enviarHU(String descripcion, String puntos, int prioridad,
     ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
     public String unirsePartida(int partidaID, int jugadorId, boolean aceptado);
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
+    public String estadoVotacion(boolean votamos, int tipoVoto);
+    public String enviarVotos(int[][] listaVotos);
 }
