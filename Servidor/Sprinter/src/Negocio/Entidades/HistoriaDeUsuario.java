@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
-    private int puntuaciónRequerida;   //Creo que esto no se va a utilizar
     private int puntuacion;
     private boolean estado;
     private int id;

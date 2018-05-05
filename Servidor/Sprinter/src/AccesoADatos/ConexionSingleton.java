@@ -14,15 +14,16 @@ import javax.swing.JOptionPane;
  *
  * @author usuario
  */
-public class Conexion {
+public class ConexionSingleton {
+    
+    private static Connection conexionSingleton;
     
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
-     * @return Conexión a la base de datos.
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public Connection conectar() throws ClassNotFoundException, SQLException {
+    public void conectar() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
@@ -34,6 +35,11 @@ public class Conexion {
             JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
                     + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
-        return conn;
+        ConexionSingleton.conexionSingleton = conn;
     }
+    
+    public static Connection getConexionSingleton(){
+        return conexionSingleton;
+    }
+    
 }
