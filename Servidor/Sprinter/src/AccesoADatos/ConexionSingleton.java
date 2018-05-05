@@ -23,14 +23,14 @@ public class ConexionSingleton {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public void conectar() throws ClassNotFoundException, SQLException {
+    public static void conectar() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
         String servidor = "jdbc:mysql://localhost:3306/sprinter";
         String usuario = "root";
         String contraseña = "Azopardo234432qw";
-        DriverManager.getConnection(servidor, usuario, contraseña);
+        conn = DriverManager.getConnection(servidor, usuario, contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
                     + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
@@ -38,7 +38,8 @@ public class ConexionSingleton {
         ConexionSingleton.conexionSingleton = conn;
     }
     
-    public static Connection getConexionSingleton(){
+    public static Connection getConexionSingleton() throws ClassNotFoundException, SQLException{
+        conectar();
         return conexionSingleton;
     }
     

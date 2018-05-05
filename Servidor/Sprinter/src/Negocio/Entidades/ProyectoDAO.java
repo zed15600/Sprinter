@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AccesoADatos;
+package Negocio.Entidades;
 
+import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Proyecto;
 import java.sql.SQLException;
 import java.util.ArrayList;
