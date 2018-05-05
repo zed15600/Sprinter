@@ -19,6 +19,10 @@ public class Backlog {
         this.listaDeHistorias = new ArrayList<>();
     }
     
+    public Backlog(ArrayList<HistoriaDeUsuario> listaDeHistorias){
+        this.listaDeHistorias = listaDeHistorias;
+    }
+    
     public void agregarHistoria(HistoriaDeUsuario historia){
         this.listaDeHistorias.add(historia);
         

@@ -13,15 +13,16 @@ import java.util.ArrayList;
  */
 public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
-    private int puntuacion;
-    private boolean estado;
     private int id;
-    private String descripcion;
-    private int contadorVotos;
-    private ArrayList<Criterio> listaCriterios;
-    private String puntosHistoria;
+    private int puntuacion;
     private int prioridad;
-
+    private int contadorVotos;
+    private boolean estado;
+    private String nombre;
+    private String descripcion;
+    private String puntosHistoria;
+    private ArrayList<Criterio> listaCriterios;
+    
     public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad){
         this.id = id;
         this.puntosHistoria = puntosHistoria;
@@ -30,7 +31,22 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
         this.estado = false;
         this.descripcion = descripcion;
         this.contadorVotos = 0;
-        this.listaCriterios = new ArrayList<>();
+        this.listaCriterios = new ArrayList();
+        this.puntosHistoria = puntosHistoria;
+    }
+    
+    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad,
+            ArrayList<Criterio> listaCriterios, String nombre){
+        this.nombre = nombre;
+        this.id = id;
+        this.puntosHistoria = puntosHistoria;
+        this.prioridad = prioridad;
+        this.puntuacion = 0;
+        this.estado = false;
+        this.descripcion = descripcion;
+        this.contadorVotos = 0;
+        this.listaCriterios = listaCriterios;
+        this.puntosHistoria = puntosHistoria;
     }
     
     public String getDescripcion() {

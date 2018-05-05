@@ -8,10 +8,9 @@ package Negocio.Entidades;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author usuario
  */
-public interface ProyectoDAO {
-    public ArrayList<Proyecto> obtenerProyectos();
-    public Proyecto obtenerProyecto(String nombre);
+public interface HistoriaDeUsuarioDAO {
+    public ArrayList<HistoriaDeUsuario> obtenerHistorias(int idProyecto);
 }

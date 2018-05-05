@@ -5,7 +5,6 @@
  */
 package Negocio.Entidades;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,13 +14,16 @@ import java.util.ArrayList;
 public class Configuracion {
     
     private Partida partida;
-    private ArrayList<Proyecto> listaDeProyectos;
-    
-    public Configuracion(ProyectoDAO impl) throws SQLException, ClassNotFoundException{
+    private final ArrayList<Proyecto> listaDeProyectos;
+    private ProyectoDAO impl;
+
+    public Configuracion(ProyectoDAO impl){
+        this.impl = impl;
         listaDeProyectos = impl.obtenerProyectos();
     }
     
-    public void crearPartida(){
+    public void crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
+        impl.obtenerProyecto(nombreProyecto);
     }
     
     public void descargarDatos(){        

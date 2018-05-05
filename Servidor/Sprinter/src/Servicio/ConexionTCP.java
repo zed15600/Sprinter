@@ -5,6 +5,7 @@
  */
 package Servicio;
 
+import AccesoADatos.HistoriaDeUsuarioDAOImpl;
 import Negocio.Entidades.Configuracion;
 import Negocio.Procesos.Proceso;
 import java.io.BufferedReader;
@@ -15,7 +16,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import Negocio.Procesos.IMensajes;
 import AccesoADatos.ProyectoDAOImpl;
-import java.sql.SQLException;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ConexionTCP {
     outData.writeBytes(out + "\n") devuelve a quién inició la conexión el String respuesta,
     el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
     */
-    public static void main(String args[]) throws IOException, SQLException, ClassNotFoundException{
+    public static void main(String args[]) throws IOException {
         ProyectoDAOImpl impl = new ProyectoDAOImpl();
         configuracion = new Configuracion(impl);
         Procesador proc = new Procesador();

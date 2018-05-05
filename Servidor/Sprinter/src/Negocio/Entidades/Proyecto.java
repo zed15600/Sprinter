@@ -6,10 +6,6 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 /**
  *
  * @author usuario
@@ -23,6 +19,14 @@ public class Proyecto {
     private int duracionDeSprints;
     private int diaActual;
     private int sprintActual;
+    
+    public Proyecto(String nombre, String descripcion){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracionDeSprints = 0;
+        this.listaDeSprints = new ArrayList();
+        this.productBacklog = new Backlog();
+    }
     
     public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
             Backlog productBacklog, int tamaño){
