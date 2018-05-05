@@ -18,7 +18,7 @@ public class Votar : ClientElement {
 	}
 
     public void enviarVoto() {
-        app.controlador.enviarVoto(app.modelo.getPartida().getID(), txt.text);
+        app.controlador.enviarVoto(txt.text);
         app.vista.estado.ocultarVotacion();
     }
 }

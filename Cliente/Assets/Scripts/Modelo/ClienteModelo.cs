@@ -17,6 +17,7 @@ public class ClienteModelo : ClientElement {
     {
         this.proyecto = proyecto;
     }
+
     public Partida getPartida()
     {
         return partida;
@@ -166,8 +167,8 @@ public class HistoriaDeUsuario{
 
 }
 
-public class Minijuego
-{
+public class Minijuego{
+
     private HistoriaDeUsuario historiaActual;
 
     private float tiempoFinal = 0;

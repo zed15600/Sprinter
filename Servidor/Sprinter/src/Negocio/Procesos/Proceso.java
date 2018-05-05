@@ -8,10 +8,9 @@ package Negocio.Procesos;
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.Sprint;
 import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.ProductBacklog;
+import Negocio.Entidades.Backlog;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Partida;
-import Negocio.Entidades.SprintBacklog;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -149,18 +148,23 @@ public class Proceso {
     public String actualizarEstadoJugador(int partidaID, int jugador){
         Partida p = partidas.get(partidaID);
         Proyecto py = p.getProyecto();
-        ArrayList<HistoriaDeUsuario> spBlog = py.getSprints().get(py.getSprintActual()).getSprintBacklog().getHistorias();
-        int size;
-        if(p.getTipoVotacion() == 1){
+        boolean votar = p.getVotacion();
+        int tipoVotacion = p.getTipoVotacion();
+        ArrayList<HistoriaDeUsuario> historias = new ArrayList<>();
+        int size = 0;
+        if(votar && tipoVotacion == 1){
             size = 6;
-        }else{
-            size = 4;
+            historias = py.getProductBacklog().getHistorias();
         }
-        size = Math.min(size, spBlog.size());
+        if(votar && tipoVotacion == 2){
+            historias = py.getSprints().get(py.getSprintActual()-1).getSprintBacklog().getHistorias();
+            size = historias.size();
+        }
+        size = Math.min(size, historias.size());
         HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[size];
         for(int i=0; i<size; i++){
-            if(i < spBlog.size())
-                posibles[i] = spBlog.get(i);
+            if(i < historias.size())
+                posibles[i] = historias.get(i);
         }
         return mensajes.actualizarEstadoJugador(p.getVotacion()&&p.getJugadores().get(jugador-1).getVotar(), posibles);
         
@@ -197,7 +201,7 @@ public class Proceso {
         Proyecto p = partidas.get(partidaID).getProyecto();
         int respuestas = 0;
         if(tipoVotacion == 1){
-            respuestas = 4;
+            respuestas = p.getDuracionDeSprints();
         }
         if(tipoVotacion == 2){
             respuestas = 1;
@@ -214,24 +218,14 @@ public class Proceso {
         Criterio criterio2 = new Criterio ("El puente debe ser verde.");
         HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", 4);
         HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", 2);
-        huGanada1.setEstado(false);
-        huGanada2.setEstado(false);
         huGanada1.agregarCriterio(criterio1);
         huGanada1.agregarCriterio(criterio2);
         huGanada2.agregarCriterio(criterio1);
-        SprintBacklog sprintBlog1 = new SprintBacklog();
-        sprintBlog1.agregarHistoria(huGanada1);
-        SprintBacklog sprintBlog2 = new SprintBacklog();
-        sprintBlog2.agregarHistoria(huGanada1);
-        Sprint sp1 = new Sprint(sprintBlog1, 1);
-        Sprint sp2 = new Sprint(sprintBlog2, 2);
-        ProductBacklog productBacklogGanado = new ProductBacklog();
+        Backlog productBacklogGanado = new Backlog();
         productBacklogGanado.agregarHistoria(huGanada1);
         productBacklogGanado.agregarHistoria(huGanada2);
         Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
         productBacklogGanado, 3);
-        proyectoGanado.agregarSprint(sp1);
-        proyectoGanado.agregarSprint(sp2);
         Partida partidaGanada = new Partida(15600, "Partida de Edison", proyectoGanado);
         partidas.put(partidaGanada.getCodigo(), partidaGanada);
     }

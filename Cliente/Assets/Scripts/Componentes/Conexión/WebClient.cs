@@ -162,7 +162,6 @@ public class WebClient : ClientElement {
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
             app.modelo.setProyecto(proyecto);
-            app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
         }
         closeSocket();
     }
@@ -185,7 +184,10 @@ public class WebClient : ClientElement {
         if(dataIn !="") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             if(!jsRes["votamos"].Boolean && (int)jsRes["tipoVotacion"].Number==1) {
-                app.controlador.terminarVotacionSprint();
+                app.controlador.terminarVotacionSprintPlanning();
+            }
+            if(!jsRes["votamos"].Boolean &&(int)jsRes["tipoVotacion"].Number==2) {
+                app.controlador.terminarVotacionDia();
             }
         } else {
             Debug.Log("WebClient.estadoVotacion() -> Json vacío.");
@@ -210,7 +212,13 @@ public class WebClient : ClientElement {
                     husID[i] = (int)historiasID[i].Number;
                     vots[i] = (int)votos[i].Number;
                 }
-                app.controlador.mostrarVotos(husID, vots);
+                if(tipoVotacion == 1){
+                    app.controlador.mostrarVotosSprintPlanning(husID, vots);
+                }
+                if(tipoVotacion == 2) {
+                    app.controlador.mostrarVotosDia(husID[0], vots[0]);
+                    app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
+                }
             } else {
                 Debug.Log("WebClient.obtenerVotos() -> diferente número de historias y contadores de votos.");
             }

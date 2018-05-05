@@ -5,17 +5,19 @@
  */
 package Negocio.Entidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author usuario
  */
 public class Sprint {
-    private SprintBacklog sprintBacklog;
+    private Backlog sprintBacklog;
     private int numeroDeSprint;
     private boolean estado;
 
-    public Sprint(SprintBacklog sprintBacklog, int numeroDeSprint) {
-        this.sprintBacklog = sprintBacklog;
+    public Sprint(int numeroDeSprint) {
+        this.sprintBacklog = new Backlog();
         this.numeroDeSprint = numeroDeSprint;
         this.estado = false;
     }
@@ -33,7 +35,7 @@ public class Sprint {
         
     }
     
-    public SprintBacklog getSprintBacklog(){
+    public Backlog getSprintBacklog(){
         return this.sprintBacklog;
     }
 }

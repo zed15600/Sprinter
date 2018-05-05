@@ -8,7 +8,7 @@ package Servicio;
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.SprintBacklog;
+import Negocio.Entidades.Backlog;
 import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class ImplMensajes implements IMensajes {
     }
 
     @Override
-    public String terminarSprint(SprintBacklog sprntBcklg) {
+    public String terminarSprint(Backlog sprntBcklg) {
         return null;
         /*return Mensaje.terminarSprint(sprntBcklg);*/
     }

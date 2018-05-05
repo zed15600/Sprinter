@@ -14,7 +14,7 @@ public class VistaEstado : ClientElement {
 
 	// Use this for initialization
 	void Start () {
-		votar = false;
+		//votar = false;
 	}
 
     void OnEnable() {
@@ -28,22 +28,22 @@ public class VistaEstado : ClientElement {
                 refreshTime -= Time.deltaTime;
             } else {
                 refreshTime = 3.0f;
-                app.controlador.actualizarEstado(app.modelo.getPartida().getID());
+                app.controlador.actualizarEstado();
             }
         }
 	}
 
     public void mostrarVotacion(int[] HUsId, string[] HUsDesc) {
         votar = true;
+        pnlVotacion.SetActive(true);
         for(int i=0; i<4;i++) {
             if(i<HUsId.Length) {
                 btnsVotacion[i].text = ""+HUsId[i];
-                btnsVotacion[i+1].text = HUsDesc[i];
+                btnsVotacion[i+4].text = HUsDesc[i];
             } else {
                 btns[i].SetActive(false);
             }
         }
-        pnlVotacion.SetActive(true);
     }
 
     public void ocultarVotacion() {

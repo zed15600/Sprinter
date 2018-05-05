@@ -9,7 +9,6 @@ public class PanelVotacion : ClientElement {
     public GameObject pnlHistorias;
     public GameObject titulo;
     public Text timertext;
-    public int trampa;
     public int tipoVoto;
 
     public Text historiaDescPrefab;
@@ -46,7 +45,7 @@ public class PanelVotacion : ClientElement {
             app.controlador.estadoVotacion();
         }
         if(contar && time <=0) {
-            terminarVotacion();
+            terminarVotacion(true);
         }
 	}
 
@@ -55,7 +54,7 @@ public class PanelVotacion : ClientElement {
             for(int i=0; i<historiasID.Length; i++){
                 Text txt = Instantiate(historiaDescPrefab);
                 Text txt2 = Instantiate(historiaDescPrefab);
-                txt.text = "Historia " + (int)historiasID[i];
+                txt.text = "Historia " + historiasID[i];
                 txt2.text = "" + votos[i];
                 txt.transform.SetParent(pnlHistorias.transform);
                 txt2.transform.SetParent(pnlHistorias.transform);
@@ -65,13 +64,24 @@ public class PanelVotacion : ClientElement {
         }
     }
 
-    public void terminarVotacion() {
+    public void mostrarVotos(int historiaID, int votos) {
+        Text txt = Instantiate(historiaDescPrefab);
+        Text txt2 = Instantiate(historiaDescPrefab);
+        txt.text = "Historia " + historiaID;
+        txt2.text = "" + votos;
+        txt.transform.SetParent(pnlHistorias.transform);
+        txt2.transform.SetParent(pnlHistorias.transform);
+    }
+
+    public void terminarVotacion(bool origen) {
         contar = false;
         timertext.gameObject.SetActive(false);
         titulo.SetActive(true);
         pnlHistorias.SetActive(true);
         button.SetActive(true);
-        app.controlador.establecerVotacion(false, tipoVoto);
+        if(origen){
+            app.controlador.establecerVotacion(false, tipoVoto);
+        }
         app.controlador.obtenerVotos(tipoVoto);
     }
 }
