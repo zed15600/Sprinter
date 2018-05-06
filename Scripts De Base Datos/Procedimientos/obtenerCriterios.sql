@@ -1,5 +1,5 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCriterios`(IN idHistoria INT)
+CREATE DEFINER=`rrazopardc`@`%` PROCEDURE `obtenerCriterios`(IN idHistoria INT)
 BEGIN
-SELECT c.descripcion_cri FROM criterios c
+SELECT c.descripcion_cri FROM Criterios c
 WHERE idHistoria = c.HistoriasDeUsuario_id_HU;
 END

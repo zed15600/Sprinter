@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTodosLosProyectos`()
+CREATE DEFINER=`rrazopardc`@`%` PROCEDURE `obtenerTodosLosProyectos`()
 BEGIN
-SELECT p.nombre_proyecto, p.descripcion_proyectos FROM proyectos p;
+SELECT p.nombre_proyecto, p.descripcion_proyectos FROM Proyectos p;
 END

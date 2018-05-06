@@ -1,16 +1,16 @@
 
 -- -----------------------------------------------------
--- Schema Sprinter
+-- Schema sprinter
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Sprinter` DEFAULT CHARACTER SET utf8 ;
-USE `Sprinter` ;
+CREATE SCHEMA IF NOT EXISTS `sprinter` DEFAULT CHARACTER SET utf8 ;
+USE `sprinter` ;
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Proyectos`
+-- Table `sprinter`.`Proyectos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Proyectos` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`Proyectos` (
   `id_proyecto` INT NOT NULL AUTO_INCREMENT,
-  `descripcion_proyectos` TINYTEXT NOT NULL,
+  `descripcion_proyectos` TEXT(500) NOT NULL,
   `n_Sprints` INT NOT NULL,
   `dur_Sprints` INT NOT NULL,
   `nombre_proyecto` VARCHAR(45) NOT NULL,
@@ -21,48 +21,49 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`HistoriasDeUsuario`
+-- Table `sprinter`.`HistoriasDeUsuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`HistoriasDeUsuario` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`HistoriasDeUsuario` (
   `id_HU` INT NOT NULL,
-  `HU_titulo` VARCHAR(45) NOT NULL,
+  `HU_titulo` VARCHAR(100) NOT NULL,
   `HU_puntos` INT NOT NULL,
   `HU_prioridad` INT NOT NULL,
   `Proyectos_id_proyecto` INT NOT NULL,
+  `HU_numero` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_HU`),
   UNIQUE INDEX `id_HU_UNIQUE` (`id_HU` ASC),
   UNIQUE INDEX `id_titulo_UNIQUE` (`HU_titulo` ASC),
   INDEX `fk_HistoriasDeUsuario_Proyectos_idx` (`Proyectos_id_proyecto` ASC),
   CONSTRAINT `fk_HistoriasDeUsuario_Proyectos`
     FOREIGN KEY (`Proyectos_id_proyecto`)
-    REFERENCES `Sprinter`.`Proyectos` (`id_proyecto`)
+    REFERENCES `sprinter`.`Proyectos` (`id_proyecto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Criterios`
+-- Table `sprinter`.`Criterios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Criterios` (
-  `id_cri` INT NOT NULL,
-  `descripcion_cri` TINYTEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS `sprinter`.`Criterios` (
+  `id_cri` INT NOT NULL AUTO_INCREMENT,
+  `descripcion_cri` VARCHAR(100) NOT NULL,
   `HistoriasDeUsuario_id_HU` INT NOT NULL,
   PRIMARY KEY (`id_cri`),
   UNIQUE INDEX `id_cri_UNIQUE` (`id_cri` ASC),
-  INDEX `fk_Criterios_HistoriasDeUsuario1_idx` (`HistoriasDeUsuario_id_HU` ASC),
-  CONSTRAINT `fk_Criterios_HistoriasDeUsuario1`
+  INDEX `id_HU_idx` (`HistoriasDeUsuario_id_HU` ASC),
+  CONSTRAINT `id_HU`
     FOREIGN KEY (`HistoriasDeUsuario_id_HU`)
-    REFERENCES `Sprinter`.`HistoriasDeUsuario` (`id_HU`)
+    REFERENCES `sprinter`.`HistoriasDeUsuario` (`id_HU`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Partidas`
+-- Table `sprinter`.`Partidas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Partidas` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`Partidas` (
   `id_partida` INT NOT NULL AUTO_INCREMENT,
   `nombre_partida` VARCHAR(45) NOT NULL,
   `estado` VARCHAR(20) NULL,
@@ -72,16 +73,16 @@ CREATE TABLE IF NOT EXISTS `Sprinter`.`Partidas` (
   INDEX `fk_Partidas_Proyectos1_idx` (`Proyectos_id_proyecto` ASC),
   CONSTRAINT `fk_Partidas_Proyectos1`
     FOREIGN KEY (`Proyectos_id_proyecto`)
-    REFERENCES `Sprinter`.`Proyectos` (`id_proyecto`)
+    REFERENCES `sprinter`.`Proyectos` (`id_proyecto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`PuntuacionesPorPartida`
+-- Table `sprinter`.`PuntuacionesPorPartida`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`PuntuacionesPorPartida` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`PuntuacionesPorPartida` (
   `puntuacion` INT NULL,
   `HistoriasDeUsuario_id_HU` INT NOT NULL,
   `Partidas_id_partida` INT NOT NULL,
@@ -90,21 +91,21 @@ CREATE TABLE IF NOT EXISTS `Sprinter`.`PuntuacionesPorPartida` (
   INDEX `fk_PuntuacionesPorPartida_Partidas1_idx` (`Partidas_id_partida` ASC),
   CONSTRAINT `fk_PuntuacionesPorPartida_HistoriasDeUsuario1`
     FOREIGN KEY (`HistoriasDeUsuario_id_HU`)
-    REFERENCES `Sprinter`.`HistoriasDeUsuario` (`id_HU`)
+    REFERENCES `sprinter`.`HistoriasDeUsuario` (`id_HU`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PuntuacionesPorPartida_Partidas1`
     FOREIGN KEY (`Partidas_id_partida`)
-    REFERENCES `Sprinter`.`Partidas` (`id_partida`)
+    REFERENCES `sprinter`.`Partidas` (`id_partida`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Impedimentos`
+-- Table `sprinter`.`Impedimentos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Impedimentos` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`Impedimentos` (
   `id_impedimento` INT NOT NULL AUTO_INCREMENT,
   `titulo_impedimento` VARCHAR(45) NOT NULL,
   `efecto_impedimento` VARCHAR(45) NOT NULL,
@@ -116,9 +117,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Jugadores`
+-- Table `sprinter`.`Jugadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Jugadores` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`Jugadores` (
   `id_jugador` INT NOT NULL AUTO_INCREMENT,
   `nombre_jugador` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_jugador`),
@@ -127,9 +128,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`JugadoresPorPartida`
+-- Table `sprinter`.`JugadoresPorPartida`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`JugadoresPorPartida` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`JugadoresPorPartida` (
   `Partidas_id_partida` INT NOT NULL,
   `Jugadores_id_jugador` INT NOT NULL,
   INDEX `fk_JugadoresPorPartida_Partidas1_idx` (`Partidas_id_partida` ASC),
@@ -137,21 +138,21 @@ CREATE TABLE IF NOT EXISTS `Sprinter`.`JugadoresPorPartida` (
   PRIMARY KEY (`Partidas_id_partida`, `Jugadores_id_jugador`),
   CONSTRAINT `fk_JugadoresPorPartida_Partidas1`
     FOREIGN KEY (`Partidas_id_partida`)
-    REFERENCES `Sprinter`.`Partidas` (`id_partida`)
+    REFERENCES `sprinter`.`Partidas` (`id_partida`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_JugadoresPorPartida_Jugadores1`
     FOREIGN KEY (`Jugadores_id_jugador`)
-    REFERENCES `Sprinter`.`Jugadores` (`id_jugador`)
+    REFERENCES `sprinter`.`Jugadores` (`id_jugador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`Preguntas`
+-- Table `sprinter`.`Preguntas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`Preguntas` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`Preguntas` (
   `pregunta` TINYTEXT NOT NULL,
   `respuestasPosibles` TINYTEXT NOT NULL,
   `id_pregunta` INT NOT NULL AUTO_INCREMENT,
@@ -162,9 +163,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Sprinter`.`RespuestasDeJugadores`
+-- Table `sprinter`.`RespuestasDeJugadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Sprinter`.`RespuestasDeJugadores` (
+CREATE TABLE IF NOT EXISTS `sprinter`.`RespuestasDeJugadores` (
   `respuestas_J` TINYTEXT NULL,
   `Jugadores_id_jugador` INT NOT NULL,
   `Preguntas_id_pregunta` INT NOT NULL,
@@ -172,12 +173,12 @@ CREATE TABLE IF NOT EXISTS `Sprinter`.`RespuestasDeJugadores` (
   INDEX `fk_RespuestasDeJugadores_Preguntas1_idx` (`Preguntas_id_pregunta` ASC),
   CONSTRAINT `fk_RespuestasDeJugadores_Jugadores1`
     FOREIGN KEY (`Jugadores_id_jugador`)
-    REFERENCES `Sprinter`.`Jugadores` (`id_jugador`)
+    REFERENCES `sprinter`.`Jugadores` (`id_jugador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_RespuestasDeJugadores_Preguntas1`
     FOREIGN KEY (`Preguntas_id_pregunta`)
-    REFERENCES `Sprinter`.`Preguntas` (`id_pregunta`)
+    REFERENCES `sprinter`.`Preguntas` (`id_pregunta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

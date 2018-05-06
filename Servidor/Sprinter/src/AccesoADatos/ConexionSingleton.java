@@ -27,8 +27,8 @@ public class ConexionSingleton {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
-        String servidor = "jdbc:mysql://localhost:3306/sprinter";
-        String usuario = "root";
+        String servidor = "jdbc:mysql://sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com:3306/sprinter";
+        String usuario = "rrazopardc";
         String contraseña = "Azopardo234432qw";
         conn = DriverManager.getConnection(servidor, usuario, contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
