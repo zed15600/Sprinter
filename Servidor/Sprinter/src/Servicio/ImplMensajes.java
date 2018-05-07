@@ -77,4 +77,9 @@ public class ImplMensajes implements IMensajes {
     public String enviarVotos(int[][] listaVotos) {
         return Mensaje.enviarVotos(listaVotos);
     }
+
+    @Override
+    public String enviarNombresProyectos() {
+        return Mensaje.enviarNombresProyectos();
+    }
 }

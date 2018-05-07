@@ -41,7 +41,6 @@ public class ConexionTCP {
     public static void main(String args[]) throws IOException {
         ProyectoDAOImpl impl = new ProyectoDAOImpl();
         configuracion = new Configuracion(impl);
-        System.out.println(configuracion.getListaDeProyectos().get(0).getDescripcion());
         Procesador proc = new Procesador();
         //Este bloque solo se requiere para sembrar una partida, no es necesario
         //en la Versión Final.
