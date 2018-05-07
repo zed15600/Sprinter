@@ -97,15 +97,32 @@ public class ClienteControlador : ClientElement {
         app.webClient.estadoVotacion(app.modelo.getPartida().getID());
     }
 
-    public void terminarVotacionSprint() {
-        app.vista.panelVotacionSprint.terminarVotacion();
+    public void terminarVotacionSprintPlanning() {
+        app.vista.panelVotacionSPlanning.terminarVotacion(false);
     }
 
     public void obtenerVotos(int tipoVotacion) {
         app.webClient.obtenerVotos(app.modelo.getPartida().getID(), tipoVotacion);
     }
 
-    public void mostrarVotos(int[] historiasID, int[] votos) {
-        app.vista.panelVotacionSprint.mostrarVotos(historiasID, votos);
+    public void mostrarVotosSprintPlanning(int[] historiasID, int[] votos) {
+        app.vista.panelVotacionSPlanning.mostrarVotos(historiasID, votos);
+    }
+
+    public void terminarVotacionDia() {
+        app.vista.panelVotacionDia.terminarVotacion(false);
+    }
+
+    public void mostrarVotosDia(int historiaID, int votos) {
+        app.vista.panelVotacionDia.mostrarVotos(historiaID, votos);
+    }
+
+    public void establecerHistoriaActual(string historiaID) {
+        HistoriaDeUsuario historia;
+        foreach(HistoriaDeUsuario hist in app.modelo.getProyecto().getHistorias()) {
+            if(hist.getID().Equals(historiaID)) {
+
+            }
+        }
     }
 }

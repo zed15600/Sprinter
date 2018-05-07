@@ -3625,7 +3625,6 @@ MonoBehaviour:
   pnlHistorias: {fileID: 720010018}
   titulo: {fileID: 1112596098}
   timertext: {fileID: 1328349213}
-  trampa: 15
   tipoVoto: 1
   historiaDescPrefab: {fileID: 114514660815593328, guid: c38023ebbf5ecd34eb5984606293a4c7,
     type: 2}
@@ -4831,7 +4830,6 @@ MonoBehaviour:
   pnlHistorias: {fileID: 1630794589}
   titulo: {fileID: 812713755}
   timertext: {fileID: 1150808382}
-  trampa: 13
   tipoVoto: 2
   historiaDescPrefab: {fileID: 114514660815593328, guid: c38023ebbf5ecd34eb5984606293a4c7,
     type: 2}
@@ -5544,7 +5542,8 @@ MonoBehaviour:
   scrumPlanning: {fileID: 942707180}
   sprintPlanning: {fileID: 365551453}
   vistaSprint: {fileID: 233536203}
-  panelVotacionSprint: {fileID: 731114937}
+  panelVotacionSPlanning: {fileID: 731114937}
+  panelVotacionDia: {fileID: 876668922}
 --- !u!1 &1072391141
 GameObject:
   m_ObjectHideFlags: 0

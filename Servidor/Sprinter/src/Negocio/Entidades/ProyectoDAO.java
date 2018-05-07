@@ -5,15 +5,13 @@
  */
 package Negocio.Entidades;
 
+import java.util.ArrayList;
+
 /**
- *
+ * 
  * @author usuario
  */
-public class SprintBacklog extends Backlog {
-    
-    int cantidadSeleccionada;
-    
-    public void definirCantidad(){        
-    }
-    
+public interface ProyectoDAO {
+    public ArrayList<Proyecto> obtenerProyectos();
+    public Proyecto obtenerProyecto(String nombre);
 }

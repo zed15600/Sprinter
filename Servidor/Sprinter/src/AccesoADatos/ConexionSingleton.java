@@ -14,26 +14,33 @@ import javax.swing.JOptionPane;
  *
  * @author usuario
  */
-public class Conexion {
+public class ConexionSingleton {
+    
+    private static Connection conexionSingleton;
     
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
-     * @return Conexión a la base de datos.
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    public Connection conectar() throws ClassNotFoundException, SQLException {
+    public static void conectar() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
-        String servidor = "jdbc:mysql://localhost:3306/sprinter";
-        String usuario = "root";
+        String servidor = "jdbc:mysql://sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com:3306/sprinter";
+        String usuario = "rrazopardc";
         String contraseña = "Azopardo234432qw";
-        DriverManager.getConnection(servidor, usuario, contraseña);
+        conn = DriverManager.getConnection(servidor, usuario, contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
                     + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
-        return conn;
+        ConexionSingleton.conexionSingleton = conn;
     }
+    
+    public static Connection getConexionSingleton() throws ClassNotFoundException, SQLException{
+        conectar();
+        return conexionSingleton;
+    }
+    
 }

@@ -5,18 +5,12 @@
  */
 package Negocio.Entidades;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  *
  * @author usuario
  */
-public class ProductBacklog extends Backlog{
-    
-    public ProductBacklog(){
-    }
-    
-    public void terminarHistoria(HistoriaDeUsuario historia){
-        
-    }
+public interface HistoriaDeUsuarioDAO {
+    public ArrayList<HistoriaDeUsuario> obtenerHistorias(int idProyecto);
 }

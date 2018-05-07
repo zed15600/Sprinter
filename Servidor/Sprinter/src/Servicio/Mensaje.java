@@ -8,7 +8,7 @@ package Servicio;
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.SprintBacklog;
+import Negocio.Entidades.Backlog;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +41,7 @@ public class Mensaje {
     Retrospectiva y una lista con los identificadores de las historias de usuario,
     en formato Json.
     */
-    protected static String terminarSprint(SprintBacklog sprntBcklg){
+    protected static String terminarSprint(Backlog sprntBcklg){
         ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHistorias();
         String HUs = "{\"codigo\":0001, "
                 + " \"HUs\":\"{";
@@ -126,8 +126,9 @@ public class Mensaje {
             HUsID += posible.getId() + ",";
             HUsDesc += "\"" + posible.getDescripcion() + "\",";
         }
-        HUsID = HUsID.substring(0, HUsID.length()-1) + "]";
-        HUsDesc = HUsDesc.substring(0, HUsDesc.length()-1) + "]";
+        System.out.println("Mensaje.actualziarEstadoJugador() -> cantidad de historias para votar: "+posibles.length);
+        HUsID = posibles.length!=0?HUsID.substring(0, HUsID.length()-1) + "]":"[]";
+        HUsDesc = posibles.length!=0?HUsDesc.substring(0, HUsDesc.length()-1) + "]":"[]";
         String res = "{"
                    + "\"votacion\":"+votar+","
                    + "\"HUs\":"+HUsID+","

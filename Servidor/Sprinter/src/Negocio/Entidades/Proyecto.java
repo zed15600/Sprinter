@@ -6,10 +6,6 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 /**
  *
  * @author usuario
@@ -17,15 +13,23 @@ import java.util.Map;
 public class Proyecto {
     
     private ArrayList<Sprint> listaDeSprints;
-    private ProductBacklog productBacklog;
+    private Backlog productBacklog;
     private String nombre;
     private String descripcion;
     private int duracionDeSprints;
     private int diaActual;
     private int sprintActual;
     
+    public Proyecto(String nombre, String descripcion){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracionDeSprints = 0;
+        this.listaDeSprints = new ArrayList();
+        this.productBacklog = new Backlog();
+    }
+    
     public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
-            ProductBacklog productBacklog, int tamaño){
+            Backlog productBacklog, int tamaño){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.listaDeSprints = new ArrayList(tamaño);
@@ -59,6 +63,10 @@ public class Proyecto {
         this.sprintActual++;
     }
     
+    public int getDuracionDeSprints(){
+        return duracionDeSprints;
+    }
+    
     public ArrayList<Sprint> getSprints(){
         return this.listaDeSprints;
     }
@@ -85,18 +93,24 @@ public class Proyecto {
     
     public int[][] getVotos(int Maximo){
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
+        Sprint actual = new Sprint(sprintActual);
+        historias.sort(null);
+        if(historias.size() >= Maximo && Maximo == 4 && historias.get(3).getVotos() == 0){
+            Maximo = 3;
+        }
         int cantidad = Math.min(Maximo, historias.size());
         int[][] votos = new int[2][cantidad];
-        historias.sort(null);
         for(int i=0; i<cantidad; i++){
             HistoriaDeUsuario h = historias.get(i);
+            actual.getSprintBacklog().agregarHistoria(h);
             votos[0][i] = h.getId();
             votos[1][i] = h.getVotos();
         }
+        listaDeSprints.add(actual);
         return votos;
     } 
 
-    public ProductBacklog getProductBacklog() {
+    public Backlog getProductBacklog() {
         return productBacklog;
     }
     

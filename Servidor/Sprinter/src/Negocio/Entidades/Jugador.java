@@ -5,8 +5,6 @@
  */
 package Negocio.Entidades;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author usuario
@@ -43,4 +41,5 @@ public class Jugador {
     
     public void votar(HistoriaDeUsuario HU){
     }
+    
 }
