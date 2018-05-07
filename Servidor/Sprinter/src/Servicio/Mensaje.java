@@ -170,4 +170,8 @@ public class Mensaje {
         }
         return json += "]}";
     }
+
+    protected static String enviarCodigoPartida(String id) {
+        return "{\"id\":\""+id+"\"}";
+    }
 }

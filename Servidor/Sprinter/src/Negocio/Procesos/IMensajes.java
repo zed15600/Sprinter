@@ -29,4 +29,5 @@ public interface IMensajes {
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(int[][] listaVotos);
     public String enviarNombresProyectos();
+    public String enviarCodigoPartida(int codigo);
 }

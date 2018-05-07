@@ -5,7 +5,11 @@
  */
 package Negocio.Entidades;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -13,17 +17,30 @@ import java.util.ArrayList;
  */
 public class Configuracion {
     
-    private Partida partida;
+    private static Map<Integer, Partida> partidas = new HashMap<>();
     private final ArrayList<Proyecto> listaDeProyectos;
     private ProyectoDAO impl;
+
+    public static Map<Integer, Partida> getPartidas() {
+        return partidas;
+    }
 
     public Configuracion(ProyectoDAO impl){
         this.impl = impl;
         listaDeProyectos = impl.obtenerProyectos();
     }
     
-    public void crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
-        impl.obtenerProyecto(nombreProyecto);
+    public int crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
+        int codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
+        Set keys = partidas.keySet();
+        while (keys.contains(codigo)){
+            codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
+        }
+        Proyecto proyecto = impl.obtenerProyecto(nombreProyecto);
+        ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0);
+        Partida partida = new Partida(codigo, nombrePartida, proyecto, scrumMaster);
+        partidas.put(codigo, partida);
+        return codigo;
     }
     
     public void descargarDatos(){        

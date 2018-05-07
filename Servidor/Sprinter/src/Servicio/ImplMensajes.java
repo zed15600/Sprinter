@@ -82,4 +82,10 @@ public class ImplMensajes implements IMensajes {
     public String enviarNombresProyectos() {
         return Mensaje.enviarNombresProyectos();
     }
+
+    @Override
+    public String enviarCodigoPartida(int codigo) {
+        String id = String.valueOf(codigo);
+        return Mensaje.enviarCodigoPartida(id);
+    }
 }

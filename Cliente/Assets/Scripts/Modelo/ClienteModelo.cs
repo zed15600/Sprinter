@@ -3,11 +3,25 @@ using UnityEngine;
 
 public class ClienteModelo : ClientElement {
 
+    private List<string> proyectos = new List<string>();
+
     private Minijuego minijuego = new Minijuego();
 
     private Partida partida = new Partida("15600");
 
     private Proyecto proyecto = new Proyecto("", "", null);
+
+    public void setPartida(Partida partida) {
+        this.partida = partida;
+    }
+
+    public List<string> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<string> proyectos) {
+        this.proyectos = proyectos;
+    }
 
     public Proyecto getProyecto() {
         return proyecto;
