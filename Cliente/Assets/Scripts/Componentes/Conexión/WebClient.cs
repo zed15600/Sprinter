@@ -82,6 +82,24 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
 
+    public void pedirJugadores(string partidaID) {
+        setupSocket();
+        string json = JsonString.pedirJugadores(partidaID);
+        writeSocket(json);
+        string recieved_data = readSocket();
+        if (recieved_data != "") {
+            JSONObject respuesta = JSONObject.Parse(recieved_data);
+            JSONArray nombres = respuesta.GetArray("jugadores");
+            JSONArray avatares = respuesta.GetArray("avatares");
+            for (int i = 0; i < nombres.Length; i++) {
+                string nombre = nombres[i].Str;
+                string avatar = avatares[i].Str;
+                Jugador jugador = new Jugador(nombre, avatar);
+                app.controlador.obtenerJugadores().Add(jugador);
+            }
+        }
+    }
+
     public void pedirProyectos() {
         setupSocket();
         string json = JsonString.pedirProyectos();

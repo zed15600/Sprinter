@@ -80,4 +80,11 @@
         return res;
     }
 
+    public static string pedirJugadores(string partidaID) {
+        string res = "{" +
+             "\"codigo\":0016," +
+             "\"partidaID\":" + partidaID +
+             "}";
+        return res;
+    }
 }

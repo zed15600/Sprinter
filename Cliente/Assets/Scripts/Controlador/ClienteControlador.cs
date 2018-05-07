@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ClienteControlador : ClientElement {
 
     public string obtenerNombreProyecto() {
@@ -124,5 +124,25 @@ public class ClienteControlador : ClientElement {
 
             }
         }
+    }
+
+    public List<string> obtenerProyectos() {
+        return app.modelo.getProyectos();
+    }
+
+    public List<Jugador> obtenerJugadores() {
+        return app.modelo.getJugadores();
+    }
+
+    public Dictionary<string, Sprite> obtenerMapaAvatares() {
+        return app.modelo.getMapaAvatares();
+    }
+
+    public void pedirJugadores() {
+        app.webClient.pedirJugadores(app.modelo.getPartida().getID());
+    }
+
+    public void establecerMapaAvatares(Dictionary<string, Sprite> avatares) {
+        app.modelo.setMapaAvatares(avatares);
     }
 }

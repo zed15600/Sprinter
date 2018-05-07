@@ -1,18 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+    
 public class ClienteModelo : ClientElement {
+    [SerializeField]
+    public Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
 
     private List<string> proyectos = new List<string>();
 
     private Minijuego minijuego = new Minijuego();
 
-    private Partida partida = new Partida("15600");
+    private Partida partida = new Partida("");
 
     private Proyecto proyecto = new Proyecto("", "", null);
 
+    private List<Jugador> jugadores = new List<Jugador>();
+
+    public Dictionary<string, Sprite> getMapaAvatares() {
+        return mapaAvatares;
+    }
+
+    public void setMapaAvatares(Dictionary<string, Sprite> mapaAvatares) {
+        this.mapaAvatares = mapaAvatares;
+    }
+
     public void setPartida(Partida partida) {
         this.partida = partida;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
     }
 
     public List<string> getProyectos() {
@@ -229,6 +246,33 @@ public class Minijuego{
         return intentos;
     }
 }
+
+public class Jugador {
+    private string nombre;
+    private string avatar;
+
+    public Jugador(string nombre, string avatar) {
+        this.nombre = nombre;
+        this.avatar = avatar;
+    }
+
+    public void setAvatar(string avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setNombre(string nombre) {
+        this.nombre = nombre;
+    }
+
+    public string getNombre() {
+        return nombre;
+    }
+
+    public string getAvatar() {
+        return avatar;
+    }
+}
+
 
 
 

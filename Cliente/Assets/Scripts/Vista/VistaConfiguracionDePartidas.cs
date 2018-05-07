@@ -13,7 +13,7 @@ public class VistaConfiguracionDePartidas : ClientElement {
         llenarDropdown();
     }
     public void llenarDropdown() {
-        List<string> nombresProyecto = app.modelo.getProyectos();
+        List<string> nombresProyecto = app.controlador.obtenerProyectos();
         proyectosDropdown.AddOptions(nombresProyecto);
     }
 
