@@ -28,4 +28,6 @@ public interface IMensajes {
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(int[][] listaVotos);
+    public String enviarNombresProyectos();
+    public String enviarCodigoPartida(int codigo);
 }

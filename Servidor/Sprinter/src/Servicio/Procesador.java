@@ -62,6 +62,12 @@ public class Procesador {
                     break;
                 case 12: return proceso.estadoVotacion(pID);
                 case 13: return proceso.enviarVotos(pID, (int)(long)json.get("tipoVotacion"));
+                case 14: return proceso.enviarProyectos();
+                case 15:
+                    String jugador = (String) json.get("jugador");
+                    String partida = (String) json.get("partida");
+                    String proyecto = (String) json.get("proyecto");
+                    return proceso.crearPartida(jugador, partida, proyecto);
             }
         }
         return "";

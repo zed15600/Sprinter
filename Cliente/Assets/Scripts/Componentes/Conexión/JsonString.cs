@@ -64,4 +64,20 @@
                      "}";
         return res;
     }
+
+    public static string pedirProyectos() {
+        string res = "{\"codigo\":0014}";
+        return res;
+    }
+
+    public static string crearPartida(string nombreJugador, string nombrePartida, string nombreProyecto) {
+        string res = "{" +
+             "\"codigo\":0015," +
+             "\"jugador\":\"" + nombreJugador + "\"," +
+             "\"partida\":\"" + nombrePartida + "\"," +
+             "\"proyecto\":\"" + nombreProyecto + "\"" +
+             "}";
+        return res;
+    }
+
 }

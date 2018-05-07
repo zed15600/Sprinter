@@ -160,4 +160,18 @@ public class Mensaje {
                 + "}";
         return res;
     }
+
+    protected static String enviarNombresProyectos() {
+        String json = "{";
+        ArrayList<Proyecto> proyectos = ConexionTCP.getConfiguracion().getListaDeProyectos();
+        json += "\"proyectos\":[";
+        for (Proyecto p:proyectos){
+            json += "\""+p.getNombre() +"\", ";
+        }
+        return json += "]}";
+    }
+
+    protected static String enviarCodigoPartida(String id) {
+        return "{\"id\":\""+id+"\"}";
+    }
 }

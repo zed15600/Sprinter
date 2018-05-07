@@ -21,22 +21,6 @@ public class WebClient : ClientElement {
 
     public bool proyectoObtenido = false;
 
-    void Update()
-    {
-        
-    }
-
-
-    void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-
-    }
-
     void OnApplicationQuit()
     {
         closeSocket();
@@ -96,6 +80,39 @@ public class WebClient : ClientElement {
         socket_reader.Close();
         tcp_socket.Close();
         socket_ready = false;
+    }
+
+    public void pedirProyectos() {
+        setupSocket();
+        string json = JsonString.pedirProyectos();
+        writeSocket(json);
+        string recieved_data = readSocket();
+        if (recieved_data != "") {
+            JSONObject respuesta = JSONObject.Parse(recieved_data);
+            JSONArray proyectos = respuesta.GetArray("proyectos");
+            List<string> proyectosNombres = new List<string>();
+            for (int i = 0; i < proyectos.Length; i++) {
+                string nombre = proyectos[i].Str;
+                proyectosNombres.Add(nombre);
+            }
+            app.modelo.setProyectos(proyectosNombres);
+        }
+        closeSocket();
+    }
+
+    public void crearPartida(string jugador, string partida, string proyecto) {
+        setupSocket();
+        string json = JsonString.crearPartida(jugador, partida, proyecto);
+        writeSocket(json);
+        string recieved_data = readSocket();
+        if (recieved_data != "") {
+            JSONObject respuesta = JSONObject.Parse(recieved_data);
+            string codigo = respuesta.GetString("id");
+            Partida partidaCliente = new Partida(codigo);
+            app.modelo.setPartida(partidaCliente);
+        }
+
+        closeSocket();
     }
 
     public void establecerCompletada(String huID)

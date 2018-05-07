@@ -16,22 +16,39 @@ import java.util.ArrayList;
 
 public class Partida {
     private int codigo;
-    private int codigoUnirse;
     private ArrayList<Jugador> listaJugadores;
     private String nombre;
     private Proyecto proyecto;
     private boolean votacion;
     private int tipoVotacion; //1 -> votar historias de Sprint, 2 -> votar historia de día
+    private ScrumMaster scrumMaster;
     
     public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
         this.listaJugadores = new ArrayList();
         this.nombre = nombre;
         this.proyecto = proyecto;
+        this.scrumMaster = new ScrumMaster("",0);
         //generar código aleatorio
-        codigoUnirse = 837085;
+        //codigoUnirse = 837085;
         votacion = false;
         tipoVotacion = 0;
+    }
+    
+    public Partida(int codigo, String nombre, Proyecto proyecto, ScrumMaster scrumMaster){
+        this.codigo = codigo;
+        this.listaJugadores = new ArrayList();
+        this.nombre = nombre;
+        this.proyecto = proyecto;
+        this.scrumMaster = scrumMaster;
+        //generar código aleatorio
+        //codigoUnirse = 837085;
+        votacion = false;
+        tipoVotacion = 0;
+    }
+
+    public ScrumMaster getScrumMaster() {
+        return scrumMaster;
     }
     
     public int agregarJugador (){
@@ -64,7 +81,7 @@ public class Partida {
     }
     
     public int getUnion(){
-        return this.codigoUnirse;
+        return this.codigo;
     }
     
     public boolean getVotacion(){
