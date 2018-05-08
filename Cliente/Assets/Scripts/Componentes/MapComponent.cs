@@ -11,7 +11,7 @@ public class MapComponent : ClientElement {
     private Sprite[] imagenes;
 
 
-   public void Awake() {
+    void Start() {
         poblarMapa();
     }
 

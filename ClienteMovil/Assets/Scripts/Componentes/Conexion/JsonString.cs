@@ -4,7 +4,7 @@
         string res = "{" +
                      "\"codigo\":0008," +
                      "\"partCode\":"+codigo+"," +
-                     "\"nombreJugador\":"+nombreJugador+
+                     "\"nombreJugador\":\""+nombreJugador+"\""+
                      "}";
         return res;
     }

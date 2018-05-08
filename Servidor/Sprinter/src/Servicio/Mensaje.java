@@ -116,7 +116,7 @@ public class Mensaje {
                 + "\"codigo\":0007,"
                 + "\"pId\":"+partidaID+","
                 + "\"jugadorId\":"+jugadorId+","
-                + "\"aceptado\":"+aceptado+""
+                + "\"aceptado\":"+aceptado+","
                 + "\"avatar\":\""+avatar+"\""
                 + "}";
         return res;
