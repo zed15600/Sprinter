@@ -37,21 +37,19 @@ public class ConexionTCP implements IConexion{
     el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
     */
     public static void main(String args[]) throws IOException {
+        
+        //Instancias de Implementaciones de Interfaces.
         ProyectoDAOImpl impl = new ProyectoDAOImpl();
         configuracion = new Configuracion(impl);
-        Procesador proc = new Procesador();
-        //Este bloque solo se requiere para sembrar una partida, no es necesario
-        //en la Versión Final.
-        // *********************************************************************
+        Procesador proc = new Procesador();        
         IMensajes mensajes = new ImplMensajes();
         IConexion conexion = new ConexionTCP();
         proceso = new Proceso(mensajes, conexion);
-        // *********************************************************************
         
+        //Conexión TCP
         ServerSocket socket = new ServerSocket(5173);
         String in, out;
         while(true){
-            System.out.println("entro");
             Socket connectionSocket = socket.accept();
             InputStreamReader isr = new InputStreamReader(connectionSocket.getInputStream());
             BufferedReader inData = new BufferedReader(isr);

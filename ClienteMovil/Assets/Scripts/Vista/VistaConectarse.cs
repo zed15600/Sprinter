@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class VistaConectarse : ClientElement {
 
-    public void verificarCodigo(string codigo, string nombreJugador) {
+    public InputField nombre;
+
+    public void verificarCodigo(string codigo) {
+        string nombreJugador = nombre.inputText.text;
         if(codigo.Contains("-2")) {
             Debug.Log("VistaConectarse.verficarCodigo() -> Código inválido");
         }

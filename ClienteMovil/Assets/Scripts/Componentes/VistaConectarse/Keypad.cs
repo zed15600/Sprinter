@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Keypad : ClientElement {
     
     public Text codigo;
-    public InputField nombre;
     int[] word = new int[]{-2, -2, -2, -2, -2, -2};
     int cursor = 0;
 
@@ -41,7 +40,7 @@ public class Keypad : ClientElement {
         } 
         if(key==10) {
             string cod = ""+word[0]+word[1]+word[2]+word[3]+word[4]+word[5];
-            app.vista.conectarse.verificarCodigo(cod, nombre.inputText.text);
+            app.vista.conectarse.verificarCodigo(cod);
         }
     }
 }
