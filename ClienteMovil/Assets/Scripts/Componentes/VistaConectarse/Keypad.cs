@@ -40,6 +40,7 @@ public class Keypad : ClientElement {
         } 
         if(key==10) {
             string cod = ""+word[0]+word[1]+word[2]+word[3]+word[4]+word[5];
+            //Debug.Log("Keypad.keyPress() -> Código: "+cod);
             app.vista.conectarse.verificarCodigo(cod);
         }
     }
