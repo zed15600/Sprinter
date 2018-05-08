@@ -13,10 +13,12 @@ import java.util.ArrayList;
  */
 public class IntegranteScrumTeam extends Jugador {
     
+    String avatar;
     private ArrayList<Impedimento> listaImpedimento;
     
-    public IntegranteScrumTeam(String nombre, int ID) {
+    public IntegranteScrumTeam(String nombre, int ID, String avatar) {
         super(nombre, ID);
+        this.avatar = avatar;
         this.listaImpedimento = new ArrayList<>();
     }
     

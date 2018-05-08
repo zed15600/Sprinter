@@ -11,6 +11,12 @@ public class VistaUnirseAPartida : ClientElement{
 
     private float timer = 2.0f;
 
+    public void ponerCodigo() {
+        string codigoPartida = app.controlador.obtenerCodigoPartida();
+        Debug.Log(codigoPartida);
+        codigo.text = codigoPartida;
+    }
+
     public void llenarGrupo() {
         List<Jugador> jugadores = app.controlador.obtenerJugadores();
         foreach (Jugador j in jugadores) {
@@ -25,8 +31,8 @@ public class VistaUnirseAPartida : ClientElement{
         }
     }
 
-	void Start () {
-		
+	void OnEnable () {
+        ponerCodigo();
 	}
 
 	void Update () {

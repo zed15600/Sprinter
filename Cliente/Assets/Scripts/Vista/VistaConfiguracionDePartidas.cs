@@ -22,5 +22,8 @@ public class VistaConfiguracionDePartidas : ClientElement {
         string partida = nombrePartida.text;
         string proyecto = proyectosDropdown.captionText.text;
         app.webClient.crearPartida(jugador, partida, proyecto);
+        app.webClient.obtenerProyecto();
+        app.vista.unirseAPartida.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

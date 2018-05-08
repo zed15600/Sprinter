@@ -9,6 +9,8 @@ import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Backlog;
+import Negocio.Entidades.IntegranteScrumTeam;
+import Negocio.Entidades.Jugador;
 import java.util.ArrayList;
 
 /**
@@ -109,12 +111,13 @@ public class Mensaje {
         return res;
     }
     
-    protected static String unirsePartida(int partidaID, int jugadorId, boolean aceptado){
+    protected static String unirsePartida(int partidaID, int jugadorId, boolean aceptado, String avatar){
         String res = "{"
                 + "\"codigo\":0007,"
                 + "\"pId\":"+partidaID+","
                 + "\"jugadorId\":"+jugadorId+","
                 + "\"aceptado\":"+aceptado+""
+                + "\"avatar\":\""+avatar+"\""
                 + "}";
         return res;
     }
@@ -163,7 +166,7 @@ public class Mensaje {
 
     protected static String enviarNombresProyectos() {
         String json = "{";
-        ArrayList<Proyecto> proyectos = ConexionTCP.getConfiguracion().getListaDeProyectos();
+        ArrayList<Proyecto> proyectos = ConexionTCP.getProceso().getConexion().obtenerConfiguracion().getListaDeProyectos();
         json += "\"proyectos\":[";
         for (Proyecto p:proyectos){
             json += "\""+p.getNombre() +"\", ";
@@ -173,5 +176,19 @@ public class Mensaje {
 
     protected static String enviarCodigoPartida(String id) {
         return "{\"id\":\""+id+"\"}";
+    }
+
+    protected static String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
+        String json = "{";
+        json += "\"jugadores\":[";
+        for (Jugador j:jugadores){
+            json += "\""+j.getNombre() +"\", ";
+        }
+        json += "],";
+        json += "\"avatares\":[";
+        for (Jugador j:jugadores){
+            json += "\""+j.getAvatar() +"\", ";
+        }
+        return json += "]}";
     }
 }

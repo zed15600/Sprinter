@@ -15,19 +15,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import Negocio.Procesos.IMensajes;
 import AccesoADatos.ProyectoDAOImpl;
+import Negocio.Procesos.IConexion;
 
 /**
  *
  * @author EDISON
  */
-public class ConexionTCP {
+public class ConexionTCP implements IConexion{
     
     private static Configuracion configuracion;
     
-    public static Configuracion getConfiguracion() {
-        return configuracion;
-    }
-    
+    private static Proceso proceso;
     /*
     Aquí se crea la conexión del servidor hacia el mundo.
     Se crea un objeto Proceso que es el que lleva a cabo todas las acciones
@@ -46,12 +44,14 @@ public class ConexionTCP {
         //en la Versión Final.
         // *********************************************************************
         IMensajes mensajes = new ImplMensajes();
-        Proceso proceso = new Proceso(mensajes);
-        proceso.sembrarPartida();
+        IConexion conexion = new ConexionTCP();
+        proceso = new Proceso(mensajes, conexion);
         // *********************************************************************
+        
         ServerSocket socket = new ServerSocket(5173);
         String in, out;
         while(true){
+            System.out.println("entro");
             Socket connectionSocket = socket.accept();
             InputStreamReader isr = new InputStreamReader(connectionSocket.getInputStream());
             BufferedReader inData = new BufferedReader(isr);
@@ -63,4 +63,15 @@ public class ConexionTCP {
             outData.writeBytes(out + "\n");
         }
     }
+
+    @Override
+    public Configuracion obtenerConfiguracion() {
+        return configuracion;
+    }
+
+    public static Proceso getProceso() {
+        return proceso;
+    }
+    
+    
 }

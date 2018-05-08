@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class ClienteControlador : ClientElement {
@@ -14,6 +15,10 @@ public class ClienteControlador : ClientElement {
     public List<HistoriaDeUsuario> obtenerHistorias()
     {
         return app.modelo.getProyecto().getHistorias();
+    }
+
+    internal string obtenerCodigoPartida() {
+        return app.modelo.getPartida().getID();
     }
 
     public string obtenerSprintsRestantes()

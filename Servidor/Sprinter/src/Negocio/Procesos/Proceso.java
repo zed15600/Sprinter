@@ -8,11 +8,9 @@ package Negocio.Procesos;
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.Sprint;
 import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.Backlog;
-import Negocio.Entidades.Configuracion;
 import Negocio.Entidades.HistoriaDeUsuario;
+import Negocio.Entidades.IntegranteScrumTeam;
 import Negocio.Entidades.Partida;
-import Servicio.ConexionTCP;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,10 +19,12 @@ import java.util.Collection;
  * @author EDISON
  */
 public class Proceso {
+    private final IConexion conexion;
     private final IMensajes mensajes;
 
-    public Proceso(IMensajes mensajes) {
+    public Proceso(IMensajes mensajes, IConexion conexion) {
         this.mensajes = mensajes;
+        this.conexion = conexion;
     }
     
     
@@ -36,7 +36,7 @@ public class Proceso {
     Json.
     */
     public String terminarDia(int partidaID){
-        Proyecto p = Configuracion.getPartidas().get(partidaID).getProyecto();
+        Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
         p.nextDia();
         return mensajes.terminarDia(p);
     }
@@ -53,7 +53,7 @@ public class Proceso {
     y retorna un String en formato Json.
     */
     public String terminarSprint(int partidaID){
-        Proyecto p = Configuracion.getPartidas().get(partidaID).getProyecto();
+        Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
         Sprint actual = p.getSprints().get(p.getSprintActual()-1);
         actual.terminarSprint();
         p.nextSprint();
@@ -71,9 +71,9 @@ public class Proceso {
     String en formato Json.
     */
     public String determinarVictoria(int partidaID){
-        Proyecto p = Configuracion.getPartidas().get(partidaID).getProyecto();
+        Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
         boolean resultado = p.terminarJuego();
-        Configuracion.getPartidas().remove(partidaID);
+        conexion.obtenerConfiguracion().getPartidas().remove(partidaID);
         return mensajes.determinarVictoria(resultado);
     }
     
@@ -86,7 +86,7 @@ public class Proceso {
     */
     
     public String enviarProyecto(int partidaID){
-        Partida par = Configuracion.getPartidas().get(partidaID);
+        Partida par = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         Proyecto p = par.getProyecto();
         String nombre = p.getNombre();
         String descripcion = p.getDescripcion();
@@ -95,7 +95,7 @@ public class Proceso {
     }
     
     public String enviarHistoria(int partidaID, String ID){
-        Partida par = Configuracion.getPartidas().get(partidaID);
+        Partida par = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         Proyecto p = par.getProyecto(); 
         ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
         HistoriaDeUsuario historia = null;
@@ -113,7 +113,7 @@ public class Proceso {
     }
     
     public String sprintPlanning(int ID){
-        Partida par = Configuracion.getPartidas().get(ID);
+        Partida par = conexion.obtenerConfiguracion().getPartidas().get(ID);
         Proyecto p = par.getProyecto();
         ArrayList<Sprint> sprints = p.getSprints();
         int actual = p.getSprintActual();
@@ -122,7 +122,7 @@ public class Proceso {
     }
     
     public void establecerCompletada(int pID, String completadaID) {
-        Partida par = Configuracion.getPartidas().get(pID);
+        Partida par = conexion.obtenerConfiguracion().getPartidas().get(pID);
         Proyecto p = par.getProyecto(); 
         ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
         HistoriaDeUsuario historia = null;
@@ -134,18 +134,19 @@ public class Proceso {
         historia.terminarHU();
     }
     
-    public String unirsePartida(int codigo){
-        Collection<Partida> parts = Configuracion.getPartidas().values();
+    public String unirsePartida(int codigo, String nombreJugador){
+        Collection<Partida> parts = conexion.obtenerConfiguracion().getPartidas().values();
         for(Partida partida: parts){
             if(partida.getUnion()==codigo){
-                return mensajes.unirsePartida(partida.getCodigo(), partida.agregarJugador(), true);
+                String avatar = partida.getAvatares().pop();
+                return mensajes.unirsePartida(partida.getCodigo(), partida.agregarJugador(nombreJugador,avatar), true, avatar);
             }
         }
-        return mensajes.unirsePartida(0000, 0, false);
+        return mensajes.unirsePartida(0000, 0, false, "");
     }
     
     public String actualizarEstadoJugador(int partidaID, int jugador){
-        Partida p = Configuracion.getPartidas().get(partidaID);
+        Partida p = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         Proyecto py = p.getProyecto();
         boolean votar = p.getVotacion();
         int tipoVotacion = p.getTipoVotacion();
@@ -165,14 +166,14 @@ public class Proceso {
             if(i < historias.size())
                 posibles[i] = historias.get(i);
         }
-        return mensajes.actualizarEstadoJugador(p.getVotacion()&&p.getJugadores().get(jugador-1).getVotar(), posibles);
+        return mensajes.actualizarEstadoJugador(p.getVotacion()&&p.getListaJugadores().get(jugador-1).getVotar(), posibles);
         
     }
     
     public void registrarVoto(int partidaID, int historiaID, int jugador){
-        Partida p = Configuracion.getPartidas().get(partidaID);
+        Partida p = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         ArrayList<HistoriaDeUsuario> bcklog = p.getProyecto().getProductBacklog().getHistorias();
-        p.getJugadores().get(jugador-1).setVotar(false);
+        p.getListaJugadores().get(jugador-1).setVotar(false);
         for(HistoriaDeUsuario historia: bcklog){
             if(historia.getId()==historiaID){
                 historia.aumentarVoto();
@@ -183,7 +184,7 @@ public class Proceso {
     }
     
     public void establecerVotación(int partidaID, boolean votar, int tipo){
-        Partida p = Configuracion.getPartidas().get(partidaID);
+        Partida p = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         if(votar){
             p.reiniciarVotaciones();
         }
@@ -192,12 +193,12 @@ public class Proceso {
     }
     
     public String estadoVotacion(int partidaID){
-        Partida p = Configuracion.getPartidas().get(partidaID);
+        Partida p = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         return mensajes.estadoVotacion(p.getVotacion(), p.getTipoVotacion());
     }
     
     public String enviarVotos(int partidaID, int tipoVotacion){
-        Proyecto p = Configuracion.getPartidas().get(partidaID).getProyecto();
+        Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
         int respuestas = 0;
         if(tipoVotacion == 1){
             respuestas = p.getDuracionDeSprints();
@@ -212,31 +213,20 @@ public class Proceso {
         return mensajes.enviarNombresProyectos();
     }
     
-    /*
-    Crea una partida básica para hacer pruebas.
-    Pendiente de terminar.
-    */
-    public void sembrarPartida(){
-        Criterio criterio1 = new Criterio ("El puente debe ser azul.");
-        Criterio criterio2 = new Criterio ("El puente debe ser verde.");
-        HistoriaDeUsuario huGanada1 = new HistoriaDeUsuario(1, "Como transitante deseo que el puente sea rojo.", "5", 4);
-        HistoriaDeUsuario huGanada2 = new HistoriaDeUsuario(2, "Como transitante deseo que el puente sea alto.", "3", 2);
-        huGanada1.agregarCriterio(criterio1);
-        huGanada1.agregarCriterio(criterio2);
-        huGanada2.agregarCriterio(criterio1);
-        Backlog productBacklogGanado = new Backlog();
-        productBacklogGanado.agregarHistoria(huGanada1);
-        productBacklogGanado.agregarHistoria(huGanada2);
-        Proyecto proyectoGanado = new Proyecto("Puente", "Descripcion del Puente", 5,
-        productBacklogGanado, 3);
-        Partida partidaGanada = new Partida(15600, "Partida de Edison", proyectoGanado);
-        Configuracion.getPartidas().put(partidaGanada.getCodigo(), partidaGanada);
-    }
-
     public String crearPartida(String jugador, String partida, String proyecto) {
         
-        int codigo = ConexionTCP.getConfiguracion().crearPartida(jugador, partida, proyecto);
+        int codigo = conexion.obtenerConfiguracion().crearPartida(jugador, partida, proyecto);
         return mensajes.enviarCodigoPartida(codigo);
+    }
+
+    public IConexion getConexion() {
+        return conexion;
+    }
+
+    public String enviarJugadores(int idPartida) {
+        Partida p = conexion.obtenerConfiguracion().getPartidas().get(idPartida);
+        ArrayList<IntegranteScrumTeam> jugadores= p.getListaJugadores();
+        return mensajes.enviarJugadoresConAvatares(jugadores);
     }
     
 }

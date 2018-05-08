@@ -9,6 +9,8 @@ import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Backlog;
+import Negocio.Entidades.IntegranteScrumTeam;
+import Negocio.Entidades.Jugador;
 import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
 
@@ -59,8 +61,8 @@ public class ImplMensajes implements IMensajes {
     }
     
     @Override
-    public String unirsePartida(int partidaID, int jugadorId, boolean aceptado){
-        return Mensaje.unirsePartida(partidaID, jugadorId, aceptado);
+    public String unirsePartida(int partidaID, int jugadorId, boolean aceptado, String avatar){
+        return Mensaje.unirsePartida(partidaID, jugadorId, aceptado, avatar);
     }
     
     @Override
@@ -87,5 +89,10 @@ public class ImplMensajes implements IMensajes {
     public String enviarCodigoPartida(int codigo) {
         String id = String.valueOf(codigo);
         return Mensaje.enviarCodigoPartida(id);
+    }
+
+    @Override
+    public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
+        return Mensaje.enviarJugadoresConAvatares(jugadores);
     }
 }

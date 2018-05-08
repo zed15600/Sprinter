@@ -6,6 +6,7 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  *
@@ -16,12 +17,25 @@ import java.util.ArrayList;
 
 public class Partida {
     private int codigo;
-    private ArrayList<Jugador> listaJugadores;
+    private ArrayList<IntegranteScrumTeam> listaJugadores;
     private String nombre;
     private Proyecto proyecto;
     private boolean votacion;
     private int tipoVotacion; //1 -> votar historias de Sprint, 2 -> votar historia de día
     private ScrumMaster scrumMaster;
+    private Stack<String> avatares;
+
+    public ArrayList<IntegranteScrumTeam> getListaJugadores() {
+        return listaJugadores;
+    }
+
+    public boolean isVotacion() {
+        return votacion;
+    }
+
+    public Stack<String> getAvatares() {
+        return avatares;
+    }
     
     public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
@@ -29,8 +43,6 @@ public class Partida {
         this.nombre = nombre;
         this.proyecto = proyecto;
         this.scrumMaster = new ScrumMaster("",0);
-        //generar código aleatorio
-        //codigoUnirse = 837085;
         votacion = false;
         tipoVotacion = 0;
     }
@@ -41,8 +53,13 @@ public class Partida {
         this.nombre = nombre;
         this.proyecto = proyecto;
         this.scrumMaster = scrumMaster;
-        //generar código aleatorio
-        //codigoUnirse = 837085;
+        this.avatares = new Stack<>();
+        avatares.push("lobo");
+        avatares.push("zorro");
+        avatares.push("oso");
+        avatares.push("gato");
+        avatares.push("mapache");
+        avatares.push("panda");
         votacion = false;
         tipoVotacion = 0;
     }
@@ -51,9 +68,9 @@ public class Partida {
         return scrumMaster;
     }
     
-    public int agregarJugador (){
+    public int agregarJugador (String nombre, String avatar){
         int id = listaJugadores.size()+1;
-        Jugador jugador = new Jugador("Edison", id);
+        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id, avatar);
         listaJugadores.add(jugador);
         return id;
     }
@@ -95,10 +112,6 @@ public class Partida {
     
     public void setVotacion(boolean votacion){
         this.votacion = votacion;
-    }
-    
-    public ArrayList<Jugador> getJugadores(){
-        return listaJugadores;
     }
     
     public int getTipoVotacion(){

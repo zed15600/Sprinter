@@ -5,6 +5,7 @@
  */
 package Servicio;
 
+import Negocio.Procesos.IConexion;
 import Negocio.Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,8 @@ public class Procesador {
     */
     public String procesarJson(String mensaje){
         IMensajes mensajes = new ImplMensajes();
-        Proceso proceso = new Proceso(mensajes);
+        IConexion conexion = new ConexionTCP();
+        Proceso proceso = new Proceso(mensajes, conexion);
         JSONParser parser = new JSONParser();
         JSONObject json;
         try {
@@ -54,7 +56,7 @@ public class Procesador {
                 case 6:  return proceso.sprintPlanning(pID);
                 case 7:  proceso.establecerCompletada(pID, (String)json.get("ID"));
                     break;
-                case 8:  return proceso.unirsePartida((int)(long)json.get("partCode"));
+                case 8:  return proceso.unirsePartida((int)(long)json.get("partCode"), (String)json.get("nombreJugador"));
                 case 9:  return proceso.actualizarEstadoJugador(pID, (int)(long)json.get("player"));
                 case 10: proceso.registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
                     break;
@@ -68,6 +70,8 @@ public class Procesador {
                     String partida = (String) json.get("partida");
                     String proyecto = (String) json.get("proyecto");
                     return proceso.crearPartida(jugador, partida, proyecto);
+                case 16:
+                    return proceso.enviarJugadores(pID);
             }
         }
         return "";

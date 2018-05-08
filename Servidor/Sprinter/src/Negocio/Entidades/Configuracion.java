@@ -21,7 +21,7 @@ public class Configuracion {
     private final ArrayList<Proyecto> listaDeProyectos;
     private ProyectoDAO impl;
 
-    public static Map<Integer, Partida> getPartidas() {
+    public Map<Integer, Partida> getPartidas() {
         return partidas;
     }
 
