@@ -8,6 +8,7 @@ public class VistaEstado : ClientElement {
     public GameObject pnlVotacion;
     public GameObject[] btns;
     public Text[] btnsVotacion;
+    public RawImage avatar;
 
     float refreshTime = 3.0f;
     bool votar = false;
@@ -18,7 +19,9 @@ public class VistaEstado : ClientElement {
 	}
 
     void OnEnable() {
+        avatar.texture = app.modelo.getAvatar(app.modelo.getJugador().getAvatar());
         votar = false;
+
     }
 
     // Update is called once per frame

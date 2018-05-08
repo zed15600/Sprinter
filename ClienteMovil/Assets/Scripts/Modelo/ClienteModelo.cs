@@ -1,16 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClienteModelo : ClientElement {
 
-    private Partida partida = new Partida(15600);
+    public string[] nombres;
+    public Texture[] avatares;
+
+    private Partida partida = new Partida("");
     private Jugador jugador = new Jugador();
-    
+    private Dictionary<string, Texture> mapaAvatares = new Dictionary<string, Texture>();
+
+    void Awake() {
+        for(int i=0; i<nombres.Length;i++) {
+            mapaAvatares.Add(nombres[i], avatares[i]);
+        }
+    }
+
     public Partida getPartida(){
         return partida;
     }
 
-    public void setPartida(int pID) {
+    public void setPartida(string pID) {
         partida = new Partida(pID);
     }
 
@@ -22,18 +33,22 @@ public class ClienteModelo : ClientElement {
         jugador.setId(id);
     }
 
+    public Texture getAvatar(string id) {
+        return mapaAvatares[id];
+    }
+
 }
 
 
 public class Partida
 {
-    private int id;
+    private string id;
 
-    public Partida(int id) { 
+    public Partida(string id) { 
         this.id = id;
     }
 
-    public int getID()
+    public string getID()
     {
         return id;
     }
@@ -45,6 +60,7 @@ public class Jugador {
 
     private int id;
     private string nombre;
+    private string avatar;
 
     public void setId(int id) {
         this.id = id;
@@ -52,6 +68,22 @@ public class Jugador {
 
     public int getId() {
         return id;
+    }
+
+    public void setNombre(string nombre) {
+        this.nombre = nombre;
+    }
+
+    public string getNombre() {
+        return nombre;
+    }
+
+    public void setAvatar(string avatar) {
+        this.avatar = avatar;
+    }
+
+    public string getAvatar() {
+        return avatar;
     }
 }
 

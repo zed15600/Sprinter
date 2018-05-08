@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class VistaConectarse : ClientElement {
 
-    public void verificarCodigo(string codigo) {
+    public void verificarCodigo(string codigo, string nombreJugador) {
         if(codigo.Contains("-2")) {
-            Debug.Log("Código inválido");
+            Debug.Log("VistaConectarse.verficarCodigo() -> Código inválido");
         }
-        app.controlador.conectarPartida(codigo);
+        app.controlador.conectarPartida(codigo, nombreJugador);
     }
 
     public void respuestaConexion(bool respuesta) {

@@ -2,16 +2,24 @@
 
 public class ClienteControlador : ClientElement {
 
-    public void conectarPartida(string codigo) {
-        app.webClient.unirsePartida(codigo);
+    public void conectarPartida(string codigo, string nombreJugador) {
+        app.webClient.unirsePartida(codigo, nombreJugador);
+    }
+
+    public void crearPartida(string partidaID) {
+        app.modelo.setPartida(partidaID);
     }
 
     public void responderConexion(bool aceptado) {
         app.vista.conectarse.respuestaConexion(aceptado);
     }
 
-    public void crearPartida(int partidaID) {
-        app.modelo.setPartida(partidaID);
+    public void establecerIdJugador(int id) {
+        app.modelo.getJugador().setId(id);
+    }
+
+    public void establecerAvatarJugador(string avatar) {
+        app.modelo.getJugador().setAvatar(avatar);
     }
 
     public void actualizarEstado() {

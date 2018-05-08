@@ -80,21 +80,22 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
     
-    public void unirsePartida(string codigo) {
-        string json = JsonString.unirseAPartida(codigo);
+    public void unirsePartida(string codigo, string nombreJugador) {
+        string json = JsonString.unirseAPartida(codigo, nombreJugador);
         setupSocket();
         writeSocket(json);
         string dataIn = readSocket();
         closeSocket();
         if(dataIn != "") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
-            app.controlador.crearPartida((int)jsRes["pId"].Number);
+            app.controlador.crearPartida(jsRes["pId"].Str);
             app.controlador.responderConexion(jsRes["aceptado"].Boolean);
-            app.modelo.setJugador((int)jsRes["jugadorId"].Number);
+            app.controlador.establecerIdJugador((int)jsRes["jugadorId"].Number);
+            app.controlador.establecerAvatarJugador(jsRes["avatar"].Str);
         }
     }
 
-    public void actualizarEstado(int pId, int player) {
+    public void actualizarEstado(string pId, int player) {
         string json = JsonString.actualizarEstado(pId, player);
         setupSocket();
         writeSocket(json);
@@ -117,7 +118,7 @@ public class WebClient : ClientElement {
         }
     }
 
-    public void enviarVoto(int pID, string HUid, int player) {
+    public void enviarVoto(string pID, string HUid, int player) {
         string json = JsonString.enviarVoto(pID, HUid, player);
         setupSocket();
         writeSocket(json);

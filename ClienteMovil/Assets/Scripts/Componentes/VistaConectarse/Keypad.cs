@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Keypad : MonoBehaviour {
+public class Keypad : ClientElement {
     
-    public GameObject este;
-    public GameObject siguiente;
-    public VistaConectarse self;
     public Text codigo;
+    public InputField nombre;
     int[] word = new int[]{-2, -2, -2, -2, -2, -2};
     int cursor = 0;
 
 	// Use this for initialization
-	void onEnable () {
+	void OnEnable () {
 		word = new int[]{-2, -2, -2, -2, -2, -2};
 	}
 	
@@ -43,7 +41,7 @@ public class Keypad : MonoBehaviour {
         } 
         if(key==10) {
             string cod = ""+word[0]+word[1]+word[2]+word[3]+word[4]+word[5];
-            self.verificarCodigo(cod);
+            app.vista.conectarse.verificarCodigo(cod, nombre.inputText.text);
         }
     }
 }
