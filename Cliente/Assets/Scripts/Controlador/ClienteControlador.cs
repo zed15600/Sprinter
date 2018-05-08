@@ -135,6 +135,10 @@ public class ClienteControlador : ClientElement {
         return app.modelo.getProyectos();
     }
 
+    public void establecerJugadores(List<Jugador> jugadores) {
+        app.modelo.setJugadores(jugadores);
+    }
+    
     public List<Jugador> obtenerJugadores() {
         return app.modelo.getJugadores();
     }

@@ -61,8 +61,8 @@ public class ImplMensajes implements IMensajes {
     }
     
     @Override
-    public String unirsePartida(int partidaID, int jugadorId, boolean aceptado, String avatar){
-        return Mensaje.unirsePartida(partidaID, jugadorId, aceptado, avatar);
+    public String unirsePartida(int jugadorId, boolean aceptado, String avatar){
+        return Mensaje.unirsePartida(jugadorId, aceptado, avatar);
     }
     
     @Override

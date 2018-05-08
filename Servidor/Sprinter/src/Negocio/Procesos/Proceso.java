@@ -139,10 +139,10 @@ public class Proceso {
         for(Partida partida: parts){
             if(partida.getUnion()==codigo){
                 String avatar = partida.getAvatares().pop();
-                return mensajes.unirsePartida(partida.getCodigo(), partida.agregarJugador(nombreJugador,avatar), true, avatar);
+                return mensajes.unirsePartida(partida.agregarJugador(nombreJugador,avatar), true, avatar);
             }
         }
-        return mensajes.unirsePartida(0000, 0, false, "");
+        return mensajes.unirsePartida(0, false, "");
     }
     
     public String actualizarEstadoJugador(int partidaID, int jugador){

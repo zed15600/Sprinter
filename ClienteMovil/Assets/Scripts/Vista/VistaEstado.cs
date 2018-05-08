@@ -19,6 +19,7 @@ public class VistaEstado : ClientElement {
 	}
 
     void OnEnable() {
+        //Debug.Log("VistaEstado.OnEnable() -> Avatar: " + app.modelo.getJugador().getAvatar());
         avatar.texture = app.modelo.getAvatar(app.modelo.getJugador().getAvatar());
         votar = false;
 

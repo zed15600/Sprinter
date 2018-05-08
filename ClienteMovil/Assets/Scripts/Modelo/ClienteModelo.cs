@@ -79,6 +79,7 @@ public class Jugador {
     }
 
     public void setAvatar(string avatar) {
+        //Debug.Log("ClienteModelo.Jugador.setAvatar() -> avatar: " + avatar);
         this.avatar = avatar;
     }
 

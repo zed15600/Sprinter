@@ -111,10 +111,8 @@ public class Mensaje {
         return res;
     }
     
-    protected static String unirsePartida(int partidaID, int jugadorId, boolean aceptado, String avatar){
+    protected static String unirsePartida(int jugadorId, boolean aceptado, String avatar){
         String res = "{"
-                + "\"codigo\":0007,"
-                + "\"pId\":"+partidaID+","
                 + "\"jugadorId\":"+jugadorId+","
                 + "\"aceptado\":"+aceptado+","
                 + "\"avatar\":\""+avatar+"\""
@@ -129,7 +127,7 @@ public class Mensaje {
             HUsID += posible.getId() + ",";
             HUsDesc += "\"" + posible.getDescripcion() + "\",";
         }
-        System.out.println("Mensaje.actualziarEstadoJugador() -> cantidad de historias para votar: "+posibles.length);
+        //System.out.println("Mensaje.actualziarEstadoJugador() -> cantidad de historias para votar: "+posibles.length);
         HUsID = posibles.length!=0?HUsID.substring(0, HUsID.length()-1) + "]":"[]";
         HUsDesc = posibles.length!=0?HUsDesc.substring(0, HUsDesc.length()-1) + "]":"[]";
         String res = "{"
@@ -186,8 +184,8 @@ public class Mensaje {
         }
         json += "],";
         json += "\"avatares\":[";
-        for (Jugador j:jugadores){
-            json += "\""+j.getAvatar() +"\", ";
+        for (IntegranteScrumTeam j:jugadores){
+            json += "\""+j.getAvatar()+"\", ";
         }
         return json += "]}";
     }

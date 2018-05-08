@@ -26,7 +26,7 @@ public interface IMensajes {
     public String enviarHU(String descripcion, String puntos, int prioridad,
     ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
-    public String unirsePartida(int partidaID, int jugadorId, boolean aceptado, String avatar);
+    public String unirsePartida(int jugadorId, boolean aceptado, String avatar);
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(int[][] listaVotos);

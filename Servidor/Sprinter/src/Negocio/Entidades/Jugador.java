@@ -12,7 +12,7 @@ package Negocio.Entidades;
 public class Jugador {
     
     private String nombre;
-    private String avatar;
+    //private String avatar;
     private int ID;
     private boolean estado; //true -> activo
     private boolean votar; //true -> puede votar
@@ -21,9 +21,9 @@ public class Jugador {
         return nombre;
     }
 
-    public String getAvatar() {
+    /*public String getAvatar() {
         return avatar;
-    }
+    }*/
     
     public Jugador(String nombre, int ID) {
         this.nombre = nombre;

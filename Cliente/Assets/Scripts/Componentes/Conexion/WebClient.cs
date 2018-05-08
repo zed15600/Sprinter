@@ -87,16 +87,19 @@ public class WebClient : ClientElement {
         string json = JsonString.pedirJugadores(partidaID);
         writeSocket(json);
         string recieved_data = readSocket();
+        closeSocket();
         if (recieved_data != "") {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             JSONArray nombres = respuesta.GetArray("jugadores");
             JSONArray avatares = respuesta.GetArray("avatares");
+            List<Jugador> jugadores = new List<Jugador>();
             for (int i = 0; i < nombres.Length; i++) {
                 string nombre = nombres[i].Str;
                 string avatar = avatares[i].Str;
                 Jugador jugador = new Jugador(nombre, avatar);
-                app.controlador.obtenerJugadores().Add(jugador);
+                jugadores.Add(jugador);
             }
+            app.controlador.establecerJugadores(jugadores);
         }
     }
 
@@ -105,6 +108,7 @@ public class WebClient : ClientElement {
         string json = JsonString.pedirProyectos();
         writeSocket(json);
         string recieved_data = readSocket();
+        closeSocket();
         if (recieved_data != "") {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             JSONArray proyectos = respuesta.GetArray("proyectos");
@@ -115,7 +119,6 @@ public class WebClient : ClientElement {
             }
             app.modelo.setProyectos(proyectosNombres);
         }
-        closeSocket();
     }
 
     public void crearPartida(string jugador, string partida, string proyecto) {
@@ -123,6 +126,7 @@ public class WebClient : ClientElement {
         string json = JsonString.crearPartida(jugador, partida, proyecto);
         writeSocket(json);
         string recieved_data = readSocket();
+        closeSocket();
         if (recieved_data != "") {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             string codigo = respuesta.GetString("id");
@@ -130,7 +134,6 @@ public class WebClient : ClientElement {
             app.modelo.setPartida(partidaCliente);
         }
 
-        closeSocket();
     }
 
     public void establecerCompletada(String huID)
@@ -147,6 +150,7 @@ public class WebClient : ClientElement {
         string json = JsonString.sprintPlanning(app.modelo.getPartida().getID());
         writeSocket(json);
         string receieved_data = readSocket();
+        closeSocket();
 
         if (receieved_data != "")
         {
@@ -156,7 +160,6 @@ public class WebClient : ClientElement {
             app.modelo.getProyecto().setSprintRestante(restantes);
             app.modelo.getProyecto().setSprintActual(numero);
         }
-        closeSocket();
     }
 
     public void obtenerProyecto() {

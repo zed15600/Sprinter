@@ -88,10 +88,10 @@ public class WebClient : ClientElement {
         closeSocket();
         if(dataIn != "") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
-            app.controlador.crearPartida(jsRes["pId"].Str);
-            app.controlador.responderConexion(jsRes["aceptado"].Boolean);
-            app.controlador.establecerIdJugador((int)jsRes["jugadorId"].Number);
+            app.controlador.crearPartida(codigo);
             app.controlador.establecerAvatarJugador(jsRes["avatar"].Str);
+            app.controlador.establecerIdJugador((int)jsRes["jugadorId"].Number);
+            app.controlador.responderConexion(jsRes["aceptado"].Boolean);
         }
     }
 

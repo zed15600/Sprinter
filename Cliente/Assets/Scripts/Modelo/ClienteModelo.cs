@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
     
 public class ClienteModelo : ClientElement {
-    [SerializeField]
+    
     public Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
 
     private List<string> proyectos = new List<string>();
@@ -26,6 +26,10 @@ public class ClienteModelo : ClientElement {
 
     public void setPartida(Partida partida) {
         this.partida = partida;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
     public List<Jugador> getJugadores() {

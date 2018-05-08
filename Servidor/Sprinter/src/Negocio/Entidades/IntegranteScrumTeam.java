@@ -22,6 +22,10 @@ public class IntegranteScrumTeam extends Jugador {
         this.listaImpedimento = new ArrayList<>();
     }
     
+    public String getAvatar(){
+        return avatar;
+    }
+    
     public void agregarImpedimento(Impedimento impedimento){
     }
     
