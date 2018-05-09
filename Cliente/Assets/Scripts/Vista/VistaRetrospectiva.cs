@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaRetrospectiva : MonoBehaviour {
+public class VistaRetrospectiva : ClienteVista {
 
     public GameObject tabla;
     public Text textPrefab;
@@ -32,6 +32,16 @@ public class VistaRetrospectiva : MonoBehaviour {
             txt2.text = historias[i][1].ToString();
             txt1.transform.SetParent(tabla.transform);
             txt2.transform.SetParent(tabla.transform);
+        }
+    }
+
+    public void cambiarVista() {
+        this.gameObject.SetActive(false);
+        Proyecto p = app.controlador.obtenerProyecto();
+        if(p.getSprintActual() > p.getNumeroSprints()) {
+            finDelJuego.gameObject.SetActive(true);
+        } else {
+            vistaSprint.gameObject.SetActive(true);
         }
     }
 }

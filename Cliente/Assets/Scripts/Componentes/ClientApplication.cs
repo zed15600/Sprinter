@@ -6,10 +6,10 @@ public class ClientElement : MonoBehaviour {
 
 public class ClientApplication : MonoBehaviour {
 
-	public ClienteModelo modelo;
-	public ClienteVista vista;
+	//public ClienteModelo modelo;
+	//public ClienteVista vista;
 	public ClienteControlador controlador;
-    public WebClient webClient;
+    //public WebClient webClient;
 
 }
 

@@ -4,151 +4,222 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ClienteControlador : ClientElement {
 
+    public ClienteModelo modelo;
+    public ClienteVista vista;
+    public WebClient webClient;
+
+    public void pedirProyectos() {
+        webClient.pedirProyectos();
+    }
+
+    public void crearPartida(string jugador, string partida, string proyecto) {
+        webClient.crearPartida(jugador, partida, proyecto);
+    }
+
+    public void obtenerProyectoServidor() {
+        webClient.obtenerProyecto();
+    }
+    
+    public Proyecto obtenerProyecto() {
+        return modelo.getProyecto();
+    }
+
     public string obtenerNombreProyecto() {
-        return app.modelo.getProyecto().getNombre();
+        return modelo.getProyecto().getNombre();
     }
 
     public string obtenerDescripcionProyecto(){
-        return app.modelo.getProyecto().getDescripcion();
+        return modelo.getProyecto().getDescripcion();
     }
 
     public List<HistoriaDeUsuario> obtenerHistorias(){
-        return app.modelo.getProyecto().getHistorias();
+        return modelo.getProyecto().getHistorias();
     }
 
     public List<HistoriaDeUsuario> obtenerHistoriasSprint() {
-        return app.modelo.getProyecto().getHistoriasSprint();
+        return modelo.getProyecto().getHistoriasSprint();
     }
 
     public void establecerHistoriasSprint(List<HistoriaDeUsuario> historias) {
-        app.modelo.getProyecto().setHistoriasSprint(historias);
+        modelo.getProyecto().setHistoriasSprint(historias);
     }
 
     internal string obtenerCodigoPartida() {
-        return app.modelo.getPartida().getID();
+        return modelo.getPartida().getID();
     }
 
     public string obtenerSprintsRestantes(){
-        return app.modelo.getProyecto().getRestantes().ToString();
+        return modelo.getProyecto().getRestantes().ToString();
     }
 
     public string obtenerActual(){
-        return app.modelo.getProyecto().getActual().ToString();
+        return modelo.getProyecto().getSprintActual().ToString();
     }
 
     public string obtenerHistoriaMinijuego() {
-        return app.modelo.getMinijuego().getHistoriaActual().getDescripcion();   
+        return modelo.getMinijuego().getHistoriaActual().getDescripcion();   
     }
 
     public List<string> obtenerCriteriosMinijuego(){
-        return app.modelo.getMinijuego().getHistoriaActual().getCriterios();
+        return modelo.getMinijuego().getHistoriaActual().getCriterios();
     }
 
     public void eliminarCriterioMinijuego(int indice){
-        app.modelo.getMinijuego().eliminarCriterio(indice);
+        modelo.getMinijuego().eliminarCriterio(indice);
     }
 
     public void cambiarEstado(HistoriaDeUsuario historia){
         historia.cambiarEstado();
-        app.webClient.establecerCompletada(historia.getID());
+        webClient.establecerCompletada(historia.getID());
     }
 
     public int obtenerPuntosHMinijuego(){
         int puntos = 0;
-        puntos = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPuntos());
+        puntos = int.Parse(modelo.getMinijuego().getHistoriaActual().getPuntos());
         return puntos;
     }
 
     public int obtenerPrioridadMinijuego(){
         int prioridad = 0;
-        prioridad = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPrioridad());
+        prioridad = int.Parse(modelo.getMinijuego().getHistoriaActual().getPrioridad());
         return prioridad;
     }
 
     public void establecerTiempo(float tiempo){
-        app.modelo.getMinijuego().setTiempoFinal(tiempo);
+        modelo.getMinijuego().setTiempoFinal(tiempo);
     }
 
     public float obtenerTiempoFinal(){
         float tiempoFinal = 0;
-        tiempoFinal = app.modelo.getMinijuego().getTiempoFinal();
+        tiempoFinal = modelo.getMinijuego().getTiempoFinal();
         return tiempoFinal;
     }
 
     public int obtenerIntentos(){
-        return app.modelo.getMinijuego().getIntentos();
+        return modelo.getMinijuego().getIntentos();
     }
 
     public void resetearIntentos() {
-        app.modelo.getMinijuego().resetearIntentos();
+        modelo.getMinijuego().resetearIntentos();
     }
 
     public void aumentarIntento() {
-        app.modelo.getMinijuego().aumentarIntentos();
+        modelo.getMinijuego().aumentarIntentos();
     }
 
     public void obtenerPuntaje(HistoriaDeUsuario historia) {
-        app.modelo.getProyecto().getHistorias();
+        modelo.getProyecto().getHistorias();
     }
 
     public void establecerVotacion(bool votar, int tipoVoto) {
-        app.webClient.establecerVotacion(app.modelo.getPartida().getID(), votar, tipoVoto);
+        webClient.establecerVotacion(modelo.getPartida().getID(), votar, tipoVoto);
     }
 
     public void estadoVotacion() {
-        app.webClient.estadoVotacion(app.modelo.getPartida().getID());
+        webClient.estadoVotacion(modelo.getPartida().getID());
     }
 
     public void terminarVotacionSprintPlanning() {
-        app.vista.panelVotacionSPlanning.terminarVotacion(false);
+        vista.panelVotacionSPlanning.terminarVotacion(false);
     }
 
     public void obtenerVotos(int tipoVotacion) {
-        app.webClient.obtenerVotos(app.modelo.getPartida().getID(), tipoVotacion);
+        webClient.obtenerVotos(modelo.getPartida().getID(), tipoVotacion);
     }
 
     public void mostrarVotosSprintPlanning(string[] historiasID, int[] votos) {
-        app.vista.panelVotacionSPlanning.mostrarVotos(historiasID, votos);
+        vista.panelVotacionSPlanning.mostrarVotos(historiasID, votos);
     }
 
     public void terminarVotacionDia() {
-        app.vista.panelVotacionDia.terminarVotacion(false);
+        vista.panelVotacionDia.terminarVotacion(false);
     }
 
     public void mostrarVotosDia(string[] historiaID, int[] votos) {
-        app.vista.panelVotacionDia.mostrarVotos(historiaID, votos);
+        vista.panelVotacionDia.mostrarVotos(historiaID, votos);
     }
 
     public void establecerHistoriaActual(string historiaID) {
-        foreach(HistoriaDeUsuario historia in app.modelo.getProyecto().getHistorias()) {
+        foreach(HistoriaDeUsuario historia in modelo.getProyecto().getHistorias()) {
             if(historia.getID().Equals(historiaID)) {
-                app.modelo.getMinijuego().setHistoriaActual(historia);
+                modelo.getMinijuego().setHistoriaActual(historia);
                 return;
             }
         }
     }
 
     public List<string> obtenerProyectos() {
-        return app.modelo.getProyectos();
+        return modelo.getProyectos();
     }
 
     public void establecerJugadores(List<Jugador> jugadores) {
-        app.modelo.setJugadores(jugadores);
+        modelo.setJugadores(jugadores);
     }
     
     public List<Jugador> obtenerJugadores() {
-        return app.modelo.getJugadores();
+        return modelo.getJugadores();
     }
 
     public Dictionary<string, Sprite> obtenerMapaAvatares() {
-        return app.modelo.getMapaAvatares();
+        return modelo.getMapaAvatares();
     }
 
     public void pedirJugadores() {
-        app.webClient.pedirJugadores(app.modelo.getPartida().getID());
+        webClient.pedirJugadores(modelo.getPartida().getID());
+    }
+
+
+    //Aquí inician las llamadas a Modelo
+
+    public void setProyectos(List<string> nombres) {
+        modelo.setProyectos(nombres);
+    }
+
+    public void setPartida(Partida partida) {
+        modelo.setPartida(partida);
+    }
+
+    public void establecerProyecto(Proyecto proyecto) {
+        modelo.setProyecto(proyecto);
     }
 
     public void establecerMapaAvatares(Dictionary<string, Sprite> avatares) {
-        app.modelo.setMapaAvatares(avatares);
+        modelo.setMapaAvatares(avatares);
     }
+
+    public Partida obtenerPartida() {
+        return modelo.getPartida();
+    }
+
+    public Minijuego obtenerMinijuego() {
+        return modelo.getMinijuego();
+    }
+
+    public void terminarDia() {
+        if(modelo.getProyecto().terminarDia()){
+            iniciarNuevoDia();
+        } else {
+            terminarSprint();
+        }
+    }
+
+
+
+    //Aquí inician las llamadas a Vista
+
+    public void iniciarNuevoDia() {
+        vista.vistaSprint.gameObject.SetActive(true);
+    }
+
+    public void terminarSprint() {
+        vista.retrospectiva.gameObject.SetActive(true);
+    }
+
+    /*public void iniciarNuevoSprint() {
+        vista.vistaSprint.gameObject.SetActive(true);
+    }
+
+    public void terminarJuego() {
+        vista.finDelJuego.gameObject.SetActive(true);
+    }*/
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaConfiguracionDePartidas : ClientElement {
+public class VistaConfiguracionDePartidas : ClienteVista {
     public InputField nombreJugador;
     public InputField nombrePartida;
     public Dropdown proyectosDropdown;
 
     public void Start() {
-        app.webClient.pedirProyectos();
+        app.controlador.pedirProyectos();
         llenarDropdown();
     }
     public void llenarDropdown() {
@@ -21,9 +21,13 @@ public class VistaConfiguracionDePartidas : ClientElement {
         string jugador = nombreJugador.text;
         string partida = nombrePartida.text;
         string proyecto = proyectosDropdown.captionText.text;
-        app.webClient.crearPartida(jugador, partida, proyecto);
-        app.webClient.obtenerProyecto();
-        app.vista.unirseAPartida.gameObject.SetActive(true);
+        app.controlador.crearPartida(jugador, partida, proyecto);
+        app.controlador.obtenerProyectoServidor();
+        unirseAPartida.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
+    }
+
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
     }
 }

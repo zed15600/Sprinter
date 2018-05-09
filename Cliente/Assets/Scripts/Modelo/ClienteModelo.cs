@@ -3,77 +3,64 @@ using UnityEngine;
 using UnityEngine.UI;
     
 public class ClienteModelo : ClientElement {
-    
     public Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
-
     private List<string> proyectos = new List<string>();
 
-    private Minijuego minijuego = new Minijuego();
-
     private Partida partida = new Partida("");
-
     private Proyecto proyecto = new Proyecto("", "", null);
-
     private List<Jugador> jugadores = new List<Jugador>();
+    private Minijuego minijuego = new Minijuego();
 
     public Dictionary<string, Sprite> getMapaAvatares() {
         return mapaAvatares;
+    }
+    public List<string> getProyectos() {
+        return proyectos;
+    }
+    public Partida getPartida(){
+        return partida;
+    }
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+    public Minijuego getMinijuego() {
+        return minijuego;
     }
 
     public void setMapaAvatares(Dictionary<string, Sprite> mapaAvatares) {
         this.mapaAvatares = mapaAvatares;
     }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
-    }
-
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public List<string> getProyectos() {
-        return proyectos;
-    }
-
     public void setProyectos(List<string> proyectos) {
         this.proyectos = proyectos;
     }
-
-    public Proyecto getProyecto() {
-        return proyecto;
+    public void setPartida(Partida partida) {
+        this.partida = partida;
     }
-
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
-
-    public Partida getPartida(){
-        return partida;
-    }
-
-    public Minijuego getMinijuego() {
-        return minijuego;
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 }
 
 public class Proyecto {
 
+    public ClienteControlador controlador;
+
     private string nombre;
-
     private string descripcion;
-
     private List<HistoriaDeUsuario> historias;
-
+    private int NumeroSprints;
+    private int duracionSprints;
     private List<HistoriaDeUsuario> historiasDeSprint;
 
     private int SprintActual;
+    private int diaSprint;
 
-    private int NumeroSprints;
 
     private int SprintRestantes = 0;
 
@@ -82,80 +69,74 @@ public class Proyecto {
         this.descripcion = descripcion;
         this.historias = historias;
         SprintActual = 1;
+        diaSprint = 1;
     }
 
-    public string getNombre()
-    {
+    public string getNombre(){
         return nombre;
     }
-
-    public string getDescripcion()
-    {
+    public string getDescripcion(){
         return descripcion;
     }
-
     public List<HistoriaDeUsuario> getHistorias(){
         return historias;
+    }
+    public int getNumeroSprints() {
+        return NumeroSprints;
+    }
+    public List<HistoriaDeUsuario> getHistoriasSprint() {
+        return historiasDeSprint;
+    }
+    public int getSprintActual(){
+        return SprintActual;
+    }
+    public int getRestantes(){
+        return SprintRestantes;
     }
 
     public void setHistoriasSprint(List<HistoriaDeUsuario> historias) {
         historiasDeSprint = historias;
     }
-
-    public List<HistoriaDeUsuario> getHistoriasSprint() {
-        return historiasDeSprint;
+    public void setSprintActual (int actual){
+        this.SprintActual = actual;
     }
-
-    public int getRestantes(){
-        return SprintRestantes;
-    }
-
-    public int getActual()
-    {
-        return SprintActual;
-    }
-
-    public void setSprintRestante(int restante)
-    {
+    public void setSprintRestante(int restante){
         this.SprintRestantes = restante;
     }
 
-    public void setSprintActual (int actual)
-    {
-        this.SprintActual = actual;
+    public bool terminarDia() {
+        if(diaSprint<duracionSprints) {
+            diaSprint ++;
+            return true;
+        } else {
+            SprintActual ++;
+            diaSprint = 1;
+            return false;
+        }
     }
 }
 
-public class Partida
-{
+
+public class Partida{
     private string id;
 
     public Partida(string id) { 
         this.id = id;
     }
 
-    public string getID()
-    {
+    public string getID(){
         return id;
     }
 }
 
 public class HistoriaDeUsuario{
-
     private string ID;
-
     private string nombre;
-
     private string descripcion;
-
-    private string prioridad;
-
     private string puntos;
-
+    private string prioridad;
     private List<string> criterios;
-
     private bool estado;
-
     private int puntaje;
 
     public HistoriaDeUsuario (string ID, string nombre, string descripcion, string prioridad, string puntos, List<string> criterios, bool estado) {
@@ -168,45 +149,27 @@ public class HistoriaDeUsuario{
         this.estado = estado;
     }
 
+    public string getID(){
+        return ID;
+    }
     public string getNombre() {
         return nombre;
     }
-
-    public string getID()
-    {
-        return ID;
-    }
-
-    public string getDescripcion()
-    {
+    public string getDescripcion(){
         return descripcion;
     }
-
-    public string getPrioridad()
-    {
-        return prioridad;
-    }
-
-    public string getPuntos()
-    {
+    public string getPuntos(){
         return puntos;
     }
-
-    public bool getEstado()
-    {
-        return estado;
+    public string getPrioridad(){
+        return prioridad;
     }
-
-    public List<string> getCriterios()
-    {
+    public List<string> getCriterios(){
         return criterios;
     }
-
-    public void cambiarEstado()
-    {
-        this.estado = true;
+    public bool getEstado(){
+        return estado;
     }
-
     public int getPuntaje() {
         return puntaje;
     }
@@ -215,54 +178,42 @@ public class HistoriaDeUsuario{
         this.puntaje = puntaje;
     }
 
+    public void cambiarEstado() {
+        estado = true;
+    }
 }
 
 public class Minijuego{
-
     private HistoriaDeUsuario historiaActual;
-
     private float tiempoFinal = 0;
-
     private int intentos = 1;
 
-    public HistoriaDeUsuario getHistoriaActual()
-    {
+    public HistoriaDeUsuario getHistoriaActual(){
         return historiaActual;
     }
-
-    public void setHistoriaActual(HistoriaDeUsuario historiax)
-    {
-        this.historiaActual = historiax;
-    }
-
-    public void eliminarCriterio(int indice)
-    {
-        List<string> criterios = historiaActual.getCriterios();
-        criterios[indice] = null;
-    }
-
-    public float getTiempoFinal()
-    {
+    public float getTiempoFinal(){
         return tiempoFinal;
     }
+    public int getIntentos(){
+        return intentos;
+    }
 
-    public void setTiempoFinal(float tiempoFinal)
-    {
+    public void setHistoriaActual(HistoriaDeUsuario historiax){
+        this.historiaActual = historiax;
+    }
+    public void setTiempoFinal(float tiempoFinal){
         this.tiempoFinal = tiempoFinal;
     }
 
-    public void aumentarIntentos()
-    {
+    public void eliminarCriterio(int indice){
+        List<string> criterios = historiaActual.getCriterios();
+        criterios[indice] = null;
+    }
+    public void aumentarIntentos() {
         this.intentos++;
     }
-
     public void resetearIntentos() {
         this.intentos = 0;
-    }
-
-    public int getIntentos()
-    {
-        return intentos;
     }
 }
 
@@ -275,20 +226,18 @@ public class Jugador {
         this.avatar = avatar;
     }
 
-    public void setAvatar(string avatar) {
-        this.avatar = avatar;
+    public string getNombre() {
+        return nombre;
+    }
+    public string getAvatar() {
+        return avatar;
     }
 
     public void setNombre(string nombre) {
         this.nombre = nombre;
     }
-
-    public string getNombre() {
-        return nombre;
-    }
-
-    public string getAvatar() {
-        return avatar;
+    public void setAvatar(string avatar) {
+        this.avatar = avatar;
     }
 }
 

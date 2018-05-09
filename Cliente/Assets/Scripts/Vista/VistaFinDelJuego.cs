@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaFinDelJuego : ClientElement {
+public class VistaFinDelJuego : ClienteVista {
 
     public Text resultado;
     public Color verde;
@@ -35,5 +35,9 @@ public class VistaFinDelJuego : ClientElement {
             }
         }
         return res;
+    }
+
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
     }
 }

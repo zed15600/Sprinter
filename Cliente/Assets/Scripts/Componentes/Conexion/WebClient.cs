@@ -117,7 +117,7 @@ public class WebClient : ClientElement {
                 string nombre = proyectos[i].Str;
                 proyectosNombres.Add(nombre);
             }
-            app.modelo.setProyectos(proyectosNombres);
+            app.controlador.setProyectos(proyectosNombres);
         }
     }
 
@@ -131,7 +131,7 @@ public class WebClient : ClientElement {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             string codigo = respuesta.GetString("id");
             Partida partidaCliente = new Partida(codigo);
-            app.modelo.setPartida(partidaCliente);
+            app.controlador.setPartida(partidaCliente);
         }
 
     }
@@ -139,32 +139,30 @@ public class WebClient : ClientElement {
     public void establecerCompletada(String huID)
     {
         setupSocket();
-        string json = JsonString.establecerCompletada(app.modelo.getPartida().getID(), huID);
+        string json = JsonString.establecerCompletada(app.controlador.obtenerPartida().getID(), huID);
         writeSocket(json);
         closeSocket();
     }
 
-    public void obtenerSprint()
-    {
+    public void obtenerSprint(){
         setupSocket();
-        string json = JsonString.sprintPlanning(app.modelo.getPartida().getID());
+        string json = JsonString.sprintPlanning(app.controlador.obtenerPartida().getID());
         writeSocket(json);
         string receieved_data = readSocket();
         closeSocket();
 
-        if (receieved_data != "")
-        {
+        if (receieved_data != ""){
             JSONObject respuesta = JSONObject.Parse(receieved_data);
             int restantes = (int)respuesta["restantes"].Number;
             int numero = (int)respuesta["numero"].Number;
-            app.modelo.getProyecto().setSprintRestante(restantes);
-            app.modelo.getProyecto().setSprintActual(numero);
+            app.controlador.obtenerProyecto().setSprintRestante(restantes);
+            app.controlador.obtenerProyecto().setSprintActual(numero);
         }
     }
 
     public void obtenerProyecto() {
         setupSocket();
-        string json = JsonString.scrumPlanning(app.modelo.getPartida().getID());
+        string json = JsonString.scrumPlanning(app.controlador.obtenerPartida().getID());
         writeSocket(json);
         string received_data = readSocket();
         
@@ -178,7 +176,7 @@ public class WebClient : ClientElement {
 
             for (int i = 0; i < IDs.Length; i++)
             {
-                string historia = JsonString.pedirHistoria(app.modelo.getPartida().getID(), IDs[i].Str);
+                string historia = JsonString.pedirHistoria(app.controlador.obtenerPartida().getID(), IDs[i].Str);
                 setupSocket();
                 writeSocket(historia);
                 string recibida = readSocket();
@@ -200,7 +198,7 @@ public class WebClient : ClientElement {
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
-            app.modelo.setProyecto(proyecto);
+            app.controlador.establecerProyecto(proyecto);
         }
         closeSocket();
     }
@@ -265,7 +263,7 @@ public class WebClient : ClientElement {
                 }
                 if(tipoVotacion == 2) {
                     app.controlador.mostrarVotosDia(husID, vots);
-                    app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
+                    app.controlador.obtenerMinijuego().setHistoriaActual(app.controlador.obtenerProyecto().getHistorias()[0]);
                 }
             } else {
                 Debug.Log("WebClient.obtenerVotos() -> diferente número de historias y contadores de votos.");

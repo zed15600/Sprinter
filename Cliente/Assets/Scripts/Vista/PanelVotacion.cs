@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelVotacion : ClientElement {
+public class PanelVotacion : ClienteVista {
 
     public GameObject button;
     public GameObject pnlHistorias;
@@ -84,4 +84,5 @@ public class PanelVotacion : ClientElement {
         }
         app.controlador.obtenerVotos(tipoVoto);
     }
+    
 }

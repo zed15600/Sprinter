@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos : ClientElement {
+public class VistaMinijuegos : ClienteVista {
     [SerializeField]
     private Text historia;
 
@@ -166,4 +166,7 @@ public class VistaMinijuegos : ClientElement {
         }
     }
 
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
+    }
 }

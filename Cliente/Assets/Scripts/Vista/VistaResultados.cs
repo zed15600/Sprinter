@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaResultados : ClientElement {
+public class VistaResultados : ClienteVista {
 
     public Text completitud; 
     public Image gato;
@@ -18,8 +18,7 @@ public class VistaResultados : ClientElement {
     public Image checkMark;
 
 	void OnEnable () {
-        if (verificarCompletitud())
-        {
+        if (verificarCompletitud()) {
             completitud.text = completada.text;
             completitud.color = completada.color;
             gato.sprite = gatoVerde.sprite;
@@ -27,8 +26,7 @@ public class VistaResultados : ClientElement {
             puntos.text = calcularPuntaje().ToString();
             app.controlador.resetearIntentos();
 
-        } else
-        {
+        } else{
             completitud.text = incompleta.text;
             completitud.color = incompleta.color;
             gato.sprite = gatoNaranja.sprite;
@@ -38,8 +36,7 @@ public class VistaResultados : ClientElement {
         }
 	}
 	
-    public bool verificarCompletitud()
-    {
+    public bool verificarCompletitud(){
         List<string> criterios = app.controlador.obtenerCriteriosMinijuego();
 
         foreach (string crit in criterios)
@@ -90,5 +87,10 @@ public class VistaResultados : ClientElement {
                 descCriterio.transform.SetParent(criterios.transform, false);
             }
         }
+    }
+
+    public void cambiarVista() {
+        this.gameObject.SetActive(false);
+        app.controlador.terminarDia();
     }
 }
