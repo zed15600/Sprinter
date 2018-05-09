@@ -185,7 +185,8 @@ public class WebClient : ClientElement {
                 JSONObject histRespuesta = JSONObject.Parse(recibida);
                 List<string> criterios = new List<string>();
                 string ID = IDs[i].Str;
-                string nombreHU = histRespuesta["descripcion"].Str;
+                string nombreHU = histRespuesta["nombre"].Str;
+                string descripcionHU = histRespuesta["descripcion"].Str;
                 string puntos = histRespuesta["puntos"].Str;
                 string prioridad = histRespuesta["prioridad"].Str;
                 JSONArray crit = histRespuesta.GetArray("criterios");
@@ -195,7 +196,7 @@ public class WebClient : ClientElement {
                     criterios.Add(crit[j].Str);
                 }
 
-                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(ID, nombreHU, puntos, prioridad, criterios, estado);
+                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(ID, nombreHU, descripcionHU, puntos, prioridad, criterios, estado);
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
@@ -242,19 +243,28 @@ public class WebClient : ClientElement {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             JSONArray historiasID = jsRes["historiasID"].Array;
             JSONArray votos = jsRes["votos"].Array;
-            if(historiasID.Length ==votos.Length) {
+            if(historiasID.Length == votos.Length) {
                 int size = votos.Length;
-                int[] husID = new int[size];
+                String[] husID = new String[size];
                 int[] vots = new int[size];
+                List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
                 for(int i=0; i<size;i++) {
-                    husID[i] = (int)historiasID[i].Number;
+                    husID[i] = historiasID[i].Str;
                     vots[i] = (int)votos[i].Number;
+                    foreach(HistoriaDeUsuario historia in app.controlador.obtenerHistorias()){
+                        Debug.Log("WebClient.obtenerVotos() -> Nombre historia de usuario: " + historia.getNombre());
+                        if(historia.getNombre().Equals(husID[i])) {
+                            historias.Add(historia);
+                            break;
+                        }
+                    }
                 }
                 if(tipoVotacion == 1){
+                    app.controlador.establecerHistoriasSprint(historias);
                     app.controlador.mostrarVotosSprintPlanning(husID, vots);
                 }
                 if(tipoVotacion == 2) {
-                    app.controlador.mostrarVotosDia(husID[0], vots[0]);
+                    app.controlador.mostrarVotosDia(husID, vots);
                     app.modelo.getMinijuego().setHistoriaActual(app.modelo.getProyecto().getHistorias()[0]);
                 }
             } else {

@@ -91,7 +91,7 @@ public class Proyecto {
         return this.sprintActual;
     }
     
-    public int[][] getVotos(int Maximo){
+    public String[][] getVotos(int Maximo){
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
         Sprint actual = new Sprint(sprintActual);
         historias.sort(null);
@@ -99,12 +99,12 @@ public class Proyecto {
             Maximo = 3;
         }
         int cantidad = Math.min(Maximo, historias.size());
-        int[][] votos = new int[2][cantidad];
+        String[][] votos = new String[2][cantidad];
         for(int i=0; i<cantidad; i++){
             HistoriaDeUsuario h = historias.get(i);
             actual.getSprintBacklog().agregarHistoria(h);
-            votos[0][i] = h.getId();
-            votos[1][i] = h.getVotos();
+            votos[0][i] = ""+h.getNombre();
+            votos[1][i] = ""+h.getVotos();
         }
         listaDeSprints.add(actual);
         return votos;

@@ -16,7 +16,7 @@ public class VistaSprint : ClientElement {
     public void llenarTabla()
     {
 
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
+        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistoriasSprint();
         for (int i = 0; i < historias.ToArray().Length; i++)
         {
             GameObject contenidoHistoria = Instantiate(prefabDesc);

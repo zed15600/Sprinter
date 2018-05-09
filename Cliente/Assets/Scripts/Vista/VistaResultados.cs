@@ -18,10 +18,6 @@ public class VistaResultados : ClientElement {
     public Image checkMark;
 
 	void OnEnable () {
-        Debug.Log("ME LLAMARON!");
-        
-
-
         if (verificarCompletitud())
         {
             completitud.text = completada.text;

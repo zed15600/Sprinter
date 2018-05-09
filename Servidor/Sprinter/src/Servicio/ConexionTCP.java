@@ -55,8 +55,8 @@ public class ConexionTCP implements IConexion{
             BufferedReader inData = new BufferedReader(isr);
             DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
             in = inData.readLine();
-            out = proc.procesarJson(in);
             System.out.println("ConexionTCP.main()-> in: " + in);
+            out = proc.procesarJson(in);
             System.out.println("ConexionTCP.main()-> out: " + out);
             outData.writeBytes(out + "\n");
         }

@@ -12,22 +12,27 @@ public class ClienteControlador : ClientElement {
         return app.modelo.getProyecto().getDescripcion();
     }
 
-    public List<HistoriaDeUsuario> obtenerHistorias()
-    {
+    public List<HistoriaDeUsuario> obtenerHistorias(){
         return app.modelo.getProyecto().getHistorias();
+    }
+
+    public List<HistoriaDeUsuario> obtenerHistoriasSprint() {
+        return app.modelo.getProyecto().getHistoriasSprint();
+    }
+
+    public void establecerHistoriasSprint(List<HistoriaDeUsuario> historias) {
+        app.modelo.getProyecto().setHistoriasSprint(historias);
     }
 
     internal string obtenerCodigoPartida() {
         return app.modelo.getPartida().getID();
     }
 
-    public string obtenerSprintsRestantes()
-    {
+    public string obtenerSprintsRestantes(){
         return app.modelo.getProyecto().getRestantes().ToString();
     }
 
-    public string obtenerActual()
-    {
+    public string obtenerActual(){
         return app.modelo.getProyecto().getActual().ToString();
     }
 
@@ -35,50 +40,42 @@ public class ClienteControlador : ClientElement {
         return app.modelo.getMinijuego().getHistoriaActual().getDescripcion();   
     }
 
-    public List<string> obtenerCriteriosMinijuego()
-    {
+    public List<string> obtenerCriteriosMinijuego(){
         return app.modelo.getMinijuego().getHistoriaActual().getCriterios();
     }
 
-    public void eliminarCriterioMinijuego(int indice)
-    {
+    public void eliminarCriterioMinijuego(int indice){
         app.modelo.getMinijuego().eliminarCriterio(indice);
     }
 
-    public void cambiarEstado(HistoriaDeUsuario historia)
-    {
+    public void cambiarEstado(HistoriaDeUsuario historia){
         historia.cambiarEstado();
         app.webClient.establecerCompletada(historia.getID());
     }
 
-    public int obtenerPuntosHMinijuego()
-    {
+    public int obtenerPuntosHMinijuego(){
         int puntos = 0;
         puntos = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPuntos());
         return puntos;
     }
 
-    public int obtenerPrioridadMinijuego()
-    {
+    public int obtenerPrioridadMinijuego(){
         int prioridad = 0;
         prioridad = int.Parse(app.modelo.getMinijuego().getHistoriaActual().getPrioridad());
         return prioridad;
     }
 
-    public void establecerTiempo(float tiempo)
-    {
+    public void establecerTiempo(float tiempo){
         app.modelo.getMinijuego().setTiempoFinal(tiempo);
     }
 
-    public float obtenerTiempoFinal()
-    {
+    public float obtenerTiempoFinal(){
         float tiempoFinal = 0;
         tiempoFinal = app.modelo.getMinijuego().getTiempoFinal();
         return tiempoFinal;
     }
 
-    public int obtenerIntentos()
-    {
+    public int obtenerIntentos(){
         return app.modelo.getMinijuego().getIntentos();
     }
 
@@ -110,7 +107,7 @@ public class ClienteControlador : ClientElement {
         app.webClient.obtenerVotos(app.modelo.getPartida().getID(), tipoVotacion);
     }
 
-    public void mostrarVotosSprintPlanning(int[] historiasID, int[] votos) {
+    public void mostrarVotosSprintPlanning(string[] historiasID, int[] votos) {
         app.vista.panelVotacionSPlanning.mostrarVotos(historiasID, votos);
     }
 
@@ -118,15 +115,15 @@ public class ClienteControlador : ClientElement {
         app.vista.panelVotacionDia.terminarVotacion(false);
     }
 
-    public void mostrarVotosDia(int historiaID, int votos) {
+    public void mostrarVotosDia(string[] historiaID, int[] votos) {
         app.vista.panelVotacionDia.mostrarVotos(historiaID, votos);
     }
 
     public void establecerHistoriaActual(string historiaID) {
-        HistoriaDeUsuario historia;
-        foreach(HistoriaDeUsuario hist in app.modelo.getProyecto().getHistorias()) {
-            if(hist.getID().Equals(historiaID)) {
-
+        foreach(HistoriaDeUsuario historia in app.modelo.getProyecto().getHistorias()) {
+            if(historia.getID().Equals(historiaID)) {
+                app.modelo.getMinijuego().setHistoriaActual(historia);
+                return;
             }
         }
     }

@@ -49,6 +49,14 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
         this.puntosHistoria = puntosHistoria;
     }
     
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }

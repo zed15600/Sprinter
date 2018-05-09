@@ -29,7 +29,7 @@ public interface IMensajes {
     public String unirsePartida(int jugadorId, boolean aceptado, String avatar);
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
-    public String enviarVotos(int[][] listaVotos);
+    public String enviarVotos(String[][] listaVotos);
     public String enviarNombresProyectos();
     public String enviarCodigoPartida(int codigo);
     public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores);

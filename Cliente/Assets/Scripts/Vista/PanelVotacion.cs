@@ -49,7 +49,7 @@ public class PanelVotacion : ClientElement {
         }
 	}
 
-    public void mostrarVotos(int[] historiasID, int[] votos) {
+    public void mostrarVotos(string[] historiasID, int[] votos) {
         if(historiasID.Length == votos.Length){
             for(int i=0; i<historiasID.Length; i++){
                 Text txt = Instantiate(historiaDescPrefab);

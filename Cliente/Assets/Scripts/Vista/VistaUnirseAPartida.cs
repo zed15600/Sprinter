@@ -13,18 +13,11 @@ public class VistaUnirseAPartida : ClientElement{
 
     public void ponerCodigo() {
         string codigoPartida = app.controlador.obtenerCodigoPartida();
-        Debug.Log(codigoPartida);
+        //Debug.Log("VistaUnirseAPartida.ponerCodigo() -> Código de partida: " + codigoPartida);
         codigo.text = codigoPartida;
     }
 
     public void llenarGrupo() {
-        /*Lo hice así porque me dio la gana.
-         Te cedo el hecho de que, desde un punto de vista global, la cantidad de procesamiento
-         que se lleva a cabo de este modo es mucho mayor a que si sólo busco si el jugador ya está
-         o no, porque al fin y al cabo, vamos a tener un máxmio de 5 jugadores y cuando hayan 4
-         voy a estar instanciando y borrando 4 instancias de ese prefab, continuamente hasta que
-         ingrese el quinto o le den a continuar, pero eso es procesamiento por el que ningún pc va a 
-         sufrir, así que por ahora no me importa.*/
         foreach(Transform child in grupoJugadores.transform) {
             GameObject.Destroy(child.gameObject);
         }

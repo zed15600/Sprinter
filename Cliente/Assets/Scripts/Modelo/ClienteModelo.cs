@@ -48,13 +48,11 @@ public class ClienteModelo : ClientElement {
         return proyecto;
     }
 
-    public void setProyecto(Proyecto proyecto)
-    {
+    public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
 
-    public Partida getPartida()
-    {
+    public Partida getPartida(){
         return partida;
     }
 
@@ -65,21 +63,25 @@ public class ClienteModelo : ClientElement {
 
 public class Proyecto {
 
-    private string nombre = "";
+    private string nombre;
 
-    private string descripcion = "";
+    private string descripcion;
 
-    private List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
+    private List<HistoriaDeUsuario> historias;
 
-    private int SprintActual = 0;
+    private List<HistoriaDeUsuario> historiasDeSprint;
+
+    private int SprintActual;
+
+    private int NumeroSprints;
 
     private int SprintRestantes = 0;
 
-    public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias)
-    {
+    public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.historias = historias;
+        SprintActual = 1;
     }
 
     public string getNombre()
@@ -92,13 +94,19 @@ public class Proyecto {
         return descripcion;
     }
 
-    public List<HistoriaDeUsuario> getHistorias()
-    {
+    public List<HistoriaDeUsuario> getHistorias(){
         return historias;
     }
 
-    public int getRestantes()
-    {
+    public void setHistoriasSprint(List<HistoriaDeUsuario> historias) {
+        historiasDeSprint = historias;
+    }
+
+    public List<HistoriaDeUsuario> getHistoriasSprint() {
+        return historiasDeSprint;
+    }
+
+    public int getRestantes(){
         return SprintRestantes;
     }
 
@@ -138,6 +146,8 @@ public class HistoriaDeUsuario{
 
     private string nombre;
 
+    private string descripcion;
+
     private string prioridad;
 
     private string puntos;
@@ -148,13 +158,18 @@ public class HistoriaDeUsuario{
 
     private int puntaje;
 
-    public HistoriaDeUsuario (string ID, string nombre, string prioridad, string puntos, List<string> criterios, bool estado) {
+    public HistoriaDeUsuario (string ID, string nombre, string descripcion, string prioridad, string puntos, List<string> criterios, bool estado) {
         this.ID = ID;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.prioridad = prioridad;
         this.puntos = puntos;
         this.criterios = criterios;
         this.estado = estado;
+    }
+
+    public string getNombre() {
+        return nombre;
     }
 
     public string getID()
@@ -164,7 +179,7 @@ public class HistoriaDeUsuario{
 
     public string getDescripcion()
     {
-        return nombre;
+        return descripcion;
     }
 
     public string getPrioridad()

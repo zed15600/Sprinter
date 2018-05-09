@@ -146,11 +146,11 @@ public class Mensaje {
         return res;
     }
     
-    protected static String enviarVotos(int[][] listaVotos){
+    protected static String enviarVotos(String[][] listaVotos){
         String hID = "[";
         String votos = "[";
         for(int i=0; i<listaVotos[0].length; i++){
-            hID += listaVotos[0][i]+",";
+            hID += "\""+listaVotos[0][i]+"\",";
             votos += listaVotos[1][i]+",";
         }
         hID = hID.substring(0, hID.length()-1)+"]";
