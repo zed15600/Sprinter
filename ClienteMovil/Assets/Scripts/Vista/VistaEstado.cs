@@ -20,7 +20,7 @@ public class VistaEstado : ClientElement {
 
     void OnEnable() {
         //Debug.Log("VistaEstado.OnEnable() -> Avatar: " + app.modelo.getJugador().getAvatar());
-        avatar.texture = app.modelo.getAvatar(app.modelo.getJugador().getAvatar());
+        avatar.texture = controlador.modelo.getAvatar(controlador.modelo.getJugador().getAvatar());
         votar = false;
 
     }
@@ -32,7 +32,7 @@ public class VistaEstado : ClientElement {
                 refreshTime -= Time.deltaTime;
             } else {
                 refreshTime = 3.0f;
-                app.controlador.actualizarEstado();
+                controlador.actualizarEstado();
             }
         }
 	}

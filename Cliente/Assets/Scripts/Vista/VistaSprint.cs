@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaSprint : ClientElement {
+public class VistaSprint : ClientElement{
 
     public GameObject prefabDesc;
     public GameObject prefabPrio;
@@ -13,10 +13,14 @@ public class VistaSprint : ClientElement {
     public VerticalLayoutGroup colPrio;
     public VerticalLayoutGroup colPunt;
 
+    public void cambiarVista() {
+        this.gameObject.SetActive(true);
+    }
+
     public void llenarTabla()
     {
 
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistoriasSprint();
+        List<HistoriaDeUsuario> historias = controlador.obtenerHistoriasSprint();
         for (int i = 0; i < historias.ToArray().Length; i++)
         {
             GameObject contenidoHistoria = Instantiate(prefabDesc);
@@ -40,9 +44,9 @@ public class VistaSprint : ClientElement {
 
     void Start()
     {
-        while (app.controlador.obtenerHistorias().ToArray().Length == 0)
+        while (controlador.obtenerHistorias().ToArray().Length == 0)
         {
-            Debug.Log(app.controlador.obtenerHistorias().Capacity);
+            Debug.Log(controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
     }

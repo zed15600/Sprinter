@@ -5,7 +5,6 @@
  */
 package Negocio.Procesos;
 
-import Negocio.Entidades.Criterio;
 import Negocio.Entidades.Sprint;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.HistoriaDeUsuario;
@@ -19,26 +18,12 @@ import java.util.Collection;
  * @author EDISON
  */
 public class Proceso {
-    private final IConexion conexion;
-    private final IMensajes mensajes;
+    protected static IConexion conexion;
+    protected static IMensajes mensajes;
 
     public Proceso(IMensajes mensajes, IConexion conexion) {
-        this.mensajes = mensajes;
-        this.conexion = conexion;
-    }
-    
-    
-    /*
-    Termina el día actual del proyecto.
-    Recibe el ID de la partida y obtiene el proyecto correspondiente.
-    p.nextDia() incrementa el día actual del proyecto.
-    JsonString.terminarDia(p) recibe un proyecto y retorna un String en formato
-    Json.
-    */
-    public String terminarDia(int partidaID){
-        Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
-        p.nextDia();
-        return mensajes.terminarDia(p);
+        Proceso.mensajes = mensajes;
+        Proceso.conexion = conexion;
     }
     
     /*
@@ -92,25 +77,6 @@ public class Proceso {
         String descripcion = p.getDescripcion();
         ArrayList<HistoriaDeUsuario>  lista = p.getProductBacklog().getHistorias();
         return mensajes.traerProyecto(nombre, descripcion, lista);
-    }
-    
-    public String enviarHistoria(int partidaID, String ID){
-        Partida par = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
-        Proyecto p = par.getProyecto(); 
-        ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
-        HistoriaDeUsuario historia = new HistoriaDeUsuario();
-        for (int i = 0; i<historias.size();i++){
-            if (historias.get(i).getId() == Integer.valueOf(ID)){
-                historia = historias.get(i);
-            }
-        }
-        String nombre = historia.getNombre();
-        String descHU = historia.getDescripcion();
-        int prioHU = historia.getPrioridad();
-        String punHU = historia.getPuntosHistoria();
-        boolean estado = historia.getEstado();
-        ArrayList<Criterio> criterios = historia.getListaCriterios();
-        return mensajes.enviarHU(nombre, descHU, punHU, prioHU, criterios, estado);
     }
     
     public String sprintPlanning(int ID){

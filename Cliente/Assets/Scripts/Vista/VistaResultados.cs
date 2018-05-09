@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaResultados : ClienteVista {
+public class VistaResultados : ClientElement {
 
     public Text completitud; 
     public Image gato;
@@ -24,7 +24,7 @@ public class VistaResultados : ClienteVista {
             gato.sprite = gatoVerde.sprite;
             checkMark.gameObject.SetActive(true);
             puntos.text = calcularPuntaje().ToString();
-            app.controlador.resetearIntentos();
+            controlador.resetearIntentos();
 
         } else{
             completitud.text = incompleta.text;
@@ -32,12 +32,12 @@ public class VistaResultados : ClienteVista {
             gato.sprite = gatoNaranja.sprite;
             checkMark.gameObject.SetActive(false);
             mostrarCriterios();
-            app.controlador.aumentarIntento();
+            controlador.aumentarIntento();
         }
 	}
 	
     public bool verificarCompletitud(){
-        List<string> criterios = app.controlador.obtenerCriteriosMinijuego();
+        List<string> criterios = controlador.obtenerCriteriosMinijuego();
 
         foreach (string crit in criterios)
         {
@@ -47,14 +47,14 @@ public class VistaResultados : ClienteVista {
             }
         }
 
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
-        string completada = app.controlador.obtenerHistoriaMinijuego();
+        List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
+        string completada = controlador.obtenerHistoriaMinijuego();
 
         foreach (HistoriaDeUsuario historia in historias)
         {
             if (completada.Equals(historia.getDescripcion()))
             {
-                app.controlador.cambiarEstado(historia);
+                controlador.cambiarEstado(historia);
             }
         }
         return true;
@@ -64,10 +64,10 @@ public class VistaResultados : ClienteVista {
     {
         int resultado = 0;
 
-        int puntos = app.controlador.obtenerPuntosHMinijuego();
-        int prioridad = app.controlador.obtenerPrioridadMinijuego();
-        int tiempo = (int) app.controlador.obtenerTiempoFinal();
-        int intentos = app.controlador.obtenerIntentos();
+        int puntos = controlador.obtenerPuntosHMinijuego();
+        int prioridad = controlador.obtenerPrioridadMinijuego();
+        int tiempo = (int) controlador.obtenerTiempoFinal();
+        int intentos = controlador.obtenerIntentos();
 
         resultado = ((prioridad * 300) + (puntos + tiempo)) / intentos;
 
@@ -76,7 +76,7 @@ public class VistaResultados : ClienteVista {
 
     public void mostrarCriterios() {
 
-        List<string> criteriosLista = app.controlador.obtenerCriteriosMinijuego();
+        List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
 
         foreach (string crit in criteriosLista) {
@@ -91,6 +91,6 @@ public class VistaResultados : ClienteVista {
 
     public void cambiarVista() {
         this.gameObject.SetActive(false);
-        app.controlador.terminarDia();
+        controlador.terminarDia();
     }
 }

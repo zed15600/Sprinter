@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos : ClienteVista {
+public class VistaMinijuegos : ClientElement {
     [SerializeField]
     private Text historia;
 
@@ -102,7 +102,7 @@ public class VistaMinijuegos : ClienteVista {
                 count++;
                 break;
             case 3:
-                app.controlador.establecerTiempo(targetTime);
+                controlador.establecerTiempo(targetTime);
                 panelCriterios.SetActive(true);
                 count = 0;
                 break;
@@ -116,13 +116,13 @@ public class VistaMinijuegos : ClienteVista {
     }
 
     public void mostrarHistoria() {
-        string HU = app.controlador.obtenerHistoriaMinijuego();
+        string HU = controlador.obtenerHistoriaMinijuego();
         historia.text = HU;
     }
 
     public void mostrarCriterios() {
 
-        List<string> criteriosLista = app.controlador.obtenerCriteriosMinijuego();
+        List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
 
         foreach (string crit in criteriosLista)
@@ -138,7 +138,7 @@ public class VistaMinijuegos : ClienteVista {
     }
 
     public void mostrarConToggles() {
-        List<string> criteriosLista = app.controlador.obtenerCriteriosMinijuego();
+        List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
         foreach (string crit in criteriosLista)
         {
@@ -161,7 +161,7 @@ public class VistaMinijuegos : ClienteVista {
         {
             if (estados[i].isOn)
             {
-                app.controlador.eliminarCriterioMinijuego(i);
+                controlador.eliminarCriterioMinijuego(i);
             }
         }
     }

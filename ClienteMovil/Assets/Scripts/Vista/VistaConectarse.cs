@@ -12,13 +12,13 @@ public class VistaConectarse : ClientElement {
         if(codigo.Contains("-2")) {
             Debug.Log("VistaConectarse.verficarCodigo() -> Código inválido");
         }
-        app.controlador.conectarPartida(codigo, nombreJugador);
+        controlador.conectarPartida(codigo, nombreJugador);
     }
 
     public void respuestaConexion(bool respuesta) {
         if(respuesta) {
             this.gameObject.SetActive(false);
-            app.vista.estado.gameObject.SetActive(true);
+            controlador.vista.estado.gameObject.SetActive(true);
         }
     }
 }

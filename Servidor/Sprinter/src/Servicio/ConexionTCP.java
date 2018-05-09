@@ -17,7 +17,6 @@ import Negocio.Procesos.IMensajes;
 import AccesoADatos.ProyectoDAOImpl;
 import AccesoADatos.ConexionSingleton;
 import Negocio.Procesos.IConexion;
-import java.sql.SQLException;
 
 /**
  *
@@ -48,7 +47,6 @@ public class ConexionTCP implements IConexion{
         IMensajes mensajes = new ImplMensajes();
         IConexion conexion = new ConexionTCP();
         proceso = new Proceso(mensajes, conexion);
-        
         //Conexión TCP
         ServerSocket socket = new ServerSocket(5173);
         String in, out;

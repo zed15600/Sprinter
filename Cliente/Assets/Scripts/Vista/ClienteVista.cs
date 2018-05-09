@@ -9,8 +9,12 @@ public class ClienteVista : ClientElement {
     public VistaScrumPlanning scrumPlanning;
     public VistaSprintPlanning sprintPlanning;
     public VistaSprint vistaSprint;
-    public VistaResultados retrospectiva;
+    public VistaResultados resultados;
+    public VistaRetrospectiva retrospectiva;
     public VistaFinDelJuego finDelJuego;
+    public VistaMinijuegos minijuegos;
+    //public VistaReunionDiaria reunion;
+    //public VistaEncuesta encuesta;
 
     public PanelVotacion panelVotacionSPlanning;
     public PanelVotacion panelVotacionDia;

@@ -23,14 +23,14 @@ public class VistaSprintPlanning : ClientElement {
 
     public void establecerSprint()
     {
-        restantes.text = "Quedan " + app.controlador.obtenerSprintsRestantes() + " Sprints.";
-        actual.text = "Sprint Número: " + app.controlador.obtenerActual() + ".";
+        restantes.text = "Quedan " + controlador.obtenerSprintsRestantes() + " Sprints.";
+        actual.text = "Sprint Número: " + controlador.obtenerActual() + ".";
     }
 
     public void llenarTabla()
     {
 
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
+        List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
         for (int i = 0; i < historias.ToArray().Length; i++)
         {
             GameObject contenidoHistoria = Instantiate(prefabDesc);
@@ -63,11 +63,14 @@ public class VistaSprintPlanning : ClientElement {
 
     void Start () {
         establecerSprint();
-        while (app.controlador.obtenerHistorias().ToArray().Length == 0)
+        while (controlador.obtenerHistorias().ToArray().Length == 0)
         {
-            Debug.Log(app.controlador.obtenerHistorias().Capacity);
+            Debug.Log(controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
     }
 
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
+    }
 }

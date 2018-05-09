@@ -99,7 +99,7 @@ public class WebClient : ClientElement {
                 Jugador jugador = new Jugador(nombre, avatar);
                 jugadores.Add(jugador);
             }
-            app.controlador.establecerJugadores(jugadores);
+            controlador.establecerJugadores(jugadores);
         }
     }
 
@@ -117,7 +117,7 @@ public class WebClient : ClientElement {
                 string nombre = proyectos[i].Str;
                 proyectosNombres.Add(nombre);
             }
-            app.controlador.setProyectos(proyectosNombres);
+            controlador.setProyectos(proyectosNombres);
         }
     }
 
@@ -131,7 +131,7 @@ public class WebClient : ClientElement {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             string codigo = respuesta.GetString("id");
             Partida partidaCliente = new Partida(codigo);
-            app.controlador.setPartida(partidaCliente);
+            controlador.setPartida(partidaCliente);
         }
 
     }
@@ -139,14 +139,14 @@ public class WebClient : ClientElement {
     public void establecerCompletada(String huID)
     {
         setupSocket();
-        string json = JsonString.establecerCompletada(app.controlador.obtenerPartida().getID(), huID);
+        string json = JsonString.establecerCompletada(controlador.obtenerPartida().getID(), huID);
         writeSocket(json);
         closeSocket();
     }
 
     public void obtenerSprint(){
         setupSocket();
-        string json = JsonString.sprintPlanning(app.controlador.obtenerPartida().getID());
+        string json = JsonString.sprintPlanning(controlador.obtenerPartida().getID());
         writeSocket(json);
         string receieved_data = readSocket();
         closeSocket();
@@ -155,14 +155,14 @@ public class WebClient : ClientElement {
             JSONObject respuesta = JSONObject.Parse(receieved_data);
             int restantes = (int)respuesta["restantes"].Number;
             int numero = (int)respuesta["numero"].Number;
-            app.controlador.obtenerProyecto().setSprintRestante(restantes);
-            app.controlador.obtenerProyecto().setSprintActual(numero);
+            controlador.obtenerProyecto().setSprintRestante(restantes);
+            controlador.obtenerProyecto().setSprintActual(numero);
         }
     }
 
     public void obtenerProyecto() {
         setupSocket();
-        string json = JsonString.scrumPlanning(app.controlador.obtenerPartida().getID());
+        string json = JsonString.scrumPlanning(controlador.obtenerPartida().getID());
         writeSocket(json);
         string received_data = readSocket();
         
@@ -171,24 +171,20 @@ public class WebClient : ClientElement {
             JSONObject respuesta = JSONObject.Parse(received_data);
             string nombre = respuesta["nombre"].Str;
             string descripcion = respuesta["descripcion"].Str;
-            JSONArray IDs = respuesta.GetArray("HUs");
+            JSONArray jHistorias = respuesta.GetArray("historias");
             List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
 
-            for (int i = 0; i < IDs.Length; i++)
+            for (int i = 0; i < jHistorias.Length; i++)
             {
-                string historia = JsonString.pedirHistoria(app.controlador.obtenerPartida().getID(), IDs[i].Str);
-                setupSocket();
-                writeSocket(historia);
-                string recibida = readSocket();
-                JSONObject histRespuesta = JSONObject.Parse(recibida);
+                JSONObject historia = jHistorias[i].Obj;
                 List<string> criterios = new List<string>();
-                string ID = IDs[i].Str;
-                string nombreHU = histRespuesta["nombre"].Str;
-                string descripcionHU = histRespuesta["descripcion"].Str;
-                string puntos = histRespuesta["puntos"].Str;
-                string prioridad = histRespuesta["prioridad"].Str;
-                JSONArray crit = histRespuesta.GetArray("criterios");
-                bool estado = histRespuesta["estado"].Boolean;
+                string ID = historia["ID"].Number.ToString();
+                string nombreHU = historia["nombre"].Str;
+                string descripcionHU = historia["descripcion"].Str;
+                string puntos = historia["puntos"].Str;
+                string prioridad = historia["prioridad"].Str;
+                JSONArray crit = historia.GetArray("criterios");
+                bool estado = historia["estado"].Boolean;
                 for (int j = 0; j < crit.Length; j++)
                 {
                     criterios.Add(crit[j].Str);
@@ -198,7 +194,7 @@ public class WebClient : ClientElement {
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias);
-            app.controlador.establecerProyecto(proyecto);
+            controlador.establecerProyecto(proyecto);
         }
         closeSocket();
     }
@@ -207,7 +203,6 @@ public class WebClient : ClientElement {
         string json = JsonString.establecerVotacion(partidaID, votar, tipoVoto);
         setupSocket();
         writeSocket(json);
-        //string dataIn = readSocket();
         closeSocket();
 
     } 
@@ -221,10 +216,10 @@ public class WebClient : ClientElement {
         if(dataIn !="") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             if(!jsRes["votamos"].Boolean && (int)jsRes["tipoVotacion"].Number==1) {
-                app.controlador.terminarVotacionSprintPlanning();
+                controlador.terminarVotacionSprintPlanning();
             }
             if(!jsRes["votamos"].Boolean &&(int)jsRes["tipoVotacion"].Number==2) {
-                app.controlador.terminarVotacionDia();
+                controlador.terminarVotacionDia();
             }
         } else {
             Debug.Log("WebClient.estadoVotacion() -> Json vacío.");
@@ -249,7 +244,7 @@ public class WebClient : ClientElement {
                 for(int i=0; i<size;i++) {
                     husID[i] = historiasID[i].Str;
                     vots[i] = (int)votos[i].Number;
-                    foreach(HistoriaDeUsuario historia in app.controlador.obtenerHistorias()){
+                    foreach(HistoriaDeUsuario historia in controlador.obtenerHistorias()){
                         Debug.Log("WebClient.obtenerVotos() -> Nombre historia de usuario: " + historia.getNombre());
                         if(historia.getNombre().Equals(husID[i])) {
                             historias.Add(historia);
@@ -258,12 +253,12 @@ public class WebClient : ClientElement {
                     }
                 }
                 if(tipoVotacion == 1){
-                    app.controlador.establecerHistoriasSprint(historias);
-                    app.controlador.mostrarVotosSprintPlanning(husID, vots);
+                    controlador.establecerHistoriasSprint(historias);
+                    controlador.mostrarVotosSprintPlanning(husID, vots);
                 }
                 if(tipoVotacion == 2) {
-                    app.controlador.mostrarVotosDia(husID, vots);
-                    app.controlador.obtenerMinijuego().setHistoriaActual(app.controlador.obtenerProyecto().getHistorias()[0]);
+                    controlador.mostrarVotosDia(husID, vots);
+                    controlador.obtenerMinijuego().setHistoriaActual(controlador.obtenerProyecto().getHistorias()[0]);
                 }
             } else {
                 Debug.Log("WebClient.obtenerVotos() -> diferente número de historias y contadores de votos.");

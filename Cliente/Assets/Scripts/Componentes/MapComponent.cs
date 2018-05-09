@@ -23,6 +23,6 @@ public class MapComponent : ClientElement {
             avatares.Add(jugadores[i], imagenes[i]);
         }
 
-        app.controlador.establecerMapaAvatares(avatares);
+        controlador.establecerMapaAvatares(avatares);
     }
 }

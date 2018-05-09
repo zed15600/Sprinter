@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaRetrospectiva : ClienteVista {
+public class VistaRetrospectiva : ClientElement {
 
     public GameObject tabla;
     public Text textPrefab;
@@ -37,11 +37,11 @@ public class VistaRetrospectiva : ClienteVista {
 
     public void cambiarVista() {
         this.gameObject.SetActive(false);
-        Proyecto p = app.controlador.obtenerProyecto();
+        Proyecto p = controlador.obtenerProyecto();
         if(p.getSprintActual() > p.getNumeroSprints()) {
-            finDelJuego.gameObject.SetActive(true);
+            controlador.vista.finDelJuego.gameObject.SetActive(true);
         } else {
-            vistaSprint.gameObject.SetActive(true);
+            controlador.vista.vistaSprint.gameObject.SetActive(true);
         }
     }
 }

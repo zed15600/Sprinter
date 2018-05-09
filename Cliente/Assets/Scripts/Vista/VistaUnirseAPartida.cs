@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaUnirseAPartida : ClientElement{
+public class VistaUnirseAPartida : ClientElement {
 
     public HorizontalLayoutGroup grupoJugadores;
     public Text codigo;
@@ -12,7 +12,7 @@ public class VistaUnirseAPartida : ClientElement{
     private float timer = 2.0f;
 
     public void ponerCodigo() {
-        string codigoPartida = app.controlador.obtenerCodigoPartida();
+        string codigoPartida = controlador.obtenerCodigoPartida();
         //Debug.Log("VistaUnirseAPartida.ponerCodigo() -> Código de partida: " + codigoPartida);
         codigo.text = codigoPartida;
     }
@@ -21,14 +21,14 @@ public class VistaUnirseAPartida : ClientElement{
         foreach(Transform child in grupoJugadores.transform) {
             GameObject.Destroy(child.gameObject);
         }
-        List<Jugador> jugadores = app.controlador.obtenerJugadores();
+        List<Jugador> jugadores = controlador.obtenerJugadores();
         //Debug.Log("VistaUnirseAPartida.llenarGrupo() -> Número de jugadores: " + jugadores.Count);
         foreach (Jugador j in jugadores) {
             Image instanciaJugador = Instantiate(prefabJugador);
             string nombre = j.getNombre();
             string avatar = j.getAvatar();
 
-            Sprite imagen = app.controlador.obtenerMapaAvatares()[avatar];
+            Sprite imagen = controlador.obtenerMapaAvatares()[avatar];
             instanciaJugador.sprite = imagen;
             instanciaJugador.GetComponentInChildren<Text>().text = nombre;
             instanciaJugador.transform.SetParent(grupoJugadores.transform, false);
@@ -43,8 +43,12 @@ public class VistaUnirseAPartida : ClientElement{
         timer -= Time.deltaTime;
         if (timer <= 0) {
             timer = 2.0f;
-            app.controlador.pedirJugadores();
+            controlador.pedirJugadores();
             llenarGrupo();
         }
 	}
+
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
+    }
 }

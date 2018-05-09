@@ -13,7 +13,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import Negocio.Procesos.IMensajes;
-import org.json.simple.JSONArray;
 
 /**
  *
@@ -51,9 +50,7 @@ public class Procesador {
             switch(Integer.valueOf(json.get("codigo").toString())){
                 case 1:  return proceso.terminarSprint(pID);
                 case 2:  return proceso.determinarVictoria(pID);
-                case 3:  return proceso.terminarDia(pID);
                 case 4:  return proceso.enviarProyecto(pID);
-                case 5:  return proceso.enviarHistoria(pID, (String)json.get("ID"));
                 case 6:  return proceso.sprintPlanning(pID);
                 case 7:  proceso.establecerCompletada(pID, (String)json.get("ID"));
                     break;

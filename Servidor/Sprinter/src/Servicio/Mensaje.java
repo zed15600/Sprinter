@@ -10,12 +10,14 @@ import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
-import Negocio.Entidades.Jugador;
+import Negocio.Entidades.Sprint;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
- *
- * @author EDISON
+ * 
+ * @author EDISON, Ricardo Azopardo
  */
 public class Mensaje {
     
@@ -25,16 +27,19 @@ public class Mensaje {
     de las historias de usaurio correspondientes, en formato Json.
     */
     protected static String terminarDia(Proyecto p){
-        String res = "{\"codigo\":0003, "
-                + "\"sprintActual\":"+p.getSprintActual()+", "
-                + "\"diaActual\""+p.getDiaActual()+", "
-                + "\"HUs\":{";
-        ArrayList<HistoriaDeUsuario> historias = p.getSprints().get(p.getSprintActual()).getSprintBacklog().getHistorias();
-        for(int i=0; i<historias.size(); i++){
-            res += "\""+(i+1)+"\":"+historias.get(i).getId()+", ";
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0003);
+        json.put("sprintActual", p.getSprintActual());
+        json.put("diaActual", p.getDiaActual());
+        JSONArray HUs = new JSONArray();
+        ArrayList<HistoriaDeUsuario> historias;
+        Sprint sprint = p.getSprints().get(p.getSprintActual());
+        historias = sprint.getSprintBacklog().getHistorias();
+        for(HistoriaDeUsuario historia: historias){
+            HUs.add(historia.getId());
         }
-        res += "}\"}";
-        return res;
+        json.put("HUs", HUs);
+        return json.toJSONString();
     }
     
     
@@ -44,16 +49,17 @@ public class Mensaje {
     en formato Json.
     */
     protected static String terminarSprint(Backlog sprntBcklg){
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0001);
+        JSONArray HUs = new JSONArray();
         ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHistorias();
-        String HUs = "{\"codigo\":0001, "
-                + " \"HUs\":\"{";
-        for(int i=0; i<historias.size(); i++){
-            if(historias.get(i).getEstado()){
-                HUs += "\""+(i+1)+"\":"+historias.get(i).getPuntuacion()+", ";
+        for(HistoriaDeUsuario historia: historias){
+            if(historia.getEstado()){
+                HUs.add(historia.getPuntuacion());
             }
         }
-        HUs += "}\"}";
-        return HUs;
+        json.put("HUs", HUs);
+        return json.toJSONString();
     }
     
     /*
@@ -61,11 +67,10 @@ public class Mensaje {
     Juego y el resultado de la partida (Victoria o Derrota), en formato Json.
     */
     protected static String determinarVictoria(boolean resultado){
-        String res = "{"
-                + "\"codigo\":0002, "
-                + "\"resultado\":\""+(resultado?"Victoria":"Derrota")+"\""
-                + "}";
-        return res;
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0002);
+        json.put("resultado", resultado?"Victoria":"Derrota");
+        return json.toJSONString();
     }
 
     /**
@@ -76,118 +81,114 @@ public class Mensaje {
      * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
      */
     protected static String traerProyecto(String nombre, String descripcion, 
-            ArrayList<HistoriaDeUsuario> HUs) {
-        String res = "{"
-                + "\"codigo\":0004, "
-                + "\"nombre\":\""+nombre+"\","
-                + "\"descripcion\":\""+descripcion+"\", "
-                                + " \"HUs\":[";
-        for(int i=0; i<HUs.size(); i++){
-                res += "\""+HUs.get(i).getId()+"\", ";
+    ArrayList<HistoriaDeUsuario> HUs) {
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0004);
+        json.put("nombre", nombre);
+        json.put("descripcion", descripcion);
+        JSONArray jHUs = new JSONArray();
+        for(HistoriaDeUsuario h: HUs){
+            JSONObject historia = new JSONObject();
+            historia.put("ID", h.getId());
+            historia.put("nombre", h.getNombre());
+            historia.put("descripcion", h.getDescripcion());
+            historia.put("puntos", h.getPuntosHistoria());
+            historia.put("estado", h.getEstado());
+            historia.put("prioridad", h.getPrioridad());
+            ArrayList<Criterio> criteriosH = h.getListaCriterios();
+            JSONArray criterios = new JSONArray();
+            for (Criterio crit: criteriosH){
+                criterios.add(crit.getDescripcion());
+            }
+            historia.put("criterios", criterios);
+            jHUs.add(historia);
         }
-        return res += "]}";
-    }
-    
-    protected static String traerHU(String nombre, String descripcion,
-    String puntos, int prioridad,ArrayList<Criterio> criterios, boolean estado){
-        String res = "{"
-                + "\"codigo\":0005, "
-                + "\"nombre\":\""+nombre+"\","
-                + "\"descripcion\":\""+descripcion+"\","
-                + "\"puntos\":\""+puntos+"\","
-                + "\"estado\":"+estado+","
-                + "\"prioridad\":\""+prioridad+"\","
-                                + " \"criterios\":[";
-        for(int i=0; i<criterios.size(); i++){
-                res += "\""+criterios.get(i).getDescripcion() +"\", ";
-        }
-        return res += "]}";
+        json.put("historias", jHUs);
+        return json.toJSONString();
     }
     
     protected static String sprintPlanning(int sprintsRestantes, int numeroDeSprint){
-        String res = "{"
-                +   "\"codigo\":0006, "
-                +   "\"restantes\":"+sprintsRestantes+","
-                +   "\"numero\":"+numeroDeSprint+"}";
-        return res;
+        JSONObject json = new JSONObject();
+        json.put("codigo",0006);
+        json.put("restantes", sprintsRestantes);
+        json.put("numero", numeroDeSprint);
+        return json.toJSONString();
     }
     
     protected static String unirsePartida(int jugadorId, boolean aceptado, String avatar){
-        String res = "{"
-                + "\"jugadorId\":"+jugadorId+","
-                + "\"aceptado\":"+aceptado+","
-                + "\"avatar\":\""+avatar+"\""
-                + "}";
-        return res;
+        JSONObject json = new JSONObject();
+        json.put("jugadorID", jugadorId);
+        json.put("aceptado", aceptado);
+        json.put("avatar",avatar);
+        return json.toJSONString();
     }
     
     protected static String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
-        String HUsID = "[";
-        String HUsDesc = "[";
+        JSONObject json = new JSONObject();
+        JSONArray HUs = new JSONArray();
+        JSONArray HUsDesc = new JSONArray();
         for (HistoriaDeUsuario posible : posibles) {
-            HUsID += posible.getId() + ",";
-            HUsDesc += "\"" + posible.getDescripcion() + "\",";
+            HUs.add(posible.getId());
+            HUsDesc.add(posible.getDescripcion());
         }
-        //System.out.println("Mensaje.actualziarEstadoJugador() -> cantidad de historias para votar: "+posibles.length);
-        HUsID = posibles.length!=0?HUsID.substring(0, HUsID.length()-1) + "]":"[]";
-        HUsDesc = posibles.length!=0?HUsDesc.substring(0, HUsDesc.length()-1) + "]":"[]";
-        String res = "{"
-                   + "\"votacion\":"+votar+","
-                   + "\"HUs\":"+HUsID+","
-                   + "\"HUsDesc\":"+HUsDesc+""
-                   + "}";
-        return res;
+        json.put("HUs", HUs);
+        json.put("HUsDesc", HUsDesc);
+        json.put("votacion", votar);
+        return json.toJSONString();
     }
     
     protected static String estadoVotacion(boolean votamos, int tipoVotacion){
-        String res = "{"
-                   + "\"votamos\":"+votamos+","
-                   + "\"tipoVotacion\":"+tipoVotacion
-                   + "}";
-        return res;
+        JSONObject json = new JSONObject();
+        json.put("votamos", votamos);
+        json.put("tipoVotacion", tipoVotacion);
+        return json.toJSONString();
     }
     
     protected static String enviarVotos(String[][] listaVotos){
-        String hID = "[";
-        String votos = "[";
+        JSONObject json = new JSONObject();
+        JSONArray hID = new JSONArray();
+        JSONArray votos = new JSONArray();
         for(int i=0; i<listaVotos[0].length; i++){
-            hID += "\""+listaVotos[0][i]+"\",";
-            votos += listaVotos[1][i]+",";
+            hID.add(listaVotos[0][i]);
+            votos.add(listaVotos[1][i]);
         }
-        hID = hID.substring(0, hID.length()-1)+"]";
-        votos = votos.substring(0, votos.length()-1)+"]";
-        String res = "{"
-                + "\"historiasID\":"+hID+","
-                + "\"votos\":"+votos
-                + "}";
-        return res;
+        json.put("historiasID", hID);
+        json.put("votos", votos);
+        return json.toJSONString();
     }
 
     protected static String enviarNombresProyectos() {
-        String json = "{";
+        JSONObject json = new JSONObject();
+        JSONArray proyectosN = new JSONArray();
         ArrayList<Proyecto> proyectos = ConexionTCP.getProceso().getConexion().obtenerConfiguracion().getListaDeProyectos();
-        json += "\"proyectos\":[";
         for (Proyecto p:proyectos){
-            json += "\""+p.getNombre() +"\", ";
+            proyectosN.add(p.getNombre());
         }
-        return json += "]}";
+        json.put("proyectos", proyectosN);
+        return json.toJSONString();
     }
 
     protected static String enviarCodigoPartida(String id) {
-        return "{\"id\":\""+id+"\"}";
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        return json.toJSONString();
     }
 
     protected static String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
-        String json = "{";
-        json += "\"jugadores\":[";
-        for (Jugador j:jugadores){
-            json += "\""+j.getNombre() +"\", ";
-        }
-        json += "],";
-        json += "\"avatares\":[";
+        
+        JSONObject json = new JSONObject();
+        JSONArray jJugadores = new JSONArray();
+        JSONArray avatares = new JSONArray();
+        
         for (IntegranteScrumTeam j:jugadores){
-            json += "\""+j.getAvatar()+"\", ";
+            jJugadores.add(j.getNombre());
+            avatares.add(j.getAvatar());
         }
-        return json += "]}";
+        
+        json.put("jugadores", jJugadores);
+        json.put("avatares",avatares);
+        return json.toJSONString();
     }
+    
+
 }

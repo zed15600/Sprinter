@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaConfiguracionDePartidas : ClienteVista {
+public class VistaConfiguracionDePartidas : ClientElement {
     public InputField nombreJugador;
     public InputField nombrePartida;
     public Dropdown proyectosDropdown;
 
-    public void Start() {
-        app.controlador.pedirProyectos();
+    void Start() {
+        controlador.pedirProyectos();
         llenarDropdown();
     }
     public void llenarDropdown() {
-        List<string> nombresProyecto = app.controlador.obtenerProyectos();
+        List<string> nombresProyecto = controlador.obtenerProyectos();
         proyectosDropdown.AddOptions(nombresProyecto);
     }
 
@@ -21,9 +20,9 @@ public class VistaConfiguracionDePartidas : ClienteVista {
         string jugador = nombreJugador.text;
         string partida = nombrePartida.text;
         string proyecto = proyectosDropdown.captionText.text;
-        app.controlador.crearPartida(jugador, partida, proyecto);
-        app.controlador.obtenerProyectoServidor();
-        unirseAPartida.gameObject.SetActive(true);
+        controlador.crearPartida(jugador, partida, proyecto);
+        controlador.obtenerProyectoServidor();
+        controlador.vista.unirseAPartida.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
     }
 

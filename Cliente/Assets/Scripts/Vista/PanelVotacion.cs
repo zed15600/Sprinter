@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelVotacion : ClienteVista {
+public class PanelVotacion : ClientElement {
 
     public GameObject button;
     public GameObject pnlHistorias;
@@ -30,20 +30,23 @@ public class PanelVotacion : ClienteVista {
         titulo.SetActive(false);
         pnlHistorias.SetActive(false);
         button.SetActive(false);
-        app.controlador.establecerVotacion(true, tipoVoto);
+        controlador.establecerVotacion(true, tipoVoto);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
         if(contar) {
             time -= Time.deltaTime;
             revisarVotaciones -= Time.deltaTime;
             timertext.text = ""+(int)time;
         }
+
         if(contar && revisarVotaciones <= 0) {
             revisarVotaciones = 2.0f;
-            app.controlador.estadoVotacion();
+            controlador.estadoVotacion();
         }
+
         if(contar && time <=0) {
             terminarVotacion(true);
         }
@@ -80,9 +83,9 @@ public class PanelVotacion : ClienteVista {
         pnlHistorias.SetActive(true);
         button.SetActive(true);
         if(origen){
-            app.controlador.establecerVotacion(false, tipoVoto);
+            controlador.establecerVotacion(false, tipoVoto);
         }
-        app.controlador.obtenerVotos(tipoVoto);
+        controlador.obtenerVotos(tipoVoto);
     }
     
 }

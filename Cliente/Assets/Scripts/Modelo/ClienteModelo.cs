@@ -240,7 +240,3 @@ public class Jugador {
         this.avatar = avatar;
     }
 }
-
-
-
-

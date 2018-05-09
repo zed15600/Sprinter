@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaScrumPlanning : ClientElement {
+public class VistaScrumPlanning : ClientElement{
 
     // ---------------------------------------------- Contenidos ---------------------------------------------------
     [SerializeField]
@@ -19,14 +19,14 @@ public class VistaScrumPlanning : ClientElement {
     public VerticalLayoutGroup colPunt;
     // -------------------------------------------------------------------------------------------------------------
     public void establecerProyecto() {
-        proyecto.text = app.controlador.obtenerNombreProyecto();
-        descripcion.text = app.controlador.obtenerDescripcionProyecto();
+        proyecto.text = controlador.obtenerNombreProyecto();
+        descripcion.text = controlador.obtenerDescripcionProyecto();
     }
 
     public void llenarTabla()
     {
 
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
+        List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
         for (int i = 0; i < historias.ToArray().Length; i++)
         {
             GameObject contenidoHistoria = Instantiate(prefabDesc);
@@ -53,10 +53,13 @@ public class VistaScrumPlanning : ClientElement {
 
         FindObjectOfType<DialogTrigger>().TriggerDialog();
         establecerProyecto();
-        while (app.controlador.obtenerHistorias().ToArray().Length == 0)
+        while (controlador.obtenerHistorias().ToArray().Length == 0)
         {
         }
         llenarTabla();
     }
 
+    public void cambiarVista() {
+        throw new System.NotImplementedException();
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaFinDelJuego : ClienteVista {
+public class VistaFinDelJuego : ClientElement {
 
     public Text resultado;
     public Color verde;
@@ -26,7 +26,7 @@ public class VistaFinDelJuego : ClienteVista {
 	}
 
     public bool revisarHistorias() {
-        List<HistoriaDeUsuario> historias = app.controlador.obtenerHistorias();
+        List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
         bool res = true;
         for (int i=0; i<historias.Count;i++) {
             if(!historias[i].getEstado()) {

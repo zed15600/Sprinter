@@ -4097,10 +4097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ff18688b273c64aa7046c320c98c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelo: {fileID: 1023667855}
-  vista: {fileID: 1050769872}
-  controlador: {fileID: 2128435208}
-  webClient: {fileID: 1658084998}
 --- !u!1 &550959660
 GameObject:
   m_ObjectHideFlags: 0
@@ -8839,6 +8835,10 @@ MonoBehaviour:
   scrumPlanning: {fileID: 942707180}
   sprintPlanning: {fileID: 365551453}
   vistaSprint: {fileID: 233536203}
+  resultados: {fileID: 1556338425}
+  retrospectiva: {fileID: 936148496}
+  finDelJuego: {fileID: 822295110}
+  minijuegos: {fileID: 1633521897}
   panelVotacionSPlanning: {fileID: 731114937}
   panelVotacionDia: {fileID: 876668922}
 --- !u!1 &1072391141
@@ -10304,7 +10304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09451563, y: 0.402}
   m_AnchorMax: {x: 0.404, y: 0.47160417}
-  m_AnchoredPosition: {x: 3.1240082, y: -4.647995}
+  m_AnchoredPosition: {x: 3.1240387, y: -4.647995}
   m_SizeDelta: {x: 13, y: 9.296}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1345823498
@@ -16731,3 +16731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995ff1414e05b1744861d3ec0a02797e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelo: {fileID: 1023667855}
+  vista: {fileID: 1050769872}
+  webClient: {fileID: 1658084998}

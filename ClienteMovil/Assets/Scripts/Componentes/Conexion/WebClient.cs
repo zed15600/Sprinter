@@ -88,10 +88,10 @@ public class WebClient : ClientElement {
         closeSocket();
         if(dataIn != "") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
-            app.controlador.crearPartida(codigo);
-            app.controlador.establecerAvatarJugador(jsRes["avatar"].Str);
-            app.controlador.establecerIdJugador((int)jsRes["jugadorId"].Number);
-            app.controlador.responderConexion(jsRes["aceptado"].Boolean);
+            controlador.crearPartida(codigo);
+            controlador.establecerAvatarJugador(jsRes["avatar"].Str);
+            controlador.establecerIdJugador((int)jsRes["jugadorID"].Number);
+            controlador.responderConexion(jsRes["aceptado"].Boolean);
         }
     }
 
@@ -113,7 +113,7 @@ public class WebClient : ClientElement {
                     HUsId[i] = (int)arr[i].Number;
                     HUsDesc[i] = desc[i].Str;
                 }
-                app.controlador.mostrarVotacion(HUsId, HUsDesc);
+                controlador.mostrarVotacion(HUsId, HUsDesc);
             }
         }
     }
