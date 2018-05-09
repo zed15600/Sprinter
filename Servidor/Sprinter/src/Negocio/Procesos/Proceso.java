@@ -98,18 +98,19 @@ public class Proceso {
         Partida par = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
         Proyecto p = par.getProyecto(); 
         ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
-        HistoriaDeUsuario historia = null;
+        HistoriaDeUsuario historia = new HistoriaDeUsuario();
         for (int i = 0; i<historias.size();i++){
             if (historias.get(i).getId() == Integer.valueOf(ID)){
                 historia = historias.get(i);
             }
         }
+        String nombre = historia.getNombre();
         String descHU = historia.getDescripcion();
         int prioHU = historia.getPrioridad();
         String punHU = historia.getPuntosHistoria();
         boolean estado = historia.getEstado();
         ArrayList<Criterio> criterios = historia.getListaCriterios();
-        return mensajes.enviarHU(descHU, punHU, prioHU, criterios, estado);
+        return mensajes.enviarHU(nombre, descHU, punHU, prioHU, criterios, estado);
     }
     
     public String sprintPlanning(int ID){
@@ -125,7 +126,7 @@ public class Proceso {
         Partida par = conexion.obtenerConfiguracion().getPartidas().get(pID);
         Proyecto p = par.getProyecto(); 
         ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
-        HistoriaDeUsuario historia = null;
+        HistoriaDeUsuario historia = new HistoriaDeUsuario();
         for (int i = 0; i<historias.size();i++){
             if (historias.get(i).getId() == Integer.valueOf(completadaID)){
                 historia = historias.get(i);
@@ -213,8 +214,7 @@ public class Proceso {
         return mensajes.enviarNombresProyectos();
     }
     
-    public String crearPartida(String jugador, String partida, String proyecto) {
-        
+    public String crearPartida(String jugador, String partida, String proyecto) {        
         int codigo = conexion.obtenerConfiguracion().crearPartida(jugador, partida, proyecto);
         return mensajes.enviarCodigoPartida(codigo);
     }

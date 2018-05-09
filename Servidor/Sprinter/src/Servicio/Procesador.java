@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import Negocio.Procesos.IMensajes;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Procesador {
     */
     public String procesarJson(String mensaje){
         IMensajes mensajes = new ImplMensajes();
-        IConexion conexion = new ConexionTCP();
+        IConexion conexion = new ConexionTCP();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         Proceso proceso = new Proceso(mensajes, conexion);
         JSONParser parser = new JSONParser();
         JSONObject json;

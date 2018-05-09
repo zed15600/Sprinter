@@ -10,7 +10,6 @@ import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
-import Negocio.Entidades.Jugador;
 import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
 
@@ -44,9 +43,9 @@ public class ImplMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarHU(String descripcion, String puntos, int prioridad, ArrayList<Criterio> criterios,
+    public String enviarHU(String nombre, String descripcion, String puntos, int prioridad, ArrayList<Criterio> criterios,
     boolean estado) {
-        return Mensaje.traerHU(descripcion, puntos, prioridad, criterios, estado);
+        return Mensaje.traerHU(nombre, descripcion, puntos, prioridad, criterios, estado);
     }
 
     /**

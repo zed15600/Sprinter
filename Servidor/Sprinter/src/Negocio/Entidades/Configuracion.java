@@ -17,9 +17,9 @@ import java.util.Set;
  */
 public class Configuracion {
     
-    private static Map<Integer, Partida> partidas = new HashMap<>();
+    private static final Map<Integer, Partida> partidas = new HashMap<>();
     private final ArrayList<Proyecto> listaDeProyectos;
-    private ProyectoDAO impl;
+    private final ProyectoDAO impl;
 
     public Map<Integer, Partida> getPartidas() {
         return partidas;

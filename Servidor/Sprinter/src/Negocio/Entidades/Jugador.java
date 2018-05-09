@@ -12,18 +12,17 @@ package Negocio.Entidades;
 public class Jugador {
     
     private String nombre;
-    //private String avatar;
     private int ID;
     private boolean estado; //true -> activo
     private boolean votar; //true -> puede votar
 
+    public Jugador() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getNombre() {
         return nombre;
     }
-
-    /*public String getAvatar() {
-        return avatar;
-    }*/
     
     public Jugador(String nombre, int ID) {
         this.nombre = nombre;

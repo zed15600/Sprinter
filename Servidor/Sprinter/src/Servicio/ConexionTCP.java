@@ -15,7 +15,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import Negocio.Procesos.IMensajes;
 import AccesoADatos.ProyectoDAOImpl;
+import AccesoADatos.ConexionSingleton;
 import Negocio.Procesos.IConexion;
+import java.sql.SQLException;
 
 /**
  *
@@ -37,7 +39,8 @@ public class ConexionTCP implements IConexion{
     el \n es necesario ya que la comunicación es por líneas, debe haber un terminador de línea.
     */
     public static void main(String args[]) throws IOException {
-        
+        //Se inicia conexion a la DB.
+        ConexionSingleton.conectar();
         //Instancias de Implementaciones de Interfaces.
         ProyectoDAOImpl impl = new ProyectoDAOImpl();
         configuracion = new Configuracion(impl);

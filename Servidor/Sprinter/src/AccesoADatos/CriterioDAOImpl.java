@@ -15,19 +15,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author usuario
+ * Implementación del DAO de la clase Criterio.
+ * @author Ricardo Azopardo
  */
 public class CriterioDAOImpl implements CriterioDAO {
 
+    /**
+     * Consulta la base de datos MySQL, llama el procedimiento obtenerCriterios.
+     * Trae los criterios de aceptación de la historia de usuario con el ID
+     * proporcionado.
+     * @param idHU id de la historia de usuario en la base de datos.
+     * @return ArrayList con todos los Criterios de la Historia de Usuario.
+     */
     @Override
     public ArrayList<Criterio> obtenerCriterios(int idHU){
         ArrayList<Criterio> criterios = new ArrayList<>();
         try {
-            Statement stmt = ConexionSingleton.getConexionSingleton().createStatement();
-            ResultSet r = stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
-            while (r.next()){
-                String desc = r.getString(1);
+            Statement stmt;
+            stmt = ConexionSingleton.getConexionSingleton().createStatement();
+            ResultSet criteriosObtenidos;
+            criteriosObtenidos = stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
+            while (criteriosObtenidos.next()){
+                String desc = criteriosObtenidos.getString(1);
                 Criterio criterio = new Criterio(desc);
                 criterios.add(criterio);
             }

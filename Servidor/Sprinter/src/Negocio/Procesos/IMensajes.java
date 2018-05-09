@@ -10,7 +10,6 @@ import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
-import Negocio.Entidades.Jugador;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +22,7 @@ public interface IMensajes {
     public String terminarSprint(Backlog sprntBcklg);
     public String determinarVictoria(boolean resultado);
     public String traerProyecto(String nombre, String descripcion, ArrayList<HistoriaDeUsuario> historias);
-    public String enviarHU(String descripcion, String puntos, int prioridad,
+    public String enviarHU(String nombre, String descripcion, String puntos, int prioridad,
     ArrayList<Criterio> criterios, boolean estado);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
     public String unirsePartida(int jugadorId, boolean aceptado, String avatar);
