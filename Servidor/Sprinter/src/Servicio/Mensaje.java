@@ -88,10 +88,11 @@ public class Mensaje {
         return res += "]}";
     }
     
-    protected static String traerHU(String descripcion, String puntos, int prioridad,
-    ArrayList<Criterio> criterios, boolean estado){
+    protected static String traerHU(String nombre, String descripcion,
+    String puntos, int prioridad,ArrayList<Criterio> criterios, boolean estado){
         String res = "{"
                 + "\"codigo\":0005, "
+                + "\"nombre\":\""+nombre+"\","
                 + "\"descripcion\":\""+descripcion+"\","
                 + "\"puntos\":\""+puntos+"\","
                 + "\"estado\":"+estado+","

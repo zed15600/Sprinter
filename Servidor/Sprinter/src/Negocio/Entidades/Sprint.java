@@ -5,8 +5,6 @@
  */
 package Negocio.Entidades;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author usuario

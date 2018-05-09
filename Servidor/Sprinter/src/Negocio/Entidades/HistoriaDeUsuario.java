@@ -23,6 +23,9 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     private String puntosHistoria;
     private ArrayList<Criterio> listaCriterios;
     
+    public HistoriaDeUsuario(){
+    }
+    
     public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad){
         this.id = id;
         this.puntosHistoria = puntosHistoria;
