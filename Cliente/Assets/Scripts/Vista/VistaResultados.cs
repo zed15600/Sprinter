@@ -39,10 +39,8 @@ public class VistaResultados : ClientElement {
     public bool verificarCompletitud(){
         List<string> criterios = controlador.obtenerCriteriosMinijuego();
 
-        foreach (string crit in criterios)
-        {
-            if (crit != null)
-            {
+        foreach (string crit in criterios){
+            if (crit != null){
                 return false;
             }
         }
@@ -50,18 +48,15 @@ public class VistaResultados : ClientElement {
         List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
         string completada = controlador.obtenerHistoriaMinijuego();
 
-        foreach (HistoriaDeUsuario historia in historias)
-        {
-            if (completada.Equals(historia.getDescripcion()))
-            {
+        foreach (HistoriaDeUsuario historia in historias){
+            if (completada.Equals(historia.getDescripcion())){
                 controlador.cambiarEstado(historia);
             }
         }
         return true;
     }
 
-    public int calcularPuntaje()
-    {
+    public int calcularPuntaje(){
         int resultado = 0;
 
         int puntos = controlador.obtenerPuntosHMinijuego();
@@ -90,7 +85,7 @@ public class VistaResultados : ClientElement {
     }
 
     public void cambiarVista() {
-        this.gameObject.SetActive(false);
         controlador.terminarDia();
+        this.gameObject.SetActive(false);
     }
 }

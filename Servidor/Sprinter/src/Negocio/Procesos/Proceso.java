@@ -72,11 +72,7 @@ public class Proceso {
     
     public String enviarProyecto(int partidaID){
         Partida par = conexion.obtenerConfiguracion().getPartidas().get(partidaID);
-        Proyecto p = par.getProyecto();
-        String nombre = p.getNombre();
-        String descripcion = p.getDescripcion();
-        ArrayList<HistoriaDeUsuario>  lista = p.getProductBacklog().getHistorias();
-        return mensajes.traerProyecto(nombre, descripcion, lista);
+        return mensajes.traerProyecto(par.getProyecto());
     }
     
     public String sprintPlanning(int ID){

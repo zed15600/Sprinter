@@ -8,6 +8,7 @@ package Servicio;
 import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
+import Negocio.Entidades.Proyecto;
 import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
 
@@ -29,9 +30,8 @@ public class ImplMensajes implements IMensajes {
     }
     
     @Override
-    public String traerProyecto(String nombre, String descripcion,
-            ArrayList<HistoriaDeUsuario> historias) {
-        return Mensaje.traerProyecto(nombre, descripcion, historias);
+    public String traerProyecto(Proyecto p) {
+        return Mensaje.traerProyecto(p);
     }
     
     /**

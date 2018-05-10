@@ -80,14 +80,15 @@ public class Mensaje {
      * @param HUs
      * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
      */
-    protected static String traerProyecto(String nombre, String descripcion, 
-    ArrayList<HistoriaDeUsuario> HUs) {
+    protected static String traerProyecto(Proyecto p) {
         JSONObject json = new JSONObject();
         json.put("codigo", 0004);
-        json.put("nombre", nombre);
-        json.put("descripcion", descripcion);
+        json.put("nombre", p.getNombre());
+        json.put("descripcion", p.getDescripcion());
+        json.put("duracionSprints", p.getDuracionDeSprints());
+        json.put("numeroSprints", p.getNumeroSprints());
         JSONArray jHUs = new JSONArray();
-        for(HistoriaDeUsuario h: HUs){
+        for(HistoriaDeUsuario h: p.getProductBacklog().getHistorias()){
             JSONObject historia = new JSONObject();
             historia.put("ID", h.getId());
             historia.put("nombre", h.getNombre());

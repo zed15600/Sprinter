@@ -16,6 +16,7 @@ public class Proyecto {
     private Backlog productBacklog;
     private String nombre;
     private String descripcion;
+    private int numeroSprints;
     private int duracionDeSprints;
     private int diaActual;
     private int sprintActual;
@@ -29,11 +30,12 @@ public class Proyecto {
     }
     
     public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
-            Backlog productBacklog, int tamaño){
+            Backlog productBacklog, int numeroSprints){
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.listaDeSprints = new ArrayList(tamaño);
+        this.listaDeSprints = new ArrayList(numeroSprints);
         this.productBacklog = productBacklog;
+        this.numeroSprints = numeroSprints;
         this.duracionDeSprints = duracionDeSprints;
         this.diaActual = 1;
         this.sprintActual = 1;
@@ -61,6 +63,10 @@ public class Proyecto {
     
     public void nextSprint(){
         this.sprintActual++;
+    }
+    
+    public int getNumeroSprints(){
+        return numeroSprints;
     }
     
     public int getDuracionDeSprints(){

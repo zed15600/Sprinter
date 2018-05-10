@@ -4,11 +4,11 @@ using UnityEngine.UI;
     
 public class ClienteModelo : ClientElement {
     public Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
-    private List<string> proyectos = new List<string>();
+    private List<string> proyectos;
 
-    private Partida partida = new Partida("");
-    private Proyecto proyecto = new Proyecto("", "", null);
-    private List<Jugador> jugadores = new List<Jugador>();
+    private Partida partida;
+    private Proyecto proyecto;
+    private List<Jugador> jugadores;
     private Minijuego minijuego = new Minijuego();
 
     public Dictionary<string, Sprite> getMapaAvatares() {
@@ -45,6 +45,9 @@ public class ClienteModelo : ClientElement {
     public void setJugadores(List<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
+    public void setMinijuego(Minijuego minijuego) {
+        this.minijuego = minijuego;
+    }
 }
 
 public class Proyecto {
@@ -54,7 +57,7 @@ public class Proyecto {
     private string nombre;
     private string descripcion;
     private List<HistoriaDeUsuario> historias;
-    private int NumeroSprints;
+    private int numeroSprints;
     private int duracionSprints;
     private List<HistoriaDeUsuario> historiasDeSprint;
 
@@ -64,10 +67,12 @@ public class Proyecto {
 
     private int SprintRestantes = 0;
 
-    public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias){
+    public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias, int nSprints, int dSprints){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.historias = historias;
+        numeroSprints = nSprints;
+        duracionSprints = dSprints;
         SprintActual = 1;
         diaSprint = 1;
     }
@@ -82,7 +87,7 @@ public class Proyecto {
         return historias;
     }
     public int getNumeroSprints() {
-        return NumeroSprints;
+        return numeroSprints;
     }
     public List<HistoriaDeUsuario> getHistoriasSprint() {
         return historiasDeSprint;
@@ -107,11 +112,11 @@ public class Proyecto {
     public bool terminarDia() {
         if(diaSprint<duracionSprints) {
             diaSprint ++;
-            return true;
+            return true; //retorna true cuando el sprint sigue
         } else {
             SprintActual ++;
             diaSprint = 1;
-            return false;
+            return false; //retorna false cuando el sprint termina
         }
     }
 }
@@ -187,6 +192,10 @@ public class Minijuego{
     private HistoriaDeUsuario historiaActual;
     private float tiempoFinal = 0;
     private int intentos = 1;
+
+    /*public Minijuego (HistoriaDeUsuario historia) {
+        historiaActual = historia;
+    }*/
 
     public HistoriaDeUsuario getHistoriaActual(){
         return historiaActual;
