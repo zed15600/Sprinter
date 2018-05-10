@@ -61,16 +61,11 @@ public class VistaSprintPlanning : ClientElement {
         }
     }
 
-    void Start () {
+    void Start() {
         establecerSprint();
-        while (controlador.obtenerHistorias().ToArray().Length == 0)
-        {
+        while (controlador.obtenerHistorias().ToArray().Length == 0) {
             Debug.Log(controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
-    }
-
-    public void cambiarVista() {
-        throw new System.NotImplementedException();
     }
 }

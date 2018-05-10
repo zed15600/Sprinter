@@ -245,7 +245,7 @@ public class WebClient : ClientElement {
                     husID[i] = historiasID[i].Str;
                     vots[i] = (int)votos[i].Number;
                     foreach(HistoriaDeUsuario historia in controlador.obtenerHistorias()){
-                        Debug.Log("WebClient.obtenerVotos() -> Nombre historia de usuario: " + historia.getNombre());
+                        //Debug.Log("WebClient.obtenerVotos() -> Nombre historia de usuario: " + historia.getNombre());
                         if(historia.getNombre().Equals(husID[i])) {
                             historias.Add(historia);
                             break;

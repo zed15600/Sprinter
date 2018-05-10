@@ -150,10 +150,11 @@ public class Mensaje {
         JSONArray votos = new JSONArray();
         for(int i=0; i<listaVotos[0].length; i++){
             hID.add(listaVotos[0][i]);
-            votos.add(listaVotos[1][i]);
+            votos.add(Integer.valueOf(listaVotos[1][i]));
         }
         json.put("historiasID", hID);
         json.put("votos", votos);
+        System.out.println(json.toJSONString());
         return json.toJSONString();
     }
 
