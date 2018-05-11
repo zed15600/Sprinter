@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.Procesos;
+package Negocio.Entidades;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Ricardo Azopardo
+ * @author usuario
  */
-public interface IConexion {
+public interface IConexionBaseDeDatos {
+    public Proyecto obtenerProyecto(String nombre);
+    public ArrayList<Proyecto> obtenerProyectos();
     public void conectar();
 }

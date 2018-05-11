@@ -7,6 +7,7 @@ package Negocio.Entidades;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,28 +21,41 @@ public class Configuracion {
     private static final Map<Integer, Partida> partidas = new HashMap<>();
     //local
     private final ArrayList<Proyecto> listaDeProyectos;
-    private final ProyectoDAO impl;
+    private final IConexionBaseDeDatos impl;
 
-    public Map<Integer, Partida> getPartidas() {
-        return partidas;
-    }
-
-    public Configuracion(ProyectoDAO impl){
+    public Configuracion(IConexionBaseDeDatos impl){
         this.impl = impl;
-        listaDeProyectos = impl.obtenerProyectos();
+        this.impl.conectar();
+        listaDeProyectos = this.impl.obtenerProyectos();
     }
     
-    public int crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
+    public String crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
         int codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
         Set keys = partidas.keySet();
         while (keys.contains(codigo)){
             codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
         }
-        Proyecto proyecto = impl.obtenerProyecto(nombreProyecto);
+        Proyecto proyecto = this.impl.obtenerProyecto(nombreProyecto);
         ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0);
         Partida partida = new Partida(codigo, nombrePartida, proyecto, scrumMaster);
         partidas.put(codigo, partida);
-        return codigo;
+        String codigoPartida = String.valueOf(codigo);
+        return codigoPartida;
+    }
+    public Proyecto obtenerProyectoDePartida(int idPartida){
+        return partidas.get(idPartida).getProyecto();
+    }
+    
+    public Partida obtenerPartida(int idPartida){
+        return partidas.get(idPartida);
+    }
+    
+    public Collection<Partida> obtenerPartidas(){
+        return partidas.values();
+    }
+    
+    public void quitarPartida(int idPartida){
+        partidas.remove(idPartida);
     }
     
     public void agregarProyecto(Proyecto proyecto){

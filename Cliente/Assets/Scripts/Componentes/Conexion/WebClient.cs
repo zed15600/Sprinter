@@ -47,6 +47,7 @@ public class WebClient : ClientElement {
 
     public void writeSocket(string line)
     {
+        Debug.Log(line);
         //Debug.Log("WebClient.writeSocket() -> out: "+line);
         if (!socket_ready)
             return;

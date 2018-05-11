@@ -23,7 +23,7 @@ public interface IMensajes {
     public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(String[][] listaVotos);
-    public String enviarNombresProyectos();
+    public String enviarNombresProyectos(ArrayList<Proyecto> listaDeProyectos);
     public String enviarCodigoPartida(String codigo);
     public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores);
 }

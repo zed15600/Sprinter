@@ -5,9 +5,14 @@
  */
 package AccesoADatos;
 
+import Negocio.Entidades.IConexionBaseDeDatos;
+import Negocio.Entidades.Proyecto;
+import Negocio.Entidades.ProyectoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +20,14 @@ import javax.swing.JOptionPane;
  * método conectar.
  * @author Ricardo Azopardo
  */
-public final class ConexionSingletonMySQL {
+public final class ConexionMySQL implements IConexionBaseDeDatos{
     
-    private static Connection conexionSingleton;
+    private static Connection conexion;
+    private final ProyectoDAO implProyectoDAO;
     
-    private ConexionSingletonMySQL(){}
+    public ConexionMySQL(){
+        implProyectoDAO = new ProyectoDAOMySQL();
+    }
     
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
@@ -30,7 +38,8 @@ public final class ConexionSingletonMySQL {
      * Usuario: usuario
      * Contraseña: Azopardo234432qw
      */
-    public static void conectar() {
+    @Override
+    public void conectar() {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
@@ -45,18 +54,20 @@ public final class ConexionSingletonMySQL {
             JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
                + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
-        ConexionSingletonMySQL.conexionSingleton = conn;
+        ConexionMySQL.conexion = conn;
+    }
+
+    @Override
+    public Proyecto obtenerProyecto(String nombre) {
+        return implProyectoDAO.obtenerProyecto(nombre);
+    }
+
+    @Override
+    public ArrayList<Proyecto> obtenerProyectos() {
+        return implProyectoDAO.obtenerProyectos();
     }
     
-    /**
-     * Método getter de la conexión a la base de datos.
-     * @return conexión a la base de datos.
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public static Connection getConexionSingleton() throws ClassNotFoundException, 
-    SQLException{
-        return conexionSingleton;
+    public static Statement crearDeclaracion() throws SQLException{
+        return conexion.createStatement();
     }
-    
 }

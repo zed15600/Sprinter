@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Servicio;
+
+import Negocio.Procesos.IMensajes;
+
 /**
  *
  * @author usuario
@@ -12,9 +15,9 @@ public class Procesador implements IProceso{
 
     IProceso procesador;
     
-    public Procesador(String tipo){
-        if (tipo.equals("json")){
-            procesador = new ProcesadorJSON();
+    public Procesador(IMensajes tipo){
+        if (tipo.getClass()==JSONMensajes.class){
+        procesador = new ProcesadorJSON();
         }
     }
     

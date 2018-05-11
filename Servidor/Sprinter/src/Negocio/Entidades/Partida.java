@@ -32,10 +32,6 @@ public class Partida {
     public boolean isVotacion() {
         return votacion;
     }
-
-    public Stack<String> getAvatares() {
-        return avatares;
-    }
     
     public Partida(int codigo, String nombre, Proyecto proyecto){
         this.codigo = codigo;
@@ -73,6 +69,10 @@ public class Partida {
         IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id, avatar);
         listaJugadores.add(jugador);
         return id;
+    }
+    
+    public String tomarAvatar(){
+        return avatares.pop();
     }
     
     public void reiniciarVotaciones(){

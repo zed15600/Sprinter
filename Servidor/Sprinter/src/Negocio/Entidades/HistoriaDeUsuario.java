@@ -106,7 +106,7 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     @Override
     public int compareTo(HistoriaDeUsuario o) {
         //System.out.println("HistoriaDeUsuario.compareTo() -> Historia comparada: " + nombre + "<>" + o.nombre);
-        if(estado){
+        if(o.estado){
             //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por estado: " + Integer.MIN_VALUE); 
             return Integer.MAX_VALUE;
         }

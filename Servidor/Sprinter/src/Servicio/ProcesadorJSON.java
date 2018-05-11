@@ -5,9 +5,6 @@
  */
 package Servicio;
 
-import Negocio.Procesos.IConexion;
-import Negocio.Procesos.IMensajes;
-import Negocio.Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
@@ -22,19 +19,7 @@ public class ProcesadorJSON implements IProceso {
 
     @Override
     public String procesar(Object mensaje) {
-        String jMensaje = (String)mensaje;
-        IMensajes mensajes = new JSONMensajes();    
-        IConexion conexion = Main.getProceso().getConexion();
-        Proceso proceso = new Proceso(mensajes, conexion);
-        
-        JSONParser parser = new JSONParser();
-        JSONObject json;
-        try {
-            json = (JSONObject)parser.parse(jMensaje);
-        } catch (ParseException ex) {
-            json = null;
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JSONObject json = parseJson(mensaje);
         if(json!=null){
             int pID;
             try{
@@ -43,32 +28,48 @@ public class ProcesadorJSON implements IProceso {
                 pID = 0;
             }
             switch(Integer.valueOf(json.get("codigo").toString())){
-                case 1:  proceso.terminarSprint(pID);
+                case 1:  Main.getControlador().terminarSprint(pID);
                         break;
-                case 2:  return proceso.determinarVictoria(pID);
-                case 4:  return proceso.enviarProyecto(pID);
-                case 6:  return proceso.sprintPlanning(pID);
-                case 7:  proceso.establecerCompletada(pID, (String)json.get("nombre"));
+                case 2:  return Main.getControlador().determinarVictoria(pID);
+                case 4:  return Main.getControlador().enviarProyecto(pID);
+                case 6:  return Main.getControlador().sprintPlanning(pID);
+                case 7:  
+                    String nombre = (String)json.get("nombre");
+                    Main.getControlador().establecerCompletada(pID, nombre);
                     break;
-                case 8:  return proceso.unirsePartida((int)(long)json.get("partCode"), (String)json.get("nombreJugador"));
-                case 9:  return proceso.actualizarEstadoJugador(pID, (int)(long)json.get("player"));
-                case 10: proceso.registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
+                case 8:  return Main.getControlador().unirsePartida((int)(long)json.get("partCode"), (String)json.get("nombreJugador"));
+                case 9:  return Main.getControlador().actualizarEstadoJugador(pID, (int)(long)json.get("player"));
+                case 10: Main.getControlador().registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
                     break;
-                case 11: proceso.establecerVotación(pID, json.get("votar").equals("True"), (int)(long)json.get("tipoVoto"));
+                case 11: Main.getControlador().establecerVotación(pID, json.get("votar").equals("True"), (int)(long)json.get("tipoVoto"));
                     break;
-                case 12: return proceso.estadoVotacion(pID);
-                case 13: return proceso.enviarVotos(pID, (int)(long)json.get("tipoVotacion"));
-                case 14: return proceso.enviarProyectos();
+                case 12: return Main.getControlador().estadoVotacion(pID);
+                case 13: return Main.getControlador().enviarVotos(pID, (int)(long)json.get("tipoVotacion"));
+                case 14: return Main.getControlador().enviarProyectos();
                 case 15:
                     String jugador = (String) json.get("jugador");
                     String partida = (String) json.get("partida");
                     String proyecto = (String) json.get("proyecto");
-                    return proceso.crearPartida(jugador, partida, proyecto);
+                    return Main.getControlador().crearPartida(jugador, partida, proyecto);
                 case 16:
-                    return proceso.enviarJugadores(pID);
+                    return Main.getControlador().enviarJugadores(pID);
             }
         }
         return "";
     }
     
+    public JSONObject parseJson(Object mensaje){
+        String jMensaje = (String)mensaje;
+        JSONParser parser = new JSONParser();
+        JSONObject json;
+        try {
+            json = (JSONObject)parser.parse(jMensaje);
+        } catch (ParseException ex) {
+            json = null;
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return json;
+    }
 }
+
+

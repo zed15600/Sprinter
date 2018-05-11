@@ -33,7 +33,7 @@ public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
         ArrayList<HistoriaDeUsuario> historias = new ArrayList<>();
         Statement stmt;
         try {
-            stmt = ConexionSingletonMySQL.getConexionSingleton().createStatement();
+            stmt = ConexionMySQL.crearDeclaracion();
             ResultSet r = stmt.executeQuery("{call obtenerHistorias("+idProyecto+")}");
             
             while (r.next()){
@@ -49,7 +49,7 @@ public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
                 historias.add(historia);
             }
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(HistoriaDeUsuarioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         

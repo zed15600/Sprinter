@@ -64,6 +64,14 @@ public class Proyecto {
         return victoria;
     }
     
+    public ArrayList<HistoriaDeUsuario> obtenerHistorias(){
+        return productBacklog.getHistorias();
+    }
+    
+    public ArrayList<HistoriaDeUsuario> obtenerHistoriasSprint(){
+        return listaDeSprints.get(sprintActual-1).getSprintBacklog().getHistorias();
+    }
+    
     public void nextDia(){
         this.diaActual++;
     }

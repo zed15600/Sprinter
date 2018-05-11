@@ -5,8 +5,8 @@
  */
 package Servicio;
 
-import Negocio.Entidades.Configuracion;
 import Negocio.Procesos.IConexion;
+import Negocio.Procesos.IMensajes;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,18 +21,10 @@ import java.util.logging.Logger;
  * @author usuario
  */
 public class ConexionTCP implements IConexion{
-    
-    private final Configuracion configuracion;
     private final IProceso procesador;
     
-    public ConexionTCP(IProceso procesador, Configuracion configuracion){
-        this.procesador = procesador;
-        this.configuracion = configuracion;
-    }
-    
-    @Override
-    public Configuracion obtenerConfiguracion() {
-        return configuracion;
+    public ConexionTCP(IMensajes formatoDeMensajes){
+        this.procesador = new Procesador(formatoDeMensajes);
     }
 
     @Override
@@ -46,9 +38,9 @@ public class ConexionTCP implements IConexion{
                 BufferedReader inData = new BufferedReader(isr);
                 DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
                 in = inData.readLine();
-                //System.out.println("ConexionTCP.conectar()-> in: " + in);
+                System.out.println("ConexionTCP.conectar()-> in: " + in);
                 out = procesador.procesar(in);
-                //System.out.println("ConexionTCP.conectar()-> out: " + out);
+                System.out.println("ConexionTCP.conectar()-> out: " + out);
                 outData.writeBytes(out + "\n");
             }
         } catch (IOException ex) {

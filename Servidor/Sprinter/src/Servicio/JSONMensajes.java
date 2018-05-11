@@ -130,10 +130,10 @@ public class JSONMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarNombresProyectos() {
+    public String enviarNombresProyectos(ArrayList<Proyecto> listaDeProyectos) {
         JSONObject json = new JSONObject();
         JSONArray proyectosN = new JSONArray();
-        ArrayList<Proyecto> proyectos = Main.getProceso().getConexion().obtenerConfiguracion().getListaDeProyectos();
+        ArrayList<Proyecto> proyectos = listaDeProyectos;
         for (Proyecto p:proyectos){
             proyectosN.add(p.getNombre());
         }

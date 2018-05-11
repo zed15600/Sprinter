@@ -32,7 +32,7 @@ public class CriterioDAOMySQL implements CriterioDAO {
         ArrayList<Criterio> criterios = new ArrayList<>();
         try {
             Statement stmt;
-            stmt = ConexionSingletonMySQL.getConexionSingleton().createStatement();
+            stmt = ConexionMySQL.crearDeclaracion();
             ResultSet criteriosObtenidos;
             criteriosObtenidos = stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
             while (criteriosObtenidos.next()){
@@ -40,7 +40,7 @@ public class CriterioDAOMySQL implements CriterioDAO {
                 Criterio criterio = new Criterio(desc);
                 criterios.add(criterio);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CriterioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return criterios;
