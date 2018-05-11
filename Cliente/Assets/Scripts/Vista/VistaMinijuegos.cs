@@ -1,25 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos : ClientElement {
+public class VistaMinijuegos:ClientElement {
     [SerializeField]
     private Text historia;
-
-    public GameObject table;
+    
     public Text timer;
     public Image gato;
     public Text category;
-    public GameObject HUnumber;
-    public GameObject continuar;
-    public float targetTime = 0;
-    public Sprite gatoAzul;
-    public Sprite gatoNaranja;
-    public Sprite gatoVerde;
-    public Color naranja;
-    public Color azul;
-    public Color verde;
+    public Sprite[] gatos;
+    public Color[] colores;
     public GameObject panelCriterios;
 
     public GameObject criterios;
@@ -32,141 +24,133 @@ public class VistaMinijuegos : ClientElement {
 
 
     int count = 0;
+    float targetTime = 0;
+    bool descontar = true;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
+    }
+
+    void OnEnable() {
+        restart();
+        actualizar();
+        descontar = true;
         mostrarHistoria();
         mostrarCriterios();
         mostrarConToggles();
-	}
-
-    void OnEnable()
-    {
-        actualizar();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        Timer();
 
-        if (targetTime <= 0) {
+    // Update is called once per frame
+    void Update() {
+        if(descontar){
+            targetTime-=Time.deltaTime;
+            timer.text=((int)(targetTime/60)).ToString()+":"+((int)targetTime%60).ToString();
+        }
+        if(targetTime<=0) {
             actualizar();
         }
-	}
-
-    public void Continuar() {
-        actualizar();
     }
 
-    void Timer() {
-
-        targetTime -= Time.deltaTime;
-        timer.text = ((int)(targetTime/60)).ToString()+":"+((int)targetTime%60).ToString();
-
-        if (targetTime <= 0.0f) {
-
-            timerEnded();
-        }
-    }
-    void timerEnded()
-    {
-       //UIText timerText = Timer.Get
-        //mer.text = "tiempo";
-    }
     public void restart() {
-        targetTime=120.0f;
+        targetTime=0.0f;
     }
 
     public void actualizar() {
 
-        switch (count) {
+        switch(count) {
             case 0:
-                incrementarContador();
-                category.text = "Diseño";
-                category.color = naranja;
-                gato.sprite = gatoNaranja;
-                count++;
-                break;
+            incrementarContador();
+            category.text="DiseÃ±o";
+            category.color=colores[1];
+            gato.sprite=gatos[1];
+            count++;
+            break;
             case 1:
-                incrementarContador();
-                category.text = "Construcción";
-                category.color = verde;
-                gato.sprite = gatoVerde;
-                count++;
-                break;
+            incrementarContador();
+            category.text="ConstrucciÃ³n";
+            category.color=colores[2];
+            gato.sprite=gatos[2];
+            count++;
+            break;
             case 2:
-                incrementarContador();
-                category.text = "Pruebas";
-                category.color = azul;
-                gato.sprite = gatoAzul;
-                count++;
-                break;
+            incrementarContador();
+            category.text="Pruebas";
+            category.color=colores[0];
+            gato.sprite=gatos[0];
+            count++;
+            break;
             case 3:
-                controlador.establecerTiempo(targetTime);
-                panelCriterios.SetActive(true);
-                count = 0;
-                break;
-        } 
+            descontar = false;
+            controlador.establecerTiempo(targetTime);
+            panelCriterios.SetActive(true);
+            count=0;
+            break;
+        }
 
     }
 
     public void incrementarContador() {
-
-        targetTime += 120;
+        targetTime+=120;
     }
 
     public void mostrarHistoria() {
         string HU = controlador.obtenerHistoriaMinijuego();
-        historia.text = HU;
+        historia.text=HU;
     }
 
     public void mostrarCriterios() {
+        foreach(Transform child in colCriterios.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
 
         List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
 
-        foreach (string crit in criteriosLista)
-        {
-            if (crit != null)
-            {
+        foreach(string crit in criteriosLista) {
+            if(crit!=null) {
                 GameObject criterioA = Instantiate(criterios);
                 Text descCriterio = criterioA.GetComponentInChildren<Text>();
-                descCriterio.text = crit;
-                descCriterio.transform.SetParent(colCriterios.transform, false);
+                descCriterio.text=crit;
+                descCriterio.transform.SetParent(colCriterios.transform,false);
             }
         }
     }
 
     public void mostrarConToggles() {
+        foreach(Transform child in colCriteriosT.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+        foreach(Transform child in colToggles.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
         List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
-        foreach (string crit in criteriosLista)
-        {
-            if (crit != null)
-            {
+        foreach(string crit in criteriosLista) {
+            if(crit!=null) {
                 GameObject criterioT = Instantiate(criteriosT);
                 Toggle critToggle = Instantiate(toggle);
                 Text descCriterio = criterioT.GetComponentInChildren<Text>();
-                descCriterio.text = crit;
-                descCriterio.transform.SetParent(colCriteriosT.transform, false);
-                critToggle.transform.SetParent(colToggles.transform, false);
+                descCriterio.text=crit;
+                descCriterio.transform.SetParent(colCriteriosT.transform,false);
+                critToggle.transform.SetParent(colToggles.transform,false);
             }
         }
     }
 
-    public void revisarCompletadas()
-    {
+    public void revisarCompletadas() {
         Toggle[] estados = colToggles.GetComponentsInChildren<Toggle>();
-        for (int i = 0;i<estados.Length;i++)
-        {
-            if (estados[i].isOn)
-            {
+        for(int i = 0;i<estados.Length;i++) {
+            if(estados[i].isOn) {
                 controlador.eliminarCriterioMinijuego(i);
             }
         }
     }
 
     public void cambiarVista() {
-        throw new System.NotImplementedException();
+        revisarCompletadas();
+        panelCriterios.SetActive(false);
+        this.gameObject.SetActive(false);
+        controlador.mostrarVistaResultados();
     }
+
 }

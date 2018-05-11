@@ -146,6 +146,9 @@ public class ClienteControlador : ClientElement {
     public void mostrarVotosDia(string[] historiaID, int[] votos) {
         vista.panelVotacionDia.mostrarVotos(historiaID, votos);
     }
+    public void mostrarVistaResultados() {
+        vista.resultados.gameObject.SetActive(true);
+    }
 
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
@@ -160,9 +163,9 @@ public class ClienteControlador : ClientElement {
 
     //Web Client
 
-    public void cambiarEstado(HistoriaDeUsuario historia){
+    public void terminarHistoria(HistoriaDeUsuario historia){
         historia.cambiarEstado();
-        webClient.establecerCompletada(historia.getID());
+        webClient.establecerCompletada(historia.getNombre());
     }
 
     //Modelo

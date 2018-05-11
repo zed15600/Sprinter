@@ -50,7 +50,7 @@ public class VistaResultados : ClientElement {
 
         foreach (HistoriaDeUsuario historia in historias){
             if (completada.Equals(historia.getDescripcion())){
-                controlador.cambiarEstado(historia);
+                controlador.terminarHistoria(historia);
             }
         }
         return true;

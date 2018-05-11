@@ -143,7 +143,7 @@ public class WebClient : ClientElement {
         closeSocket();
     }
 
-    public void obtenerSprint(){
+    /*public void obtenerSprint(){
         setupSocket();
         string json = JsonString.sprintPlanning(controlador.obtenerPartida().getID());
         writeSocket(json);
@@ -157,11 +157,11 @@ public class WebClient : ClientElement {
             controlador.obtenerProyecto().setSprintRestante(restantes);
             controlador.obtenerProyecto().setSprintActual(numero);
         }
-    }
+    }*/
 
     public void obtenerProyecto() {
         setupSocket();
-        string json = JsonString.scrumPlanning(controlador.obtenerPartida().getID());
+        string json = JsonString.pedirProyecto(controlador.obtenerPartida().getID());
         writeSocket(json);
         string received_data = readSocket();
         closeSocket();

@@ -53,6 +53,9 @@ public class PanelVotacion : ClientElement {
 	}
 
     public void mostrarVotos(string[] historiasID, int[] votos) {
+        foreach(Transform child in pnlHistorias.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
         if(historiasID.Length == votos.Length){
             for(int i=0; i<historiasID.Length; i++){
                 Text txt = Instantiate(historiaDescPrefab);

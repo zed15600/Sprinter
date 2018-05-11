@@ -37,6 +37,7 @@ public class ClienteModelo : ClientElement {
         this.proyectos = proyectos;
     }
     public void setPartida(Partida partida) {
+        //Debug.Log("ClienteModelo.setPartida() -> PartidaID: "+partida.getID());
         this.partida = partida;
     }
     public void setProyecto(Proyecto proyecto) {
