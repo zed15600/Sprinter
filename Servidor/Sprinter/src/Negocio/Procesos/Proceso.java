@@ -12,6 +12,7 @@ import Negocio.Entidades.IntegranteScrumTeam;
 import Negocio.Entidades.Partida;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -26,6 +27,8 @@ public class Proceso {
         Proceso.conexion = conexion;
     }
     
+    public Proceso(){
+    }
     /*
     Termina el sprint actual del proyecto.
     Recibe el ID de la partida y obtiene el proyecto correspondiente.
@@ -37,12 +40,11 @@ public class Proceso {
     JsonString.terminarSprint(actual.getSprintBacklog()) recibe un SprintBacklog
     y retorna un String en formato Json.
     */
-    public String terminarSprint(int partidaID){
+    public void terminarSprint(int partidaID){
         Proyecto p = conexion.obtenerConfiguracion().getPartidas().get(partidaID).getProyecto();
         Sprint actual = p.getSprints().get(p.getSprintActual()-1);
         actual.terminarSprint();
         p.nextSprint();
-        return mensajes.terminarSprint(actual.getSprintBacklog());
     }
     
     /*
@@ -84,17 +86,16 @@ public class Proceso {
         return mensajes.sprintPlanning(restantes, actual);
     }
     
-    public void establecerCompletada(int pID, String completadaID) {
+    public void establecerCompletada(int pID, String nombre) {
         Partida par = conexion.obtenerConfiguracion().getPartidas().get(pID);
         Proyecto p = par.getProyecto(); 
         ArrayList<HistoriaDeUsuario> historias = p.getProductBacklog().getHistorias();
-        HistoriaDeUsuario historia = new HistoriaDeUsuario();
-        for (int i = 0; i<historias.size();i++){
-            if (historias.get(i).getId() == Integer.valueOf(completadaID)){
-                historia = historias.get(i);
+        for (HistoriaDeUsuario historia : historias){
+            if (historia.getNombre().equals(nombre)){
+                historia.terminarHU();
+                return;
             }
         }
-        historia.terminarHU();
     }
     
     public String unirsePartida(int codigo, String nombreJugador){
@@ -122,8 +123,18 @@ public class Proceso {
         if(votar && tipoVotacion == 2){
             historias = py.getSprints().get(py.getSprintActual()-1).getSprintBacklog().getHistorias();
             size = historias.size();
+            for(HistoriaDeUsuario historia : historias){
+                if(historia.getEstado()){
+                    size--;
+                }
+            }
         }
         size = Math.min(size, historias.size());
+        historias.sort(null);
+        Collections.reverse(historias);
+        for(HistoriaDeUsuario historia : historias){
+            System.out.println("Proceso.actualizarEstadoJugador() -> Orden de historias: " + historia.getNombre());
+        }
         HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[size];
         for(int i=0; i<size; i++){
             if(i < historias.size())
@@ -176,8 +187,8 @@ public class Proceso {
         return mensajes.enviarNombresProyectos();
     }
     
-    public String crearPartida(String jugador, String partida, String proyecto) {        
-        int codigo = conexion.obtenerConfiguracion().crearPartida(jugador, partida, proyecto);
+    public String crearPartida(String jugador, String partida, String proyecto){        
+        String codigo = "" + conexion.obtenerConfiguracion().crearPartida(jugador, partida, proyecto);
         return mensajes.enviarCodigoPartida(codigo);
     }
 

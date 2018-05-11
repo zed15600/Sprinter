@@ -5,6 +5,8 @@
  */
 package Negocio.Entidades;
 
+//local
+
 /**
  *
  * @author usuario
@@ -12,18 +14,12 @@ package Negocio.Entidades;
 public class Criterio {
     
     String descripcion;
-    
-    boolean completitud;
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public boolean isCompletitud() {
-        return completitud;
-    }
-    
     public Criterio(String descripcion){
         this.descripcion = descripcion;
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
     }
 }

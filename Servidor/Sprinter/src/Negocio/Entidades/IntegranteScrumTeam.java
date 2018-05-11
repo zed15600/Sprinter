@@ -14,12 +14,19 @@ import java.util.ArrayList;
 public class IntegranteScrumTeam extends Jugador {
     
     String avatar;
+    private boolean estado; //true -> activo
+    private boolean votar; //true -> puede votar
     private ArrayList<Impedimento> listaImpedimento;
+    
+    public void votar(HistoriaDeUsuario HU){
+    }
     
     public IntegranteScrumTeam(String nombre, int ID, String avatar) {
         super(nombre, ID);
         this.avatar = avatar;
-        this.listaImpedimento = new ArrayList<>();
+        listaImpedimento = new ArrayList<>();
+        votar = true;
+        estado = true;
     }
     
     public String getAvatar(){
@@ -30,5 +37,17 @@ public class IntegranteScrumTeam extends Jugador {
     }
     
     public void quitarImpedimento(Impedimento impedimento){
+    }
+    
+    public boolean getEstado(){
+        return estado;
+    }
+    
+    public boolean getVotar(){
+        return votar;
+    }
+    
+    public void setVotar(boolean votar){
+        this.votar = votar;
     }
 }

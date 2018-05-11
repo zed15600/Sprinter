@@ -13,12 +13,7 @@ public class Jugador {
     
     private String nombre;
     private int ID;
-    private boolean estado; //true -> activo
-    private boolean votar; //true -> puede votar
 
-    public Jugador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public String getNombre() {
         return nombre;
@@ -27,27 +22,9 @@ public class Jugador {
     public Jugador(String nombre, int ID) {
         this.nombre = nombre;
         this.ID = ID;
-        votar = true;
-        estado = true;
     }
     
     public int getID(){
         return ID;
     }
-    
-    public boolean getEstado(){
-        return estado;
-    }
-    
-    public boolean getVotar(){
-        return votar;
-    }
-    
-    public void setVotar(boolean votar){
-        this.votar = votar;
-    }
-    
-    public void votar(HistoriaDeUsuario HU){
-    }
-    
 }

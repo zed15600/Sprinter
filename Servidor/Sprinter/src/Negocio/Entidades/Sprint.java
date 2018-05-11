@@ -14,8 +14,8 @@ public class Sprint {
     private int numeroDeSprint;
     private boolean estado;
 
-    public Sprint(int numeroDeSprint) {
-        this.sprintBacklog = new Backlog();
+    public Sprint(int numeroDeSprint, int nHistorias) {
+        this.sprintBacklog = new Backlog(nHistorias);
         this.numeroDeSprint = numeroDeSprint;
         this.estado = false;
     }

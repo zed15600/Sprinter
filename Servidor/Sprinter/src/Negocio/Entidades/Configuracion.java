@@ -18,6 +18,7 @@ import java.util.Set;
 public class Configuracion {
     
     private static final Map<Integer, Partida> partidas = new HashMap<>();
+    //local
     private final ArrayList<Proyecto> listaDeProyectos;
     private final ProyectoDAO impl;
 
@@ -41,9 +42,6 @@ public class Configuracion {
         Partida partida = new Partida(codigo, nombrePartida, proyecto, scrumMaster);
         partidas.put(codigo, partida);
         return codigo;
-    }
-    
-    public void descargarDatos(){        
     }
     
     public void agregarProyecto(Proyecto proyecto){

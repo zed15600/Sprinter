@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  * método conectar.
  * @author Ricardo Azopardo
  */
-public final class ConexionSingleton {
+public final class ConexionSingletonMySQL {
     
     private static Connection conexionSingleton;
     
-    private ConexionSingleton(){}
+    private ConexionSingletonMySQL(){}
     
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
@@ -45,7 +45,7 @@ public final class ConexionSingleton {
             JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
                + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
-        ConexionSingleton.conexionSingleton = conn;
+        ConexionSingletonMySQL.conexionSingleton = conn;
     }
     
     /**
