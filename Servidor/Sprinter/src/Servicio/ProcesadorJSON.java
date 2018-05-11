@@ -13,21 +13,24 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author usuario
+ * @author Ricardo Azopardo, Edison Zapata
  */
 public class ProcesadorJSON implements IProceso {
 
     @Override
     public String procesar(Object mensaje) {
         JSONObject json = parseJson(mensaje);
+        int codigoProceso;
         if(json!=null){
             int pID;
             try{
+                codigoProceso = Integer.valueOf(json.get("codigo").toString());
                 pID = Integer.valueOf(json.get("partidaID").toString());
             }catch(Exception ex){
+                codigoProceso = 0;
                 pID = 0;
             }
-            switch(Integer.valueOf(json.get("codigo").toString())){
+            switch(codigoProceso){
                 case 1:  Main.getControlador().terminarSprint(pID);
                         break;
                 case 2:  return Main.getControlador().determinarVictoria(pID);
@@ -37,20 +40,38 @@ public class ProcesadorJSON implements IProceso {
                     String nombre = (String)json.get("nombre");
                     Main.getControlador().establecerCompletada(pID, nombre);
                     break;
-                case 8:  return Main.getControlador().unirsePartida((int)(long)json.get("partCode"), (String)json.get("nombreJugador"));
-                case 9:  return Main.getControlador().actualizarEstadoJugador(pID, (int)(long)json.get("player"));
-                case 10: Main.getControlador().registrarVoto(pID, (int)(long)json.get("HUid"), (int)(long)json.get("player"));
+                case 8:
+                    String nombreJugador = (String)json.get("nombreJugador");
+                    return Main.getControlador().unirsePartida(pID,
+                            nombreJugador);
+                case 9:  
+                    int jugador = (int)(long)json.get("player");
+                    return Main.getControlador().actualizarEstadoJugador(pID,
+                            jugador);
+                case 10: 
+                    int idHU = (int)(long)json.get("HUid");
+                    int playerId = (int)(long)json.get("player");
+                    Main.getControlador().registrarVoto(pID, idHU, playerId);
                     break;
-                case 11: Main.getControlador().establecerVotación(pID, json.get("votar").equals("True"), (int)(long)json.get("tipoVoto"));
+                case 11:
+                    boolean votar = json.get("votar").equals("True");
+                    int tipoVoto = (int)(long)json.get("tipoVoto");
+                    Main.getControlador().establecerVotación(pID,votar,
+                            tipoVoto);
                     break;
-                case 12: return Main.getControlador().estadoVotacion(pID);
-                case 13: return Main.getControlador().enviarVotos(pID, (int)(long)json.get("tipoVotacion"));
-                case 14: return Main.getControlador().enviarProyectos();
+                case 12: 
+                    return Main.getControlador().estadoVotacion(pID);
+                case 13:
+                    int tipoVotacion = (int)(long)json.get("tipoVotacion");
+                    return Main.getControlador().enviarVotos(pID, tipoVotacion);
+                case 14: 
+                    return Main.getControlador().enviarProyectos();
                 case 15:
-                    String jugador = (String) json.get("jugador");
+                    String scrumMaster = (String) json.get("jugador");
                     String partida = (String) json.get("partida");
                     String proyecto = (String) json.get("proyecto");
-                    return Main.getControlador().crearPartida(jugador, partida, proyecto);
+                    return Main.getControlador().crearPartida(scrumMaster,
+                            partida, proyecto);
                 case 16:
                     return Main.getControlador().enviarJugadores(pID);
             }

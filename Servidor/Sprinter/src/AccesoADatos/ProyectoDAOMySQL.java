@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class ProyectoDAOMySQL implements ProyectoDAO {
     
-    private HistoriaDeUsuarioDAO impl;
+    private final HistoriaDeUsuarioDAO impl;
     
     public ProyectoDAOMySQL(){
         impl = new HistoriaDeUsuarioDAOMySQL();
@@ -34,7 +34,7 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
         try {
             Statement stmt;
             stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet r = stmt.executeQuery("{call obtenerTodosLosProyectos()}");
+            ResultSet r =stmt.executeQuery("{call obtenerTodosLosProyectos()}");
             while (r.next()){
                 String nombre =  r.getString(1);
                 String descripcion = r.getString(2);
@@ -42,7 +42,8 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
                 proyectos.add(proyecto);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
         return proyectos;
     }
@@ -52,17 +53,20 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
         Proyecto proyecto = null;
         try {
             Statement stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet r = stmt.executeQuery("{call obtenerProyecto(\""+nombre+"\")}");
+            ResultSet r = stmt.executeQuery("{call obtenerProyecto(\""+nombre+
+                    "\")}");
             while (r.next()){
                 int id =  r.getInt(1);
                 String descripcion = r.getString(2);
                 int nSprints = r.getInt(3);
                 int durSprints = r.getInt(4);
                 Backlog backlog = new Backlog(impl.obtenerHistorias(id));
-                proyecto = new Proyecto(nombre, descripcion, durSprints, backlog, nSprints);
+                proyecto = new Proyecto(nombre, descripcion, durSprints,
+                        backlog, nSprints);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
         return proyecto;
     }

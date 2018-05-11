@@ -11,12 +11,11 @@ import Negocio.Entidades.Configuracion;
  *
  * @author usuario
  */
-public class Controlador {
-    IMensajes respuestas;
-    Configuracion configuracion;
+public class ControladorJugador extends Controlador {
     
-    public Controlador(IMensajes respuestas, Configuracion configuracion){
-        this.respuestas = respuestas;
-        this.configuracion = configuracion;
+    public ControladorJugador(IMensajes respuestas,Configuracion configuracion){
+        super(respuestas, configuracion);
     }
+    
+    
 }

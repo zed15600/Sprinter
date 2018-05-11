@@ -46,13 +46,17 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
         String IP = "sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com";
         String puerto = "3306";
         String baseDeDatos = "sprinter";
-        String conector = "jdbc:mysql://" + IP + ":" + puerto + "/" + baseDeDatos;
+        String conector = "jdbc:mysql://"
+                + IP
+                + ":" + puerto 
+                + "/" + baseDeDatos;
         String usuario = "rrazopardc";
         String contraseña = "Azopardo234432qw";
         conn = DriverManager.getConnection(conector, usuario, contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error en la conexión con la"
-               + "base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex,
+                    "Error en la conexión con la" + "base de datos: "
+                            + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
         ConexionMySQL.conexion = conn;
     }

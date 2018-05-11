@@ -1,22 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header/*, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package Negocio.Entidades;
 
 import java.util.ArrayList;
 
-/**
+/*
  *
  * @author usuario
  */
 public class IntegranteScrumTeam extends Jugador {
     
     String avatar;
-    private boolean estado; //true -> activo
+    private final boolean estado; //true -> activo
     private boolean votar; //true -> puede votar
-    private ArrayList<Impedimento> listaImpedimento;
+    private final ArrayList<Impedimento> listaImpedimento;
     
     public void votar(HistoriaDeUsuario HU){
     }

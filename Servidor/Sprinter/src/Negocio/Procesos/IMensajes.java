@@ -6,7 +6,6 @@
 package Negocio.Procesos;
 
 import Negocio.Entidades.HistoriaDeUsuario;
-import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
 import Negocio.Entidades.Proyecto;
 import java.util.ArrayList;
@@ -20,10 +19,12 @@ public interface IMensajes {
     public String traerProyecto(Proyecto p);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
     public String unirsePartida(int jugadorId, boolean aceptado, String avatar);
-    public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles);
+    public String actualizarEstadoJugador(boolean votar,
+            HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(String[][] listaVotos);
     public String enviarNombresProyectos(ArrayList<Proyecto> listaDeProyectos);
     public String enviarCodigoPartida(String codigo);
-    public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores);
+    public String enviarJugadoresConAvatares
+        (ArrayList<IntegranteScrumTeam> jugadores);
 }

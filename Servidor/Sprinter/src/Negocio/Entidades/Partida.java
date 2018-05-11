@@ -16,14 +16,18 @@ import java.util.Stack;
 
 
 public class Partida {    
-    private int codigo;
-    private ArrayList<IntegranteScrumTeam> listaJugadores;
-    private String nombre;
+    private final int codigo;
+    private final ArrayList<IntegranteScrumTeam> listaJugadores;
+    private final String nombre;
     private Proyecto proyecto;
     private boolean votacion;
-    private int tipoVotacion; //1 -> votar historias de Sprint, 2 -> votar historia de día
-    private ScrumMaster scrumMaster;
-    private Stack<String> avatares;
+    private int tipoVotacion; /* Tipos de Votaciones:
+                               * 1 || 2
+                               * 1 -> votar historias de Sprint, 
+                               * 2 -> votar historia de día
+                               */
+    private final ScrumMaster scrumMaster;
+    private final Stack<String> avatares;
 
     public ArrayList<IntegranteScrumTeam> getListaJugadores() {
         return listaJugadores;
@@ -33,17 +37,8 @@ public class Partida {
         return votacion;
     }
     
-    public Partida(int codigo, String nombre, Proyecto proyecto){
-        this.codigo = codigo;
-        this.listaJugadores = new ArrayList();
-        this.nombre = nombre;
-        this.proyecto = proyecto;
-        this.scrumMaster = new ScrumMaster("",0);
-        votacion = false;
-        tipoVotacion = 0;
-    }
-    
-    public Partida(int codigo, String nombre, Proyecto proyecto, ScrumMaster scrumMaster){
+    public Partida(int codigo, String nombre, Proyecto proyecto,
+            ScrumMaster scrumMaster){
         this.codigo = codigo;
         this.listaJugadores = new ArrayList();
         this.nombre = nombre;
@@ -66,7 +61,7 @@ public class Partida {
     
     public int agregarJugador (String nombre, String avatar){
         int id = listaJugadores.size()+1;
-        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id, avatar);
+        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre,id,avatar);
         listaJugadores.add(jugador);
         return id;
     }

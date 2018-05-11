@@ -11,7 +11,7 @@ import AccesoADatos.ConexionMySQL;
 import Negocio.Entidades.IConexionBaseDeDatos;
 import Negocio.Procesos.IConexion;
 import Negocio.Procesos.IMensajes;
-import Negocio.Procesos.Controlador;
+import Negocio.Procesos.ControladorPrincipal;
 
 /**
  *
@@ -20,11 +20,11 @@ import Negocio.Procesos.Controlador;
 
 public class Main {
     
-    private static Controlador controlador;
+    private static ControladorPrincipal controlador;
     
     /*
     Aquí se crea la conexión del servidor hacia el mundo.
-    Se crea un objeto Controlador que es el que lleva a cabo todas las acciones
+    Se crea un objeto ControladorPrincipal que es el que lleva a cabo todas las acciones
     en base al String que la conexión lee desde el puerto (5173).
     socket.accept() abre el puerto y se queda esperando hasta que recibe una conexión.
     inData.readLine() almacena en una variable String el mensaje     que recibe por el puerto.
@@ -35,7 +35,8 @@ public class Main {
     public static void main(String args[]) throws IOException {
         /*----------------------Instanciación de Interfaces-------------------*/
         /*
-         * IConexionBaseDeDatos: define el tipo de conexión con la base de datos.
+         * IConexionBaseDeDatos: define el tipo de conexión con la base de 
+         * datos.
          * Posibles implementaciones: ConexionMySQL
          * Actual selección: ConexionMySQL para conectarse a la DB MySQL.
          */
@@ -48,7 +49,8 @@ public class Main {
          */
         IMensajes implMensajes = new JSONMensajes();
         /*
-         * IConexion: define el protocolo de transferencia que utiliza el servidor.
+         * IConexion: define el protocolo de transferencia que utiliza el 
+         * servidor.
          * Posibles implementaciones: ConexionTCP
          * Actual selección: ConexionTCP para protocolo de transferencia TCP.
          */
@@ -56,11 +58,11 @@ public class Main {
         /*--------------------Fin De Implementaciones-------------------------*/
         Configuracion configuracion = new Configuracion(implBaseDeDatos);
         //Controlador global de la aplicación.
-        controlador = new Controlador(implMensajes, implConexion, configuracion);
+        controlador = new ControladorPrincipal(implMensajes,implConexion,configuracion);
         controlador.conectar();
     }
     
-    public static Controlador getControlador(){
+    public static ControladorPrincipal getControlador(){
         return controlador;
     }    
 }

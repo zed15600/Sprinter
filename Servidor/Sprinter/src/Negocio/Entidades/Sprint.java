@@ -10,8 +10,8 @@ package Negocio.Entidades;
  * @author usuario
  */
 public class Sprint {
-    private Backlog sprintBacklog;
-    private int numeroDeSprint;
+    private final Backlog sprintBacklog;
+    private final int numeroDeSprint;
     private boolean estado;
 
     public Sprint(int numeroDeSprint, int nHistorias) {

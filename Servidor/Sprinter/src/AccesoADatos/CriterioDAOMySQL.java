@@ -34,14 +34,16 @@ public class CriterioDAOMySQL implements CriterioDAO {
             Statement stmt;
             stmt = ConexionMySQL.crearDeclaracion();
             ResultSet criteriosObtenidos;
-            criteriosObtenidos = stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
+            criteriosObtenidos = 
+                    stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
             while (criteriosObtenidos.next()){
                 String desc = criteriosObtenidos.getString(1);
                 Criterio criterio = new Criterio(desc);
                 criterios.add(criterio);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CriterioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CriterioDAOMySQL.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
         return criterios;
     }

@@ -7,6 +7,7 @@ package Negocio.Entidades;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 /**
  *
  * @author usuario
@@ -118,9 +119,12 @@ public class Proyecto {
         historias.sort(null);
         Collections.reverse(historias);
         for(HistoriaDeUsuario historia : historias){
-        System.out.println("Proyecto.getVotos() -> Orden de historias: " + historia.getNombre());
+        /*System.out.println("Proyecto.getVotos() -> Orden de historias: " +
+                historia.getNombre());*/
         }
-        if(historias.size() >= Maximo && Maximo == 4 && historias.get(3).getVotos() == 0){
+        if(historias.size() >= Maximo 
+                && Maximo == 4 
+                && historias.get(3).getVotos() == 0){
             Maximo = 3;
         }
         int cantidad = Math.min(Maximo, historias.size());

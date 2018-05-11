@@ -92,7 +92,8 @@ public class JSONMensajes implements IMensajes {
     }
     
     @Override
-    public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
+    public String actualizarEstadoJugador(boolean votar,
+            HistoriaDeUsuario[] posibles){
         JSONObject json = new JSONObject();
         JSONArray HUs = new JSONArray();
         JSONArray HUsDesc = new JSONArray();
@@ -125,7 +126,8 @@ public class JSONMensajes implements IMensajes {
         }
         json.put("historiasID", hID);
         json.put("votos", votos);
-        //System.out.println("JSONMensajes.enviarVotos() -> Json: " + json.toJSONString());
+        /*System.out.println("JSONMensajes.enviarVotos() -> Json: " + 
+        json.toJSONString());*/
         return json.toJSONString();
     }
 
@@ -149,7 +151,9 @@ public class JSONMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
+    public String enviarJugadoresConAvatares
+        (ArrayList<IntegranteScrumTeam> jugadores) {
+            
         JSONObject json = new JSONObject();
         JSONArray jJugadores = new JSONArray();
         JSONArray avatares = new JSONArray();

@@ -18,44 +18,47 @@ import java.util.Set;
  */
 public class Configuracion {
     
-    private static final Map<Integer, Partida> partidas = new HashMap<>();
+    private final Map<Integer, Partida> mapaDePartidas;
     //local
     private final ArrayList<Proyecto> listaDeProyectos;
     private final IConexionBaseDeDatos impl;
 
     public Configuracion(IConexionBaseDeDatos impl){
+        this.mapaDePartidas = new HashMap<>();
         this.impl = impl;
         this.impl.conectar();
         listaDeProyectos = this.impl.obtenerProyectos();
     }
     
-    public String crearPartida(String nombreJugador, String nombrePartida, String nombreProyecto){
+    public String crearPartida(String nombreJugador, String nombrePartida,
+            String nombreProyecto){
         int codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
-        Set keys = partidas.keySet();
+        Set keys = mapaDePartidas.keySet();
         while (keys.contains(codigo)){
             codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
         }
         Proyecto proyecto = this.impl.obtenerProyecto(nombreProyecto);
         ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0);
-        Partida partida = new Partida(codigo, nombrePartida, proyecto, scrumMaster);
-        partidas.put(codigo, partida);
+        Partida partida = new Partida(codigo, nombrePartida, proyecto,
+                scrumMaster);
+        mapaDePartidas.put(codigo, partida);
         String codigoPartida = String.valueOf(codigo);
         return codigoPartida;
     }
     public Proyecto obtenerProyectoDePartida(int idPartida){
-        return partidas.get(idPartida).getProyecto();
+        return mapaDePartidas.get(idPartida).getProyecto();
     }
     
     public Partida obtenerPartida(int idPartida){
-        return partidas.get(idPartida);
+        return mapaDePartidas.get(idPartida);
     }
     
     public Collection<Partida> obtenerPartidas(){
-        return partidas.values();
+        return mapaDePartidas.values();
     }
     
     public void quitarPartida(int idPartida){
-        partidas.remove(idPartida);
+        mapaDePartidas.remove(idPartida);
     }
     
     public void agregarProyecto(Proyecto proyecto){

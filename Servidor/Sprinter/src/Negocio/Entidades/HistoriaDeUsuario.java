@@ -5,7 +5,6 @@
  */
 package Negocio.Entidades;
 
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 
 /**
@@ -32,8 +31,8 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     public HistoriaDeUsuario(){
     }
     
-    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad,
-            ArrayList<Criterio> listaCriterios, String nombre){
+    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria,
+            int prioridad, ArrayList<Criterio> listaCriterios, String nombre){
         this.nombre = nombre;
         this.id = id;
         this.puntosHistoria = puntosHistoria;
@@ -105,20 +104,25 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
     @Override
     public int compareTo(HistoriaDeUsuario o) {
-        //System.out.println("HistoriaDeUsuario.compareTo() -> Historia comparada: " + nombre + "<>" + o.nombre);
+        /*System.out.println("HistoriaDeUsuario.compareTo() -> +
+        Historia comparada: " + nombre + "<>" + o.nombre);*/
         if(o.estado){
-            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por estado: " + Integer.MIN_VALUE); 
+            /*System.out.println("HistoriaDeUsuario.compareTo() -> + 
+            Resultado por estado: " + Integer.MIN_VALUE);*/ 
             return Integer.MAX_VALUE;
         }
         if(this.contadorVotos != o.contadorVotos){
-            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por votos: " + (contadorVotos-o.contadorVotos)); 
+            /*System.out.println("HistoriaDeUsuario.compareTo() -> +
+            Resultado por votos: " + (contadorVotos-o.contadorVotos));*/
             return contadorVotos - o.contadorVotos;
         }
         if(this.prioridad != o.prioridad){
-            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por prioridad: " + (prioridad-o.prioridad)); 
+            /*System.out.println("HistoriaDeUsuario.compareTo() -> +
+            Resultado por prioridad: " + (prioridad-o.prioridad));*/
             return prioridad - o.prioridad;
         }
-        //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado igual: " + 0); 
+        /*System.out.println("HistoriaDeUsuario.compareTo() -> +
+        Resultado igual: " + 0); */
         return 0;
     }
 }

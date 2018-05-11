@@ -34,7 +34,8 @@ public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
         Statement stmt;
         try {
             stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet r = stmt.executeQuery("{call obtenerHistorias("+idProyecto+")}");
+            ResultSet r = stmt.executeQuery
+                ("{call obtenerHistorias("+idProyecto+")}");
             
             while (r.next()){
                 int id =  r.getInt(1);
@@ -44,13 +45,14 @@ public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
                 String nombre = r.getString(5);
                 ArrayList<Criterio> criterios = critImpl.obtenerCriterios(id);
                 
-                HistoriaDeUsuario historia = new HistoriaDeUsuario(id, desc, puntos, prioridad,
-                criterios, nombre);
+                HistoriaDeUsuario historia = new HistoriaDeUsuario(id, desc, 
+                        puntos, prioridad, criterios, nombre);
                 historias.add(historia);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaDeUsuarioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger
+        (HistoriaDeUsuarioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return historias;

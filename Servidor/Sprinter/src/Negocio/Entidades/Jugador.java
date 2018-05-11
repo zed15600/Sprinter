@@ -11,8 +11,8 @@ package Negocio.Entidades;
  */
 public class Jugador {
     
-    private String nombre;
-    private int ID;
+    private final String nombre;
+    private final int ID;
 
 
     public String getNombre() {

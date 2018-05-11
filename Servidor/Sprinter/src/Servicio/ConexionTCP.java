@@ -34,9 +34,11 @@ public class ConexionTCP implements IConexion{
             String in, out;
             while(true){
                 Socket connectionSocket = socket.accept();
-                InputStreamReader isr = new InputStreamReader(connectionSocket.getInputStream());
+                InputStreamReader isr =
+                       new InputStreamReader(connectionSocket.getInputStream());
                 BufferedReader inData = new BufferedReader(isr);
-                DataOutputStream outData = new DataOutputStream(connectionSocket.getOutputStream());
+                DataOutputStream outData = 
+                       new DataOutputStream(connectionSocket.getOutputStream());
                 in = inData.readLine();
                 System.out.println("ConexionTCP.conectar()-> in: " + in);
                 out = procesador.procesar(in);
@@ -44,7 +46,8 @@ public class ConexionTCP implements IConexion{
                 outData.writeBytes(out + "\n");
             }
         } catch (IOException ex) {
-            Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
     }    
 }
