@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * @author usuario
  */
 public interface IMensajes {
-    public String terminarSprint(Backlog sprntBcklg);
     public String determinarVictoria(boolean resultado);
     public String traerProyecto(Proyecto p);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
@@ -25,6 +24,6 @@ public interface IMensajes {
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(String[][] listaVotos);
     public String enviarNombresProyectos();
-    public String enviarCodigoPartida(int codigo);
+    public String enviarCodigoPartida(String codigo);
     public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores);
 }

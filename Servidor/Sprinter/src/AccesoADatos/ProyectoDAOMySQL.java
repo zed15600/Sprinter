@@ -20,19 +20,19 @@ import java.util.logging.Logger;
  *
  * @author usuario
  */
-public class ProyectoDAOImpl implements ProyectoDAO {
+public class ProyectoDAOMySQL implements ProyectoDAO {
     
     private HistoriaDeUsuarioDAO impl;
     
-    public ProyectoDAOImpl(){
-        impl = new HistoriaDeUsuarioDAOImpl();
+    public ProyectoDAOMySQL(){
+        impl = new HistoriaDeUsuarioDAOMySQL();
     }
     
     @Override
     public ArrayList<Proyecto> obtenerProyectos(){
         ArrayList<Proyecto> proyectos = new ArrayList<>();
         try {
-            ResultSet r = ConexionSingleton.getConexionSingleton().createStatement().executeQuery("{call obtenerTodosLosProyectos()}");
+            ResultSet r = ConexionSingletonMySQL.getConexionSingleton().createStatement().executeQuery("{call obtenerTodosLosProyectos()}");
             while (r.next()){
                 String nombre =  r.getString(1);
                 String descripcion = r.getString(2);
@@ -40,7 +40,7 @@ public class ProyectoDAOImpl implements ProyectoDAO {
                 proyectos.add(proyecto);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ProyectoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proyectos;
     }
@@ -49,7 +49,7 @@ public class ProyectoDAOImpl implements ProyectoDAO {
     public Proyecto obtenerProyecto(String nombre) {
         Proyecto proyecto = null;
         try {
-            Statement stmt = ConexionSingleton.getConexionSingleton().createStatement();
+            Statement stmt = ConexionSingletonMySQL.getConexionSingleton().createStatement();
             ResultSet r = stmt.executeQuery("{call obtenerProyecto(\""+nombre+"\")}");
             while (r.next()){
                 int id =  r.getInt(1);
@@ -60,7 +60,7 @@ public class ProyectoDAOImpl implements ProyectoDAO {
                 proyecto = new Proyecto(nombre, descripcion, durSprints, backlog, nSprints);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ProyectoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proyecto;
     }

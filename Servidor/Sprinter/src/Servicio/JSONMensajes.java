@@ -7,80 +7,39 @@ package Servicio;
 
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
-import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.Backlog;
 import Negocio.Entidades.IntegranteScrumTeam;
-import Negocio.Entidades.Sprint;
+import Negocio.Entidades.Proyecto;
+import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- * 
- * @author EDISON, Ricardo Azopardo
+ *
+ * @author usuario
  */
-public class Mensaje {
+public class JSONMensajes implements IMensajes {
     
-    /*
-    Recibe un Proyecto y retorna un String con el código para la vista Sprint, 
-    el sprint actual, el día actual del proyecto y una lista con los identificadores
-    de las historias de usaurio correspondientes, en formato Json.
-    */
-    protected static String terminarDia(Proyecto p){
-        JSONObject json = new JSONObject();
-        json.put("codigo", 0003);
-        json.put("sprintActual", p.getSprintActual());
-        json.put("diaActual", p.getDiaActual());
-        JSONArray HUs = new JSONArray();
-        ArrayList<HistoriaDeUsuario> historias;
-        Sprint sprint = p.getSprints().get(p.getSprintActual());
-        historias = sprint.getSprintBacklog().getHistorias();
-        for(HistoriaDeUsuario historia: historias){
-            HUs.add(historia.getId());
-        }
-        json.put("HUs", HUs);
-        return json.toJSONString();
-    }
-    
-    
-    /*
-    Recibe un SprintBacklog y retorna un String con el código para la vista 
-    Retrospectiva y una lista con los identificadores de las historias de usuario,
-    en formato Json.
-    */
-    protected static String terminarSprint(Backlog sprntBcklg){
-        JSONObject json = new JSONObject();
-        json.put("codigo", 0001);
-        JSONArray HUs = new JSONArray();
-        ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHistorias();
-        for(HistoriaDeUsuario historia: historias){
-            if(historia.getEstado()){
-                HUs.add(historia.getPuntuacion());
-            }
-        }
-        json.put("HUs", HUs);
-        return json.toJSONString();
-    }
-    
-    /*
-    Recibe un booleano y retorna un String con el código para la vista Fin del 
-    Juego y el resultado de la partida (Victoria o Derrota), en formato Json.
-    */
-    protected static String determinarVictoria(boolean resultado){
+    /**
+     * Recibe un booleano y retorna un String con el código para la vista Fin del 
+     * Juego y el resultado de la partida (Victoria o Derrota), en formato Json.
+     * @param resultado
+     * @return
+     */
+    @Override
+    public String determinarVictoria(boolean resultado) {
         JSONObject json = new JSONObject();
         json.put("codigo", 0002);
         json.put("resultado", resultado?"Victoria":"Derrota");
         return json.toJSONString();
     }
-
-    /**
+    
+     /**
      * Retorna el String en formato Json con los datos del proyecto: nombre y descripcion.
-     * @param nombre nombre del proyecto.
-     * @param descripcion descripcion del proyecto.
-     * @param HUs
      * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
      */
-    protected static String traerProyecto(Proyecto p) {
+    @Override
+    public String traerProyecto(Proyecto p) {
         JSONObject json = new JSONObject();
         json.put("codigo", 0004);
         json.put("nombre", p.getNombre());
@@ -108,7 +67,14 @@ public class Mensaje {
         return json.toJSONString();
     }
     
-    protected static String sprintPlanning(int sprintsRestantes, int numeroDeSprint){
+    /**
+     * 
+     * @param sprintsRestantes 
+     * @param numeroDeSprint
+     * @return 
+     */
+    @Override
+    public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
         JSONObject json = new JSONObject();
         json.put("codigo",0006);
         json.put("restantes", sprintsRestantes);
@@ -116,7 +82,8 @@ public class Mensaje {
         return json.toJSONString();
     }
     
-    protected static String unirsePartida(int jugadorId, boolean aceptado, String avatar){
+    @Override
+    public String unirsePartida(int jugadorId, boolean aceptado, String avatar){
         JSONObject json = new JSONObject();
         json.put("jugadorID", jugadorId);
         json.put("aceptado", aceptado);
@@ -124,7 +91,8 @@ public class Mensaje {
         return json.toJSONString();
     }
     
-    protected static String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
+    @Override
+    public String actualizarEstadoJugador(boolean votar, HistoriaDeUsuario[] posibles){
         JSONObject json = new JSONObject();
         JSONArray HUs = new JSONArray();
         JSONArray HUsDesc = new JSONArray();
@@ -138,14 +106,16 @@ public class Mensaje {
         return json.toJSONString();
     }
     
-    protected static String estadoVotacion(boolean votamos, int tipoVotacion){
+    @Override
+    public String estadoVotacion(boolean votamos, int tipoVoto){
         JSONObject json = new JSONObject();
         json.put("votamos", votamos);
-        json.put("tipoVotacion", tipoVotacion);
+        json.put("tipoVotacion", tipoVoto);
         return json.toJSONString();
     }
-    
-    protected static String enviarVotos(String[][] listaVotos){
+
+    @Override
+    public String enviarVotos(String[][] listaVotos) {
         JSONObject json = new JSONObject();
         JSONArray hID = new JSONArray();
         JSONArray votos = new JSONArray();
@@ -155,14 +125,15 @@ public class Mensaje {
         }
         json.put("historiasID", hID);
         json.put("votos", votos);
-        System.out.println(json.toJSONString());
+        //System.out.println("JSONMensajes.enviarVotos() -> Json: " + json.toJSONString());
         return json.toJSONString();
     }
 
-    protected static String enviarNombresProyectos() {
+    @Override
+    public String enviarNombresProyectos() {
         JSONObject json = new JSONObject();
         JSONArray proyectosN = new JSONArray();
-        ArrayList<Proyecto> proyectos = ConexionTCP.getProceso().getConexion().obtenerConfiguracion().getListaDeProyectos();
+        ArrayList<Proyecto> proyectos = Main.getProceso().getConexion().obtenerConfiguracion().getListaDeProyectos();
         for (Proyecto p:proyectos){
             proyectosN.add(p.getNombre());
         }
@@ -170,14 +141,15 @@ public class Mensaje {
         return json.toJSONString();
     }
 
-    protected static String enviarCodigoPartida(String id) {
+    @Override
+    public String enviarCodigoPartida(String codigo) {
         JSONObject json = new JSONObject();
-        json.put("id", id);
+        json.put("id", codigo);
         return json.toJSONString();
     }
 
-    protected static String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
-        
+    @Override
+    public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
         JSONObject json = new JSONObject();
         JSONArray jJugadores = new JSONArray();
         JSONArray avatares = new JSONArray();
@@ -192,5 +164,46 @@ public class Mensaje {
         return json.toJSONString();
     }
     
-
+    //POR IMPLEMENTAR
+    /*
+    Recibe un Proyecto y retorna un String con el código para la vista Sprint, 
+    el sprint actual, el día actual del proyecto y una lista con los identificadores
+    de las historias de usaurio correspondientes, en formato Json.
+    
+    protected static String terminarDia(Proyecto p){
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0003);
+        json.put("sprintActual", p.getSprintActual());
+        json.put("diaActual", p.getDiaActual());
+        JSONArray HUs = new JSONArray();
+        ArrayList<HistoriaDeUsuario> historias;
+        Sprint sprint = p.getSprints().get(p.getSprintActual());
+        historias = sprint.getSprintBacklog().getHistorias();
+        for(HistoriaDeUsuario historia: historias){
+            HUs.add(historia.getId());
+        }
+        json.put("HUs", HUs);
+        return json.toJSONString();
+    }
+    */
+    
+    /*
+    Recibe un SprintBacklog y retorna un String con el código para la vista 
+    Retrospectiva y una lista con los identificadores de las historias de usuario,
+    en formato Json.
+    
+    protected static String terminarSprint(Backlog sprntBcklg){
+        JSONObject json = new JSONObject();
+        json.put("codigo", 0001);
+        JSONArray HUs = new JSONArray();
+        ArrayList<HistoriaDeUsuario> historias = sprntBcklg.getHistorias();
+        for(HistoriaDeUsuario historia: historias){
+            if(historia.getEstado()){
+                HUs.add(historia.getPuntuacion());
+            }
+        }
+        json.put("HUs", HUs);
+        return json.toJSONString();
+    }
+    */
 }

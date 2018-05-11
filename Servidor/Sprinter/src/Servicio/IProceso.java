@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.Procesos;
-
-import Negocio.Entidades.Configuracion;
+package Servicio;
 
 /**
  *
  * @author usuario
  */
-public interface IConexion {
-    public void conectar();
-    public Configuracion obtenerConfiguracion();
+public interface IProceso {
+    public String procesar(Object mensaje);
 }

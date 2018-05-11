@@ -20,12 +20,12 @@ import java.util.logging.Logger;
  *
  * @author usuario
  */
-public class HistoriaDeUsuarioDAOImpl implements HistoriaDeUsuarioDAO {
+public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
     
     private final CriterioDAO critImpl;
     
-    public HistoriaDeUsuarioDAOImpl(){
-        critImpl = new CriterioDAOImpl();
+    public HistoriaDeUsuarioDAOMySQL(){
+        critImpl = new CriterioDAOMySQL();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class HistoriaDeUsuarioDAOImpl implements HistoriaDeUsuarioDAO {
         ArrayList<HistoriaDeUsuario> historias = new ArrayList<>();
         Statement stmt;
         try {
-            stmt = ConexionSingleton.getConexionSingleton().createStatement();
+            stmt = ConexionSingletonMySQL.getConexionSingleton().createStatement();
             ResultSet r = stmt.executeQuery("{call obtenerHistorias("+idProyecto+")}");
             
             while (r.next()){
@@ -50,7 +50,7 @@ public class HistoriaDeUsuarioDAOImpl implements HistoriaDeUsuarioDAO {
             }
             
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(HistoriaDeUsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HistoriaDeUsuarioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return historias;

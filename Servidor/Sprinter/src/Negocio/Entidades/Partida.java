@@ -15,7 +15,7 @@ import java.util.Stack;
 
 
 
-public class Partida {
+public class Partida {    
     private int codigo;
     private ArrayList<IntegranteScrumTeam> listaJugadores;
     private String nombre;
@@ -76,13 +76,10 @@ public class Partida {
     }
     
     public void reiniciarVotaciones(){
-        for(Jugador jugador: listaJugadores){
+        for(IntegranteScrumTeam jugador: listaJugadores){
             jugador.setVotar(true);
         }
         proyecto.reiniciarVotacion();
-    }
-    
-    public void quitarJugador (Jugador jugador){        
     }
     
     public int getCodigo(){
@@ -103,7 +100,7 @@ public class Partida {
     
     public boolean getVotacion(){
         boolean jugadoresPorVotar = false;
-        for(Jugador jugador: listaJugadores){
+        for(IntegranteScrumTeam jugador: listaJugadores){
             jugadoresPorVotar |= jugador.getVotar()&&jugador.getEstado();
         }
         votacion &= jugadoresPorVotar;

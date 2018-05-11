@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Implementación del DAO de la clase Criterio.
  * @author Ricardo Azopardo
  */
-public class CriterioDAOImpl implements CriterioDAO {
+public class CriterioDAOMySQL implements CriterioDAO {
 
     /**
      * Consulta la base de datos MySQL, llama el procedimiento obtenerCriterios.
@@ -32,7 +32,7 @@ public class CriterioDAOImpl implements CriterioDAO {
         ArrayList<Criterio> criterios = new ArrayList<>();
         try {
             Statement stmt;
-            stmt = ConexionSingleton.getConexionSingleton().createStatement();
+            stmt = ConexionSingletonMySQL.getConexionSingleton().createStatement();
             ResultSet criteriosObtenidos;
             criteriosObtenidos = stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
             while (criteriosObtenidos.next()){
@@ -41,7 +41,7 @@ public class CriterioDAOImpl implements CriterioDAO {
                 criterios.add(criterio);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CriterioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CriterioDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return criterios;
     }

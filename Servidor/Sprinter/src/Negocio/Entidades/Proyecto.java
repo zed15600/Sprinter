@@ -6,6 +6,7 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  *
  * @author usuario
@@ -14,11 +15,17 @@ public class Proyecto {
     
     private ArrayList<Sprint> listaDeSprints;
     private Backlog productBacklog;
+    //local
     private String nombre;
+    //local
     private String descripcion;
-    private int numeroSprints;
+    private int numeroSprints; 
+    //local posiblemente
     private int duracionDeSprints;
+    
+    //YA VEREMOS!!
     private int diaActual;
+    
     private int sprintActual;
     
     public Proyecto(String nombre, String descripcion){
@@ -26,7 +33,7 @@ public class Proyecto {
         this.descripcion = descripcion;
         this.duracionDeSprints = 0;
         this.listaDeSprints = new ArrayList();
-        this.productBacklog = new Backlog();
+        this.productBacklog = new Backlog(0);
     }
     
     public Proyecto (String nombre, String descripcion, int duracionDeSprints, 
@@ -99,12 +106,17 @@ public class Proyecto {
     
     public String[][] getVotos(int Maximo){
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
-        Sprint actual = new Sprint(sprintActual);
+        
         historias.sort(null);
+        Collections.reverse(historias);
+        for(HistoriaDeUsuario historia : historias){
+        System.out.println("Proyecto.getVotos() -> Orden de historias: " + historia.getNombre());
+        }
         if(historias.size() >= Maximo && Maximo == 4 && historias.get(3).getVotos() == 0){
             Maximo = 3;
         }
         int cantidad = Math.min(Maximo, historias.size());
+        Sprint actual = new Sprint(sprintActual, cantidad);
         String[][] votos = new String[2][cantidad];
         for(int i=0; i<cantidad; i++){
             HistoriaDeUsuario h = historias.get(i);

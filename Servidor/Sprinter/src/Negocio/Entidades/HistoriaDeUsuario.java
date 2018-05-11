@@ -5,6 +5,7 @@
  */
 package Negocio.Entidades;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 
 /**
@@ -13,29 +14,22 @@ import java.util.ArrayList;
  */
 public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
+    //A quitar
     private int id;
     private int puntuacion;
+    //local
     private int prioridad;
     private int contadorVotos;
     private boolean estado;
     private String nombre;
+    //local
     private String descripcion;
+    //local
     private String puntosHistoria;
+    //local
     private ArrayList<Criterio> listaCriterios;
     
     public HistoriaDeUsuario(){
-    }
-    
-    public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad){
-        this.id = id;
-        this.puntosHistoria = puntosHistoria;
-        this.prioridad = prioridad;
-        this.puntuacion = 0;
-        this.estado = false;
-        this.descripcion = descripcion;
-        this.contadorVotos = 0;
-        this.listaCriterios = new ArrayList();
-        this.puntosHistoria = puntosHistoria;
     }
     
     public HistoriaDeUsuario(int id, String descripcion, String puntosHistoria, int prioridad,
@@ -92,10 +86,6 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
         return this.estado;
     }
     
-    public void setEstado(boolean estado){
-        this.estado = estado;
-    }
-    
     public int getVotos(){
         return contadorVotos;
     }
@@ -115,20 +105,20 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     
     @Override
     public int compareTo(HistoriaDeUsuario o) {
-        if(this.contadorVotos > o.contadorVotos){
-            return -1;
+        //System.out.println("HistoriaDeUsuario.compareTo() -> Historia comparada: " + nombre + "<>" + o.nombre);
+        if(estado){
+            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por estado: " + Integer.MIN_VALUE); 
+            return Integer.MAX_VALUE;
         }
-        if(this.contadorVotos < o.contadorVotos){
-            return 1;
+        if(this.contadorVotos != o.contadorVotos){
+            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por votos: " + (contadorVotos-o.contadorVotos)); 
+            return contadorVotos - o.contadorVotos;
         }
-        if(this.prioridad > o.prioridad){
-            return -1;
+        if(this.prioridad != o.prioridad){
+            //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado por prioridad: " + (prioridad-o.prioridad)); 
+            return prioridad - o.prioridad;
         }
-        if(this.contadorVotos < o.prioridad){
-            return 1;
-        }
+        //System.out.println("HistoriaDeUsuario.compareTo() -> Resultado igual: " + 0); 
         return 0;
     }
-
-
 }
