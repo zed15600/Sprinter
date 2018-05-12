@@ -20,17 +20,16 @@ public class ProcesadorJSON implements IProceso {
     @Override
     public String procesar(Object mensaje) {
         JSONObject json = parseJson(mensaje);
-        int codigoProceso;
         if(json!=null){
             int pID;
             try{
-                codigoProceso = Integer.valueOf(json.get("codigo").toString());
+                //codigoProceso = ;
                 pID = Integer.valueOf(json.get("partidaID").toString());
             }catch(Exception ex){
-                codigoProceso = 0;
                 pID = 0;
             }
-            switch(codigoProceso){
+            //Main.getControlador().controlar(json);
+            switch(Integer.valueOf(json.get("codigo").toString())){
                 case 1:  Main.getControlador().terminarSprint(pID);
                         break;
                 case 2:  return Main.getControlador().determinarVictoria(pID);

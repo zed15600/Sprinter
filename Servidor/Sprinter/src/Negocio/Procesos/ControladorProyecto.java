@@ -6,6 +6,7 @@
 package Negocio.Procesos;
 
 import Negocio.Entidades.Configuracion;
+import Negocio.Entidades.HistoriaDeUsuario;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.Sprint;
 import java.util.ArrayList;
@@ -39,6 +40,22 @@ public class ControladorProyecto extends Controlador {
         int actual = p.getSprintActual();
         int restantes = Math.abs(sprints.size() - actual);
         return respuestas.sprintPlanning(restantes, actual);
+    }
+
+    void establecerCompletada(int partidaID, String nombreHistoria) {
+        Proyecto p = configuracion.obtenerProyectoDePartida(partidaID);
+        ArrayList<HistoriaDeUsuario> historias = p.obtenerHistorias();
+        for (HistoriaDeUsuario historia : historias){
+            if (historia.getNombre().equals(nombreHistoria)){
+                historia.terminarHU();
+                return;
+            }
+        }
+    }
+
+    String enviarProyectos() {
+        ArrayList<Proyecto> listaDeProyectos = configuracion.getListaDeProyectos();
+        return respuestas.enviarNombresProyectos(listaDeProyectos);
     }
     
     

@@ -6,7 +6,10 @@
 package Negocio.Procesos;
 
 import Negocio.Entidades.Configuracion;
+import Negocio.Entidades.IntegranteScrumTeam;
+import Negocio.Entidades.Partida;
 import Negocio.Entidades.Proyecto;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +26,43 @@ public class ControladorPartida extends Controlador {
         boolean resultado = p.terminarJuego();
         configuracion.quitarPartida(partidaID);
         return respuestas.determinarVictoria(resultado);
+    }
+
+    public void establecerVotacion(int partidaID, boolean votar, int tipo) {
+        Partida p = configuracion.obtenerPartida(partidaID);
+        if(votar){
+            p.reiniciarVotaciones();
+        }
+        p.setVotacion(votar);
+        p.setTipoVotación(tipo);
+    }
+
+    public String estadoVotacion(int partidaID) {
+        Partida p = configuracion.obtenerPartida(partidaID);
+        return respuestas.estadoVotacion(p.getVotacion(), p.getTipoVotacion());
+    }
+    
+    public String enviarVotos(int partidaID, int tipoVotacion){
+        Proyecto p = configuracion.obtenerProyectoDePartida(partidaID);
+        int respuestasVotos = 0;
+        if(tipoVotacion == 1){
+            respuestasVotos = p.getDuracionDeSprints();
+        }
+        if(tipoVotacion == 2){
+            respuestasVotos = 1;
+        }
+        return this.respuestas.enviarVotos(p.getVotos(respuestasVotos));
+    }
+
+    public String crearPartida(String jugador, String partida, String proyecto) {
+        String codigo = configuracion.crearPartida(jugador, partida, proyecto);
+        return respuestas.enviarCodigoPartida(codigo);
+    }
+
+    public String enviarJugadores(int idPartida) {
+        Partida p = configuracion.obtenerPartida(idPartida);
+        ArrayList<IntegranteScrumTeam> jugadores= p.getListaJugadores();
+        return respuestas.enviarJugadoresConAvatares(jugadores);
     }
     
 }
