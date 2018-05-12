@@ -40,10 +40,11 @@ public class VistaEstado : ClientElement {
     public void mostrarVotacion(int[] HUsId, string[] HUsDesc) {
         votar = true;
         pnlVotacion.SetActive(true);
-        for(int i=0; i<4;i++) {
+        int limit = btnsVotacion.Length/2;
+        for(int i=0; i<limit;i++) {
             if(i<HUsId.Length) {
                 btnsVotacion[i].text = ""+HUsId[i];
-                btnsVotacion[i+4].text = HUsDesc[i];
+                btnsVotacion[i+limit].text = HUsDesc[i];
             } else {
                 btns[i].SetActive(false);
             }
