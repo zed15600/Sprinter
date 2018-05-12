@@ -99,6 +99,9 @@ public class Proyecto {
     public int getRestantes(){
         return SprintRestantes;
     }
+    public int getDiaActual() {
+        return diaSprint;
+    }
 
     public void setHistoriasSprint(List<HistoriaDeUsuario> historias) {
         historiasDeSprint = historias;
@@ -136,7 +139,6 @@ public class Partida{
 }
 
 public class HistoriaDeUsuario{
-    private string ID;
     private string nombre;
     private string descripcion;
     private string puntos;
@@ -145,18 +147,13 @@ public class HistoriaDeUsuario{
     private bool estado;
     private int puntaje;
 
-    public HistoriaDeUsuario (string ID, string nombre, string descripcion, string prioridad, string puntos, List<string> criterios, bool estado) {
-        this.ID = ID;
+    public HistoriaDeUsuario (string nombre, string descripcion, string prioridad, string puntos, List<string> criterios, bool estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.prioridad = prioridad;
         this.puntos = puntos;
         this.criterios = criterios;
         this.estado = estado;
-    }
-
-    public string getID(){
-        return ID;
     }
     public string getNombre() {
         return nombre;

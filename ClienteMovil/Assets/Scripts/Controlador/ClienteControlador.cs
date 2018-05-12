@@ -30,8 +30,8 @@ public class ClienteControlador : ClientElement {
         webClient.actualizarEstado(modelo.getPartida().getID(), modelo.getJugador().getId());
     }
 
-    public void mostrarVotacion(int[] HUsId, string[] HUsDesc) {
-        vista.estado.mostrarVotacion(HUsId, HUsDesc);
+    public void mostrarVotacion(string[] HUNombres, string[] HUsDesc) {
+        vista.estado.mostrarVotacion(HUNombres, HUsDesc);
     }
 
     public void enviarVoto(string HUid) {

@@ -90,22 +90,22 @@ public class Jugador {
 
 public class HistoriaDeUsuario{
 
-    private string ID;
-
     private string nombre;
 
-    public HistoriaDeUsuario (string ID, string nombre) {
-        this.ID = ID;
+    private string descripcion;
+
+    public HistoriaDeUsuario (string nombre, string descripcion) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         }
 
-    public string getID()
+    public string getNombre()
     {
-        return ID;
+        return nombre;
     }
 
     public string getDescripcion()
     {
-        return nombre;
+        return descripcion;
     }
 }

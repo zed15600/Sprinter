@@ -107,13 +107,13 @@ public class WebClient : ClientElement {
                 JSONArray arr = jsRes["HUs"].Array;
                 JSONArray desc = jsRes["HUsDesc"].Array;
                 int size = arr.Length;
-                int[] HUsId = new int[size];
+                string[] HUNombres = new string[size];
                 string[] HUsDesc = new string[size];
                 for(int i=0; i<size; i++) {
-                    HUsId[i] = (int)arr[i].Number;
+                    HUNombres[i] = arr[i].Str;
                     HUsDesc[i] = desc[i].Str;
                 }
-                controlador.mostrarVotacion(HUsId, HUsDesc);
+                controlador.mostrarVotacion(HUNombres, HUsDesc);
             }
         }
     }

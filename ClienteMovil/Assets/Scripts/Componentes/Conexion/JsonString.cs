@@ -3,7 +3,7 @@
     public static string unirseAPartida(string codigo, string nombreJugador){
         string res = "{" +
                      "\"codigo\":0008," +
-                     "\"partCode\":"+codigo+"," +
+                     "\"partidaID\":"+codigo+"," +
                      "\"nombreJugador\":\""+nombreJugador+"\""+
                      "}";
         return res;
@@ -18,11 +18,11 @@
         return res;
     }
 
-    public static string enviarVoto(string partidaID, string HUid, int player){
+    public static string enviarVoto(string partidaID, string HUNombre, int player){
         string res = "{" +
                      "\"codigo\":0010," +
                      "\"partidaID\":"+partidaID+"," +
-                     "\"HUid\":"+HUid+"," +
+                     "\"HUNombre\":\""+HUNombre+"\"," +
                      "\"player\":"+player+"" +
             "}";
         return res;
