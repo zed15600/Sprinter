@@ -37,13 +37,13 @@ public class VistaEstado : ClientElement {
         }
 	}
 
-    public void mostrarVotacion(int[] HUsId, string[] HUsDesc) {
+    public void mostrarVotacion(string[] HUNombres, string[] HUsDesc) {
         votar = true;
         pnlVotacion.SetActive(true);
         int limit = btnsVotacion.Length/2;
         for(int i=0; i<limit;i++) {
-            if(i<HUsId.Length) {
-                btnsVotacion[i].text = ""+HUsId[i];
+            if(i<HUNombres.Length) {
+                btnsVotacion[i].text = HUNombres[i];
                 btnsVotacion[i+limit].text = HUsDesc[i];
             } else {
                 btns[i].SetActive(false);

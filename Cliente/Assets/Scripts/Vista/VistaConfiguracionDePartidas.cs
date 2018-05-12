@@ -22,7 +22,7 @@ public class VistaConfiguracionDePartidas : ClientElement {
         string proyecto = proyectosDropdown.captionText.text;
         controlador.crearPartida(jugador, partida, proyecto);
         controlador.obtenerProyectoServidor();
-        controlador.vista.unirseAPartida.gameObject.SetActive(true);
+        controlador.mostrarVistaUnirseAPartida();
         this.gameObject.SetActive(false);
     }
 

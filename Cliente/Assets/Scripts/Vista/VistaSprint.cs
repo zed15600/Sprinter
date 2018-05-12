@@ -5,24 +5,34 @@ using UnityEngine.UI;
 
 public class VistaSprint : ClientElement{
 
+    public GameObject pnlVotos;
     public GameObject prefabDesc;
     public GameObject prefabPrio;
     public GameObject prefabPunt;
-
+    public Text dias;
     public VerticalLayoutGroup colDesc;
     public VerticalLayoutGroup colPrio;
     public VerticalLayoutGroup colPunt;
 
-    public void cambiarVista() {
-        this.gameObject.SetActive(true);
+    void OnEnable(){
+        int dia = controlador.obtenerDiaActual();
+        dias.text = "Tiempo restante: " + dia + (dia==1?" día.":" días.");
+        llenarTabla();
     }
 
-    public void llenarTabla()
-    {
+    public void llenarTabla(){
+        foreach(Transform child in colDesc.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+        foreach(Transform child in colPrio.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+        foreach(Transform child in colPunt.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
 
         List<HistoriaDeUsuario> historias = controlador.obtenerHistoriasSprint();
-        for (int i = 0; i < historias.ToArray().Length; i++)
-        {
+        for (int i = 0; i < historias.ToArray().Length; i++){
             GameObject contenidoHistoria = Instantiate(prefabDesc);
             GameObject contenidoPrioridad = Instantiate(prefabPrio);
             GameObject contenidoPuntos = Instantiate(prefabPunt);
@@ -42,18 +52,10 @@ public class VistaSprint : ClientElement{
         }
     }
 
-    void Start()
-    {
-        while (controlador.obtenerHistorias().ToArray().Length == 0)
-        {
-            Debug.Log(controlador.obtenerHistorias().Capacity);
-        }
-        llenarTabla();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    public void cambiarVista() {
+        pnlVotos.SetActive(false);
+        this.gameObject.SetActive(false);
+        controlador.iniciarMinijuego();
     }
 }

@@ -25,11 +25,11 @@
         return res;
     }*/
 
-    public static string establecerCompletada(string partida, string idHistoria){
+    public static string establecerCompletada(string partida, string historiaNombre){
         string res = "{"
         + "\"codigo\":0007, "
         + "\"partidaID\":\"" + partida + "\","
-        + "\"nombre\":\"" + idHistoria + "\""
+        + "\"nombre\":\"" + historiaNombre + "\""
         + "}\n";
         return res;
     }

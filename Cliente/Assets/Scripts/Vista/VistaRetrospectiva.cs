@@ -39,12 +39,12 @@ public class VistaRetrospectiva : ClientElement {
     }
 
     public void cambiarVista() {
-        this.gameObject.SetActive(false);
         Proyecto p = controlador.obtenerProyecto();
         if(p.getSprintActual() > p.getNumeroSprints()) {
-            controlador.vista.finDelJuego.gameObject.SetActive(true);
+            controlador.mostrarVistaFinDelJuego();
         } else {
-            controlador.vista.vistaSprint.gameObject.SetActive(true);
+            controlador.mostrarVistaSprintPlanning();
         }
+        this.gameObject.SetActive(false);
     }
 }

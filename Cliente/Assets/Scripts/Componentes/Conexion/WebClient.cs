@@ -135,9 +135,9 @@ public class WebClient : ClientElement {
 
     }
 
-    public void establecerCompletada(String huID){
+    public void establecerCompletada(String HUNombre){
         setupSocket();
-        string json = JsonString.establecerCompletada(controlador.obtenerPartida().getID(), huID);
+        string json = JsonString.establecerCompletada(controlador.obtenerPartida().getID(), HUNombre);
         writeSocket(json);
         closeSocket();
     }
@@ -175,7 +175,6 @@ public class WebClient : ClientElement {
             for (int i = 0; i < jHistorias.Length; i++){
                 JSONObject historia = jHistorias[i].Obj;
                 List<string> criterios = new List<string>();
-                string ID = historia["ID"].Number.ToString();
                 string nombreHU = historia["nombre"].Str;
                 string descripcionHU = historia["descripcion"].Str;
                 string puntos = historia["puntos"].Str;
@@ -186,7 +185,7 @@ public class WebClient : ClientElement {
                     criterios.Add(crit[j].Str);
                 }
 
-                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(ID, nombreHU, descripcionHU, puntos, prioridad, criterios, estado);
+                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, descripcionHU, puntos, prioridad, criterios, estado);
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias, (int)respuesta["duracionSprints"].Number, (int)respuesta["numeroSprints"].Number);
@@ -236,7 +235,7 @@ public class WebClient : ClientElement {
                 String[] husID = new String[size];
                 int[] vots = new int[size];
                 List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
-                HistoriaDeUsuario hActual = new HistoriaDeUsuario("", "", "", "", "", null, false);
+                HistoriaDeUsuario hActual = new HistoriaDeUsuario("", "", "", "", null, false);
                 for(int i=0; i<size;i++) {
                     husID[i] = historiasID[i].Str;
                     vots[i] = (int)votos[i].Number;
