@@ -45,7 +45,7 @@ public class HistoriaDeUsuarioDAOMySQL implements HistoriaDeUsuarioDAO {
                 String nombre = r.getString(5);
                 ArrayList<Criterio> criterios = critImpl.obtenerCriterios(id);
                 
-                HistoriaDeUsuario historia = new HistoriaDeUsuario(id, desc, 
+                HistoriaDeUsuario historia = new HistoriaDeUsuario(desc, 
                         puntos, prioridad, criterios, nombre);
                 historias.add(historia);
             }

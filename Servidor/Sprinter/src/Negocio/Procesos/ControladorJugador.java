@@ -51,9 +51,17 @@ public class ControladorJugador extends Controlador {
         "-> Orden de historias: " + historia.getNombre());
         }*/
         HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[size];
-        for(int i=0; i<size; i++){
-            if(i < historias.size())
-                posibles[i] = historias.get(i);
+        int i = 0;
+        for(HistoriaDeUsuario historia: historias){
+            if(!historia.getEstado()){
+                posibles[i] = historia;
+                i++;
+            }else{
+                continue;
+            }
+            if(i >= size){
+                break;
+            }
         }
         boolean validar;
         validar = p.getVotacion()
@@ -73,16 +81,16 @@ public class ControladorJugador extends Controlador {
         return respuestas.unirsePartida(0, false, "");
     }
 
-    public void registrarVoto(int partidaID, int historiaID, int jugador) {
+    public void registrarVoto(int partidaID, String historiaNombre, int jugador) {
         Partida p = configuracion.obtenerPartida(partidaID);
         Proyecto proyecto = p.getProyecto();
         ArrayList<HistoriaDeUsuario> bcklog = proyecto.obtenerHistorias();
         p.getListaJugadores().get(jugador-1).setVotar(false);
         for(HistoriaDeUsuario historia: bcklog){
-            if(historia.getId()==historiaID){
+            if(historia.getNombre().equals(historiaNombre)){
                 historia.aumentarVoto();
-                /*System.out.println("ControladorPrincipal.registrarVoto() -> +
-                REGISTRÉ UN VOTO.");*/
+                /*System.out.println("ControladorJugador.registrarVoto() -> "+
+                "Nombre HU: " + historiaNombre + "->" + historia.getNombre());*/
                 return;
             }
         }

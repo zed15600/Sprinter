@@ -49,7 +49,6 @@ public class JSONMensajes implements IMensajes {
         JSONArray jHUs = new JSONArray();
         for(HistoriaDeUsuario h: p.getProductBacklog().getHistorias()){
             JSONObject historia = new JSONObject();
-            historia.put("ID", h.getId());
             historia.put("nombre", h.getNombre());
             historia.put("descripcion", h.getDescripcion());
             historia.put("puntos", h.getPuntosHistoria());
@@ -98,7 +97,7 @@ public class JSONMensajes implements IMensajes {
         JSONArray HUs = new JSONArray();
         JSONArray HUsDesc = new JSONArray();
         for (HistoriaDeUsuario posible : posibles) {
-            HUs.add(posible.getId());
+            HUs.add(posible.getNombre());
             HUsDesc.add(posible.getDescripcion());
         }
         json.put("HUs", HUs);

@@ -35,7 +35,7 @@ public class ControladorPrincipal {
     
     public void controlar(Map datos){
         String codigo = datos.get((Object)"codigo").toString();
-        System.out.println(codigo);
+        //System.out.println("ControladorPrincipal.controlar() -> Código: " + codigo);
     }
     
     public void terminarSprint(int partidaID){
@@ -66,8 +66,8 @@ public class ControladorPrincipal {
         return controladorJugadores.actualizarEstadoJugador(partidaID, jugador);     
     }
     
-    public void registrarVoto(int partidaID, int historiaID, int jugador){
-        controladorJugadores.registrarVoto(partidaID, historiaID, jugador);
+    public void registrarVoto(int partidaID, String historiaNombre, int jugador){
+        controladorJugadores.registrarVoto(partidaID, historiaNombre, jugador);
     }
     
     public void establecerVotación(int partidaID, boolean votar, int tipo){

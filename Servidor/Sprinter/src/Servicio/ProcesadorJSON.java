@@ -48,9 +48,9 @@ public class ProcesadorJSON implements IProceso {
                     return Main.getControlador().actualizarEstadoJugador(pID,
                             jugador);
                 case 10: 
-                    int idHU = (int)(long)json.get("HUid");
+                    String HUNombre = (String)json.get("HUNombre");
                     int playerId = (int)(long)json.get("player");
-                    Main.getControlador().registrarVoto(pID, idHU, playerId);
+                    Main.getControlador().registrarVoto(pID, HUNombre, playerId);
                     break;
                 case 11:
                     boolean votar = json.get("votar").equals("True");
