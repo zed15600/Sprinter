@@ -8,8 +8,8 @@ using Boomlagoon.JSON;
 
 public class WebClient : ClientElement {
     // Use this for initialization
-    public String host = "localhost";
-    public Int32 port = 5173;
+    public String host;
+    public Int32 port;
 
     internal Boolean socket_ready = false;
 
@@ -45,9 +45,7 @@ public class WebClient : ClientElement {
         }
     }
 
-    public void writeSocket(string line)
-    {
-        Debug.Log(line);
+    public void writeSocket(string line){
         //Debug.Log("WebClient.writeSocket() -> out: "+line);
         if (!socket_ready)
             return;
