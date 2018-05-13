@@ -51,7 +51,8 @@ public class ControladorPartida extends Controlador {
         if(tipoVotacion == 2){
             respuestasVotos = 1;
         }
-        return this.respuestas.enviarVotos(p.getVotos(respuestasVotos));
+        return this.respuestas.enviarVotos(p.getVotos(respuestasVotos, 
+                configuracion.obtenerPartida(partidaID).getTipoVotacion()));
     }
 
     public String crearPartida(String jugador, String partida, String proyecto) {

@@ -24,9 +24,6 @@ public class Proyecto {
     //local posiblemente
     private int duracionDeSprints;
     
-    //YA VEREMOS!!
-    private int diaActual;
-    
     private int sprintActual;
     
     public Proyecto(String nombre, String descripcion){
@@ -45,8 +42,7 @@ public class Proyecto {
         this.productBacklog = productBacklog;
         this.numeroSprints = numeroSprints;
         this.duracionDeSprints = duracionDeSprints;
-        this.diaActual = 1;
-        this.sprintActual = 1;
+        this.sprintActual = 0;
     }
     
     public void reiniciarVotacion(){
@@ -73,12 +69,14 @@ public class Proyecto {
         return listaDeSprints.get(sprintActual-1).getSprintBacklog().getHistorias();
     }
     
-    public void nextDia(){
+    /*public void nextDia(){
         this.diaActual++;
-    }
+    }*/
     
     public void nextSprint(){
-        this.sprintActual++;
+        sprintActual++;
+        /*System.out.println("Proyecto.nextSprint() -> Ahora estamos en el sprint"
+                + " " + sprintActual);*/
     }
     
     public int getNumeroSprints(){
@@ -97,9 +95,9 @@ public class Proyecto {
         listaDeSprints.add(sp);
     }
     
-    public int getDiaActual(){
+    /*public int getDiaActual(){
         return this.diaActual;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -113,35 +111,57 @@ public class Proyecto {
         return this.sprintActual;
     }
     
-    public String[][] getVotos(int Maximo){
+    public String[][] getVotos(int Maximo, int tipoVotacion){
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
         
         historias.sort(null);
         Collections.reverse(historias);
-        for(HistoriaDeUsuario historia : historias){
-        /*System.out.println("Proyecto.getVotos() -> Orden de historias: " +
-                historia.getNombre());*/
-        }
+        /*for(HistoriaDeUsuario historia : historias){
+        System.out.println("Proyecto.getVotos() -> Orden de historias: " +
+                historia.getNombre());
+        }*/
+        //Esto lo tengo que hacer variable
         if(historias.size() >= Maximo 
-                && Maximo == 4 
+                && Maximo == duracionDeSprints 
                 && historias.get(3).getVotos() == 0){
             Maximo = 3;
         }
-        int cantidad = Math.min(Maximo, historias.size());
+        int cantidad = Math.min(Maximo, getNumeroHistoriasPorCompletar());
         Sprint actual = new Sprint(sprintActual, cantidad);
         String[][] votos = new String[2][cantidad];
-        for(int i=0; i<cantidad; i++){
-            HistoriaDeUsuario h = historias.get(i);
-            actual.getSprintBacklog().agregarHistoria(h);
-            votos[0][i] = ""+h.getNombre();
-            votos[1][i] = ""+h.getVotos();
+        int i = 0;
+        for(HistoriaDeUsuario historia: historias){
+            if(!historia.getEstado()){
+                actual.getSprintBacklog().agregarHistoria(historia);
+                votos[0][i] = ""+historia.getNombre();
+                votos[1][i] = ""+historia.getVotos();
+                i++;
+            }
+            if(i >= cantidad){
+                break;
+            }
         }
-        listaDeSprints.add(actual);
+        if(tipoVotacion == 1){
+            /*System.out.println("Proyecto.getVotos() -> Agregué un sprint con " 
+                    + actual.getSprintBacklog().getTamaño() + " historias.");*/
+            listaDeSprints.add(actual);
+            nextSprint();
+        }
         return votos;
     } 
 
     public Backlog getProductBacklog() {
         return productBacklog;
+    }
+    
+    public int getNumeroHistoriasPorCompletar(){
+        int i=0;
+        for(HistoriaDeUsuario historia: obtenerHistorias()){
+            if(!historia.getEstado()){
+                i++;
+            }
+        }
+        return i;
     }
     
 }
