@@ -43,7 +43,7 @@ public class ControladorJugador extends Controlador {
                 }
             }
         }
-        size = Math.min(size, historias.size());
+        size = Math.min(size, py.getNumeroHistoriasPorCompletar());
         historias.sort(null);
         Collections.reverse(historias);
         /*for(HistoriaDeUsuario historia : historias){
