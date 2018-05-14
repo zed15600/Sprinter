@@ -18,5 +18,6 @@ public class ClienteVista : ClientElement {
 
     public PanelVotacion panelVotacionSPlanning;
     public PanelVotacion panelVotacionDia;
+    public GameObject pnlMenssage;
 
 }

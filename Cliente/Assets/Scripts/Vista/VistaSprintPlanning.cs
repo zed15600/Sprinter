@@ -51,7 +51,7 @@ public class VistaSprintPlanning : ClientElement {
             Text puntos = contenidoPuntos.GetComponentInChildren<Text>();
 
             descripcion.text = historias[i].getDescripcion();
-            prioridad.text = historias[i].getPrioridad();
+            prioridad.text = "" + historias[i].getPrioridad();
             puntos.text = historias[i].getPuntos();
 
             contenidoHistoria.transform.SetParent(colDesc.transform, false);
