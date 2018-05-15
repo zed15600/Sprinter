@@ -19,7 +19,7 @@ public interface IMensajes {
     public String traerProyecto(Proyecto p);
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint);
     public String unirsePartida(int jugadorId, boolean aceptado, String avatar);
-    public String actualizarEstadoJugador(boolean votar,
+    public String actualizarEstadoJugador(boolean votar, String estadoPartida,
             HistoriaDeUsuario[] posibles);
     public String estadoVotacion(boolean votamos, int tipoVoto);
     public String enviarVotos(String[][] listaVotos);

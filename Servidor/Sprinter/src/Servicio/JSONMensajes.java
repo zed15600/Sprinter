@@ -91,7 +91,7 @@ public class JSONMensajes implements IMensajes {
     }
     
     @Override
-    public String actualizarEstadoJugador(boolean votar,
+    public String actualizarEstadoJugador(boolean votar, String estadoPartida,
             HistoriaDeUsuario[] posibles){
         JSONObject json = new JSONObject();
         JSONArray HUs = new JSONArray();
@@ -103,6 +103,7 @@ public class JSONMensajes implements IMensajes {
         json.put("HUs", HUs);
         json.put("HUsDesc", HUsDesc);
         json.put("votacion", votar);
+        json.put("estadoPartida", estadoPartida);
         return json.toJSONString();
     }
     
