@@ -83,4 +83,11 @@
              "}";
         return res;
     }
+
+    public static string empezarPartida(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0017" +
+            "}";
+        return res;
+    }
 }

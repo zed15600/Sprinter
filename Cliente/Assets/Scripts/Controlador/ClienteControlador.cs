@@ -32,6 +32,9 @@ public class ClienteControlador : ClientElement {
     public void pedirJugadores() {
         webClient.pedirJugadores(modelo.getPartida().getID());
     }
+    public void empezarPartida() {
+        webClient.empezarPartida(modelo.getPartida().getID());
+    }
     
 
     //Llamadas a Modelo
@@ -151,6 +154,9 @@ public class ClienteControlador : ClientElement {
 
     public void mostrarVistaUnirseAPartida() {
         vista.unirseAPartida.gameObject.SetActive(true);
+    }
+    public void mostrarVistaScrumPlanning() {
+        vista.scrumPlanning.gameObject.SetActive(true);
     }
     public void mostrarVistaSprintPlanning() {
         vista.sprintPlanning.gameObject.SetActive(true);

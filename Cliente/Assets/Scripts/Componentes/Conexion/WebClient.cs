@@ -265,4 +265,8 @@ public class WebClient : ClientElement {
             Debug.Log("WebClient.obtenerVotos() -> Json vacío.");
         }
     }
+
+    public void empezarPartida(string partidaID) {
+
+    }
 }

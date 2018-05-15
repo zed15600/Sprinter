@@ -49,6 +49,8 @@ public class VistaUnirseAPartida : ClientElement {
 	}
 
     public void cambiarVista() {
-        throw new System.NotImplementedException();
+        controlador.empezarPartida();
+        this.gameObject.SetActive(false);
+        controlador.mostrarVistaScrumPlanning();
     }
 }
