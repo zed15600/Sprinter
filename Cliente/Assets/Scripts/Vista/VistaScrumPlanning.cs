@@ -48,7 +48,7 @@ public class VistaScrumPlanning : ClientElement{
         }
     }
 
-    public void Start()
+    public void OnEnable()
     {
 
         FindObjectOfType<DialogTrigger>().TriggerDialog();
@@ -57,6 +57,7 @@ public class VistaScrumPlanning : ClientElement{
         {
         }
         llenarTabla();
+        controlador.cargarDialogoGlobal(1);
     }
 
     public void cambiarVista() {

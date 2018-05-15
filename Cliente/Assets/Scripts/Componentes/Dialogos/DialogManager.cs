@@ -36,4 +36,10 @@ public class DialogManager : MonoBehaviour {
         textoUI.text = linea;
     }
 
+    public bool dialogoVacio() {
+        if (lineasDeDialogo.Count == 0) {
+            return true;
+        }
+        return false;
+    }
 }

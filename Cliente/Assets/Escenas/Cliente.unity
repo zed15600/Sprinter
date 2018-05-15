@@ -9945,6 +9945,7 @@ GameObject:
   - component: {fileID: 836427131}
   - component: {fileID: 836427130}
   - component: {fileID: 836427129}
+  - component: {fileID: 836427135}
   m_Layer: 0
   m_Name: Dialogo Global
   m_TagString: Untagged
@@ -9985,11 +9986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogo:
-    lineasDeDialogo:
-    - Bienvenidos al Scrum Team!
-    - "Vamos a construir un proyecto en equipo utilizando el Marco \xC1gil Scrum!"
-    - Deben cumplir los deseos del cliente para ganar!
-    - "Mucha Suerte! \nMeow! =^._.^= "
+    lineasDeDialogo: []
 --- !u!114 &836427130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10013,7 +10010,24 @@ MonoBehaviour:
   m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 836427130}
+          m_MethodName: MostrarLineaSiguiente
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!114 &836427132
 MonoBehaviour:
@@ -10072,6 +10086,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &836427135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836427127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbbd8cb25ca7d54599b56093faa6c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 836427129}
 --- !u!1 &843982732
 GameObject:
   m_ObjectHideFlags: 0
@@ -13021,6 +13047,7 @@ MonoBehaviour:
   retrospectiva: {fileID: 936148496}
   finDelJuego: {fileID: 822295110}
   minijuegos: {fileID: 1633521897}
+  dialogoGlobal: {fileID: 836427135}
   panelVotacionSPlanning: {fileID: 731114937}
   panelVotacionDia: {fileID: 876668922}
   pnlMenssage: {fileID: 688910748}

@@ -61,11 +61,12 @@ public class VistaSprintPlanning : ClientElement {
         }
     }
 
-    void Start() {
+    void OnEnable() {
         establecerSprint();
         while (controlador.obtenerHistorias().ToArray().Length == 0) {
             Debug.Log(controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
+        controlador.cargarDialogoGlobal(2);
     }
 }

@@ -195,6 +195,11 @@ public class ClienteControlador : ClientElement {
         vista.pnlMenssage.SetActive(false);
     }
 
+    public void cargarDialogoGlobal(int indice) {
+        vista.dialogoGlobal.cargarDialogo(indice);
+        vista.dialogoGlobal.gameObject.SetActive(true);
+    }
+
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
     }
