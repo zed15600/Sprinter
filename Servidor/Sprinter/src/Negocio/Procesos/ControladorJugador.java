@@ -25,6 +25,11 @@ public class ControladorJugador extends Controlador {
     
     public String actualizarEstadoJugador(int partidaID, int jugador){
         Partida p = configuracion.obtenerPartida(partidaID);
+        String estadoPartida = p.getEstado();
+        if(estadoPartida.equals("conexion")){
+            return respuestas.actualizarEstadoJugador(false, estadoPartida,
+                new HistoriaDeUsuario[]{}); 
+        }
         Proyecto py = p.getProyecto();
         boolean votar = p.getVotacion();
         int tipoVotacion = p.getTipoVotacion();
@@ -66,7 +71,8 @@ public class ControladorJugador extends Controlador {
         boolean validar;
         validar = p.getVotacion()
                 && p.getListaJugadores().get(jugador-1).getVotar();
-        return respuestas.actualizarEstadoJugador(validar, posibles);        
+        return respuestas.actualizarEstadoJugador(validar, estadoPartida,
+                posibles);        
     }
 
     public String unirsePartida(int codigo, String nombreJugador) {
