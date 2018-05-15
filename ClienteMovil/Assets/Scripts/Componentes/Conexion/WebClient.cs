@@ -115,6 +115,7 @@ public class WebClient : ClientElement {
                 }
                 controlador.mostrarVotacion(HUNombres, HUsDesc);
             }
+            controlador.cambiarEstadoPartida(jsRes["estadoPartida"].Str);
         }
     }
 
