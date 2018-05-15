@@ -6,6 +6,7 @@
 package Negocio.Entidades;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -17,8 +18,10 @@ import java.util.Stack;
 
 public class Partida {    
     private final int codigo;
-    private final ArrayList<IntegranteScrumTeam> listaJugadores;
     private final String nombre;
+    private final ArrayList<IntegranteScrumTeam> listaJugadores;
+    private final ScrumMaster scrumMaster;
+    private final Stack<String> avatares;
     private Proyecto proyecto;
     private boolean votacion;
     private int tipoVotacion; /* Tipos de Votaciones:
@@ -26,8 +29,7 @@ public class Partida {
                                * 1 -> votar historias de Sprint, 
                                * 2 -> votar historia de día
                                */
-    private final ScrumMaster scrumMaster;
-    private final Stack<String> avatares;
+    private String estado;
 
     public ArrayList<IntegranteScrumTeam> getListaJugadores() {
         return listaJugadores;
@@ -51,8 +53,10 @@ public class Partida {
         avatares.push("gato");
         avatares.push("mapache");
         avatares.push("panda");
+        Collections.shuffle(avatares);
         votacion = false;
         tipoVotacion = 0;
+        estado = "conexion";
     }
 
     public ScrumMaster getScrumMaster() {
@@ -112,6 +116,14 @@ public class Partida {
     
     public void setTipoVotación(int tipoVotacion){
         this.tipoVotacion = tipoVotacion;
+    }
+    
+    public String getEstado(){
+        return estado;
+    }
+    
+    public void setEstado(String estado){
+        this.estado = estado;
     }
     
 }
