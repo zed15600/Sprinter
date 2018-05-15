@@ -38,7 +38,7 @@ public class VistaScrumPlanning : ClientElement{
             Text puntos = contenidoPuntos.GetComponentInChildren<Text>();
 
             descripcion.text = historias[i].getDescripcion();
-            prioridad.text = historias[i].getPrioridad();
+            prioridad.text = "" + historias[i].getPrioridad();
             puntos.text = historias[i].getPuntos();
 
             contenidoHistoria.transform.SetParent(colDesc.transform, false);
@@ -48,7 +48,7 @@ public class VistaScrumPlanning : ClientElement{
         }
     }
 
-    public void Start()
+    public void OnEnable()
     {
 
         FindObjectOfType<DialogTrigger>().TriggerDialog();
@@ -57,6 +57,7 @@ public class VistaScrumPlanning : ClientElement{
         {
         }
         llenarTabla();
+        controlador.cargarDialogoGlobal(1);
     }
 
     public void cambiarVista() {

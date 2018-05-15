@@ -18,6 +18,9 @@ public class VistaResultados : ClientElement {
     public Image checkMark;
 
 	void OnEnable () {
+        foreach(Transform child in criterios.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
         if (verificarCompletitud()) {
             completitud.text = completada.text;
             completitud.color = completada.color;
@@ -37,20 +40,21 @@ public class VistaResultados : ClientElement {
 	}
 	
     public bool verificarCompletitud(){
-        List<string> criterios = controlador.obtenerCriteriosMinijuego();
+        List<CriterioHU> criterios = controlador.obtenerCriteriosMinijuego();
 
-        foreach (string crit in criterios){
-            if (crit != null){
+        foreach (CriterioHU crit in criterios){
+            if (!crit.getEstado()){
                 return false;
             }
         }
 
         List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
-        string completada = controlador.obtenerHistoriaMinijuego();
+        string completada = controlador.obtenerNombreHistoriaMinijuego();
 
         foreach (HistoriaDeUsuario historia in historias){
-            if (completada.Equals(historia.getDescripcion())){
+            if (completada.Equals(historia.getNombre())){
                 controlador.terminarHistoria(historia);
+                break;
             }
         }
         return true;
@@ -69,16 +73,17 @@ public class VistaResultados : ClientElement {
         return resultado;
     }
 
+
     public void mostrarCriterios() {
 
-        List<string> criteriosLista = controlador.obtenerCriteriosMinijuego();
+        List<CriterioHU> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
 
-        foreach (string crit in criteriosLista) {
-            if (crit != null) {
+        foreach (CriterioHU crit in criteriosLista) {
+            if (!crit.getEstado()) {
                 Text criterioA = Instantiate(criterio);
                 Text descCriterio = criterioA.GetComponentInChildren<Text>();
-                descCriterio.text = crit;
+                descCriterio.text = crit.getDescripcion();
                 descCriterio.transform.SetParent(criterios.transform, false);
             }
         }
@@ -86,6 +91,9 @@ public class VistaResultados : ClientElement {
 
     public void cambiarVista() {
         controlador.terminarDia();
+        if(!controlador.obtenerMinijuego().getHistoriaActual().getEstado()) {
+            controlador.mostrarPanelMensaje();
+        }
         this.gameObject.SetActive(false);
     }
 }

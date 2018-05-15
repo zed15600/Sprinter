@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class VistaEstado : ClientElement {
 
+    public GameObject bienvenida;
+    public GameObject detalle;
     public GameObject pnlVotacion;
     public GameObject[] btns;
     public Text[] btnsVotacion;
@@ -22,7 +24,6 @@ public class VistaEstado : ClientElement {
         //Debug.Log("VistaEstado.OnEnable() -> Avatar: " + app.modelo.getJugador().getAvatar());
         avatar.texture = controlador.modelo.getAvatar(controlador.modelo.getJugador().getAvatar());
         votar = false;
-
     }
 
     // Update is called once per frame
@@ -33,6 +34,16 @@ public class VistaEstado : ClientElement {
             } else {
                 refreshTime = 3.0f;
                 controlador.actualizarEstado();
+                switch(controlador.obtenerEstadoPartida()) {
+                    case "conexion":
+                        bienvenida.SetActive(true);
+                        detalle.SetActive(false);
+                        break;
+                    case "iniciada":
+                        bienvenida.SetActive(false);
+                        detalle.SetActive(true);
+                        break;
+                }
             }
         }
 	}

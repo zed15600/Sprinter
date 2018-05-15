@@ -142,18 +142,19 @@ public class HistoriaDeUsuario{
     private string nombre;
     private string descripcion;
     private string puntos;
-    private string prioridad;
-    private List<string> criterios;
+    private int prioridad;
+    private List<CriterioHU> criterios;
     private bool estado;
     private int puntaje;
 
-    public HistoriaDeUsuario (string nombre, string descripcion, string prioridad, string puntos, List<string> criterios, bool estado) {
+    public HistoriaDeUsuario (string nombre, string descripcion, int prioridad, string puntos, List<CriterioHU> criterios, bool estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.prioridad = prioridad;
         this.puntos = puntos;
         this.criterios = criterios;
         this.estado = estado;
+        puntaje = 0;
     }
     public string getNombre() {
         return nombre;
@@ -164,10 +165,10 @@ public class HistoriaDeUsuario{
     public string getPuntos(){
         return puntos;
     }
-    public string getPrioridad(){
+    public int getPrioridad(){
         return prioridad;
     }
-    public List<string> getCriterios(){
+    public List<CriterioHU> getCriterios(){
         return criterios;
     }
     public bool getEstado(){
@@ -182,6 +183,26 @@ public class HistoriaDeUsuario{
     }
 
     public void cambiarEstado() {
+        estado = true;
+    }
+}
+
+public class CriterioHU {
+    string descripcion;
+    bool estado;
+
+    public CriterioHU(string descripcion) {
+        this.descripcion = descripcion;
+        estado = false;
+    }
+    
+    public string getDescripcion() {
+        return descripcion;
+    }
+    public bool getEstado() {
+        return estado;
+    }
+    public void completar() {
         estado = true;
     }
 }
@@ -212,15 +233,19 @@ public class Minijuego{
         this.tiempoFinal = tiempoFinal;
     }
 
-    public void eliminarCriterio(int indice){
-        List<string> criterios = historiaActual.getCriterios();
-        criterios[indice] = null;
+    public void completarCriterio(string descripcion){
+        foreach(CriterioHU criterio in getHistoriaActual().getCriterios()) {
+            if(criterio.getDescripcion().Equals(descripcion)) {
+                criterio.completar();
+                break;
+            }
+        }
     }
     public void aumentarIntentos() {
         this.intentos++;
     }
     public void resetearIntentos() {
-        this.intentos = 0;
+        this.intentos = 1;
     }
 }
 

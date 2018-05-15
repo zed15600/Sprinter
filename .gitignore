@@ -53,3 +53,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#Other files
+Thumbs.db
+Thumbs.db.meta

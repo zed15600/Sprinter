@@ -32,6 +32,9 @@ public class ClienteControlador : ClientElement {
     public void pedirJugadores() {
         webClient.pedirJugadores(modelo.getPartida().getID());
     }
+    public void empezarPartida() {
+        webClient.empezarPartida(modelo.getPartida().getID());
+    }
     
 
     //Llamadas a Modelo
@@ -105,20 +108,25 @@ public class ClienteControlador : ClientElement {
         public Minijuego obtenerMinijuego() {
             return modelo.getMinijuego();
         }
-        public string obtenerHistoriaMinijuego() {
-            return modelo.getMinijuego().getHistoriaActual().getDescripcion();   
+        public string obtenerNombreHistoriaMinijuego() {
+            return modelo.getMinijuego().getHistoriaActual().getNombre();   
         }
-        public List<string> obtenerCriteriosMinijuego(){
+        public string obtenerDescripcionHistoriaMinijuego() {
+            return modelo.getMinijuego().getHistoriaActual().getDescripcion();
+        }
+        public List<CriterioHU> obtenerCriteriosMinijuego(){
             return modelo.getMinijuego().getHistoriaActual().getCriterios();
         }
-        public void eliminarCriterioMinijuego(int indice){
-            modelo.getMinijuego().eliminarCriterio(indice);
+        public void eliminarCriterioMinijuego(string descripcion){
+            modelo.getMinijuego().completarCriterio(descripcion);
         }
         public int obtenerPuntosHMinijuego(){
+            //Debug.Log("ClienteControlador.obtenerPuntosHMinijuego() -> Puntos de Historia de minijuego: " + modelo.getMinijuego().getHistoriaActual().getPuntos());
             return int.Parse(modelo.getMinijuego().getHistoriaActual().getPuntos());
         }
         public int obtenerPrioridadMinijuego(){
-            return int.Parse(modelo.getMinijuego().getHistoriaActual().getPrioridad());
+            //Debug.Log("ClienteControlador.obtenerPuntosHMinijuego() -> Prioridad de Historia de minijuego: " + modelo.getMinijuego().getHistoriaActual().getPrioridad());
+            return modelo.getMinijuego().getHistoriaActual().getPrioridad();
         }
         public void establecerTiempo(float tiempo){
             modelo.getMinijuego().setTiempoFinal(tiempo);
@@ -146,6 +154,9 @@ public class ClienteControlador : ClientElement {
 
     public void mostrarVistaUnirseAPartida() {
         vista.unirseAPartida.gameObject.SetActive(true);
+    }
+    public void mostrarVistaScrumPlanning() {
+        vista.scrumPlanning.gameObject.SetActive(true);
     }
     public void mostrarVistaSprintPlanning() {
         vista.sprintPlanning.gameObject.SetActive(true);
@@ -176,6 +187,17 @@ public class ClienteControlador : ClientElement {
     }
     public void mostrarVistaFinDelJuego() {
         vista.finDelJuego.gameObject.SetActive(true);
+    }
+    public void mostrarPanelMensaje() {
+        vista.pnlMenssage.SetActive(true);
+    }
+    public void ocultarPanelMensaje() {
+        vista.pnlMenssage.SetActive(false);
+    }
+
+    public void cargarDialogoGlobal(int indice) {
+        vista.dialogoGlobal.cargarDialogo(indice);
+        vista.dialogoGlobal.gameObject.SetActive(true);
     }
 
     /*public void iniciarNuevoSprint() {

@@ -14,6 +14,14 @@ public class ClienteControlador : ClientElement {
         modelo.setPartida(partidaID);
     }
 
+    public void cambiarEstadoPartida(string estado) {
+        modelo.getPartida().setEstado(estado);
+    }
+
+    public string obtenerEstadoPartida() {
+        return modelo.getPartida().getEstado();
+    }
+
     public void responderConexion(bool aceptado) {
         vista.conectarse.respuestaConexion(aceptado);
     }

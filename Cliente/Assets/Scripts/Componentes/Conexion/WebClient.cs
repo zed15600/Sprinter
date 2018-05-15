@@ -174,18 +174,20 @@ public class WebClient : ClientElement {
 
             for (int i = 0; i < jHistorias.Length; i++){
                 JSONObject historia = jHistorias[i].Obj;
-                List<string> criterios = new List<string>();
+                List<CriterioHU> criterios = new List<CriterioHU>();
                 string nombreHU = historia["nombre"].Str;
                 string descripcionHU = historia["descripcion"].Str;
                 string puntos = historia["puntos"].Str;
-                string prioridad = historia["prioridad"].Str;
+                int prioridad = (int)historia["prioridad"].Number;
+                //Debug.Log("WebClient.obtenerProyecto() -> Prioridad HU:" + prioridad);
                 JSONArray crit = historia.GetArray("criterios");
                 bool estado = historia["estado"].Boolean;
                 for (int j = 0; j < crit.Length; j++){
-                    criterios.Add(crit[j].Str);
+                    criterios.Add(new CriterioHU(crit[j].Str));
+                    //Debug.Log("WebClient.obtenerProyecto() -> Descripción de criterio: " + criterios[j].getDescripcion());
                 }
 
-                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, descripcionHU, puntos, prioridad, criterios, estado);
+                HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, descripcionHU, prioridad, puntos, criterios, estado);
                 historias.Add(historiaDeUsuario);
             }
             Proyecto proyecto = new Proyecto(nombre, descripcion, historias, (int)respuesta["duracionSprints"].Number, (int)respuesta["numeroSprints"].Number);
@@ -235,7 +237,7 @@ public class WebClient : ClientElement {
                 String[] husID = new String[size];
                 int[] vots = new int[size];
                 List<HistoriaDeUsuario> historias = new List<HistoriaDeUsuario>();
-                HistoriaDeUsuario hActual = new HistoriaDeUsuario("", "", "", "", null, false);
+                HistoriaDeUsuario hActual = new HistoriaDeUsuario("", "", 0, "", null, false);
                 for(int i=0; i<size;i++) {
                     husID[i] = historiasID[i].Str;
                     vots[i] = (int)votos[i].Number;
@@ -262,5 +264,12 @@ public class WebClient : ClientElement {
         } else {
             Debug.Log("WebClient.obtenerVotos() -> Json vacío.");
         }
+    }
+
+    public void empezarPartida(string partidaID) {
+        string json = JsonString.empezarPartida(partidaID);
+        setupSocket();
+        writeSocket(json);
+        closeSocket();
     }
 }
