@@ -73,6 +73,9 @@ public class ProcesadorJSON implements IProceso {
                             partida, proyecto);
                 case 16:
                     return Main.getControlador().enviarJugadores(pID);
+                case 17:
+                    Main.getControlador().empezarPartida(pID);
+                    break;
             }
         }
         return "";
