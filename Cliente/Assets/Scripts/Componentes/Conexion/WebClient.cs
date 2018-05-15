@@ -267,6 +267,9 @@ public class WebClient : ClientElement {
     }
 
     public void empezarPartida(string partidaID) {
-
+        string json = JsonString.empezarPartida(partidaID);
+        setupSocket();
+        writeSocket(json);
+        closeSocket();
     }
 }
