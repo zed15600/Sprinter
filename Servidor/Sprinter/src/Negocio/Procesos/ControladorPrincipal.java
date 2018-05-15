@@ -94,4 +94,8 @@ public class ControladorPrincipal {
         return controladorPartidas.enviarJugadores(idPartida);
     }
     
+    public void empezarPartida(int partidaID){
+        controladorPartidas.empezarPartida(partidaID);
+    }
+    
 }
