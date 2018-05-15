@@ -40,19 +40,24 @@ public class ClienteModelo : ClientElement {
 }
 
 
-public class Partida
-{
+public class Partida{
     private string id;
+    private string estado;
 
     public Partida(string id) { 
         this.id = id;
+        estado = "conexion";
     }
 
-    public string getID()
-    {
+    public string getID() {
         return id;
     }
-
+    public string getEstado() {
+        return estado;
+    }
+    public void setEstado(string estado) {
+        this.estado = estado;
+    }
 
 }
 
