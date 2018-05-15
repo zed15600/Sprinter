@@ -66,4 +66,9 @@ public class ControladorPartida extends Controlador {
         return respuestas.enviarJugadoresConAvatares(jugadores);
     }
     
+    public void empezarPartida(int partidaID){
+        Partida p = configuracion.obtenerPartida(partidaID);
+        p.setEstado("iniciada");
+    }
+    
 }
