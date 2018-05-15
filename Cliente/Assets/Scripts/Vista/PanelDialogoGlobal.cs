@@ -25,9 +25,8 @@ public class PanelDialogoGlobal : MonoBehaviour {
                 lineasDeDialogo = new string[] {
                     "Los proyectos en Scrum se realizan por ciclos (o iteraciones :3) de tiempo definido.",
                     "A estas iteraciones les llamamos Sprints.",
-                    "Al finalizar de cada Sprint debemos tener un producto funcional que el cliente pueda probar. :D",
+                    "Al final de cada Sprint debemos tener un producto funcional que el cliente pueda probar. :D",
                     "Debemos seleccionar cuales historias de usuario realizaremos en este primer Sprint.",
-                    "Al finalizar de cada Sprint debemos tener un producto funcional que el cliente pueda probar!",
                     "He seleccionado las primeras basadas en prioridad y las que conformarían un buen prototipo funcional.",
                     "Debemos organizarnos como equipo para elegir entre cuales de estas trabajaran en el Sprint! (=^･ω･^=)," +
                     ""};
