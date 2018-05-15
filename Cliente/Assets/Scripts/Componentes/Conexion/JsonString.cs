@@ -86,7 +86,8 @@
 
     public static string empezarPartida(string partidaID) {
         string res = "{" +
-            "\"codigo\":0017" +
+            "\"codigo\":0017," +
+            "\"partidaID\":" + partidaID +
             "}";
         return res;
     }
