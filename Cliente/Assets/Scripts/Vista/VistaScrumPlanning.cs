@@ -59,8 +59,4 @@ public class VistaScrumPlanning : ClientElement{
         llenarTabla();
         controlador.cargarDialogoGlobal(1);
     }
-
-    public void cambiarVista() {
-        throw new System.NotImplementedException();
-    }
 }

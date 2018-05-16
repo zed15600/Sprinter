@@ -57,10 +57,18 @@ public class ClienteControlador : ClientElement {
         public Dictionary<string, Sprite> obtenerMapaAvatares() {
             return modelo.getMapaAvatares();
         }
-        
-        //Partida
 
-        public void setPartida(Partida partida) {
+        public void establecerScrumMaster(string nombre) {
+            modelo.setScrumMaster(nombre);
+        }
+
+        public string obtenerScrumMaster() {
+            return modelo.getScrumMaster();
+        }
+
+    //Partida
+
+    public void setPartida(Partida partida) {
             modelo.setPartida(partida);
         }
         public Partida obtenerPartida() {
@@ -144,7 +152,6 @@ public class ClienteControlador : ClientElement {
             modelo.getMinijuego().aumentarIntentos();
         }
 
-
         public void obtenerPuntaje(HistoriaDeUsuario historia) {
             modelo.getProyecto().getHistorias();
         }// wtf ¿quién hizo esto?
@@ -198,6 +205,14 @@ public class ClienteControlador : ClientElement {
     public void cargarDialogoGlobal(int indice) {
         vista.dialogoGlobal.cargarDialogo(indice);
         vista.dialogoGlobal.gameObject.SetActive(true);
+    }
+
+    public void mostrarPanelVotacion() {
+        vista.panelVotacionSPlanning.gameObject.SetActive(true);
+    }
+
+    public bool verificarDialogoVacio() {
+        return vista.dialogoGlobal.dialogoVacio();
     }
 
     /*public void iniciarNuevoSprint() {

@@ -9,7 +9,7 @@ public class VistaSprintPlanning : ClientElement {
 
     [SerializeField]
     private Text actual = null;
-    
+
     public GameObject prefabDesc;
     public GameObject prefabPrio;
     public GameObject prefabPunt;
@@ -69,4 +69,12 @@ public class VistaSprintPlanning : ClientElement {
         llenarTabla();
         controlador.cargarDialogoGlobal(2);
     }
+
+    public void organizarPaneles() {
+        controlador.cargarDialogoGlobal(3);
+        while (!controlador.verificarDialogoVacio()) {
+        }
+        controlador.mostrarPanelVotacion();
+    }
+
 }

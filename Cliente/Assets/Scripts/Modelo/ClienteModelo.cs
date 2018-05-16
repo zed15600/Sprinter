@@ -6,10 +6,19 @@ public class ClienteModelo : ClientElement {
     public Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
     private List<string> proyectos;
 
+    private string scrumMaster;
     private Partida partida;
     private Proyecto proyecto;
     private List<Jugador> jugadores;
     private Minijuego minijuego = new Minijuego();
+
+    public void setScrumMaster(string scrumMaster) {
+        this.scrumMaster = scrumMaster;
+    }
+
+    public string getScrumMaster() {
+        return scrumMaster;
+    }
 
     public Dictionary<string, Sprite> getMapaAvatares() {
         return mapaAvatares;

@@ -23,6 +23,7 @@ public class VistaConfiguracionDePartidas : ClientElement {
         controlador.crearPartida(jugador, partida, proyecto);
         controlador.obtenerProyectoServidor();
         controlador.mostrarVistaUnirseAPartida();
+        controlador.establecerScrumMaster(jugador);
         this.gameObject.SetActive(false);
     }
 

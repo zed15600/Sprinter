@@ -9,12 +9,12 @@ public class DialogManager : MonoBehaviour {
 
     private Queue<string> lineasDeDialogo;
 
-	public void Awake () {
+    void Awake () {
         lineasDeDialogo = new Queue<string>();
 	}
 	
     public void StartDialogue(Dialogo dialogo)
-    {
+    {   
         lineasDeDialogo.Clear();
 
         foreach (string linea in dialogo.lineasDeDialogo)
@@ -36,7 +36,7 @@ public class DialogManager : MonoBehaviour {
         textoUI.text = linea;
     }
 
-    public bool dialogoVacio() {
+    public bool dialogoEstaVacio() {
         if (lineasDeDialogo.Count == 0) {
             return true;
         }
