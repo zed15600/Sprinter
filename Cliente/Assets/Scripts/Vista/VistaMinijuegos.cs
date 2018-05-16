@@ -32,6 +32,7 @@ public class VistaMinijuegos:ClientElement {
     }
 
     void OnEnable() {
+        controlador.cargarDialogoGlobal(7);
         restart();
         actualizar();
         descontar = true;

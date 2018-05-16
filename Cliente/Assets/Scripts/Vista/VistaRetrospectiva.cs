@@ -15,6 +15,7 @@ public class VistaRetrospectiva : ClientElement {
 
 	// Use this for initialization
 	void OnEnable () {
+        controlador.cargarDialogoGlobal(11);
         historiasDeSprint = controlador.obtenerHistoriasSprint();
         mostrarHistorias(historiasDeSprint);
 		//a = new int[][] {new int[]{1, 2745}, new int[]{2, 1890}};

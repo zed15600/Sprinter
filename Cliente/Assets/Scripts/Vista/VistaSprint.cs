@@ -15,6 +15,7 @@ public class VistaSprint : ClientElement{
     public VerticalLayoutGroup colPunt;
 
     void OnEnable(){
+        controlador.cargarDialogoGlobal(4);
         int dia = controlador.obtenerDiaActual();
         dias.text = "Tiempo restante: " + dia + (dia==1?" día.":" días.");
         llenarTabla();

@@ -7,15 +7,18 @@ public class DialogManager : MonoBehaviour {
 
     public Text textoUI;
 
-    private Queue<string> lineasDeDialogo;
+    private Queue<string> lineasDeDialogo = new Queue<string>() ;
 
-    void Awake () {
-        lineasDeDialogo = new Queue<string>();
-	}
-	
-    public void StartDialogue(Dialogo dialogo)
-    {   
+    public void limpiarDialogo() {
         lineasDeDialogo.Clear();
+    }
+    public void StartDialogue(Dialogo dialogo)
+    {
+        limpiarDialogo();
+
+        if (dialogo.lineasDeDialogo == null) {
+            return;
+        }
 
         foreach (string linea in dialogo.lineasDeDialogo)
         {

@@ -50,13 +50,12 @@ public class VistaScrumPlanning : ClientElement{
 
     public void OnEnable()
     {
-
+        controlador.cargarDialogoGlobal(1);
         FindObjectOfType<DialogTrigger>().TriggerDialog();
         establecerProyecto();
         while (controlador.obtenerHistorias().ToArray().Length == 0)
         {
         }
         llenarTabla();
-        controlador.cargarDialogoGlobal(1);
     }
 }

@@ -13,7 +13,7 @@ public class ClienteVista : ClientElement {
     public VistaRetrospectiva retrospectiva;
     public VistaFinDelJuego finDelJuego;
     public VistaMinijuegos minijuegos;
-    //public VistaReunionDiaria reunion;
+    public VistaReunionDiaria reunion;
     //public VistaEncuesta encuesta;
 
     public PanelDialogoGlobal dialogoGlobal;

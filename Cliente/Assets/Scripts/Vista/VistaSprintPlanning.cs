@@ -21,6 +21,8 @@ public class VistaSprintPlanning : ClientElement {
     public VerticalLayoutGroup colPunt;
     public VerticalLayoutGroup colEstado;
 
+    private bool dialogoVacio;
+    private bool dialogoFueActivo;
     public void establecerSprint()
     {
         restantes.text = "Quedan " + controlador.obtenerSprintsRestantes() + " Sprints.";
@@ -62,19 +64,25 @@ public class VistaSprintPlanning : ClientElement {
     }
 
     void OnEnable() {
+        controlador.cargarDialogoGlobal(2);
         establecerSprint();
         while (controlador.obtenerHistorias().ToArray().Length == 0) {
             Debug.Log(controlador.obtenerHistorias().Capacity);
         }
         llenarTabla();
-        controlador.cargarDialogoGlobal(2);
     }
 
     public void organizarPaneles() {
         controlador.cargarDialogoGlobal(3);
-        while (!controlador.verificarDialogoVacio()) {
-        }
-        controlador.mostrarPanelVotacion();
+        dialogoVacio = false;
+        dialogoFueActivo = true;
     }
 
+    void Update() {
+        if (!dialogoVacio && controlador.verificarDialogoVacio() && dialogoFueActivo) {
+            controlador.mostrarPanelVotacion();
+            dialogoVacio = true;
+            dialogoFueActivo = false;
+        }
+    }
 }

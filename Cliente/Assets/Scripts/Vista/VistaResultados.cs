@@ -18,6 +18,7 @@ public class VistaResultados : ClientElement {
     public Image checkMark;
 
 	void OnEnable () {
+        controlador.cargarDialogoGlobal(9);
         foreach(Transform child in criterios.transform) {
             GameObject.Destroy(child.gameObject);
         }
