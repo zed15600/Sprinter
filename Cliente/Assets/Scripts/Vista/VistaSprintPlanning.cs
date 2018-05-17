@@ -21,7 +21,10 @@ public class VistaSprintPlanning : ClientElement {
     public VerticalLayoutGroup colPunt;
     public VerticalLayoutGroup colEstado;
 
+    //Verifica que ya se ha validado un dialogo vaciado, detiene el Update de esta vista.
     private bool dialogoVacio;
+    //Verifica que ya se ha activado el dialogo, previene que el update de esta vista se inicie
+    //automaticamente.
     private bool dialogoFueActivo;
     public void establecerSprint()
     {

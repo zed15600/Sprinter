@@ -108,8 +108,8 @@ public class Proyecto {
     public int getRestantes(){
         return SprintRestantes;
     }
-    public int getDiaActual() {
-        return diaSprint;
+    public int getDiasRestantes() {
+        return duracionSprints - diaSprint;
     }
 
     public void setHistoriasSprint(List<HistoriaDeUsuario> historias) {
@@ -131,6 +131,15 @@ public class Proyecto {
             diaSprint = 1;
             return false; //retorna false cuando el sprint termina
         }
+    }
+
+    public HistoriaDeUsuario obtenerHistoria(string tituloHistoria) {
+        foreach (HistoriaDeUsuario hist in historias) {
+            if (hist.getNombre().Equals(tituloHistoria)) {
+                return hist;
+            }
+        }
+        return new HistoriaDeUsuario();
     }
 }
 
@@ -156,6 +165,9 @@ public class HistoriaDeUsuario{
     private bool estado;
     private int puntaje;
 
+    public HistoriaDeUsuario() {
+
+    }
     public HistoriaDeUsuario (string nombre, string descripcion, int prioridad, string puntos, List<CriterioHU> criterios, bool estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;

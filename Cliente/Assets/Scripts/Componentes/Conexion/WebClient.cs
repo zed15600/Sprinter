@@ -190,7 +190,7 @@ public class WebClient : ClientElement {
                 HistoriaDeUsuario historiaDeUsuario = new HistoriaDeUsuario(nombreHU, descripcionHU, prioridad, puntos, criterios, estado);
                 historias.Add(historiaDeUsuario);
             }
-            Proyecto proyecto = new Proyecto(nombre, descripcion, historias, (int)respuesta["duracionSprints"].Number, (int)respuesta["numeroSprints"].Number);
+            Proyecto proyecto = new Proyecto(nombre, descripcion, historias, (int)respuesta["numeroSprints"].Number, (int)respuesta["duracionSprints"].Number);
             controlador.establecerProyecto(proyecto);
         }
     }

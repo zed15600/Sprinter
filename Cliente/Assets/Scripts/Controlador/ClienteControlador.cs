@@ -108,7 +108,11 @@ public class ClienteControlador : ClientElement {
             return modelo.getProyecto().getSprintActual().ToString();
         }
         public int obtenerDiaActual() {
-            return modelo.getProyecto().getDiaActual();
+            return modelo.getProyecto().getDiasRestantes();
+        }
+
+        public HistoriaDeUsuario obtenerHistoriaPorTitulo(string tituloHistoria) {
+            return modelo.getProyecto().obtenerHistoria(tituloHistoria);
         }
 
         //Minijuego
@@ -215,6 +219,10 @@ public class ClienteControlador : ClientElement {
         return vista.dialogoGlobal.dialogoVacio();
     }
 
+    public void mostrarPanelHistoria(string titulo) {
+        vista.panelHistorias.actualizarHistoria(titulo);
+        vista.panelHistorias.gameObject.SetActive(true);
+    }
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
     }

@@ -10,13 +10,10 @@ public class VistaScrumPlanning : ClientElement{
     [SerializeField]
     private Text descripcion = null;
 
-    public GameObject prefabDesc;
-    public GameObject prefabPrio;
-    public GameObject prefabPunt;
+    public GameObject prefabHistoria;
 
-    public VerticalLayoutGroup colDesc;
-    public VerticalLayoutGroup colPrio;
-    public VerticalLayoutGroup colPunt;
+    public VerticalLayoutGroup contenidosHistoria;
+
     // -------------------------------------------------------------------------------------------------------------
     public void establecerProyecto() {
         proyecto.text = controlador.obtenerNombreProyecto();
@@ -25,26 +22,19 @@ public class VistaScrumPlanning : ClientElement{
 
     public void llenarTabla()
     {
-
         List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
-        for (int i = 0; i < historias.ToArray().Length; i++)
-        {
-            GameObject contenidoHistoria = Instantiate(prefabDesc);
-            GameObject contenidoPrioridad = Instantiate(prefabPrio);
-            GameObject contenidoPuntos = Instantiate(prefabPunt);
-
-            Text descripcion = contenidoHistoria.GetComponentInChildren<Text>();
-            Text prioridad = contenidoPrioridad.GetComponentInChildren<Text>();
-            Text puntos = contenidoPuntos.GetComponentInChildren<Text>();
-
-            descripcion.text = historias[i].getDescripcion();
-            prioridad.text = "" + historias[i].getPrioridad();
-            puntos.text = historias[i].getPuntos();
-
-            contenidoHistoria.transform.SetParent(colDesc.transform, false);
-            contenidoPrioridad.transform.SetParent(colPrio.transform, false);
-            contenidoPuntos.transform.SetParent(colPunt.transform, false);
-            
+        for (int i = 0; i < historias.Count; i++) {
+            GameObject historia = Instantiate(prefabHistoria);
+            string titulo = historias[i].getNombre();
+            historia.GetComponentsInChildren<Button>()[0].GetComponentsInChildren<Image>()[0].
+                GetComponentsInChildren<Text>()[0].text = titulo;
+            historia.GetComponentsInChildren<Button>()[0].
+                GetComponentsInChildren<Text>()[1].text = titulo;
+            historia.GetComponentsInChildren<Image>()[2].GetComponentsInChildren<Text>()[0]
+                .text = historias[i].getPrioridad() + "";
+            historia.GetComponentsInChildren<Image>()[3].GetComponentsInChildren<Text>()[0]
+                .text = historias[i].getPuntos() + "";
+            historia.transform.SetParent(contenidosHistoria.transform, false);     
         }
     }
 

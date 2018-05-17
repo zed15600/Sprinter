@@ -36,6 +36,7 @@ public class JSONMensajes implements IMensajes {
     
      /**
      * Retorna el String en formato Json con los datos del proyecto: nombre y descripcion.
+     * @param p
      * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
      */
     @Override

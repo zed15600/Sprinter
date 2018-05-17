@@ -16,6 +16,7 @@ public class ClienteVista : ClientElement {
     public VistaReunionDiaria reunion;
     //public VistaEncuesta encuesta;
 
+    public PanelHistorias panelHistorias;
     public PanelDialogoGlobal dialogoGlobal;
     public PanelVotacion panelVotacionSPlanning;
     public PanelVotacion panelVotacionDia;
