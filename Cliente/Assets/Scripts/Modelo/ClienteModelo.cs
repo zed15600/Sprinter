@@ -233,13 +233,12 @@ public class Minijuego{
     private float tiempoFinal = 0;
     private int intentos = 1;
 
-    /*public Minijuego (HistoriaDeUsuario historia) {
-        historiaActual = historia;
-    }*/
-
     public HistoriaDeUsuario getHistoriaActual(){
         return historiaActual;
     }
+
+    public List<Jugador> jugadoresEnProblemas = new List<Jugador>();
+
     public float getTiempoFinal(){
         return tiempoFinal;
     }
@@ -267,6 +266,10 @@ public class Minijuego{
     }
     public void resetearIntentos() {
         this.intentos = 1;
+    }
+
+    public List<Jugador> getJugadoresEnProblemas() {
+        return jugadoresEnProblemas;
     }
 }
 

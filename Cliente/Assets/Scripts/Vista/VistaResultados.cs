@@ -17,7 +17,9 @@ public class VistaResultados : ClientElement {
     public Text criterio;
     public Image checkMark;
 
-	void OnEnable () {
+    private bool dialogoActivo = false;
+
+    void OnEnable () {
         controlador.cargarDialogoGlobal(9);
         foreach(Transform child in criterios.transform) {
             GameObject.Destroy(child.gameObject);
@@ -90,11 +92,24 @@ public class VistaResultados : ClientElement {
         }
     }
 
+    public void mostrarDialogoFinal() {
+        controlador.cargarDialogoGlobal(10);
+    }
+
     public void cambiarVista() {
-        controlador.terminarDia();
-        if(!controlador.obtenerMinijuego().getHistoriaActual().getEstado()) {
-            controlador.mostrarPanelMensaje();
+        mostrarDialogoFinal();
+        dialogoActivo = true;
+    }
+
+    void Update() {
+        if (controlador.verificarDialogoVacio() && dialogoActivo) {
+            controlador.terminarDia();
+            if (!controlador.obtenerMinijuego().getHistoriaActual().getEstado()) {
+                controlador.mostrarPanelMensaje();
+            }
+            dialogoActivo = false;
+            FindObjectOfType<DialogManager>().limpiarDialogo();
+            this.gameObject.SetActive(false);
         }
-        this.gameObject.SetActive(false);
     }
 }

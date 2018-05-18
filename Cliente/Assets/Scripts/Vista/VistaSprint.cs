@@ -6,13 +6,9 @@ using UnityEngine.UI;
 public class VistaSprint : ClientElement{
 
     public GameObject pnlVotos;
-    public GameObject prefabDesc;
-    public GameObject prefabPrio;
-    public GameObject prefabPunt;
+    public GameObject prefabHistoria;
     public Text dias;
-    public VerticalLayoutGroup colDesc;
-    public VerticalLayoutGroup colPrio;
-    public VerticalLayoutGroup colPunt;
+    public VerticalLayoutGroup tablaHistorias;
 
     void OnEnable(){
         controlador.cargarDialogoGlobal(4);
@@ -22,33 +18,24 @@ public class VistaSprint : ClientElement{
     }
 
     public void llenarTabla(){
-        foreach(Transform child in colDesc.transform) {
-            GameObject.Destroy(child.gameObject);
-        }
-        foreach(Transform child in colPrio.transform) {
-            GameObject.Destroy(child.gameObject);
-        }
-        foreach(Transform child in colPunt.transform) {
+
+        foreach(Transform child in tablaHistorias.transform) {
             GameObject.Destroy(child.gameObject);
         }
 
         List<HistoriaDeUsuario> historias = controlador.obtenerHistoriasSprint();
-        for (int i = 0; i < historias.ToArray().Length; i++){
-            GameObject contenidoHistoria = Instantiate(prefabDesc);
-            GameObject contenidoPrioridad = Instantiate(prefabPrio);
-            GameObject contenidoPuntos = Instantiate(prefabPunt);
-
-            Text descripcion = contenidoHistoria.GetComponentInChildren<Text>();
-            Text prioridad = contenidoPrioridad.GetComponentInChildren<Text>();
-            Text puntos = contenidoPuntos.GetComponentInChildren<Text>();
-
-            descripcion.text = historias[i].getDescripcion();
-            prioridad.text = "" + historias[i].getPrioridad();
-            puntos.text = historias[i].getPuntos();
-
-            contenidoHistoria.transform.SetParent(colDesc.transform, false);
-            contenidoPrioridad.transform.SetParent(colPrio.transform, false);
-            contenidoPuntos.transform.SetParent(colPunt.transform, false);
+        for (int i = 0; i < historias.Count; i++){
+            GameObject contenidoHistoria = Instantiate(prefabHistoria);
+            string titulo = historias[i].getNombre();
+            contenidoHistoria.GetComponentsInChildren<Button>()[0].GetComponentsInChildren<Image>()[0].
+                GetComponentsInChildren<Text>()[0].text = titulo;
+            contenidoHistoria.GetComponentsInChildren<Button>()[0].
+                GetComponentsInChildren<Text>()[1].text = titulo;
+            contenidoHistoria.GetComponentsInChildren<Image>()[2].GetComponentsInChildren<Text>()[0]
+                .text = historias[i].getPrioridad() + "";
+            contenidoHistoria.GetComponentsInChildren<Image>()[3].GetComponentsInChildren<Text>()[0]
+                .text = historias[i].getPuntos() + "";
+            contenidoHistoria.transform.SetParent(tablaHistorias.transform, false);
 
         }
     }
@@ -58,6 +45,6 @@ public class VistaSprint : ClientElement{
         controlador.ocultarPanelMensaje();
         pnlVotos.SetActive(false);
         this.gameObject.SetActive(false);
-        controlador.iniciarMinijuego();
+        controlador.iniciarReunion();
     }
 }

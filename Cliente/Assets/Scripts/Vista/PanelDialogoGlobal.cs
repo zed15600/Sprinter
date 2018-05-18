@@ -72,7 +72,7 @@ public class PanelDialogoGlobal : ClientElement {
                     };
                     break;
 
-                //Impedimento - TODO
+                //Impedimento - Listo
                 case 6:
                     if(dialogoImpedimento)
                     lineasDeDialogo = new string[] {
@@ -83,7 +83,7 @@ public class PanelDialogoGlobal : ClientElement {
                     };
                     dialogoImpedimento = false;
                     break;
-                //Minijuego - POR COMPLETAR
+                //Minijuego - Listo
                 case 7:
                     if (dialogosIteracion)
                     lineasDeDialogo = new string[] {
@@ -102,7 +102,7 @@ public class PanelDialogoGlobal : ClientElement {
                     ""
                     };
                     break;
-                //Minijuego terminado - TODO
+                //Minijuego terminado - Listo
                 case 8:
                     if (dialogosIteracion)
                     lineasDeDialogo = new string[] {
@@ -122,7 +122,7 @@ public class PanelDialogoGlobal : ClientElement {
                     ""
                     };
                     break;
-                //Resultados Boton - TODO
+                //Resultados Boton - Listo
                 case 10:
                     if (dialogosIteracion)
                     lineasDeDialogo = new string[] {
@@ -140,7 +140,7 @@ public class PanelDialogoGlobal : ClientElement {
                     ""
                     };
                     break;
-                //Dialogo Final del primer Sprint - TODO
+                //Dialogo Final del primer Sprint - Listo
                 case 12:
                     lineasDeDialogo = new string[] {
                     "Buen trabajo en el primer Sprint, ya les he explicado un poco sobre los conceptos básicos de Scrum.",
@@ -151,8 +151,10 @@ public class PanelDialogoGlobal : ClientElement {
                 dialogosPermitidos = false;
                 break;
             }
+            Debug.Log(lineasDeDialogo[0]);
             trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
         }
+
     }
 
     void OnEnable() {
