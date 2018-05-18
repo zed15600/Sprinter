@@ -85,16 +85,8 @@ public class WebClient : ClientElement {
         closeSocket();
         if (recieved_data != "") {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
-            JSONArray nombres = respuesta.GetArray("jugadores");
-            JSONArray avatares = respuesta.GetArray("avatares");
-            List<Jugador> jugadores = new List<Jugador>();
-            for (int i = 0; i < nombres.Length; i++) {
-                string nombre = nombres[i].Str;
-                string avatar = avatares[i].Str;
-                Jugador jugador = new Jugador(nombre, avatar);
-                jugadores.Add(jugador);
-            }
-            controlador.establecerJugadores(jugadores);
+            
+            controlador.establecerJugadores(hacerListaDeJugadores(respuesta));
         }
     }
 
@@ -276,7 +268,26 @@ public class WebClient : ClientElement {
         string dataIn = readSocket();
         closeSocket();
         if(dataIn !="") {
-
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            controlador.establecerJugadoresEnProblemas(hacerListaDeJugadores(jsRes));
         }
+    }
+
+
+
+
+
+
+    public List<Jugador> hacerListaDeJugadores(JSONObject json) {
+        JSONArray nombres = json.GetArray("jugadores");
+        JSONArray avatares = json.GetArray("avatares");
+        List<Jugador> jugadores = new List<Jugador>();
+        for (int i = 0; i < nombres.Length; i++) {
+            string nombre = nombres[i].Str;
+            string avatar = avatares[i].Str;
+            Jugador jugador = new Jugador(nombre, avatar);
+            jugadores.Add(jugador);
+        }
+        return jugadores;
     }
 }

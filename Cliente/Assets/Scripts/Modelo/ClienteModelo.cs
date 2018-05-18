@@ -232,12 +232,12 @@ public class Minijuego{
     private HistoriaDeUsuario historiaActual;
     private float tiempoFinal = 0;
     private int intentos = 1;
+    public List<Jugador> jugadoresEnProblemas = new List<Jugador>();
 
     public HistoriaDeUsuario getHistoriaActual(){
         return historiaActual;
     }
 
-    public List<Jugador> jugadoresEnProblemas = new List<Jugador>();
 
     public float getTiempoFinal(){
         return tiempoFinal;
@@ -270,6 +270,10 @@ public class Minijuego{
 
     public List<Jugador> getJugadoresEnProblemas() {
         return jugadoresEnProblemas;
+    }
+
+    public void setJugadoresEnProblemas(List<Jugador> jugadoresEnProblemas) {
+        this.jugadoresEnProblemas = jugadoresEnProblemas;
     }
 }
 

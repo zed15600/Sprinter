@@ -66,6 +66,10 @@ public class ClienteControlador : ClientElement {
             return modelo.getScrumMaster();
         }
 
+        public void establecerJugadoresEnProblemas(List<Jugador> jugadores) {
+            modelo.getMinijuego().setJugadoresEnProblemas(jugadores);
+        }
+
     //Partida
 
     public void setPartida(Partida partida) {
