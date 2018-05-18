@@ -1,4 +1,14 @@
-﻿public class JsonString : ClientElement {
+﻿using UnityEngine;
+
+public class JsonString : ClientElement {
+
+    public static string terminarDia(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0003," +
+            "\"partidaID\":\"" + partidaID + "\"" +
+            "}";
+        return res;
+    }
 
     public static string pedirProyecto(string partida){
         string res = "{"
@@ -67,6 +77,7 @@
     }
 
     public static string crearPartida(string nombreJugador, string nombrePartida, string nombreProyecto) {
+        //Debug.Log("Proyecto: " + nombreProyecto);
         string res = "{" +
              "\"codigo\":0015," +
              "\"jugador\":\"" + nombreJugador + "\"," +

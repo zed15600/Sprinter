@@ -1,4 +1,4 @@
-/* JSONObject.cs -- Simple C# JSON parser
+﻿/* JSONObject.cs -- Simple C# JSON parser
   version 1.4 - March 17, 2014
 
   Copyright (C) 2012 Boomlagoon Ltd.

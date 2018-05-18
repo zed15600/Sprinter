@@ -43,7 +43,7 @@ public class ConexionTCP implements IConexion{
                 System.out.println("ConexionTCP.conectar()-> in: " + in);
                 out = procesador.procesar(in);
                 System.out.println("ConexionTCP.conectar()-> out: " + out);
-                outData.writeBytes(out + "\n");
+                outData.writeUTF("\n"+out+"\n");
             }
         } catch (IOException ex) {
             Logger.getLogger(ConexionTCP.class.getName()).log(Level.SEVERE,

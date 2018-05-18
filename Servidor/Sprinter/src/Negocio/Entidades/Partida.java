@@ -90,10 +90,9 @@ public class Partida {
         double probabilidad = ((sActual-1)*dias+dActual)*0.5/(sprints*dias);
         probabilidad = sActual==0?0:probabilidad;
         for(IntegranteScrumTeam jugador: listaJugadores){
-            if(probabilidad > 0 && Math.random() < probabilidad+1){
+            if(probabilidad > 0 && Math.random() < probabilidad){
                 int impedimento = ThreadLocalRandom.current().nextInt(imps.size());
                 jugador.setImpedimento(imps.get(impedimento));
-                System.out.println("Partida.asignarImpedimentos() -> Asigné un impedimento");
             }else{
                 jugador.setImpedimento(null);
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Net.Sockets;
 using System;
+using System.Text;
 using Boomlagoon.JSON;
 
 public class WebClient : ClientElement {
@@ -55,19 +56,14 @@ public class WebClient : ClientElement {
         socket_writer.Flush();
     }
 
-    public String readSocket()
-    {
-        if (!socket_ready)
-        {
+    public String readSocket(){
+        if (!socket_ready){
             return "";
         }
-
-        //if (net_stream.DataAvailable) {
             string inp = socket_reader.ReadLine();
+        inp = socket_reader.ReadLine();
         //Debug.Log("WebClient.readSocket() -> in: "+inp);
             return inp;
-        //}
-        //return "";
     }
 
     public void closeSocket()
@@ -271,5 +267,16 @@ public class WebClient : ClientElement {
         setupSocket();
         writeSocket(json);
         closeSocket();
+    }
+
+    public void terminarDia(string partidaID) {
+        string json = JsonString.terminarDia(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+
+        }
     }
 }

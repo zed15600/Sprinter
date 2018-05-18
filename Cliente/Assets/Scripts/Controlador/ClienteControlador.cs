@@ -260,6 +260,7 @@ public class ClienteControlador : ClientElement {
         }
     }
     public void terminarDia() {
+        webClient.terminarDia(modelo.getPartida().getID());
         if(modelo.getProyecto().terminarDia()){
             mostrarVistaSprint();
         } else {

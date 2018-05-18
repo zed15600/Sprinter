@@ -50,7 +50,7 @@ public class VistaEstado : ClientElement {
                         if(i.Afectado) {
                             estado.color = new Color(1, 0, 0, 1);
                         } else {
-                            estado.color = new Color(0, 0.710345f, 1, 0);
+                            estado.color = new Color(0, 0.710345f, 1, 1);
                         }
                         break;
                 }

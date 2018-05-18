@@ -64,6 +64,7 @@ public class WebClient : ClientElement {
 
         //if (net_stream.DataAvailable) {
             string inp = socket_reader.ReadLine();
+        inp = socket_reader.ReadLine();
             return inp;
         //}
         //return "";
@@ -116,7 +117,12 @@ public class WebClient : ClientElement {
                 controlador.mostrarVotacion(HUNombres, HUsDesc);
             }
             controlador.cambiarEstadoPartida(jsRes["estadoPartida"].Str);
-            controlador.modificarImpedimento(jsRes["afectado"].Boolean, jsRes["nombre"].Str, jsRes["descripcion"].Str);
+            bool afectado = jsRes["afectado"].Boolean;
+            if(afectado){
+                controlador.modificarImpedimento(afectado, jsRes["nombre"].Str, jsRes["descripcion"].Str);
+            } else {
+                controlador.modificarImpedimento(afectado, "", "");
+            }
         }
     }
 
