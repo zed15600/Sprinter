@@ -26,6 +26,8 @@ public class VistaMinijuegos:ClientElement {
     int count = 0;
     float targetTime = 0;
     bool descontar = true;
+    bool dialogoFueActivo = false;
+    bool activarCriterios = false;
 
     // Use this for initialization
     void Start() {
@@ -33,6 +35,7 @@ public class VistaMinijuegos:ClientElement {
 
     void OnEnable() {
         controlador.cargarDialogoGlobal(7);
+        dialogoFueActivo = true;
         restart();
         actualizar();
         descontar = true;
@@ -43,12 +46,21 @@ public class VistaMinijuegos:ClientElement {
 
     // Update is called once per frame
     void Update() {
-        if(descontar){
-            targetTime-=Time.deltaTime;
-            timer.text=((int)(targetTime/60)).ToString()+":"+((int)targetTime%60).ToString();
-        }
-        if(targetTime<=0) {
-            actualizar();
+        if (controlador.verificarDialogoVacio()) {
+            if (dialogoFueActivo) {
+                if (descontar) {
+                    targetTime -= Time.deltaTime;
+                    timer.text = ((int)(targetTime / 60)).ToString() + ":" + ((int)targetTime % 60).ToString();
+                }
+                if (targetTime <= 0) {
+                    actualizar();
+                }
+            }
+
+            if (activarCriterios) {
+                panelCriterios.SetActive(true);
+                activarCriterios = false;
+            }
         }
     }
 
@@ -83,8 +95,10 @@ public class VistaMinijuegos:ClientElement {
             case 3:
             descontar = false;
             controlador.establecerTiempo(targetTime);
-            panelCriterios.SetActive(true);
+            activarCriterios = true;
+            controlador.cargarDialogoGlobal(8);
             count=0;
+            dialogoFueActivo = false;
             break;
         }
 

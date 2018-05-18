@@ -22,6 +22,10 @@ public class VistaScrumPlanning : ClientElement{
 
     public void llenarTabla()
     {
+        foreach (Transform child in contenidosHistoria.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
         List<HistoriaDeUsuario> historias = controlador.obtenerHistorias();
         for (int i = 0; i < historias.Count; i++) {
             GameObject historia = Instantiate(prefabHistoria);
@@ -41,7 +45,7 @@ public class VistaScrumPlanning : ClientElement{
     public void OnEnable()
     {
         controlador.cargarDialogoGlobal(1);
-        FindObjectOfType<DialogTrigger>().TriggerDialog();
+        //FindObjectOfType<DialogTrigger>().TriggerDialog();
         establecerProyecto();
         while (controlador.obtenerHistorias().ToArray().Length == 0)
         {

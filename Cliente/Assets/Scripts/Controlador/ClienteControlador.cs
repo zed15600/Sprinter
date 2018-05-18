@@ -102,7 +102,7 @@ public class ClienteControlador : ClientElement {
             modelo.getProyecto().setHistoriasSprint(historias);
         }
         public string obtenerSprintsRestantes(){
-            return modelo.getProyecto().getRestantes().ToString();
+            return  (modelo.getProyecto().getNumeroSprints() - modelo.getProyecto().getRestantes()).ToString();
         }
         public string obtenerActual(){
             return modelo.getProyecto().getSprintActual().ToString();
@@ -116,6 +116,10 @@ public class ClienteControlador : ClientElement {
         }
 
         //Minijuego
+
+        public HistoriaDeUsuario obtenerHistoriaActual() {
+            return modelo.getMinijuego().getHistoriaActual();
+        }
 
         public Minijuego obtenerMinijuego() {
             return modelo.getMinijuego();
@@ -222,6 +226,10 @@ public class ClienteControlador : ClientElement {
     public void mostrarPanelHistoria(string titulo) {
         vista.panelHistorias.actualizarHistoria(titulo);
         vista.panelHistorias.gameObject.SetActive(true);
+    }
+
+    public void iniciarReunion() {
+        vista.reunion.gameObject.SetActive(true);
     }
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
