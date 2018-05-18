@@ -11,9 +11,6 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public interface IConexionBaseDeDatos {
-    public Proyecto obtenerProyecto(String nombre);
-    public ArrayList<Proyecto> obtenerProyectos();
+public interface ImpedimentoDAO {
     public ArrayList<Impedimento> obtenerImpedimentos();
-    public void conectar();
 }

@@ -6,6 +6,8 @@
 package AccesoADatos;
 
 import Negocio.Entidades.IConexionBaseDeDatos;
+import Negocio.Entidades.Impedimento;
+import Negocio.Entidades.ImpedimentoDAO;
 import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.ProyectoDAO;
 import java.sql.Connection;
@@ -24,9 +26,11 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
     
     private static Connection conexion;
     private final ProyectoDAO implProyectoDAO;
+    private final ImpedimentoDAO implImpedimentoDAO;
     
     public ConexionMySQL(){
         implProyectoDAO = new ProyectoDAOMySQL();
+        implImpedimentoDAO = new ImpedimentoDAOMySQL();
     }
     
     /**
@@ -69,6 +73,11 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
     @Override
     public ArrayList<Proyecto> obtenerProyectos() {
         return implProyectoDAO.obtenerProyectos();
+    }
+
+    @Override
+    public ArrayList<Impedimento> obtenerImpedimentos() {
+        return implImpedimentoDAO.obtenerImpedimentos();
     }
     
     public static Statement crearDeclaracion() throws SQLException{

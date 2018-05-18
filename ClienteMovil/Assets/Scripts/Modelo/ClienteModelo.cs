@@ -66,6 +66,12 @@ public class Jugador {
     private int id;
     private string nombre;
     private string avatar;
+    private Impedimento estado;
+
+
+    public Jugador() {
+        estado = new Impedimento();
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -90,6 +96,55 @@ public class Jugador {
 
     public string getAvatar() {
         return avatar;
+    }
+
+    public Impedimento Estado {
+        get {
+            return estado;
+        }
+    }
+}
+
+public class Impedimento {
+
+    private string nombre;
+    private string descripcion;
+    private bool afectado;
+
+    public Impedimento() {
+        nombre = "Estado: Normal";
+        descripcion = "No estás siendo afectado por ninguna eventualidad.";
+        afectado = false;
+    }
+
+    public string Nombre {
+        get {
+            return nombre;
+        }
+
+        set {
+            nombre=value;
+        }
+    }
+
+    public string Descripcion {
+        get {
+            return descripcion;
+        }
+
+        set {
+            descripcion=value;
+        }
+    }
+
+    public bool Afectado {
+        get {
+            return afectado;
+        }
+
+        set {
+            afectado=value;
+        }
     }
 }
 

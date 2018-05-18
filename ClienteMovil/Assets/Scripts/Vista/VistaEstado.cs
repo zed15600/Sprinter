@@ -11,6 +11,8 @@ public class VistaEstado : ClientElement {
     public GameObject[] btns;
     public Text[] btnsVotacion;
     public RawImage avatar;
+    public Text estado;
+    public Text descripcion;
 
     float refreshTime = 3.0f;
     bool votar = false;
@@ -40,8 +42,16 @@ public class VistaEstado : ClientElement {
                         detalle.SetActive(false);
                         break;
                     case "iniciada":
+                        Impedimento i = controlador.obtenerImpedimento();
                         bienvenida.SetActive(false);
                         detalle.SetActive(true);
+                        estado.text = i.Nombre;
+                        descripcion.text = i.Descripcion;
+                        if(i.Afectado) {
+                            estado.color = new Color(1, 0, 0, 1);
+                        } else {
+                            estado.color = new Color(0, 0.710345f, 1, 0);
+                        }
                         break;
                 }
             }

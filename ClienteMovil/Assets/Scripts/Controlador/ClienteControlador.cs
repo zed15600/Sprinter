@@ -45,4 +45,20 @@ public class ClienteControlador : ClientElement {
     public void enviarVoto(string HUid) {
         webClient.enviarVoto(modelo.getPartida().getID(), HUid, modelo.getJugador().getId());
     }
+
+    public Impedimento obtenerImpedimento() {
+        return modelo.getJugador().Estado;
+    }
+
+    public void modificarImpedimento(bool afectado, string nombre, string descripcion) {
+        Impedimento i = obtenerImpedimento();
+        if(afectado) {
+            i.Nombre = nombre;
+            i.Descripcion = descripcion;
+        } else {
+            i.Nombre = "Estado: Normal";
+            i.Descripcion = "No estás siendo afectado por ninguna eventualidad.";
+        }
+        i.Afectado = afectado;
+    }
 }

@@ -98,4 +98,8 @@ public class ControladorPrincipal {
         controladorPartidas.empezarPartida(partidaID);
     }
     
+    public String terminarDia(int partidaID){
+        return controladorPartidas.terminarDia(partidaID);
+    }
+    
 }

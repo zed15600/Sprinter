@@ -71,4 +71,12 @@ public class ControladorPartida extends Controlador {
         p.setEstado("iniciada");
     }
     
+    public String terminarDia(int partidaID){
+        Partida p = configuracion.obtenerPartida(partidaID);
+        p.getProyecto().nextDia();
+        p.asignarImpedimentos(configuracion.getImpedimentos());
+        return respuestas.enviarJugadoresConAvatares
+            (p.getJugadoresConImpedimentos());
+    }
+    
 }

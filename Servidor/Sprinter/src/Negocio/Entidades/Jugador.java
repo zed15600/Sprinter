@@ -13,18 +13,18 @@ public class Jugador {
     
     private final String nombre;
     private final int ID;
-
-
-    public String getNombre() {
-        return nombre;
-    }
     
     public Jugador(String nombre, int ID) {
         this.nombre = nombre;
         this.ID = ID;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
     
     public int getID(){
         return ID;
     }
+
 }

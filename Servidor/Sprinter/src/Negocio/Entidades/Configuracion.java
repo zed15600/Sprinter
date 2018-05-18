@@ -19,6 +19,7 @@ import java.util.Set;
 public class Configuracion {
     
     private final Map<Integer, Partida> mapaDePartidas;
+    private final ArrayList<Impedimento> impedimentos;
     //local
     private final ArrayList<Proyecto> listaDeProyectos;
     private final IConexionBaseDeDatos impl;
@@ -28,6 +29,8 @@ public class Configuracion {
         this.impl = impl;
         this.impl.conectar();
         listaDeProyectos = this.impl.obtenerProyectos();
+        impedimentos = this.impl.obtenerImpedimentos();
+        System.out.println("Configuracion.() -> Traje los proyectos y los impedimentos.");
     }
     
     public String crearPartida(String nombreJugador, String nombrePartida,
@@ -67,5 +70,9 @@ public class Configuracion {
     
     public ArrayList<Proyecto> getListaDeProyectos(){
         return listaDeProyectos;
+    }
+
+    public ArrayList<Impedimento> getImpedimentos() {
+        return impedimentos;
     }
 }

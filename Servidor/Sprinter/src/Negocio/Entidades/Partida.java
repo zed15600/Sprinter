@@ -8,6 +8,7 @@ package Negocio.Entidades;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -79,6 +80,34 @@ public class Partida {
             jugador.setVotar(true);
         }
         proyecto.reiniciarVotacion();
+    }
+    
+    public void asignarImpedimentos(ArrayList<Impedimento> imps){
+        int sprints = proyecto.getNumeroSprints();
+        int dias = proyecto.getDuracionDeSprints();
+        int sActual = proyecto.getSprintActual();
+        int dActual = proyecto.getDiaActual();
+        double probabilidad = ((sActual-1)*dias+dActual)*0.5/(sprints*dias);
+        probabilidad = sActual==0?0:probabilidad;
+        for(IntegranteScrumTeam jugador: listaJugadores){
+            if(probabilidad > 0 && Math.random() < probabilidad+1){
+                int impedimento = ThreadLocalRandom.current().nextInt(imps.size());
+                jugador.setImpedimento(imps.get(impedimento));
+                System.out.println("Partida.asignarImpedimentos() -> Asigné un impedimento");
+            }else{
+                jugador.setImpedimento(null);
+            }
+        }
+    }
+    
+    public ArrayList<IntegranteScrumTeam> getJugadoresConImpedimentos(){
+        ArrayList<IntegranteScrumTeam> jugadores = new ArrayList<>();
+        for(IntegranteScrumTeam j: listaJugadores){
+            if(j.getImpedimento() != null){
+                jugadores.add(j);
+            }
+        }
+        return jugadores;
     }
     
     public int getCodigo(){

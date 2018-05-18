@@ -16,7 +16,7 @@ public class IntegranteScrumTeam extends Jugador {
     String avatar;
     private final boolean estado; //true -> activo
     private boolean votar; //true -> puede votar
-    private final ArrayList<Impedimento> listaImpedimento;
+    private Impedimento Impedimento;
     
     public void votar(HistoriaDeUsuario HU){
     }
@@ -24,19 +24,12 @@ public class IntegranteScrumTeam extends Jugador {
     public IntegranteScrumTeam(String nombre, int ID, String avatar) {
         super(nombre, ID);
         this.avatar = avatar;
-        listaImpedimento = new ArrayList<>();
         votar = true;
         estado = true;
     }
     
     public String getAvatar(){
         return avatar;
-    }
-    
-    public void agregarImpedimento(Impedimento impedimento){
-    }
-    
-    public void quitarImpedimento(Impedimento impedimento){
     }
     
     public boolean getEstado(){
@@ -49,5 +42,13 @@ public class IntegranteScrumTeam extends Jugador {
     
     public void setVotar(boolean votar){
         this.votar = votar;
+    }
+
+    public Impedimento getImpedimento() {
+        return Impedimento;
+    }
+
+    public void setImpedimento(Impedimento Impedimento) {
+        this.Impedimento = Impedimento;
     }
 }

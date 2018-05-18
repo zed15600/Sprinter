@@ -25,6 +25,7 @@ public class Proyecto {
     private int duracionDeSprints;
     
     private int sprintActual;
+    private int diaActual;
     
     public Proyecto(String nombre, String descripcion){
         this.nombre = nombre;
@@ -42,7 +43,8 @@ public class Proyecto {
         this.productBacklog = productBacklog;
         this.numeroSprints = numeroSprints;
         this.duracionDeSprints = duracionDeSprints;
-        this.sprintActual = 0;
+        sprintActual = 0;
+        diaActual = 1;
     }
     
     public void reiniciarVotacion(){
@@ -69,9 +71,13 @@ public class Proyecto {
         return listaDeSprints.get(sprintActual-1).getSprintBacklog().getHistorias();
     }
     
-    /*public void nextDia(){
-        this.diaActual++;
-    }*/
+    public void nextDia(){
+        if(diaActual < duracionDeSprints){
+            diaActual++;
+        }else{
+            diaActual=1;
+        }
+    }
     
     public void nextSprint(){
         sprintActual++;
@@ -162,6 +168,10 @@ public class Proyecto {
             }
         }
         return i;
+    }
+
+    public int getDiaActual() {
+        return diaActual;
     }
     
 }

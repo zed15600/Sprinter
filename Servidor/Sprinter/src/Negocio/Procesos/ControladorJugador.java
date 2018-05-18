@@ -7,6 +7,7 @@ package Negocio.Procesos;
 
 import Negocio.Entidades.Configuracion;
 import Negocio.Entidades.HistoriaDeUsuario;
+import Negocio.Entidades.IntegranteScrumTeam;
 import Negocio.Entidades.Partida;
 import Negocio.Entidades.Proyecto;
 import java.util.ArrayList;
@@ -23,12 +24,12 @@ public class ControladorJugador extends Controlador {
         super(respuestas, configuracion);
     }
     
-    public String actualizarEstadoJugador(int partidaID, int jugador){
+    public String actualizarEstadoJugador(int partidaID, int jugadorID){
         Partida p = configuracion.obtenerPartida(partidaID);
         String estadoPartida = p.getEstado();
         if(estadoPartida.equals("conexion")){
             return respuestas.actualizarEstadoJugador(false, estadoPartida,
-                new HistoriaDeUsuario[]{}); 
+                new HistoriaDeUsuario[]{}, null); 
         }
         Proyecto py = p.getProyecto();
         boolean votar = p.getVotacion();
@@ -51,10 +52,6 @@ public class ControladorJugador extends Controlador {
         size = Math.min(size, py.getNumeroHistoriasPorCompletar());
         historias.sort(null);
         Collections.reverse(historias);
-        /*for(HistoriaDeUsuario historia : historias){
-            System.out.println("ControladorJugador.actualizarEstadoJugador()" + 
-        "-> Orden de historias: " + historia.getNombre());
-        }*/
         HistoriaDeUsuario[] posibles = new HistoriaDeUsuario[size];
         int i = 0;
         for(HistoriaDeUsuario historia: historias){
@@ -69,10 +66,11 @@ public class ControladorJugador extends Controlador {
             }
         }
         boolean validar;
+        IntegranteScrumTeam jugador = p.getListaJugadores().get(jugadorID-1);
         validar = p.getVotacion()
-                && p.getListaJugadores().get(jugador-1).getVotar();
+                && jugador.getVotar();
         return respuestas.actualizarEstadoJugador(validar, estadoPartida,
-                posibles);        
+                posibles, jugador.getImpedimento());        
     }
 
     public String unirsePartida(int codigo, String nombreJugador) {

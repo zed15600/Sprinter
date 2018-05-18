@@ -7,6 +7,7 @@ package Servicio;
 
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.HistoriaDeUsuario;
+import Negocio.Entidades.Impedimento;
 import Negocio.Entidades.IntegranteScrumTeam;
 import Negocio.Entidades.Proyecto;
 import Negocio.Procesos.IMensajes;
@@ -19,10 +20,12 @@ import org.json.simple.JSONObject;
  * @author usuario
  */
 public class JSONMensajes implements IMensajes {
-    
+
     /**
-     * Recibe un booleano y retorna un String con el código para la vista Fin del 
-     * Juego y el resultado de la partida (Victoria o Derrota), en formato Json.
+     * Recibe un booleano y retorna un String con el código para la vista Fin
+     * del Juego y el resultado de la partida (Victoria o Derrota), en formato
+     * Json.
+     *
      * @param resultado
      * @return
      */
@@ -30,25 +33,28 @@ public class JSONMensajes implements IMensajes {
     public String determinarVictoria(boolean resultado) {
         JSONObject json = new JSONObject();
         json.put("codigo", 0002);
-        json.put("resultado", resultado?"Victoria":"Derrota");
+        json.put("resultado", resultado ? "Victoria" : "Derrota");
         return json.toJSONString();
     }
-    
-     /**
-     * Retorna el String en formato Json con los datos del proyecto: nombre y descripcion.
+
+    /**
+     * Retorna el String en formato Json con los datos del proyecto: nombre y
+     * descripcion.
+     *
      * @param p
-     * @return string en formato Json con el codigo 0004 para la vista de Scrum Planning.
+     * @return string en formato Json con el codigo 0004 para la vista de Scrum
+     * Planning.
      */
     @Override
     public String traerProyecto(Proyecto p) {
         JSONObject json = new JSONObject();
-        json.put("codigo", 0004);
+        //json.put("codigo", 0004);
         json.put("nombre", p.getNombre());
         json.put("descripcion", p.getDescripcion());
         json.put("duracionSprints", p.getDuracionDeSprints());
         json.put("numeroSprints", p.getNumeroSprints());
         JSONArray jHUs = new JSONArray();
-        for(HistoriaDeUsuario h: p.getProductBacklog().getHistorias()){
+        for (HistoriaDeUsuario h : p.getProductBacklog().getHistorias()) {
             JSONObject historia = new JSONObject();
             historia.put("nombre", h.getNombre());
             historia.put("descripcion", h.getDescripcion());
@@ -57,7 +63,7 @@ public class JSONMensajes implements IMensajes {
             historia.put("prioridad", h.getPrioridad());
             ArrayList<Criterio> criteriosH = h.getListaCriterios();
             JSONArray criterios = new JSONArray();
-            for (Criterio crit: criteriosH){
+            for (Criterio crit : criteriosH) {
                 criterios.add(crit.getDescripcion());
             }
             historia.put("criterios", criterios);
@@ -66,34 +72,34 @@ public class JSONMensajes implements IMensajes {
         json.put("historias", jHUs);
         return json.toJSONString();
     }
-    
+
     /**
-     * 
-     * @param sprintsRestantes 
+     *
+     * @param sprintsRestantes
      * @param numeroDeSprint
-     * @return 
+     * @return
      */
     @Override
     public String sprintPlanning(int sprintsRestantes, int numeroDeSprint) {
         JSONObject json = new JSONObject();
-        json.put("codigo",0006);
+        json.put("codigo", 0006);
         json.put("restantes", sprintsRestantes);
         json.put("numero", numeroDeSprint);
         return json.toJSONString();
     }
-    
+
     @Override
-    public String unirsePartida(int jugadorId, boolean aceptado, String avatar){
+    public String unirsePartida(int jugadorId, boolean aceptado, String avatar) {
         JSONObject json = new JSONObject();
         json.put("jugadorID", jugadorId);
         json.put("aceptado", aceptado);
-        json.put("avatar",avatar);
+        json.put("avatar", avatar);
         return json.toJSONString();
     }
-    
+
     @Override
     public String actualizarEstadoJugador(boolean votar, String estadoPartida,
-            HistoriaDeUsuario[] posibles){
+            HistoriaDeUsuario[] posibles, Impedimento imp) {
         JSONObject json = new JSONObject();
         JSONArray HUs = new JSONArray();
         JSONArray HUsDesc = new JSONArray();
@@ -105,11 +111,16 @@ public class JSONMensajes implements IMensajes {
         json.put("HUsDesc", HUsDesc);
         json.put("votacion", votar);
         json.put("estadoPartida", estadoPartida);
+        if (imp != null) {
+            json.put("nombre", imp.getNombre());
+            json.put("descripcion", imp.getEfecto());
+        }
+        json.put("afectado", imp != null);
         return json.toJSONString();
     }
-    
+
     @Override
-    public String estadoVotacion(boolean votamos, int tipoVoto){
+    public String estadoVotacion(boolean votamos, int tipoVoto) {
         JSONObject json = new JSONObject();
         json.put("votamos", votamos);
         json.put("tipoVotacion", tipoVoto);
@@ -121,7 +132,7 @@ public class JSONMensajes implements IMensajes {
         JSONObject json = new JSONObject();
         JSONArray hID = new JSONArray();
         JSONArray votos = new JSONArray();
-        for(int i=0; i<listaVotos[0].length; i++){
+        for (int i = 0; i < listaVotos[0].length; i++) {
             hID.add(listaVotos[0][i]);
             votos.add(Integer.valueOf(listaVotos[1][i]));
         }
@@ -137,7 +148,7 @@ public class JSONMensajes implements IMensajes {
         JSONObject json = new JSONObject();
         JSONArray proyectosN = new JSONArray();
         ArrayList<Proyecto> proyectos = listaDeProyectos;
-        for (Proyecto p:proyectos){
+        for (Proyecto p : proyectos) {
             proyectosN.add(p.getNombre());
         }
         json.put("proyectos", proyectosN);
@@ -152,23 +163,22 @@ public class JSONMensajes implements IMensajes {
     }
 
     @Override
-    public String enviarJugadoresConAvatares
-        (ArrayList<IntegranteScrumTeam> jugadores) {
-            
+    public String enviarJugadoresConAvatares(ArrayList<IntegranteScrumTeam> jugadores) {
+
         JSONObject json = new JSONObject();
         JSONArray jJugadores = new JSONArray();
         JSONArray avatares = new JSONArray();
-        
-        for (IntegranteScrumTeam j:jugadores){
+
+        for (IntegranteScrumTeam j : jugadores) {
             jJugadores.add(j.getNombre());
             avatares.add(j.getAvatar());
         }
-        
+
         json.put("jugadores", jJugadores);
-        json.put("avatares",avatares);
+        json.put("avatares", avatares);
         return json.toJSONString();
     }
-    
+
     //POR IMPLEMENTAR
     /*
     Recibe un Proyecto y retorna un String con el código para la vista Sprint, 
@@ -190,9 +200,8 @@ public class JSONMensajes implements IMensajes {
         json.put("HUs", HUs);
         return json.toJSONString();
     }
-    */
-    
-    /*
+     */
+ /*
     Recibe un SprintBacklog y retorna un String con el código para la vista 
     Retrospectiva y una lista con los identificadores de las historias de usuario,
     en formato Json.
@@ -210,5 +219,5 @@ public class JSONMensajes implements IMensajes {
         json.put("HUs", HUs);
         return json.toJSONString();
     }
-    */
+     */
 }

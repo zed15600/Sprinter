@@ -33,6 +33,7 @@ public class ProcesadorJSON implements IProceso {
                 case 1:  Main.getControlador().terminarSprint(pID);
                         break;
                 case 2:  return Main.getControlador().determinarVictoria(pID);
+                case 3: 
                 case 4:  return Main.getControlador().enviarProyecto(pID);
                 case 6:  return Main.getControlador().sprintPlanning(pID);
                 case 7:  
