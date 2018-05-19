@@ -11,7 +11,7 @@ public class VistaSprint : ClientElement{
     public VerticalLayoutGroup tablaHistorias;
 
     void OnEnable(){
-        controlador.cargarDialogoGlobal(4);
+        controlador.cargarDialogoInteracion(4);
         int dia = controlador.obtenerDiaActual();
         dias.text = "Tiempo restante: " + dia + (dia==1?" día.":" días.");
         llenarTabla();
@@ -25,18 +25,19 @@ public class VistaSprint : ClientElement{
 
         List<HistoriaDeUsuario> historias = controlador.obtenerHistoriasSprint();
         for (int i = 0; i < historias.Count; i++){
-            GameObject contenidoHistoria = Instantiate(prefabHistoria);
-            string titulo = historias[i].getNombre();
-            contenidoHistoria.GetComponentsInChildren<Button>()[0].GetComponentsInChildren<Image>()[0].
-                GetComponentsInChildren<Text>()[0].text = titulo;
-            contenidoHistoria.GetComponentsInChildren<Button>()[0].
-                GetComponentsInChildren<Text>()[1].text = titulo;
-            contenidoHistoria.GetComponentsInChildren<Image>()[2].GetComponentsInChildren<Text>()[0]
-                .text = historias[i].getPrioridad() + "";
-            contenidoHistoria.GetComponentsInChildren<Image>()[3].GetComponentsInChildren<Text>()[0]
-                .text = historias[i].getPuntos() + "";
-            contenidoHistoria.transform.SetParent(tablaHistorias.transform, false);
-
+            if (!historias[i].getEstado()) {
+                GameObject contenidoHistoria = Instantiate(prefabHistoria);
+                string titulo = historias[i].getNombre();
+                contenidoHistoria.GetComponentsInChildren<Button>()[0].GetComponentsInChildren<Image>()[0].
+                    GetComponentsInChildren<Text>()[0].text = titulo;
+                contenidoHistoria.GetComponentsInChildren<Button>()[0].
+                    GetComponentsInChildren<Text>()[1].text = titulo;
+                contenidoHistoria.GetComponentsInChildren<Image>()[2].GetComponentsInChildren<Text>()[0]
+                    .text = historias[i].getPrioridad() + "";
+                contenidoHistoria.GetComponentsInChildren<Image>()[3].GetComponentsInChildren<Text>()[0]
+                    .text = historias[i].getPuntos() + "";
+                contenidoHistoria.transform.SetParent(tablaHistorias.transform, false);
+            }
         }
     }
 

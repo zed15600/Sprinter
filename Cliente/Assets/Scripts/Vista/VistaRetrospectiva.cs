@@ -17,15 +17,15 @@ public class VistaRetrospectiva : ClientElement {
 
     // Use this for initialization
     void OnEnable () {
-        controlador.cargarDialogoGlobal(11);
+        controlador.cargarDialogoFinal(11);
         historiasDeSprint = controlador.obtenerHistoriasSprint();
         mostrarHistorias(historiasDeSprint);
-		//a = new int[][] {new int[]{1, 2745}, new int[]{2, 1890}};
-	}
+        //a = new int[][] {new int[]{1, 2745}, new int[]{2, 1890}};
+    }
 
     // Update is called once per frame
     void Update() {
-        if (controlador.verificarDialogoVacio() && dialogoActivo) {
+        if (dialogoActivo && controlador.verificarDialogoVacio()) {
             Proyecto p = controlador.obtenerProyecto();
             if (p.getSprintActual() > p.getNumeroSprints()) {
                 controlador.mostrarVistaFinDelJuego();
@@ -50,7 +50,7 @@ public class VistaRetrospectiva : ClientElement {
     }
 
     public void cambiarVista() {
-        controlador.cargarDialogoGlobal(12);
+        controlador.cargarDialogoFinal(12);
         dialogoActivo = true;
     }
 }

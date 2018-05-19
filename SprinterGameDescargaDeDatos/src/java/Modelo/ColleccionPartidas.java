@@ -11,21 +11,22 @@ import java.util.ArrayList;
  *
  * @author Ricardo Azopardo
  */
-public class ColleccionDePartidas {
+public class ColleccionPartidas {
     
-    private final PartidaDAO partidaDAO;
+    private final IConexionBaseDeDatos conexion;
     private final ArrayList<Partida> partidas;
     
-    public ColleccionDePartidas(PartidaDAO partidaDAO){
-       this.partidaDAO = partidaDAO; 
-       partidas = partidaDAO.obtenerPartidas();
+    public ColleccionPartidas(IConexionBaseDeDatos conexion){
+       this.conexion = conexion;
+       conexion.conectar();
+       partidas = conexion.obtenerPartidas();
     }
     
     public void actualizar(){
-        partidaDAO.obtenerPartidas();
+        conexion.obtenerPartidas();
     }
     
     public ArrayList<Partida>getPartidas(){
-        return partidas;
+        return conexion.obtenerPartidas();
     }
 }

@@ -20,7 +20,7 @@ public class VistaResultados : ClientElement {
     private bool dialogoActivo = false;
 
     void OnEnable () {
-        controlador.cargarDialogoGlobal(9);
+        controlador.cargarDialogoInteracion(8);
         foreach(Transform child in criterios.transform) {
             GameObject.Destroy(child.gameObject);
         }
@@ -93,7 +93,7 @@ public class VistaResultados : ClientElement {
     }
 
     public void mostrarDialogoFinal() {
-        controlador.cargarDialogoGlobal(10);
+        controlador.cargarDialogoInteracion(9);
     }
 
     public void cambiarVista() {
@@ -108,7 +108,6 @@ public class VistaResultados : ClientElement {
                 controlador.mostrarPanelMensaje();
             }
             dialogoActivo = false;
-            FindObjectOfType<DialogManager>().limpiarDialogo();
             this.gameObject.SetActive(false);
         }
     }

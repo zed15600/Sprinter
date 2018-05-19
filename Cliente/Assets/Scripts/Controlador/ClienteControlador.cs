@@ -164,11 +164,6 @@ public class ClienteControlador : ClientElement {
             modelo.getMinijuego().aumentarIntentos();
         }
 
-        public void obtenerPuntaje(HistoriaDeUsuario historia) {
-            modelo.getProyecto().getHistorias();
-        }// wtf ¿quién hizo esto?
-
-
     //Llamadas a Vista
 
     public void mostrarVistaUnirseAPartida() {
@@ -214,9 +209,25 @@ public class ClienteControlador : ClientElement {
         vista.pnlMenssage.SetActive(false);
     }
 
-    public void cargarDialogoGlobal(int indice) {
-        vista.dialogoGlobal.cargarDialogo(indice);
-        vista.dialogoGlobal.gameObject.SetActive(true);
+    public void cargarDialogoFinal(int indice) {
+        if (vista.dialogoGlobal.getDialogosPermitidos()) {
+            vista.dialogoGlobal.cargarDialogoFinSprint(indice);
+            vista.dialogoGlobal.gameObject.SetActive(true);
+        }
+    }
+
+    public void cargarDialogoImpedimento() {
+        if (vista.dialogoGlobal.getDialogosPermitidos() && vista.dialogoGlobal.getDialogosImpedimento()) {
+            vista.dialogoGlobal.cargarDialogoImpedimento();
+            vista.dialogoGlobal.gameObject.SetActive(true);
+        }
+    }
+
+    public void cargarDialogoInteracion(int indice) {
+        if (vista.dialogoGlobal.getDialogosPermitidos() && vista.dialogoGlobal.getDialogosIteracion()) {
+            vista.dialogoGlobal.cargarDialogosIteracion(indice);
+            vista.dialogoGlobal.gameObject.SetActive(true);
+        }
     }
 
     public void mostrarPanelVotacion() {
@@ -234,6 +245,18 @@ public class ClienteControlador : ClientElement {
 
     public void iniciarReunion() {
         vista.reunion.gameObject.SetActive(true);
+    }
+
+    public bool obtenerDialogoPermitido() {
+        return vista.dialogoGlobal.getDialogosPermitidos();
+    }
+
+    public bool obtenerDialogoIteracion() {
+        return vista.dialogoGlobal.getDialogosIteracion();
+    }
+
+    public bool obtenerDialogoImpedimento() {
+        return vista.dialogoGlobal.getDialogosImpedimento();
     }
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);

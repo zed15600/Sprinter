@@ -10,12 +10,60 @@ public class PanelDialogoGlobal : ClientElement {
     private bool dialogosIteracion = true;
     private bool dialogoImpedimento = true;
 
-    public void cargarDialogo(int indice) {
-        if (dialogosPermitidos) {
+    public bool getDialogosPermitidos() {
+        return dialogosPermitidos;
+    }
+
+    public bool getDialogosIteracion() {
+        return dialogosIteracion;
+    }
+
+    public bool getDialogosImpedimento() {
+        return dialogoImpedimento;
+    }
+
+    public void cargarDialogoImpedimento() {
+        if (dialogoImpedimento) {
+            lineasDeDialogo = new string[] {
+                    "Oh no! Parece que alguien tiene un impedimento. D:",
+                    "Como Scrum Team deben organizarse para apoyarse como equipo y enfrentar el problema juntos.",
+                    controlador.obtenerScrumMaster() + ",como Scrum Master es muy importante que apoyes a las personas que estén en problemas y motives al equipo.",
+                    ""
+                    };
+            trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
+            dialogoImpedimento = false;
+        }
+    }
+
+    public void cargarDialogoFinSprint(int indice) {
+        switch (indice) {
+            case 11:
+                lineasDeDialogo = new string[] {
+                    "Ha terminado el Sprint y le he enseñado la funcionalidad desarrollada al cliente.",
+                    "Aquí anunciare los resultados.",
+                    ""
+                    };
+                break;
+            //Dialogo Final del primer Sprint - Listo
+            case 12:
+                lineasDeDialogo = new string[] {
+                    "Buen trabajo en el primer Sprint, ya les he explicado un poco sobre los conceptos básicos de Scrum.",
+                    "De todas formas," + controlador.obtenerScrumMaster() + "como Scrum Master les ayudara a resolver dudas que tengan sobre el marco de trabajo y les ayudara a seguir el proceso de Scrum!.",
+                    "Buena Suerte! Meow!",
+                    ""
+                    };
+                dialogosPermitidos = false;
+                break;
+        }
+        trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
+    }
+
+    public void cargarDialogosIteracion(int indice) {
+        if (dialogosIteracion) {
             switch (indice) {
                 //Scrum Planning - Listo
                 case 1:
-                    lineasDeDialogo = new string[] {
+                lineasDeDialogo = new string[] {
                     "Bienvenidos al Scrum Team!",
                     "Vamos a construir un proyecto en equipo utilizando el Marco Ágil Scrum!",
                     "Yo seré el Product Owner del equipo y he recopilado los deseos del cliente!",
@@ -23,11 +71,10 @@ public class PanelDialogoGlobal : ClientElement {
                     "Mucha Suerte!\n" +
                     "Meow! (=^･ｪ･^=))ﾉ彡☆ ",
                     ""};
-                    break;
+                break;
                 //Sprint Planning - Listo
                 case 2:
-                    if (dialogosIteracion) 
-                    lineasDeDialogo = new string[] {
+                lineasDeDialogo = new string[] {
                     "Ha iniciado el Sprint Planning!",
                     "Los proyectos en Scrum se realizan por ciclos (o iteraciones :3) de tiempo definido.",
                     "A estas iteraciones les llamamos Sprints.",
@@ -36,31 +83,28 @@ public class PanelDialogoGlobal : ClientElement {
                     "He seleccionado las primeras basadas en prioridad y las que conformarían un buen prototipo funcional.",
                     "Debemos organizarnos como equipo para elegir entre cuales de estas trabajaran en el Sprint! (=^･ω･^=)," +
                     ""};
-                    break;
+                break;
                 //Sprint Planning advertencia de votación. - Listo
                 case 3:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
-                    "A continuación empezara una votación para decidir por cuales historias trabajar",
+                lineasDeDialogo = new string[] {
+                    "A continuación empezara una votación para decidir por cuales historias trabajar.",
                     "Antes de votar asegúrense de haber expresado sus opiniones como equipo, es importante que todos nos comuniquemos!",
                     "Cuando estén listos, voten en sus dispositivos móviles!",
                     ""
                     };
-                    break;
+                break;
                 //Sprint - Listo
                 case 4:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                lineasDeDialogo = new string[] {
                     "Ha iniciado el Sprint!",
                     "Debemos completar las historias de usuario antes de que se acaben los días del Sprint.",
                     "Empecemos decidiendo cual historia de usuario trabajaremos el día de hoy.",
                     ""
                     };
-                    break;
-                //Reunion Diaria - Listo
+                break;
+            //Reunion Diaria - Listo
                 case 5:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                lineasDeDialogo = new string[] {
                     "En Scrum el equipo se reúne diariamente para gestionar el trabajo e informar impedimentos",
                     "Esta reunión se conoce como la reunión diaria o el Daily Scrum",
                     "Debemos aprovechar este tiempo de reunión para discutir que haremos el día de hoy y como completaremos la historia de usuario.",
@@ -70,23 +114,11 @@ public class PanelDialogoGlobal : ClientElement {
                     "Buena suerte!  (=^ ◡ ^=)",
                     ""
                     };
-                    break;
+                break;
 
-                //Impedimento - Listo
+            //Minijuego - Listo
                 case 6:
-                    if(dialogoImpedimento)
-                    lineasDeDialogo = new string[] {
-                    "Oh no! Parece que alguien tiene un impedimento. D:",
-                    "Como Scrum Team deben organizarse para apoyarse como equipo y enfrentar el problema juntos.",
-                    controlador.obtenerScrumMaster() + ",como Scrum Master es muy importante que apoyes a las personas que estén en problemas y motives al equipo.",
-                    ""
-                    };
-                    dialogoImpedimento = false;
-                    break;
-                //Minijuego - Listo
-                case 7:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                lineasDeDialogo = new string[] {
                     "Ahora empezaremos a construir la funcionalidad.",
                     "En la mayoría de los marcos ágiles incluyendo Scrum el desarrollo es iterativo.",
                     "Es decir, el proceso de diseño, construcción y pruebas se hace de acuerdo al foco del trabajo en el momento.",
@@ -101,60 +133,40 @@ public class PanelDialogoGlobal : ClientElement {
                     "Buena suerte!! :3",
                     ""
                     };
-                    break;
-                //Minijuego terminado - Listo
-                case 8:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                break;
+            //Minijuego terminado - Listo
+                case 7:
+                lineasDeDialogo = new string[] {
                     "El minijuego ha terminado!",
                     controlador.obtenerScrumMaster() + ", necesito que observes el producto construido y señales cuales criterios se cumplieron.",
                     ""
                     };
-                    break;
-                //Resultados - Listo
-                case 9:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                break;
+            //Resultados - Listo
+                case 8:
+                lineasDeDialogo = new string[] {
                     "Aquí se anuncian los resultados de su desarrollo.",
                     "Si lograron completar los criterios de aceptación continuaremos a desarrollar otras historias del Sprint.",
                     "Pero en el caso contrario, seguiremos desarrollando esta historia hasta que la completemos",
                     "Independientemente de los resultados, buen trabajo! :D",
                     ""
                     };
-                    break;
-                //Resultados Boton - Listo
-                case 10:
-                    if (dialogosIteracion)
-                    lineasDeDialogo = new string[] {
+                break;
+            //Resultados Boton - Listo
+                case 9:
+                lineasDeDialogo = new string[] {
                     "El Sprint seguira hasta que completen las historias de usuario del Sprint o se acaben los días.",
                     "Recuerden gestionar muy bien su tiempo y auto organizarce como equipo! ฅ(＾・ω・＾ฅ)",
                     ""
                     };
-                    dialogosIteracion = false;
-                    break;
-                //Sprint Terminado - Restrospectiva - Listo
-                case 11:
-                    lineasDeDialogo = new string[] {
-                    "Ha terminado el Sprint y le he enseñado la funcionalidad desarrolladas al cliente",
-                    "Aquí anunciare los resultados.",
-                    ""
-                    };
-                    break;
-                //Dialogo Final del primer Sprint - Listo
-                case 12:
-                    lineasDeDialogo = new string[] {
-                    "Buen trabajo en el primer Sprint, ya les he explicado un poco sobre los conceptos básicos de Scrum.",
-                    "De todas formas," + controlador.obtenerScrumMaster() + "como Scrum Master les ayudara a resolver dudas que tengan sobre el marco de trabajo y les ayudara a seguir el proceso de Scrum!.",
-                    "Buena Suerte! Meow!",
-                    ""
-                    };
-                dialogosPermitidos = false;
+                dialogosIteracion = false;
+                trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
                 break;
+                }
             }
-            Debug.Log(lineasDeDialogo[0]);
+        if (dialogosIteracion) {
             trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
         }
-
     }
 
     void OnEnable() {

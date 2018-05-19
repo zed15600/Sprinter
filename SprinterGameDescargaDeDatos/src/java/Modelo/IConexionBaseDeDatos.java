@@ -1,4 +1,6 @@
-package AccesoADatos;
+package Modelo;
+
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,6 +12,7 @@ package AccesoADatos;
  *
  * @author usuario
  */
-interface IConexionBaseDeDatos {
+public interface IConexionBaseDeDatos {
     public void conectar();
+    public ArrayList<Partida>obtenerPartidas();
 }

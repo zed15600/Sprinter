@@ -17,12 +17,11 @@ public class VistaReunionDiaria : ClientElement {
 
     float targetTime = 60;
     private bool dialogoFueActivo = false;
-    private bool impedimento = false;
 
     void OnEnable () {
-        controlador.cargarDialogoGlobal(5);
-        if (impedimento) {
-            controlador.cargarDialogoGlobal(6);
+        controlador.cargarDialogoInteracion(5);
+        if (controlador.obtenerMinijuego().getJugadoresEnProblemas().Count > 0) {
+            controlador.cargarDialogoImpedimento();
         }
         dialogoFueActivo = true;
         establecerReunion();

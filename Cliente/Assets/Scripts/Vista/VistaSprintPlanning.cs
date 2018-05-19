@@ -52,7 +52,7 @@ public class VistaSprintPlanning : ClientElement {
     }
 
     void OnEnable() {
-        controlador.cargarDialogoGlobal(2);
+        controlador.cargarDialogoInteracion(2);
         establecerSprint();
         while (controlador.obtenerHistorias().ToArray().Length == 0) {
             Debug.Log(controlador.obtenerHistorias().Capacity);
@@ -61,7 +61,7 @@ public class VistaSprintPlanning : ClientElement {
     }
 
     public void organizarPaneles() {
-        controlador.cargarDialogoGlobal(3);
+        controlador.cargarDialogoInteracion(3);
         dialogoVacio = false;
         dialogoFueActivo = true;
     }

@@ -34,7 +34,7 @@ public class VistaMinijuegos:ClientElement {
     }
 
     void OnEnable() {
-        controlador.cargarDialogoGlobal(7);
+        controlador.cargarDialogoInteracion(6);
         dialogoFueActivo = true;
         restart();
         actualizar();
@@ -96,7 +96,7 @@ public class VistaMinijuegos:ClientElement {
             descontar = false;
             controlador.establecerTiempo(targetTime);
             activarCriterios = true;
-            controlador.cargarDialogoGlobal(8);
+            controlador.cargarDialogoInteracion(7);
             count=0;
             dialogoFueActivo = false;
             break;

@@ -5,10 +5,14 @@ package AccesoADatos;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Modelo.IConexionBaseDeDatos;
+import Modelo.Partida;
+import Modelo.PartidaDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +25,11 @@ import javax.swing.JOptionPane;
 public final class ConexionMySQL implements IConexionBaseDeDatos{
     
     private static Connection conexion;
+    private final PartidaDAO implPartida;
     
+    public ConexionMySQL(){
+        implPartida = new PartidaDAOMySQL();
+    }
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
      * IP: sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com
@@ -58,12 +66,12 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
         ConexionMySQL.conexion = conn;
     }
         
-    public static Statement crearDeclaracion() {
-        try {
-            return conexion.createStatement();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionMySQL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public static Statement crearDeclaracion() throws SQLException {
+        return conexion.createStatement();
+    }
+    
+    @Override
+    public ArrayList<Partida> obtenerPartidas(){
+        return implPartida.obtenerPartidas();
     }
 }

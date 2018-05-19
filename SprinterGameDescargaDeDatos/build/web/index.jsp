@@ -1,9 +1,10 @@
 <%-- 
     Document   : index
     Created on : 18/05/2018, 09:23:02 PM
-    Author     : usuario
+    Author     : Ricardo Azopardo
 --%>
 
+<%@page import="Modelo.Configuracion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

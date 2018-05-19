@@ -5,22 +5,22 @@
  */
 package Modelo;
 
-import AccesoADatos.PartidaDAOMySQL;
+import AccesoADatos.ConexionMySQL;
 
 /**
  *
- * @author usuario
+ * @author Ricardo Azopardo
  */
 public class Configuracion {
     
-    private static ColleccionDePartidas partidas;
+    private static ColleccionPartidas partidas;
     
     public static void main(String args[]){
-        PartidaDAO impl = new PartidaDAOMySQL();
-        partidas = new ColleccionDePartidas(impl);
+        IConexionBaseDeDatos conexion = new ConexionMySQL();
+        partidas = new ColleccionPartidas(conexion);
     }
     
-    public static ColleccionDePartidas getPartidas(){
-        return partidas;
+    public static void actualizarPartidas(){
+        partidas.actualizar();
     }
 }
