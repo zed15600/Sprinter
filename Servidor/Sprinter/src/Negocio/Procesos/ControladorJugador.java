@@ -5,11 +5,11 @@
  */
 package Negocio.Procesos;
 
-import Negocio.Entidades.Configuracion;
-import Negocio.Entidades.HistoriaDeUsuario;
-import Negocio.Entidades.IntegranteScrumTeam;
-import Negocio.Entidades.Partida;
-import Negocio.Entidades.Proyecto;
+import Negocio.Entidades.Modelo.Configuracion;
+import Negocio.Entidades.Modelo.HistoriaDeUsuario;
+import Negocio.Entidades.Modelo.IntegranteScrumTeam;
+import Negocio.Entidades.Modelo.Partida;
+import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

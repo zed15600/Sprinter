@@ -5,10 +5,10 @@
  */
 package Negocio.Procesos;
 
-import Negocio.Entidades.Configuracion;
-import Negocio.Entidades.HistoriaDeUsuario;
-import Negocio.Entidades.Proyecto;
-import Negocio.Entidades.Sprint;
+import Negocio.Entidades.Modelo.Configuracion;
+import Negocio.Entidades.Modelo.HistoriaDeUsuario;
+import Negocio.Entidades.Modelo.Proyecto;
+import Negocio.Entidades.Modelo.Sprint;
 import java.util.ArrayList;
 
 /**

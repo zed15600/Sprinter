@@ -6,21 +6,18 @@ using UnityEngine.UI;
 public class VistaRetrospectiva : ClientElement {
 
     public GameObject tabla;
-    public Text textPrefab;
+    public GameObject historiaPrefab;
     public Text textoDelGato;
 
     List<HistoriaDeUsuario> historiasDeSprint;
     private bool dialogoActivo = false;
 
-    //int[][] a;
-    //int x=0;
-
     // Use this for initialization
     void OnEnable () {
         controlador.cargarDialogoFinal(11);
         historiasDeSprint = controlador.obtenerHistoriasSprint();
+        mostrarDialogoCliente();
         mostrarHistorias(historiasDeSprint);
-        //a = new int[][] {new int[]{1, 2745}, new int[]{2, 1890}};
     }
 
     // Update is called once per frame
@@ -38,14 +35,26 @@ public class VistaRetrospectiva : ClientElement {
         }
     }
 
+    public void mostrarDialogoCliente() {
+        if (controlador.verificarSprintTotalmenteCompleto()) {
+            textoDelGato.text = "Lograron completar todas las historias del Sprint! \n" +
+                        "El cliente esta muy satisfecho con el trabajo hecho, Felicidades. :D";
+        } else {
+            textoDelGato.text = "Parece que faltaron algunas historias por completar. :( \n" +
+                        "El cliente espera más compromiso de parte de ustedes.";
+        }
+    }
+
     public void mostrarHistorias(List<HistoriaDeUsuario> historias) {
+        foreach (Transform child in tabla.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
         foreach(HistoriaDeUsuario historia in historias) {
-            Text txt1 = Instantiate(textPrefab);
-            Text txt2 = Instantiate(textPrefab);
-            txt1.text = historia.getNombre();
-            txt2.text = ""+historia.getPuntaje();
-            txt1.transform.SetParent(tabla.transform);
-            txt2.transform.SetParent(tabla.transform);
+            GameObject hist = Instantiate(historiaPrefab);
+            hist.GetComponentsInChildren<Text>()[0].text = historia.getNombre();
+            hist.GetComponentsInChildren<Text>()[1].text = historia.getNombre();
+            hist.GetComponentsInChildren<Text>()[2].text = historia.getPuntaje().ToString();
+            hist.transform.SetParent(tabla.transform);
         }
     }
 

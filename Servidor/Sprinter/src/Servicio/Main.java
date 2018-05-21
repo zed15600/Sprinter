@@ -5,10 +5,12 @@
  */
 package Servicio;
 
-import Negocio.Entidades.Configuracion;
+import Servicio.ElementosConexión.ConexionTCP;
+import Servicio.Mensajes.JSONMensajes;
+import Negocio.Entidades.Modelo.Configuracion;
 import java.io.IOException;
-import AccesoADatos.ConexionMySQL;
-import Negocio.Entidades.IConexionBaseDeDatos;
+import AccesoADatos.FuncionesDAOMySQL.DAOFachadaMySQL;
+import Negocio.Entidades.DAO.DAOFachada;
 import Negocio.Procesos.IConexion;
 import Negocio.Procesos.IMensajes;
 import Negocio.Procesos.ControladorPrincipal;
@@ -36,12 +38,12 @@ public class Main {
     public static void main(String args[]) throws IOException {
         /*----------------------Instanciación de Interfaces-------------------*/
         /*
-         * IConexionBaseDeDatos: define el tipo de conexión con la base de 
-         * datos.
-         * Posibles implementaciones: ConexionMySQL
-         * Actual selección: ConexionMySQL para conectarse a la DB MySQL.
+         * DAOFachada: interfaz encargada de abstraer el modelo de la capa de 
+         * acceso a datos, define el tipo de conexión de la base de datos.
+         * Posibles implementaciones: DAOFachadaMySQL.
+         * Actual selección: DAOFachadaMySQL para conectarse a la DB MySQL.
          */
-        IConexionBaseDeDatos implBaseDeDatos = new ConexionMySQL();
+        DAOFachada DAO = new DAOFachadaMySQL();
         /*
          * IMensajes: define el formato de texto para intercambio de datos, para
          * los mensajes recibidos y respuesta.
@@ -57,7 +59,7 @@ public class Main {
          */
         IConexion implConexion = new ConexionTCP(implMensajes);
         /*--------------------Fin De Implementaciones-------------------------*/
-        Configuracion configuracion = new Configuracion(implBaseDeDatos);
+        Configuracion configuracion = new Configuracion(DAO);
         //Controlador global de la aplicación.
         controlador = new ControladorPrincipal(implMensajes,implConexion,configuracion);
         controlador.conectar();

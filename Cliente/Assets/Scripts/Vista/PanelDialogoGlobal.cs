@@ -6,12 +6,13 @@ public class PanelDialogoGlobal : ClientElement {
 
     public DialogTrigger trigger;
     private string[] lineasDeDialogo;
-    private bool dialogosPermitidos = true;
+
+    private bool dialogosFinales = true;
     private bool dialogosIteracion = true;
     private bool dialogoImpedimento = true;
 
-    public bool getDialogosPermitidos() {
-        return dialogosPermitidos;
+    public bool getDialogosFinales() {
+        return dialogosFinales;
     }
 
     public bool getDialogosIteracion() {
@@ -52,7 +53,7 @@ public class PanelDialogoGlobal : ClientElement {
                     "Buena Suerte! Meow!",
                     ""
                     };
-                dialogosPermitidos = false;
+                dialogosFinales = false;
                 break;
         }
         trigger.dialogo.lineasDeDialogo = lineasDeDialogo;

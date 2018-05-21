@@ -14,6 +14,7 @@ public class ClienteVista : ClientElement {
     public VistaFinDelJuego finDelJuego;
     public VistaMinijuegos minijuegos;
     public VistaReunionDiaria reunion;
+    public VistaConfiguracion configuracion;
     //public VistaEncuesta encuesta;
 
     public PanelHistorias panelHistorias;

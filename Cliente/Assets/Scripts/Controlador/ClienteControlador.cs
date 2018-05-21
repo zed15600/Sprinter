@@ -9,6 +9,18 @@ public class ClienteControlador : ClientElement {
     private ClienteVista vista;
     public WebClient webClient;
 
+    private bool _dialogosPermitidos = true;
+
+    public bool dialogosPermitidos { get { return _dialogosPermitidos; } }
+
+    public void activarDialogos() {
+        _dialogosPermitidos = true;
+    }
+
+    public void desactivarDialogos() {
+        _dialogosPermitidos = false;
+    }
+
     //Llamadas a WebClient
 
     public void pedirProyectos() {
@@ -119,6 +131,16 @@ public class ClienteControlador : ClientElement {
             return modelo.getProyecto().obtenerHistoria(tituloHistoria);
         }
 
+        public bool verificarSprintTotalmenteCompleto() {
+            List<HistoriaDeUsuario> historias = modelo.getProyecto().getHistoriasSprint();
+            for (int i = 0; i<historias.Count; ++i) {
+                if (!historias[i].getEstado()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         //Minijuego
 
         public HistoriaDeUsuario obtenerHistoriaActual() {
@@ -210,21 +232,21 @@ public class ClienteControlador : ClientElement {
     }
 
     public void cargarDialogoFinal(int indice) {
-        if (vista.dialogoGlobal.getDialogosPermitidos()) {
+        if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosFinales()) {
             vista.dialogoGlobal.cargarDialogoFinSprint(indice);
             vista.dialogoGlobal.gameObject.SetActive(true);
         }
     }
 
     public void cargarDialogoImpedimento() {
-        if (vista.dialogoGlobal.getDialogosPermitidos() && vista.dialogoGlobal.getDialogosImpedimento()) {
+        if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosImpedimento()) {
             vista.dialogoGlobal.cargarDialogoImpedimento();
             vista.dialogoGlobal.gameObject.SetActive(true);
         }
     }
 
     public void cargarDialogoInteracion(int indice) {
-        if (vista.dialogoGlobal.getDialogosPermitidos() && vista.dialogoGlobal.getDialogosIteracion()) {
+        if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosIteracion()) {
             vista.dialogoGlobal.cargarDialogosIteracion(indice);
             vista.dialogoGlobal.gameObject.SetActive(true);
         }
@@ -248,7 +270,7 @@ public class ClienteControlador : ClientElement {
     }
 
     public bool obtenerDialogoPermitido() {
-        return vista.dialogoGlobal.getDialogosPermitidos();
+        return vista.dialogoGlobal.getDialogosFinales();
     }
 
     public bool obtenerDialogoIteracion() {

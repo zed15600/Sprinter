@@ -5,7 +5,7 @@
  */
 package Negocio.Procesos;
 
-import Negocio.Entidades.Configuracion;
+import Negocio.Entidades.Modelo.Configuracion;
 import java.util.Map;
 
 /**

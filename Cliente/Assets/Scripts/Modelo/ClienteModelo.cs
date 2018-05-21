@@ -119,14 +119,15 @@ public class Proyecto {
     }
 
     public bool terminarDia() {
-        if(diaSprint<duracionSprints) {
-            diaSprint ++;
-            return true; //retorna true cuando el sprint sigue
-        } else {
-            SprintActual ++;
-            diaSprint = 1;
-            return false; //retorna false cuando el sprint termina
+        for (int i = 0; i<historiasDeSprint.Count;i++) {
+            if (!historiasDeSprint[i].getEstado() && diaSprint < duracionSprints) {
+                diaSprint++;
+                return true; //retorna true cuando el sprint sigue
+            }
         }
+        SprintActual++;
+        diaSprint = 1;
+        return false; //retorna false cuando el sprint termina
     }
 
     public HistoriaDeUsuario obtenerHistoria(string tituloHistoria) {
