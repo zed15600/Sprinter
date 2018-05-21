@@ -106,7 +106,7 @@ public class ClienteControlador : ClientElement {
             modelo.getProyecto().setHistoriasSprint(historias);
         }
         public string obtenerSprintsRestantes(){
-            return  (modelo.getProyecto().getNumeroSprints() - modelo.getProyecto().getRestantes()).ToString();
+            return  modelo.getProyecto().getRestantes().ToString();
         }
         public string obtenerActual(){
             return modelo.getProyecto().getSprintActual().ToString();

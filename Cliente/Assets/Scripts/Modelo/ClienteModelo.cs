@@ -74,8 +74,7 @@ public class Proyecto {
     private int SprintActual;
     private int diaSprint;
 
-
-    private int SprintRestantes = 0;
+    
 
     public Proyecto(string nombre, string descripcion, List<HistoriaDeUsuario> historias, int nSprints, int dSprints){
         this.nombre = nombre;
@@ -106,7 +105,7 @@ public class Proyecto {
         return SprintActual;
     }
     public int getRestantes(){
-        return SprintRestantes;
+        return numeroSprints - SprintActual;
     }
     public int getDiasRestantes() {
         return duracionSprints - diaSprint;
@@ -117,9 +116,6 @@ public class Proyecto {
     }
     public void setSprintActual (int actual){
         this.SprintActual = actual;
-    }
-    public void setSprintRestante(int restante){
-        this.SprintRestantes = restante;
     }
 
     public bool terminarDia() {

@@ -73,6 +73,8 @@ public class VistaResultados : ClientElement {
 
         resultado = ((prioridad * 300) + (puntos + tiempo)) / intentos;
 
+        controlador.obtenerHistoriaActual().setPuntaje(resultado);
+
         return resultado;
     }
 

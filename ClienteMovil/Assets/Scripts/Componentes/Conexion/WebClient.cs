@@ -114,7 +114,9 @@ public class WebClient : ClientElement {
                     HUNombres[i] = arr[i].Str;
                     HUsDesc[i] = desc[i].Str;
                 }
-                controlador.mostrarVotacion(HUNombres, HUsDesc);
+                controlador.mostrarVotacion(HUNombres);
+            } else {
+                controlador.ocultarVotacion();
             }
             controlador.cambiarEstadoPartida(jsRes["estadoPartida"].Str);
             bool afectado = jsRes["afectado"].Boolean;

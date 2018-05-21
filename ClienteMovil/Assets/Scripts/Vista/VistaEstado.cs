@@ -58,14 +58,14 @@ public class VistaEstado : ClientElement {
         }
 	}
 
-    public void mostrarVotacion(string[] HUNombres, string[] HUsDesc) {
+    public void mostrarVotacion(string[] HUNombres) {
         votar = true;
         pnlVotacion.SetActive(true);
         int limit = btnsVotacion.Length/2;
         for(int i=0; i<limit;i++) {
             if(i<HUNombres.Length) {
                 btnsVotacion[i].text = HUNombres[i];
-                btnsVotacion[i+limit].text = HUsDesc[i];
+                btnsVotacion[i+limit].text = HUNombres[i];
             } else {
                 btns[i].SetActive(false);
             }
@@ -73,8 +73,10 @@ public class VistaEstado : ClientElement {
     }
 
     public void ocultarVotacion() {
-        votar = false;
-        pnlVotacion.SetActive(false);
+        if(votar==true){
+            votar = false;
+            pnlVotacion.SetActive(false);
+        }
     }
 
 }
