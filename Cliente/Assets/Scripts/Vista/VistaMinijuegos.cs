@@ -16,12 +16,9 @@ public class VistaMinijuegos:ClientElement {
 
     public GameObject criterios;
     public GameObject criteriosT;
-    public Toggle toggle;
 
     public VerticalLayoutGroup colCriterios;
     public VerticalLayoutGroup colCriteriosT;
-    public VerticalLayoutGroup colToggles;
-
 
     int count = 0;
     float targetTime = 0;
@@ -123,12 +120,9 @@ public class VistaMinijuegos:ClientElement {
 
 
         foreach(CriterioHU crit in criteriosLista) {
-            //if(crit!=null) {
                 GameObject criterioA = Instantiate(criterios);
-                Text descCriterio = criterioA.GetComponentInChildren<Text>();
-                descCriterio.text=crit.getDescripcion();
-                descCriterio.transform.SetParent(colCriterios.transform,false);
-            //}
+                criterioA.GetComponentInChildren<Text>().text = crit.getDescripcion();
+                criterioA.transform.SetParent(colCriterios.transform,false);
         }
     }
 
@@ -136,25 +130,20 @@ public class VistaMinijuegos:ClientElement {
         foreach(Transform child in colCriteriosT.transform) {
             GameObject.Destroy(child.gameObject);
         }
-        foreach(Transform child in colToggles.transform) {
-            GameObject.Destroy(child.gameObject);
-        }
+
         List<CriterioHU> criteriosLista = controlador.obtenerCriteriosMinijuego();
 
         foreach(CriterioHU crit in criteriosLista) {
             //if(crit!=null) {
                 GameObject criterioT = Instantiate(criteriosT);
-                Toggle critToggle = Instantiate(toggle);
-                Text descCriterio = criterioT.GetComponentInChildren<Text>();
-                descCriterio.text=crit.getDescripcion();
-                descCriterio.transform.SetParent(colCriteriosT.transform,false);
-                critToggle.transform.SetParent(colToggles.transform,false);
+                criterioT.GetComponentInChildren<Text>().text = crit.getDescripcion();
+                criterioT.transform.SetParent(colCriteriosT.transform,false);
             //}
         }
     }
 
     public void revisarCompletadas() {
-        Toggle[] estados = colToggles.GetComponentsInChildren<Toggle>();
+        Toggle[] estados = colCriteriosT.GetComponentsInChildren<Toggle>();
         Text[] descripciones = colCriteriosT.GetComponentsInChildren<Text>();
         for(int i = 0;i<estados.Length;i++) {
             if(estados[i].isOn) {
