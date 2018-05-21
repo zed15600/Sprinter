@@ -12,9 +12,12 @@ import Negocio.Entidades.Proyecto;
 import Negocio.Entidades.ProyectoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,10 +43,10 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
      * Base de Datos: sprinter
      * Conector: conformado por el conector jdbc de mysql, IP, puerto y bd.
      * Usuario: usuario
-     * Contraseña: Azopardo234432qw
+     * Contraseña: Azopardo234432qw 
      */
-    @Override
-    public void conectar() {
+    public static void conectar() {
+        conexion = null;
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
@@ -62,7 +65,7 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
                     "Error en la conexión con la" + "base de datos: "
                             + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
-        ConexionMySQL.conexion = conn;
+        conexion = conn;
     }
 
     @Override
@@ -80,7 +83,22 @@ public final class ConexionMySQL implements IConexionBaseDeDatos{
         return implImpedimentoDAO.obtenerImpedimentos();
     }
     
-    public static Statement crearDeclaracion() throws SQLException{
-        return conexion.createStatement();
+    public static Connection abrirConexion(){
+        conectar();
+        return conexion;
+    }
+    
+    public static Connection obtenerConexion(){
+        return conexion;
+    }
+    
+    public static void cerrar(ResultSet r, Statement t, Connection c){
+        try {
+            r.close();
+            t.close();
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

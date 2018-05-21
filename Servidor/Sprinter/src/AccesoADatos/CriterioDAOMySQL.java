@@ -7,6 +7,7 @@ package AccesoADatos;
 
 import Negocio.Entidades.Criterio;
 import Negocio.Entidades.CriterioDAO;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,16 +31,15 @@ public class CriterioDAOMySQL implements CriterioDAO {
     @Override
     public ArrayList<Criterio> obtenerCriterios(int idHU){
         ArrayList<Criterio> criterios = new ArrayList<>();
+        Connection c = ConexionMySQL.obtenerConexion();
         try {
-            Statement stmt;
-            stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet criteriosObtenidos;
-            criteriosObtenidos = 
-                    stmt.executeQuery("{call obtenerCriterios("+idHU+")}");
-            while (criteriosObtenidos.next()){
-                String desc = criteriosObtenidos.getString(1);
-                Criterio criterio = new Criterio(desc);
-                criterios.add(criterio);
+            try (Statement stmt = c.createStatement(); 
+                    ResultSet criteriosObtenidos = stmt
+                    .executeQuery("{call obtenerCriterios("+idHU+")}")) {
+                while (criteriosObtenidos.next()){
+                    Criterio criterio = new Criterio(criteriosObtenidos.getString(1));
+                    criterios.add(criterio);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CriterioDAOMySQL.class.getName()).log(Level.SEVERE,

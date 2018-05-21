@@ -27,10 +27,8 @@ public class Configuracion {
     public Configuracion(IConexionBaseDeDatos impl){
         this.mapaDePartidas = new HashMap<>();
         this.impl = impl;
-        this.impl.conectar();
         listaDeProyectos = this.impl.obtenerProyectos();
         impedimentos = this.impl.obtenerImpedimentos();
-        System.out.println("Configuracion.() -> Traje los proyectos y los impedimentos.");
     }
     
     public String crearPartida(String nombreJugador, String nombrePartida,

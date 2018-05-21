@@ -15,7 +15,7 @@ public class VistaResultados : ClientElement {
     public Image gatoNaranja;
     public VerticalLayoutGroup criterios;
     public Text criterio;
-    public Image checkMark;
+    public GameObject checkMark;
 
     private bool dialogoActivo = false;
 

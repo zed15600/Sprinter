@@ -9,6 +9,7 @@ import Negocio.Entidades.Backlog;
 import Negocio.Entidades.HistoriaDeUsuarioDAO;
 import Negocio.Entidades.ProyectoDAO;
 import Negocio.Entidades.Proyecto;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,10 +32,12 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
     @Override
     public ArrayList<Proyecto> obtenerProyectos(){
         ArrayList<Proyecto> proyectos = new ArrayList<>();
-        try {
-            Statement stmt;
-            stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet r =stmt.executeQuery("{call obtenerTodosLosProyectos()}");
+        Connection c = ConexionMySQL.abrirConexion();
+        Statement stmt = null;
+        ResultSet r = null;
+        try {  
+            stmt = c.createStatement();
+            r = stmt.executeQuery("{call obtenerTodosLosProyectos()}");
             while (r.next()){
                 String nombre =  r.getString(1);
                 String descripcion = r.getString(2);
@@ -44,6 +47,9 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE,
                     null, ex);
+        } finally {
+            if (r != null && stmt != null && c != null)
+            ConexionMySQL.cerrar(r, stmt, c);
         }
         return proyectos;
     }
@@ -51,22 +57,29 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
     @Override
     public Proyecto obtenerProyecto(String nombre) {
         Proyecto proyecto = null;
-        try {
-            Statement stmt = ConexionMySQL.crearDeclaracion();
-            ResultSet r = stmt.executeQuery("{call obtenerProyecto(\""+nombre+
+        Connection c = ConexionMySQL.abrirConexion();
+        Statement stmt = null;
+        ResultSet r = null;
+        try {      
+            stmt = c.createStatement();
+            r = stmt.executeQuery("{call obtenerProyecto(\""+nombre+
                     "\")}");
             while (r.next()){
                 int id =  r.getInt(1);
                 String descripcion = r.getString(2);
                 int nSprints = r.getInt(3);
                 int durSprints = r.getInt(4);
+                r.close();
                 Backlog backlog = new Backlog(impl.obtenerHistorias(id));
                 proyecto = new Proyecto(nombre, descripcion, durSprints,
                         backlog, nSprints);
             }
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ProyectoDAOMySQL.class.getName()).log(Level.SEVERE,
-                    null, ex);
+
+        } finally {
+            if (r != null && stmt != null && c != null)
+            ConexionMySQL.cerrar(r, stmt, c);
         }
         return proyecto;
     }

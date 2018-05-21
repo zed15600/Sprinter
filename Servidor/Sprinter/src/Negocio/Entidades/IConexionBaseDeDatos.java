@@ -15,5 +15,4 @@ public interface IConexionBaseDeDatos {
     public Proyecto obtenerProyecto(String nombre);
     public ArrayList<Proyecto> obtenerProyectos();
     public ArrayList<Impedimento> obtenerImpedimentos();
-    public void conectar();
 }
