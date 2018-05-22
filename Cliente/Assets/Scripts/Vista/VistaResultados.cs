@@ -5,37 +5,41 @@ using UnityEngine.UI;
 
 public class VistaResultados : ClientElement {
 
-    public Text completitud; 
+    public Text completitud;
     public Image gato;
     public Text puntos;
     public Text completada;
     public Text incompleta;
     public Text puntosPrefab;
-    public Image gatoVerde;
+    public Image gatoAzul;
     public Image gatoNaranja;
     public VerticalLayoutGroup criterios;
     public Text criterio;
     public GameObject checkMark;
-
+    public Color rojo;
+    public Color verde;
     private bool dialogoActivo = false;
 
     void OnEnable () {
+        puntos.text = "0";
         controlador.cargarDialogoInteracion(8);
         foreach(Transform child in criterios.transform) {
             GameObject.Destroy(child.gameObject);
         }
         if (verificarCompletitud()) {
             completitud.text = completada.text;
-            completitud.color = completada.color;
-            gato.sprite = gatoVerde.sprite;
+            completitud.color = verde;
+            gato.sprite = gatoAzul.sprite;
+            gato.color = verde;
             checkMark.gameObject.SetActive(true);
             puntos.text = calcularPuntaje().ToString();
             controlador.resetearIntentos();
 
         } else{
             completitud.text = incompleta.text;
-            completitud.color = incompleta.color;
+            completitud.color = rojo;
             gato.sprite = gatoNaranja.sprite;
+            gato.color = rojo;
             checkMark.gameObject.SetActive(false);
             mostrarCriterios();
             controlador.aumentarIntento();

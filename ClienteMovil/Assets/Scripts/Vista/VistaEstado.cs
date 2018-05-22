@@ -10,13 +10,13 @@ public class VistaEstado : ClientElement {
     public GameObject pnlVotacion;
     public GameObject[] btns;
     public Text[] btnsVotacion;
-    public RawImage avatar;
+    public Image avatar;
     public Text estado;
     public Text descripcion;
-
+    private Color azulNormal = new Color(0.2090157f, 0.3889777f, 0.5754717f);
+    private Color rojoImpedimento = new Color(1, 0.4470001f, 0.2971698f);
     float refreshTime = 3.0f;
     bool votar = false;
-
 	// Use this for initialization
 	void Start () {
 		//votar = false;
@@ -24,7 +24,7 @@ public class VistaEstado : ClientElement {
 
     void OnEnable() {
         //Debug.Log("VistaEstado.OnEnable() -> Avatar: " + app.modelo.getJugador().getAvatar());
-        avatar.texture = controlador.modelo.getAvatar(controlador.modelo.getJugador().getAvatar());
+        avatar.sprite = controlador.modelo.getAvatar(controlador.modelo.getJugador().getAvatar());
         votar = false;
     }
 
@@ -48,9 +48,11 @@ public class VistaEstado : ClientElement {
                         estado.text = i.Nombre;
                         descripcion.text = i.Descripcion;
                         if(i.Afectado) {
-                            estado.color = new Color(1, 0, 0, 1);
+                            estado.color = rojoImpedimento;
+                            descripcion.color = rojoImpedimento;
                         } else {
-                            estado.color = new Color(0, 0.710345f, 1, 1);
+                            estado.color = azulNormal;
+                            descripcion.color = azulNormal;
                         }
                         break;
                 }
@@ -71,7 +73,7 @@ public class VistaEstado : ClientElement {
             }
         }
     }
-
+    
     public void ocultarVotacion() {
         if(votar==true){
             votar = false;

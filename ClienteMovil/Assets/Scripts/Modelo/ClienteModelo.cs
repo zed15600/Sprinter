@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class ClienteModelo : ClientElement {
 
     public string[] nombres;
-    public Texture[] avatares;
+    public Sprite[] avatares;
 
     private Partida partida = new Partida("");
     private Jugador jugador = new Jugador();
-    private Dictionary<string, Texture> mapaAvatares = new Dictionary<string, Texture>();
+    private Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
 
     void Awake() {
         for(int i=0; i<nombres.Length;i++) {
@@ -33,7 +33,7 @@ public class ClienteModelo : ClientElement {
         jugador.setId(id);
     }
 
-    public Texture getAvatar(string id) {
+    public Sprite getAvatar(string id) {
         return mapaAvatares[id];
     }
 

@@ -69,34 +69,37 @@ public class VistaMinijuegos:ClientElement {
 
         switch(count) {
             case 0:
-            incrementarContador();
-            category.text="Diseño";
-            category.color=colores[1];
-            gato.sprite=gatos[1];
-            count++;
-            break;
+                incrementarContador();
+                category.text="Diseño";
+                category.color=colores[1];
+                gato.sprite=gatos[1];
+                gato.color = colores[1];
+                count++;
+                break;
             case 1:
-            incrementarContador();
-            category.text="Construcción";
-            category.color=colores[2];
-            gato.sprite=gatos[2];
-            count++;
-            break;
+                incrementarContador();
+                category.text="Construcción";
+                category.color=colores[2];
+                gato.sprite=gatos[2];
+                gato.color = colores[2];
+                count++;
+                break;
             case 2:
-            incrementarContador();
-            category.text="Pruebas";
-            category.color=colores[0];
-            gato.sprite=gatos[0];
-            count++;
-            break;
+                incrementarContador();
+                category.text="Pruebas";
+                category.color=colores[0];
+                gato.sprite=gatos[0];
+                gato.color = colores[0];
+                count++;
+                break;
             case 3:
-            descontar = false;
-            controlador.establecerTiempo(targetTime);
-            activarCriterios = true;
-            controlador.cargarDialogoInteracion(7);
-            count=0;
-            dialogoFueActivo = false;
-            break;
+                descontar = false;
+                controlador.establecerTiempo(targetTime);
+                activarCriterios = true;
+                controlador.cargarDialogoInteracion(7);
+                count=0;
+                dialogoFueActivo = false;
+                break;
         }
 
     }
