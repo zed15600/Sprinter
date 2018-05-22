@@ -28,7 +28,7 @@ public class PanelDialogoGlobal : ClientElement {
             lineasDeDialogo = new string[] {
                     "Oh no! Parece que alguien tiene un impedimento. D:",
                     "Como Scrum Team deben organizarse para apoyarse como equipo y enfrentar el problema juntos.",
-                    controlador.obtenerScrumMaster() + ",como Scrum Master es muy importante que apoyes a las personas que estén en problemas y motives al equipo.",
+                    controlador.obtenerScrumMaster() + ", como Scrum Master es muy importante que apoyes a las personas que estén en problemas y motives al equipo.",
                     ""
                     };
             trigger.dialogo.lineasDeDialogo = lineasDeDialogo;
@@ -49,7 +49,7 @@ public class PanelDialogoGlobal : ClientElement {
             case 12:
                 lineasDeDialogo = new string[] {
                     "Buen trabajo en el primer Sprint, ya les he explicado un poco sobre los conceptos básicos de Scrum.",
-                    "De todas formas," + controlador.obtenerScrumMaster() + "como Scrum Master les ayudara a resolver dudas que tengan sobre el marco de trabajo y les ayudara a seguir el proceso de Scrum!.",
+                    "De todas formas, " + controlador.obtenerScrumMaster() + " como Scrum Master les ayudara a resolver dudas que tengan sobre el marco de trabajo y les ayudara a seguir el proceso de Scrum!.",
                     "Buena Suerte! Meow!",
                     ""
                     };

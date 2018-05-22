@@ -11,11 +11,9 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class Encuesta {
+public class Pregunta {
     
-    private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+    private ArrayList<String>Preguntas = new ArrayList<String>(4);
     
-    public void empezarEncuesta(IntegranteScrumTeam integrante){
-    }
     
 }
