@@ -52,15 +52,15 @@ public class PanelVotacion : ClientElement {
         }
 	}
 
-    public void mostrarVotos(string[] historiasID, int[] votos) {
+    public void mostrarVotos(string[] historias, int[] votos) {
         foreach(Transform child in pnlHistorias.transform) {
             GameObject.Destroy(child.gameObject);
         }
-        if(historiasID.Length == votos.Length){
-            for(int i=0; i<historiasID.Length; i++){
+        if(historias.Length == votos.Length){
+            for(int i=0; i<historias.Length; i++){
                 Text txt = Instantiate(historiaDescPrefab);
                 Text txt2 = Instantiate(historiaDescPrefab);
-                txt.text = "Historia " + historiasID[i];
+                txt.text = historias[i];
                 txt2.text = "" + votos[i];
                 txt.transform.SetParent(pnlHistorias.transform);
                 txt2.transform.SetParent(pnlHistorias.transform);

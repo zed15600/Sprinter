@@ -102,13 +102,10 @@ public class JSONMensajes implements IMensajes {
             HistoriaDeUsuario[] posibles, Impedimento imp) {
         JSONObject json = new JSONObject();
         JSONArray HUs = new JSONArray();
-        JSONArray HUsDesc = new JSONArray();
         for (HistoriaDeUsuario posible : posibles) {
             HUs.add(posible.getNombre());
-            HUsDesc.add(posible.getDescripcion());
         }
         json.put("HUs", HUs);
-        json.put("HUsDesc", HUsDesc);
         json.put("votacion", votar);
         json.put("estadoPartida", estadoPartida);
         if (imp != null) {

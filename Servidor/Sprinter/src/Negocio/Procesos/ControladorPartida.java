@@ -42,20 +42,13 @@ public class ControladorPartida extends Controlador {
         return respuestas.estadoVotacion(p.getVotacion(), p.getTipoVotacion());
     }
     
-    public String enviarVotos(int partidaID, int tipoVotacion){
+    public String enviarVotos(int partidaID){
         Proyecto p = configuracion.obtenerProyectoDePartida(partidaID);
-        int respuestasVotos = 0;
-        if(tipoVotacion == 1){
-            respuestasVotos = p.getDuracionDeSprints();
-        }
-        if(tipoVotacion == 2){
-            respuestasVotos = 1;
-        }
-        return this.respuestas.enviarVotos(p.getVotos(respuestasVotos, 
-                configuracion.obtenerPartida(partidaID).getTipoVotacion()));
+        return this.respuestas.enviarVotos
+        (p.getVotos(configuracion.obtenerPartida(partidaID).getTipoVotacion()));
     }
 
-    public String crearPartida(String jugador, String partida, String proyecto) {
+    public String crearPartida(String jugador, String partida, String proyecto){
         String codigo = configuracion.crearPartida(jugador, partida, proyecto);
         return respuestas.enviarCodigoPartida(codigo);
     }

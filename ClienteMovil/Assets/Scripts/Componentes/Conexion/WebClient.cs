@@ -106,13 +106,10 @@ public class WebClient : ClientElement {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             if(jsRes["votacion"].Boolean) {
                 JSONArray arr = jsRes["HUs"].Array;
-                JSONArray desc = jsRes["HUsDesc"].Array;
                 int size = arr.Length;
                 string[] HUNombres = new string[size];
-                string[] HUsDesc = new string[size];
                 for(int i=0; i<size; i++) {
                     HUNombres[i] = arr[i].Str;
-                    HUsDesc[i] = desc[i].Str;
                 }
                 controlador.mostrarVotacion(HUNombres);
             } else {

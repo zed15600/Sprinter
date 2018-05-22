@@ -81,8 +81,8 @@ public class Proyecto {
     
     public void nextSprint(){
         sprintActual++;
-        /*System.out.println("Proyecto.nextSprint() -> Ahora estamos en el sprint"
-                + " " + sprintActual);*/
+        System.out.println("Proyecto.nextSprint() -> Ahora estamos en el sprint"
+                + " " + sprintActual);
     }
     
     public int getNumeroSprints(){
@@ -117,23 +117,33 @@ public class Proyecto {
         return this.sprintActual;
     }
     
-    public String[][] getVotos(int Maximo, int tipoVotacion){
+    public String[][] getVotos(int tipoVotacion){
+        int cantidad;
+        if(tipoVotacion == 1){
+            int minimo, maximo;
+            //cambiar si se recupera el código para terminar sprint
+            minimo = getNumeroHistoriasPorCompletar()-
+                ((getSprintsRestantes()-1)*duracionDeSprints);
+            maximo = (int)Math.ceil((double)getNumeroHistoriasPorCompletar()/
+                getSprintsRestantes());
+            int histConVotos = getNumeroHistoriasConVotos();
+            if(histConVotos <= minimo){
+                cantidad = minimo;
+            }else if(histConVotos >= maximo){
+                cantidad = maximo;
+            }else{
+                cantidad = histConVotos;
+            }
+        }else{
+            cantidad = 1;
+        }
+        
         ArrayList<HistoriaDeUsuario> historias = productBacklog.getHistorias();
         
         historias.sort(null);
         Collections.reverse(historias);
-        /*for(HistoriaDeUsuario historia : historias){
-        System.out.println("Proyecto.getVotos() -> Orden de historias: " +
-                historia.getNombre());
-        }*/
-        //Esto lo tengo que hacer variable
-        if(historias.size() >= Maximo 
-                && Maximo == duracionDeSprints 
-                && historias.get(3).getVotos() == 0){
-            Maximo = 3;
-        }
-        int cantidad = Math.min(Maximo, getNumeroHistoriasPorCompletar());
-        Sprint actual = new Sprint(sprintActual, cantidad);
+        //cambiar si se recupera el código para terminar sprint
+        Sprint actual = new Sprint(sprintActual+1, cantidad);
         String[][] votos = new String[2][cantidad];
         int i = 0;
         for(HistoriaDeUsuario historia: historias){
@@ -148,8 +158,6 @@ public class Proyecto {
             }
         }
         if(tipoVotacion == 1){
-            /*System.out.println("Proyecto.getVotos() -> Agregué un sprint con " 
-                    + actual.getSprintBacklog().getTamaño() + " historias.");*/
             listaDeSprints.add(actual);
             nextSprint();
         }
@@ -169,9 +177,23 @@ public class Proyecto {
         }
         return i;
     }
+    
+    public int getNumeroHistoriasConVotos(){
+        int i = 0;
+        for(HistoriaDeUsuario h: obtenerHistorias()){
+            if(h.getVotos()>0){
+                i++;
+            }
+        }
+        return i;
+    }
 
     public int getDiaActual() {
         return diaActual;
+    }
+    
+    public int getSprintsRestantes(){
+        return numeroSprints-sprintActual;
     }
     
 }

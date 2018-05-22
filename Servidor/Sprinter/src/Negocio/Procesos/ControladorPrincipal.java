@@ -78,8 +78,8 @@ public class ControladorPrincipal {
         return controladorPartidas.estadoVotacion(partidaID);
     }
     
-    public String enviarVotos(int partidaID, int tipoVotacion){
-        return controladorPartidas.enviarVotos(partidaID, tipoVotacion);
+    public String enviarVotos(int partidaID){
+        return controladorPartidas.enviarVotos(partidaID);
     }
     
     public String enviarProyectos(){

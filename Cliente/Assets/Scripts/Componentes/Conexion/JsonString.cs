@@ -65,8 +65,7 @@ public class JsonString : ClientElement {
     public static string obtenerVotos(string partidaID, int tipoVotacion) {
         string res = "{" +
                      "\"codigo\":0013," +
-                     "\"partidaID\":"+partidaID+"," +
-                     "\"tipoVotacion\":"+tipoVotacion +
+                     "\"partidaID\":"+partidaID +
                      "}";
         return res;
     }

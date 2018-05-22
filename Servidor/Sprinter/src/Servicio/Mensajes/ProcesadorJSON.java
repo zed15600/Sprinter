@@ -64,8 +64,7 @@ public class ProcesadorJSON implements IProceso {
                 case 12: 
                     return Main.getControlador().estadoVotacion(pID);
                 case 13:
-                    int tipoVotacion = (int)(long)json.get("tipoVotacion");
-                    return Main.getControlador().enviarVotos(pID, tipoVotacion);
+                    return Main.getControlador().enviarVotos(pID);
                 case 14: 
                     return Main.getControlador().enviarProyectos();
                 case 15:
