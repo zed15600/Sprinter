@@ -44,8 +44,9 @@ public class ProcesadorJSON implements IProceso {
                     break;
                 case 8:
                     String nombreJugador = (String)json.get("nombreJugador");
+                    String deviceIDi = (String)json.get("deviceID");
                     return Main.getControlador().unirsePartida(pID,
-                            nombreJugador);
+                            nombreJugador, deviceIDi);
                 case 9:  
                     int jugador = (int)(long)json.get("player");
                     return Main.getControlador().actualizarEstadoJugador(pID,
@@ -69,10 +70,11 @@ public class ProcesadorJSON implements IProceso {
                     return Main.getControlador().enviarProyectos();
                 case 15:
                     String scrumMaster = (String) json.get("jugador");
+                    String deviceIDm = (String)json.get("deviceID");
                     String partida = (String) json.get("partida");
                     String proyecto = (String) json.get("proyecto");
                     return Main.getControlador().crearPartida(scrumMaster,
-                            partida, proyecto);
+                            deviceIDm, partida, proyecto);
                 case 16:
                     return Main.getControlador().enviarJugadores(pID);
                 case 17:

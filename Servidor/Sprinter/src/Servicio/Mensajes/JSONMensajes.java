@@ -89,11 +89,12 @@ public class JSONMensajes implements IMensajes {
     }
 
     @Override
-    public String unirsePartida(int jugadorId, boolean aceptado, String avatar) {
+    public String unirsePartida(IntegranteScrumTeam jugador, boolean aceptado) {
         JSONObject json = new JSONObject();
-        json.put("jugadorID", jugadorId);
+        
+        json.put("jugadorID", jugador.getAssignedID());
         json.put("aceptado", aceptado);
-        json.put("avatar", avatar);
+        json.put("avatar", jugador.getAvatar());
         return json.toJSONString();
     }
 

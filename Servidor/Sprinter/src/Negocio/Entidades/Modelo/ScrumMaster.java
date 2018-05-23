@@ -11,10 +11,7 @@ package Negocio.Entidades.Modelo;
  */
 public class ScrumMaster extends Jugador {
     
-    public ScrumMaster(String nombre, int ID) {
-        super(nombre, ID);
-    }
-    
-    public void marcarCriterios (Criterio criterio){        
+    public ScrumMaster(String nombre, int assignedID, String deviceID) {
+        super(nombre, assignedID, deviceID);
     }
 }

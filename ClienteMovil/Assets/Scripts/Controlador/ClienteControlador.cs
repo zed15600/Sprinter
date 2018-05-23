@@ -7,7 +7,7 @@ public class ClienteControlador : ClientElement {
     public ClienteVista vista;
 
     public void conectarPartida(string codigo, string nombreJugador) {
-        webClient.unirsePartida(codigo, nombreJugador);
+        webClient.unirsePartida(codigo, nombreJugador, modelo.getPartida().DeviceID);
     }
 
     public void crearPartida(string partidaID) {

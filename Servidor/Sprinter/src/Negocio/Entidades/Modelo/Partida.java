@@ -64,11 +64,18 @@ public class Partida {
         return scrumMaster;
     }
     
-    public int agregarJugador (String nombre, String avatar){
+    public IntegranteScrumTeam agregarJugador (String nombre, String deviceID){
+        for(IntegranteScrumTeam j : listaJugadores){
+            if(j.getDeviceID().equals(deviceID)){
+               return j;
+            }
+        }
         int id = listaJugadores.size()+1;
-        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre,id,avatar);
+        String avatar = avatares.pop();
+        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id,
+                avatar, deviceID);
         listaJugadores.add(jugador);
-        return id;
+        return jugador;
     }
     
     public String tomarAvatar(){

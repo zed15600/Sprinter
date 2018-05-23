@@ -27,25 +27,25 @@ public class ClienteControlador : ClientElement {
         webClient.pedirProyectos();
     }
     public void crearPartida(string jugador, string partida, string proyecto) {
-        webClient.crearPartida(jugador, partida, proyecto);
+        webClient.crearPartida(jugador, modelo.getPartida().DeviceID, partida, proyecto);
     }
     public void obtenerProyectoServidor() {
         webClient.obtenerProyecto();
     }
     public void establecerVotacion(bool votar, int tipoVoto) {
-        webClient.establecerVotacion(modelo.getPartida().getID(), votar, tipoVoto);
+        webClient.establecerVotacion(modelo.getPartida().Id, votar, tipoVoto);
     }
     public void estadoVotacion() {
-        webClient.estadoVotacion(modelo.getPartida().getID());
+        webClient.estadoVotacion(modelo.getPartida().Id);
     }
     public void obtenerVotos(int tipoVotacion) {
-        webClient.obtenerVotos(modelo.getPartida().getID(), tipoVotacion);
+        webClient.obtenerVotos(modelo.getPartida().Id, tipoVotacion);
     }
     public void pedirJugadores() {
-        webClient.pedirJugadores(modelo.getPartida().getID());
+        webClient.pedirJugadores(modelo.getPartida().Id);
     }
     public void empezarPartida() {
-        webClient.empezarPartida(modelo.getPartida().getID());
+        webClient.empezarPartida(modelo.getPartida().Id);
     }
     
 
@@ -84,14 +84,14 @@ public class ClienteControlador : ClientElement {
 
     //Partida
 
-    public void setPartida(Partida partida) {
-            modelo.setPartida(partida);
+        public void setIdPartida(string ID) {
+            modelo.getPartida().Id = ID;
         }
         public Partida obtenerPartida() {
             return modelo.getPartida();
         }
         internal string obtenerCodigoPartida() {
-            return modelo.getPartida().getID();
+            return modelo.getPartida().Id;
         }
 
         //proyecto
@@ -309,7 +309,7 @@ public class ClienteControlador : ClientElement {
         }
     }
     public void terminarDia() {
-        webClient.terminarDia(modelo.getPartida().getID());
+        webClient.terminarDia(modelo.getPartida().Id);
         if(modelo.getProyecto().terminarDia()){
             mostrarVistaSprint();
         } else {

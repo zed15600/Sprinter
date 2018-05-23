@@ -75,11 +75,11 @@ public class JsonString : ClientElement {
         return res;
     }
 
-    public static string crearPartida(string nombreJugador, string nombrePartida, string nombreProyecto) {
-        //Debug.Log("Proyecto: " + nombreProyecto);
+    public static string crearPartida(string nombreJugador, string deviceID, string nombrePartida, string nombreProyecto) {
         string res = "{" +
              "\"codigo\":0015," +
              "\"jugador\":\"" + nombreJugador + "\"," +
+             "\"deviceID\":\"" + deviceID + "\"," +
              "\"partida\":\"" + nombrePartida + "\"," +
              "\"proyecto\":\"" + nombreProyecto + "\"" +
              "}";

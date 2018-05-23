@@ -48,8 +48,10 @@ public class ControladorPartida extends Controlador {
         (p.getVotos(configuracion.obtenerPartida(partidaID).getTipoVotacion()));
     }
 
-    public String crearPartida(String jugador, String partida, String proyecto){
-        String codigo = configuracion.crearPartida(jugador, partida, proyecto);
+    public String crearPartida(String jugador, String deviceID, String partida, 
+            String proyecto){
+        String codigo = configuracion.crearPartida(jugador, deviceID, partida,
+                proyecto);
         return respuestas.enviarCodigoPartida(codigo);
     }
 

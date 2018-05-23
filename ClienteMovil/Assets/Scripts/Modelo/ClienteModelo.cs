@@ -7,11 +7,12 @@ public class ClienteModelo : ClientElement {
     public string[] nombres;
     public Sprite[] avatares;
 
-    private Partida partida = new Partida("");
+    private Partida partida;
     private Jugador jugador = new Jugador();
     private Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
 
     void Awake() {
+        partida = new Partida("");
         for(int i=0; i<nombres.Length;i++) {
             mapaAvatares.Add(nombres[i], avatares[i]);
         }
@@ -43,10 +44,12 @@ public class ClienteModelo : ClientElement {
 public class Partida{
     private string id;
     private string estado;
+    public string DeviceID { get; private set; }
 
     public Partida(string id) { 
         this.id = id;
         estado = "conexion";
+        DeviceID = SystemInfo.deviceUniqueIdentifier;
     }
 
     public string getID() {
@@ -66,11 +69,10 @@ public class Jugador {
     private int id;
     private string nombre;
     private string avatar;
-    private Impedimento estado;
-
+    public Impedimento Estado { get; private set; }
 
     public Jugador() {
-        estado = new Impedimento();
+        Estado = new Impedimento();
     }
 
     public void setId(int id) {
@@ -98,53 +100,18 @@ public class Jugador {
         return avatar;
     }
 
-    public Impedimento Estado {
-        get {
-            return estado;
-        }
-    }
 }
 
 public class Impedimento {
 
-    private string nombre;
-    private string descripcion;
-    private bool afectado;
+    public string Nombre { get; set; }
+    public string Descripcion { get; set; }
+    public bool Afectado { get; set; }
 
     public Impedimento() {
-        nombre = "Estado: Normal";
-        descripcion = "No estás siendo afectado por ninguna eventualidad.";
-        afectado = false;
-    }
-
-    public string Nombre {
-        get {
-            return nombre;
-        }
-
-        set {
-            nombre=value;
-        }
-    }
-
-    public string Descripcion {
-        get {
-            return descripcion;
-        }
-
-        set {
-            descripcion=value;
-        }
-    }
-
-    public bool Afectado {
-        get {
-            return afectado;
-        }
-
-        set {
-            afectado=value;
-        }
+        Nombre = "Estado: Normal";
+        Descripcion = "No estás siendo afectado por ninguna eventualidad.";
+        Afectado = false;
     }
 }
 

@@ -32,15 +32,15 @@ public class Configuracion {
         impedimentos = this.fachadaImpl.obtenerImpedimentos();
     }
     
-    public String crearPartida(String nombreJugador, String nombrePartida,
-            String nombreProyecto){
+    public String crearPartida(String nombreJugador, String deviceID, 
+            String nombrePartida, String nombreProyecto){
         int codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
         Set keys = mapaDePartidas.keySet();
         while (keys.contains(codigo)){
             codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
         }
         Proyecto proyecto = this.fachadaImpl.obtenerProyecto(nombreProyecto);
-        ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0);
+        ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0, deviceID);
         Partida partida = new Partida(codigo, nombrePartida, proyecto,
                 scrumMaster);
         mapaDePartidas.put(codigo, partida);
