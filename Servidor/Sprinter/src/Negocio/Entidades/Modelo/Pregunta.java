@@ -5,15 +5,31 @@
  */
 package Negocio.Entidades.Modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author usuario
  */
 public class Pregunta {
     
-    private ArrayList<String>Preguntas = new ArrayList<String>(4);
+    private int id;
+    private String enunciado;
+    private String[] respuestas;
     
-    
+    public Pregunta(int id, String enunciado, String[] respuestas){
+        this.id = id;
+        this.enunciado = enunciado;
+        this.respuestas = respuestas;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEnunciado() {
+        return enunciado;
+    }
+
+    public String[] getRespuestas() {
+        return respuestas;
+    }
 }

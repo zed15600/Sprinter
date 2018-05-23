@@ -31,6 +31,7 @@ public class Partida {
                                * 2 -> votar historia de día
                                */
     private String estado;
+    private Encuesta encuesta;
 
     public ArrayList<IntegranteScrumTeam> getListaJugadores() {
         return listaJugadores;

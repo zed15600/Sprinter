@@ -17,6 +17,7 @@ public class ControladorPrincipal {
     private final ControladorJugador controladorJugadores;
     private final ControladorProyecto controladorProyectos;
     private final ControladorPartida controladorPartidas;
+    private final ControladorEncuesta controladorEncuesta;
     
     public ControladorPrincipal(IMensajes respuestas, IConexion conexion, 
     Configuracion configuracion) {
@@ -25,6 +26,8 @@ public class ControladorPrincipal {
         this.controladorProyectos = new ControladorProyecto(respuestas,
                 configuracion);
         this.controladorPartidas = new ControladorPartida(respuestas,
+                configuracion);
+        this.controladorEncuesta = new ControladorEncuesta(respuestas,
                 configuracion);
         this.conexion = conexion;
     }

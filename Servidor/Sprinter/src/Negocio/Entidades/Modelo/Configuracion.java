@@ -20,9 +20,10 @@ import java.util.Set;
 public class Configuracion {
     
     private final Map<Integer, Partida> mapaDePartidas;
-    private final ArrayList<Impedimento> impedimentos;
     //local
     private final ArrayList<Proyecto> listaDeProyectos;
+    private final ArrayList<Impedimento> impedimentos;
+    private final ArrayList<Pregunta> preguntasDeEncuesta;
     private final DAOFachada fachadaImpl;
 
     public Configuracion(DAOFachada fachadaImpl){
@@ -30,6 +31,7 @@ public class Configuracion {
         this.fachadaImpl = fachadaImpl;
         listaDeProyectos = this.fachadaImpl.obtenerProyectos();
         impedimentos = this.fachadaImpl.obtenerImpedimentos();
+        preguntasDeEncuesta = this.fachadaImpl.obtenerPreguntasEncuesta();
     }
     
     public String crearPartida(String nombreJugador, String deviceID, 
