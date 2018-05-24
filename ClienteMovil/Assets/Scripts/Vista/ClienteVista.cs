@@ -6,5 +6,6 @@ public class ClienteVista : ClientElement {
 
     public VistaConectarse conectarse;
     public VistaEstado estado;
+    public VistaEncuesta encuesta;
 
 }

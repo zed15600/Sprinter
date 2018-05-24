@@ -31,4 +31,5 @@ public interface IMensajes {
         (ArrayList<IntegranteScrumTeam> jugadores);
     public String empezarEncuesta(Pregunta pregunta);
     public String siguientePregunta(boolean terminamos, Pregunta pregunta);
+    public String responderRespuesta(boolean terminado, int preguntaActual);
 }

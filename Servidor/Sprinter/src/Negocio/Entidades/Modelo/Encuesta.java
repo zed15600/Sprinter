@@ -6,6 +6,8 @@
 package Negocio.Entidades.Modelo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,8 @@ public class Encuesta {
     
     private ArrayList<Pregunta> preguntas = new ArrayList<>();
     private int preguntaActual;
+    
+    private ArrayList<ArrayList<String>> respuestas = new ArrayList<>();
     
     public Encuesta(ArrayList<Pregunta> preguntasEncuesta){
         for(Pregunta p : preguntasEncuesta){
@@ -28,7 +32,7 @@ public class Encuesta {
     
     public boolean siguientePregunta(){
         preguntaActual ++;
-        return preguntaActual <= preguntas.size();
+        return preguntaActual > preguntas.size();
     }
 
     public int getNumeroPreguntaActual() {
@@ -37,5 +41,20 @@ public class Encuesta {
     
     public Pregunta getPreguntaActual(int id){
         return preguntas.get(id);
+    }
+    
+    public void agregarJugador(){
+        respuestas.add(new ArrayList<>());
+    }
+    
+    public boolean registrarRespuesta(int jugador, String opcion){
+        ArrayList<String> respuestasDeJugador = respuestas.get(jugador-1);
+        while((respuestasDeJugador.size()+1)<preguntaActual){
+            respuestasDeJugador.add(null);
+        }
+        if(respuestasDeJugador.size()==(preguntaActual-1)){
+            respuestasDeJugador.add(opcion);
+        }
+        return preguntaActual > preguntas.size();
     }
 }

@@ -129,10 +129,23 @@ public class WebClient : ClientElement {
         string json = JsonString.enviarVoto(pID, HUid, player);
         setupSocket();
         writeSocket(json);
+        closeSocket();
+    }
+
+    public void enviarRespuesta(string pID, int player, int pregunta, string opcion) {
+        string json = JsonString.enviarRespuesta(pID, player, pregunta, opcion);
+        setupSocket();
+        writeSocket(json);
         string dataIn = readSocket();
         closeSocket();
         if(dataIn !="") {
-            //creo que no hay que hacer nada
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            if(jsRes["terminamos"].Boolean) {
+                controlador.ocultarEncuesta();
+                controlador.mostrarInicio();
+            } else {
+                controlador.establecerPreguntaActual((int)jsRes["pregunta"].Number);
+            }
         }
     }
 

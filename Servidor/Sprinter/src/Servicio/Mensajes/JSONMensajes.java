@@ -235,6 +235,15 @@ public class JSONMensajes implements IMensajes {
         return json.toJSONString();
     }
     
+    @Override
+    public String responderRespuesta(boolean terminado, int preguntaActual) {
+        JSONObject json = new JSONObject();
+        json.put("terminamos", terminado);
+        if(!terminado){
+            json.put("pregunta", preguntaActual);
+        }
+        return json.toJSONString();
+    }
     
     
     
@@ -249,4 +258,5 @@ public class JSONMensajes implements IMensajes {
         }
         json.put("respuestas", arr);
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class ClienteControlador : ClientElement {
+public class ClienteControlador : MonoBehaviour {
 
     public WebClient webClient;
     public ClienteModelo modelo;
@@ -64,5 +65,20 @@ public class ClienteControlador : ClientElement {
             i.Descripcion = "No estás siendo afectado por ninguna eventualidad.";
         }
         i.Afectado = afectado;
+    }
+    public void establecerPreguntaActual(int pregunta) {
+        modelo.getPartida().PreguntaID = pregunta;
+    }
+    public void enviarRespuesta(string opcion) {
+        Partida p = modelo.getPartida();
+        webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), p.PreguntaID, opcion);
+    }
+
+    public void ocultarEncuesta() {
+        vista.encuesta.gameObject.SetActive(false);
+    }
+
+    public void mostrarInicio() {
+        vista.conectarse.gameObject.SetActive(true);
     }
 }

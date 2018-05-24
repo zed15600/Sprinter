@@ -116,4 +116,8 @@ public class ControladorPrincipal {
         return controladorEncuesta.siguientePregunta(partidaID);
     }
     
+    public String registrarRespuesta(int partidaID, int jugador, String respuesta){
+        return controladorEncuesta.registrarRespuesta(partidaID, jugador, respuesta);
+    }
+    
 }

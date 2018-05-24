@@ -45,6 +45,7 @@ public class Partida{
     private string id;
     private string estado;
     public string DeviceID { get; private set; }
+    public int PreguntaID{ get; set; }
 
     public Partida(string id) { 
         this.id = id;

@@ -78,6 +78,7 @@ public class Partida {
         IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id,
                 avatar, deviceID);
         listaJugadores.add(jugador);
+        encuesta.agregarJugador();
         return jugador;
     }
     
