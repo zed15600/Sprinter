@@ -2,9 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaScrumPlanning : ClientElement{
+public class VistaScrumPlanning : ClientElement, IVista{
 
     // ---------------------------------------------- Contenidos ---------------------------------------------------
+    Idioma idioma;
+
     [SerializeField]
     private Text proyecto = null;
     [SerializeField]
@@ -14,6 +16,10 @@ public class VistaScrumPlanning : ClientElement{
 
     public VerticalLayoutGroup contenidosHistoria;
 
+    public Text story;
+    public Text prio;
+    public Text points;
+    public Button continuar;
     // -------------------------------------------------------------------------------------------------------------
     public void establecerProyecto() {
         proyecto.text = controlador.obtenerNombreProyecto();
@@ -44,6 +50,7 @@ public class VistaScrumPlanning : ClientElement{
 
     public void OnEnable()
     {
+        inicializarVista();
         controlador.cargarDialogoInteracion(1);
         //FindObjectOfType<DialogTrigger>().TriggerDialog();
         establecerProyecto();
@@ -51,5 +58,17 @@ public class VistaScrumPlanning : ClientElement{
         {
         }
         llenarTabla();
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        story.text = map["historia"];
+        prio.text = map["prioridad"];
+        points.text = map["puntos"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

@@ -17,6 +17,7 @@ public class ControladorPrincipal {
     private final ControladorJugador controladorJugadores;
     private final ControladorProyecto controladorProyectos;
     private final ControladorPartida controladorPartidas;
+    private final ControladorEncuesta controladorEncuesta;
     
     public ControladorPrincipal(IMensajes respuestas, IConexion conexion, 
     Configuracion configuracion) {
@@ -26,6 +27,8 @@ public class ControladorPrincipal {
                 configuracion);
         this.controladorPartidas = new ControladorPartida(respuestas,
                 configuracion);
+        this.controladorEncuesta = new ControladorEncuesta(respuestas,
+                configuracion);
         this.conexion = conexion;
     }
     
@@ -33,10 +36,10 @@ public class ControladorPrincipal {
         conexion.conectar();
     }
     
-    public void controlar(Map datos){
+    /*public void controlar(Map datos){
         String codigo = datos.get((Object)"codigo").toString();
         //System.out.println("ControladorPrincipal.controlar() -> Código: " + codigo);
-    }
+    }*/
     
     public void terminarSprint(int partidaID){
         controladorProyectos.terminarSprint(partidaID);
@@ -58,8 +61,10 @@ public class ControladorPrincipal {
         controladorProyectos.establecerCompletada(partidaID, nombreHistoria);
     }
     
-    public String unirsePartida(int codigo, String nombreJugador){
-        return controladorJugadores.unirsePartida(codigo, nombreJugador);
+    public String unirsePartida(int codigo, String nombreJugador, 
+            String deviceID){
+        return controladorJugadores.unirsePartida(codigo, nombreJugador, 
+                deviceID);
     }
     
     public String actualizarEstadoJugador(int partidaID, int jugador){
@@ -86,8 +91,9 @@ public class ControladorPrincipal {
         return controladorProyectos.enviarProyectos();
     }
     
-    public String crearPartida(String jugador, String partida, String proyecto){
-        return controladorPartidas.crearPartida(jugador, partida, proyecto);
+    public String crearPartida(String jugador, String deviceID, String partida, 
+            String proyecto){
+        return controladorPartidas.crearPartida(jugador, deviceID, partida, proyecto);
     }
 
     public String enviarJugadores(int idPartida) {
@@ -100,6 +106,14 @@ public class ControladorPrincipal {
     
     public String terminarDia(int partidaID){
         return controladorPartidas.terminarDia(partidaID);
+    }
+    
+    public String empezarEncuesta(int partidaID){
+        return controladorEncuesta.empezarEncuesta(partidaID);
+    }
+    
+    public String siguientePregunta(int partidaID){
+        return controladorEncuesta.siguientePregunta(partidaID);
     }
     
 }

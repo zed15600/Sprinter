@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.Entidades.Modelo;
+package Negocio.Entidades.DAO;
+
+import Negocio.Entidades.Modelo.Pregunta;
+import java.util.ArrayList;
 
 /**
  *
  * @author usuario
  */
-public class ScrumMaster extends Jugador {
-    
-    public ScrumMaster(String nombre, int assignedID, String deviceID) {
-        super(nombre, assignedID, deviceID);
-    }
+public interface PreguntaDAO {
+    public ArrayList<Pregunta> obtenerPreguntas();
 }

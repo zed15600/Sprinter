@@ -9,6 +9,7 @@ import Negocio.Entidades.Modelo.Criterio;
 import Negocio.Entidades.Modelo.HistoriaDeUsuario;
 import Negocio.Entidades.Modelo.Impedimento;
 import Negocio.Entidades.Modelo.IntegranteScrumTeam;
+import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import Negocio.Procesos.IMensajes;
 import java.util.ArrayList;
@@ -89,11 +90,12 @@ public class JSONMensajes implements IMensajes {
     }
 
     @Override
-    public String unirsePartida(int jugadorId, boolean aceptado, String avatar) {
+    public String unirsePartida(IntegranteScrumTeam jugador, boolean aceptado) {
         JSONObject json = new JSONObject();
-        json.put("jugadorID", jugadorId);
+        
+        json.put("jugadorID", jugador.getAssignedID());
         json.put("aceptado", aceptado);
-        json.put("avatar", avatar);
+        json.put("avatar", jugador.getAvatar());
         return json.toJSONString();
     }
 
@@ -217,4 +219,34 @@ public class JSONMensajes implements IMensajes {
         return json.toJSONString();
     }
      */
+
+    @Override
+    public String empezarEncuesta(Pregunta pregunta) {
+        JSONObject json = new JSONObject();
+        ponerPregunta(json, pregunta);
+        return json.toJSONString();
+    }
+
+    @Override
+    public String siguientePregunta(boolean terminamos, Pregunta pregunta) {
+        JSONObject json = new JSONObject();
+        json.put("terminado", terminamos);
+        ponerPregunta(json, pregunta);
+        return json.toJSONString();
+    }
+    
+    
+    
+    
+    
+    
+    
+    public void ponerPregunta(JSONObject json, Pregunta p){
+        json.put("pregunta", p.getEnunciado());
+        JSONArray arr = new JSONArray();
+        for(String s : p.getRespuestas()){
+            arr.add(s);
+        }
+        json.put("respuestas", arr);
+    }
 }

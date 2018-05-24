@@ -12,11 +12,9 @@ public class ClienteControlador : ClientElement {
     private bool _dialogosPermitidos = true;
 
     public bool dialogosPermitidos { get { return _dialogosPermitidos; } }
-
     public void activarDialogos() {
         _dialogosPermitidos = true;
     }
-
     public void desactivarDialogos() {
         _dialogosPermitidos = false;
     }
@@ -27,25 +25,28 @@ public class ClienteControlador : ClientElement {
         webClient.pedirProyectos();
     }
     public void crearPartida(string jugador, string partida, string proyecto) {
-        webClient.crearPartida(jugador, partida, proyecto);
+        webClient.crearPartida(jugador, modelo.getPartida().DeviceID, partida, proyecto);
     }
     public void obtenerProyectoServidor() {
         webClient.obtenerProyecto();
     }
     public void establecerVotacion(bool votar, int tipoVoto) {
-        webClient.establecerVotacion(modelo.getPartida().getID(), votar, tipoVoto);
+        webClient.establecerVotacion(modelo.getPartida().Id, votar, tipoVoto);
     }
     public void estadoVotacion() {
-        webClient.estadoVotacion(modelo.getPartida().getID());
+        webClient.estadoVotacion(modelo.getPartida().Id);
     }
     public void obtenerVotos(int tipoVotacion) {
-        webClient.obtenerVotos(modelo.getPartida().getID(), tipoVotacion);
+        webClient.obtenerVotos(modelo.getPartida().Id, tipoVotacion);
     }
     public void pedirJugadores() {
-        webClient.pedirJugadores(modelo.getPartida().getID());
+        webClient.pedirJugadores(modelo.getPartida().Id);
     }
     public void empezarPartida() {
-        webClient.empezarPartida(modelo.getPartida().getID());
+        webClient.empezarPartida(modelo.getPartida().Id);
+    }
+    public void siguientePregunta() {
+        webClient.siguientePregunta(modelo.getPartida().Id);
     }
     
 
@@ -81,17 +82,20 @@ public class ClienteControlador : ClientElement {
         public void establecerJugadoresEnProblemas(List<Jugador> jugadores) {
             modelo.getMinijuego().setJugadoresEnProblemas(jugadores);
         }
+        public Pregunta obtenerPregunta() {
+            return modelo.Preg;
+        }
 
     //Partida
 
-    public void setPartida(Partida partida) {
-            modelo.setPartida(partida);
+        public void setIdPartida(string ID) {
+            modelo.getPartida().Id = ID;
         }
         public Partida obtenerPartida() {
             return modelo.getPartida();
         }
         internal string obtenerCodigoPartida() {
-            return modelo.getPartida().getID();
+            return modelo.getPartida().Id;
         }
 
         //proyecto
@@ -126,11 +130,9 @@ public class ClienteControlador : ClientElement {
         public int obtenerDiaActual() {
             return modelo.getProyecto().getDiasRestantes();
         }
-
         public HistoriaDeUsuario obtenerHistoriaPorTitulo(string tituloHistoria) {
             return modelo.getProyecto().obtenerHistoria(tituloHistoria);
         }
-
         public bool verificarSprintTotalmenteCompleto() {
             List<HistoriaDeUsuario> historias = modelo.getProyecto().getHistoriasSprint();
             for (int i = 0; i<historias.Count; ++i) {
@@ -146,7 +148,6 @@ public class ClienteControlador : ClientElement {
         public HistoriaDeUsuario obtenerHistoriaActual() {
             return modelo.getMinijuego().getHistoriaActual();
         }
-
         public Minijuego obtenerMinijuego() {
             return modelo.getMinijuego();
         }
@@ -280,6 +281,10 @@ public class ClienteControlador : ClientElement {
     public bool obtenerDialogoImpedimento() {
         return vista.dialogoGlobal.getDialogosImpedimento();
     }
+
+    public void cambiarIdioma(Idioma idioma) {
+        vista.cambiarIdioma(idioma);
+    }
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
     }
@@ -287,6 +292,10 @@ public class ClienteControlador : ClientElement {
     public void terminarJuego() {
         vista.finDelJuego.gameObject.SetActive(true);
     }*/
+    public void mostrarVistaEncuesta() {
+        webClient.iniciarEncuesta(modelo.getPartida().Id);
+        vista.encuesta.gameObject.SetActive(true);
+    }
 
 
     //Llamadas que contienen procesamiento
@@ -309,7 +318,7 @@ public class ClienteControlador : ClientElement {
         }
     }
     public void terminarDia() {
-        webClient.terminarDia(modelo.getPartida().getID());
+        webClient.terminarDia(modelo.getPartida().Id);
         if(modelo.getProyecto().terminarDia()){
             mostrarVistaSprint();
         } else {

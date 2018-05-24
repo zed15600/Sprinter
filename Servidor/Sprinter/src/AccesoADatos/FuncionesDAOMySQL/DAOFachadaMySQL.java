@@ -7,8 +7,10 @@ package AccesoADatos.FuncionesDAOMySQL;
 
 import Negocio.Entidades.DAO.DAOFachada;
 import Negocio.Entidades.DAO.ImpedimentoDAO;
+import Negocio.Entidades.DAO.PreguntaDAO;
 import Negocio.Entidades.DAO.ProyectoDAO;
 import Negocio.Entidades.Modelo.Impedimento;
+import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
 
@@ -20,10 +22,12 @@ public class DAOFachadaMySQL implements DAOFachada {
     
     private final ProyectoDAO proDAO;
     private final ImpedimentoDAO impDAO;
+    private final PreguntaDAO preDAO;
     
     public DAOFachadaMySQL(){
         this.proDAO = new ProyectoDAOMySQL();
         this.impDAO = new ImpedimentoDAOMySQL();
+        this.preDAO = new PreguntaDAOMySQL();
     }
     
     @Override
@@ -39,6 +43,11 @@ public class DAOFachadaMySQL implements DAOFachada {
     @Override
     public Proyecto obtenerProyecto(String nombre) {
         return proDAO.obtenerProyecto(nombre);
+    }
+
+    @Override
+    public ArrayList<Pregunta> obtenerPreguntasEncuesta() {
+        return preDAO.obtenerPreguntas();
     }
     
 }

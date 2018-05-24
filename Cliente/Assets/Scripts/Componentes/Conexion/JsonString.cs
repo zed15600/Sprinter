@@ -75,11 +75,11 @@ public class JsonString : ClientElement {
         return res;
     }
 
-    public static string crearPartida(string nombreJugador, string nombrePartida, string nombreProyecto) {
-        //Debug.Log("Proyecto: " + nombreProyecto);
+    public static string crearPartida(string nombreJugador, string deviceID, string nombrePartida, string nombreProyecto) {
         string res = "{" +
              "\"codigo\":0015," +
              "\"jugador\":\"" + nombreJugador + "\"," +
+             "\"deviceID\":\"" + deviceID + "\"," +
              "\"partida\":\"" + nombrePartida + "\"," +
              "\"proyecto\":\"" + nombreProyecto + "\"" +
              "}";
@@ -97,6 +97,22 @@ public class JsonString : ClientElement {
     public static string empezarPartida(string partidaID) {
         string res = "{" +
             "\"codigo\":0017," +
+            "\"partidaID\":" + partidaID +
+            "}";
+        return res;
+    }
+    
+    public static string empezarEncuesta(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0018," +
+            "\"partidaID\":" + partidaID +
+            "}";
+        return res;
+    }
+
+    public static string siguientePregunta(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0019," +
             "\"partidaID\":" + partidaID +
             "}";
         return res;

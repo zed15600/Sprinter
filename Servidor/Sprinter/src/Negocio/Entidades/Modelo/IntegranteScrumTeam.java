@@ -21,8 +21,9 @@ public class IntegranteScrumTeam extends Jugador {
     public void votar(HistoriaDeUsuario HU){
     }
     
-    public IntegranteScrumTeam(String nombre, int ID, String avatar) {
-        super(nombre, ID);
+    public IntegranteScrumTeam(String nombre, int assignedID, String avatar,
+            String deviceID) {
+        super(nombre, assignedID, deviceID);
         this.avatar = avatar;
         votar = true;
         estado = true;

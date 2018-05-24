@@ -9,19 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1078524886442910}
+  m_RootGameObject: {fileID: 1532922430275188}
   m_IsPrefabParent: 1
---- !u!1 &1078524886442910
+--- !u!1 &1532922430275188
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224928198843730258}
-  - component: {fileID: 222591904624404364}
-  - component: {fileID: 114016532689343474}
-  - component: {fileID: 114051726871368654}
+  - component: {fileID: 224493282362423962}
+  - component: {fileID: 222403591774509966}
+  - component: {fileID: 114021967910101646}
+  - component: {fileID: 114902574225584390}
   m_Layer: 5
   m_Name: Criterios Prefab 1
   m_TagString: Untagged
@@ -29,12 +29,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114016532689343474
+--- !u!114 &114021967910101646
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1078524886442910}
+  m_GameObject: {fileID: 1532922430275188}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -50,10 +50,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 15
     m_FontStyle: 1
-    m_BestFit: 1
-    m_MinSize: 1
+    m_BestFit: 0
+    m_MinSize: 0
     m_MaxSize: 20
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -62,12 +62,12 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: ASDASDADSASDADADASDADAD MUUYYY LARGO!!!!!! BASTANTE LARGO!!!
---- !u!114 &114051726871368654
+--- !u!114 &114902574225584390
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1078524886442910}
+  m_GameObject: {fileID: 1532922430275188}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -76,18 +76,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0.6232286, g: 0.6121396, b: 0.7169812, a: 0.32156864}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!222 &222591904624404364
+--- !u!222 &222403591774509966
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1078524886442910}
---- !u!224 &224928198843730258
+  m_GameObject: {fileID: 1532922430275188}
+--- !u!224 &224493282362423962
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1078524886442910}
+  m_GameObject: {fileID: 1532922430275188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

@@ -8,6 +8,7 @@ package Negocio.Procesos;
 import Negocio.Entidades.Modelo.Configuracion;
 import Negocio.Entidades.Modelo.HistoriaDeUsuario;
 import Negocio.Entidades.Modelo.IntegranteScrumTeam;
+import Negocio.Entidades.Modelo.Jugador;
 import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
@@ -73,16 +74,18 @@ public class ControladorJugador extends Controlador {
                 posibles, jugador.getImpedimento());        
     }
 
-    public String unirsePartida(int codigo, String nombreJugador) {
+    public String unirsePartida(int codigo, String nombreJugador, 
+            String deviceID) {
         Collection<Partida> parts = configuracion.obtenerPartidas();
         for(Partida partida: parts){
             if(partida.getUnion()==codigo){
-                String avatar = partida.tomarAvatar();
-                int idJugador = partida.agregarJugador(nombreJugador, avatar);
-                return respuestas.unirsePartida(idJugador, true, avatar);
+                IntegranteScrumTeam jugador = 
+                        partida.agregarJugador(nombreJugador, deviceID);
+                return respuestas.unirsePartida(jugador, true);
             }
         }
-        return respuestas.unirsePartida(0, false, "");
+        return respuestas.unirsePartida(new IntegranteScrumTeam("", 0, "", ""),
+                false);
     }
 
     public void registrarVoto(int partidaID, String historiaNombre, int jugador) {

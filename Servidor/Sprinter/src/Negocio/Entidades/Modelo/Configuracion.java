@@ -20,9 +20,10 @@ import java.util.Set;
 public class Configuracion {
     
     private final Map<Integer, Partida> mapaDePartidas;
-    private final ArrayList<Impedimento> impedimentos;
     //local
     private final ArrayList<Proyecto> listaDeProyectos;
+    private final ArrayList<Impedimento> impedimentos;
+    private final ArrayList<Pregunta> preguntasDeEncuesta;
     private final DAOFachada fachadaImpl;
 
     public Configuracion(DAOFachada fachadaImpl){
@@ -30,19 +31,20 @@ public class Configuracion {
         this.fachadaImpl = fachadaImpl;
         listaDeProyectos = this.fachadaImpl.obtenerProyectos();
         impedimentos = this.fachadaImpl.obtenerImpedimentos();
+        preguntasDeEncuesta = this.fachadaImpl.obtenerPreguntasEncuesta();
     }
     
-    public String crearPartida(String nombreJugador, String nombrePartida,
-            String nombreProyecto){
-        int codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
+    public String crearPartida(String nombreJugador, String deviceID, 
+            String nombrePartida, String nombreProyecto){
+        int codigo;
         Set keys = mapaDePartidas.keySet();
-        while (keys.contains(codigo)){
+        do {
             codigo = ThreadLocalRandom.current().nextInt(100000, 999998 + 1);
-        }
+        }while(keys.contains(codigo));
         Proyecto proyecto = this.fachadaImpl.obtenerProyecto(nombreProyecto);
-        ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0);
+        ScrumMaster scrumMaster = new ScrumMaster(nombreJugador, 0, deviceID);
         Partida partida = new Partida(codigo, nombrePartida, proyecto,
-                scrumMaster);
+                scrumMaster, preguntasDeEncuesta);
         mapaDePartidas.put(codigo, partida);
         String codigoPartida = String.valueOf(codigo);
         return codigoPartida;

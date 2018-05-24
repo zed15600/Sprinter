@@ -31,6 +31,7 @@ public class Partida {
                                * 2 -> votar historia de día
                                */
     private String estado;
+    private Encuesta encuesta;
 
     public ArrayList<IntegranteScrumTeam> getListaJugadores() {
         return listaJugadores;
@@ -41,7 +42,7 @@ public class Partida {
     }
     
     public Partida(int codigo, String nombre, Proyecto proyecto,
-            ScrumMaster scrumMaster){
+            ScrumMaster scrumMaster, ArrayList<Pregunta> preguntasEncuesta){
         this.codigo = codigo;
         this.listaJugadores = new ArrayList();
         this.nombre = nombre;
@@ -58,17 +59,26 @@ public class Partida {
         votacion = false;
         tipoVotacion = 0;
         estado = "conexion";
+        
+        encuesta = new Encuesta(preguntasEncuesta);
     }
 
     public ScrumMaster getScrumMaster() {
         return scrumMaster;
     }
     
-    public int agregarJugador (String nombre, String avatar){
+    public IntegranteScrumTeam agregarJugador (String nombre, String deviceID){
+        for(IntegranteScrumTeam j : listaJugadores){
+            if(j.getDeviceID().equals(deviceID)){
+               return j;
+            }
+        }
         int id = listaJugadores.size()+1;
-        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre,id,avatar);
+        String avatar = avatares.pop();
+        IntegranteScrumTeam jugador = new IntegranteScrumTeam(nombre, id,
+                avatar, deviceID);
         listaJugadores.add(jugador);
-        return id;
+        return jugador;
     }
     
     public String tomarAvatar(){
@@ -152,6 +162,10 @@ public class Partida {
     
     public void setEstado(String estado){
         this.estado = estado;
+    }
+
+    public Encuesta getEncuesta() {
+        return encuesta;
     }
     
 }

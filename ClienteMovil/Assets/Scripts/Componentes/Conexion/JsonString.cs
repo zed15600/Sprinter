@@ -1,10 +1,11 @@
 ﻿public class JsonString : ClientElement {
 
-    public static string unirseAPartida(string codigo, string nombreJugador){
+    public static string unirseAPartida(string codigo, string nombreJugador, string deviceID){
         string res = "{" +
                      "\"codigo\":0008," +
                      "\"partidaID\":"+codigo+"," +
-                     "\"nombreJugador\":\""+nombreJugador+"\""+
+                     "\"nombreJugador\":\""+nombreJugador+"\"," +
+                     "\"deviceID\":\""+deviceID+"\""+
                      "}";
         return res;
     }

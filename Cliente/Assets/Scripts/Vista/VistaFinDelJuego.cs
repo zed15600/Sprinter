@@ -38,6 +38,7 @@ public class VistaFinDelJuego : ClientElement {
     }
 
     public void cambiarVista() {
-        throw new System.NotImplementedException();
+        this.gameObject.SetActive(false);
+        controlador.mostrarVistaEncuesta();
     }
 }

@@ -81,8 +81,8 @@ public class WebClient : ClientElement {
         socket_ready = false;
     }
     
-    public void unirsePartida(string codigo, string nombreJugador) {
-        string json = JsonString.unirseAPartida(codigo, nombreJugador);
+    public void unirsePartida(string codigo, string nombreJugador, string deviceID) {
+        string json = JsonString.unirseAPartida(codigo, nombreJugador, deviceID);
         setupSocket();
         writeSocket(json);
         string dataIn = readSocket();

@@ -11,6 +11,12 @@ public class ClienteModelo : ClientElement {
     private Proyecto proyecto;
     private List<Jugador> jugadores;
     private Minijuego minijuego = new Minijuego();
+    public Pregunta Preg {get; set;}
+
+    void Awake() {
+        partida = new Partida("0");
+        Preg = new Pregunta();
+    }
 
     public void setScrumMaster(string scrumMaster) {
         this.scrumMaster = scrumMaster;
@@ -142,15 +148,15 @@ public class Proyecto {
 
 
 public class Partida{
-    private string id;
+
+    public string Id { get; set; }
+    public string DeviceID { get; set; }
 
     public Partida(string id) { 
-        this.id = id;
+        this.Id = id;
+        DeviceID = SystemInfo.deviceUniqueIdentifier;
     }
 
-    public string getID(){
-        return id;
-    }
 }
 
 public class HistoriaDeUsuario{
@@ -296,4 +302,16 @@ public class Jugador {
     public void setAvatar(string avatar) {
         this.avatar = avatar;
     }
+}
+
+public class Pregunta {
+    
+    public string Descripcion {get; set;}
+    public string[] Respuestas {get; set;}
+
+    public Pregunta() {
+        Descripcion = "";
+        Respuestas = new string[4];
+    }
+
 }

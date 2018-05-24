@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class AbrirUrl : MonoBehaviour {
     public void abrirPaginaDescargas() {
-        Application.OpenURL("http://54.233.184.179/");
+        Application.OpenURL("http://sprintergame.sa-east-1.elasticbeanstalk.com/");
     }
 }

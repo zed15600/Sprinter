@@ -108,24 +108,23 @@ public class WebClient : ClientElement {
         }
     }
 
-    public void crearPartida(string jugador, string partida, string proyecto) {
+    public void crearPartida(string jugador, string deviceID, string partida, string proyecto) {
         setupSocket();
-        string json = JsonString.crearPartida(jugador, partida, proyecto);
+        string json = JsonString.crearPartida(jugador, deviceID, partida, proyecto);
         writeSocket(json);
         string recieved_data = readSocket();
         closeSocket();
         if (recieved_data != "") {
             JSONObject respuesta = JSONObject.Parse(recieved_data);
             string codigo = respuesta.GetString("id");
-            Partida partidaCliente = new Partida(codigo);
-            controlador.setPartida(partidaCliente);
+            controlador.setIdPartida(codigo);
         }
 
     }
 
     public void establecerCompletada(String HUNombre){
         setupSocket();
-        string json = JsonString.establecerCompletada(controlador.obtenerPartida().getID(), HUNombre);
+        string json = JsonString.establecerCompletada(controlador.obtenerPartida().Id, HUNombre);
         writeSocket(json);
         closeSocket();
     }
@@ -148,7 +147,7 @@ public class WebClient : ClientElement {
 
     public void obtenerProyecto() {
         setupSocket();
-        string json = JsonString.pedirProyecto(controlador.obtenerPartida().getID());
+        string json = JsonString.pedirProyecto(controlador.obtenerPartida().Id);
         writeSocket(json);
         string received_data = readSocket();
         closeSocket();
@@ -273,6 +272,33 @@ public class WebClient : ClientElement {
         }
     }
 
+    public void iniciarEncuesta(string partidaID) {
+        string json = JsonString.empezarEncuesta(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            establecerPregunta(jsRes);
+        }
+    }
+
+    public void siguientePregunta(string partidaID) {
+        string json = JsonString.siguientePregunta(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            if(!jsRes["terminado"].Boolean) {
+                establecerPregunta(jsRes);
+            } else {
+
+            }
+        }
+    }
 
 
 
@@ -289,5 +315,14 @@ public class WebClient : ClientElement {
             jugadores.Add(jugador);
         }
         return jugadores;
+    }
+
+    public void establecerPregunta(JSONObject json) {
+        Pregunta p = controlador.obtenerPregunta();
+        p.Descripcion = json["pregunta"].Str;
+        JSONArray res = json["respuestas"].Array;
+        for(int i=0; i<4;i++) {
+            p.Respuestas[i] = res[i].Str;
+        }
     }
 }
