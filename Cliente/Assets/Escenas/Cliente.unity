@@ -2848,6 +2848,12 @@ MonoBehaviour:
     type: 2}
   criteriosPrefab: {fileID: 1837801881813042, guid: d1dcea890ef264b44898b64e7ea100fe,
     type: 2}
+  titulo: {fileID: 83446}
+  criterios: {fileID: 251917659}
+  problemas: {fileID: 939297204}
+  desarollo: {fileID: 487625629}
+  dia: {fileID: 2054777757}
+  continuarBoton: {fileID: 938275249}
 --- !u!1 &206506830
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,7 +4448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dialogo Retrospectiva, por Implementar.
+  m_Text: Dialogo Retrospectiva.
 --- !u!222 &307431603
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6960,8 +6966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 348.09998, y: -39.7}
-  m_SizeDelta: {x: 184.5, y: 79.4}
+  m_AnchoredPosition: {x: 366, y: -39.7}
+  m_SizeDelta: {x: 220.3, y: 79.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &487625629
 MonoBehaviour:
@@ -14087,7 +14093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 86, y: -314.6}
+  m_AnchoredPosition: {x: 101.94995, y: -314.6}
   m_SizeDelta: {x: -62.600037, y: 138.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &938275248
@@ -21130,23 +21136,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171c6a12607af0544b752a831d3d9194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completitud: {fileID: 385500501}
   gato: {fileID: 611640603}
-  puntos: {fileID: 1985572757}
+  gatoAzul: {fileID: 611640603}
+  gatoNaranja: {fileID: 114363503280530522, guid: 41ea04da45b3ced47951926e7ca54b2c,
+    type: 2}
   completada: {fileID: 114126254039850316, guid: f344c2bbd76d975469a5d681ddc9ad66,
     type: 2}
   incompleta: {fileID: 114839768913639380, guid: aaae0eb8be71f0e4c87c380736505ae6,
     type: 2}
   puntosPrefab: {fileID: 114019392603365654, guid: 3a8cc177c8637364ea4b875c382730f8,
     type: 2}
-  gatoAzul: {fileID: 611640603}
-  gatoNaranja: {fileID: 114363503280530522, guid: 41ea04da45b3ced47951926e7ca54b2c,
-    type: 2}
-  criterios: {fileID: 401426491}
+  completitud: {fileID: 385500501}
+  puntos: {fileID: 1985572757}
   criterio: {fileID: 114416678145329462, guid: 885923a035f07bb4f9a7b35210cb56d8, type: 2}
+  criterios: {fileID: 401426491}
   checkMark: {fileID: 1078563590}
   rojo: {r: 1, g: 0.45882356, b: 0.2784314, a: 1}
   verde: {r: 0.06007475, g: 0.8490566, b: 0.45984378, a: 1}
+  titulo: {fileID: 1995099647}
+  puntosSTR: {fileID: 188473381}
+  criteriosSTR: {fileID: 1966785250}
+  continuar: {fileID: 1072391144}
 --- !u!1 &1563392449
 GameObject:
   m_ObjectHideFlags: 0
@@ -22059,6 +22069,11 @@ MonoBehaviour:
   criteriosT: {fileID: 1990663280351886, guid: 49b057285199f024491923b22a05c5c5, type: 2}
   colCriterios: {fileID: 2070809457}
   colCriteriosT: {fileID: 1623100187}
+  minijuego: {fileID: 946593015}
+  criteriosSTR: {fileID: 1766662256}
+  seleccionar: {fileID: 1921842961}
+  continuar1: {fileID: 1671847226}
+  continuar2: {fileID: 1763984180}
 --- !u!1 &1633839401
 GameObject:
   m_ObjectHideFlags: 0
@@ -27026,6 +27041,8 @@ MonoBehaviour:
   historiaPrefab: {fileID: 1825438572865126, guid: 4c943ede76bbad846a1ac26b9ebf4e5d,
     type: 2}
   textoDelGato: {fileID: 307431602}
+  continuar: {fileID: 1470033177}
+  titulo: {fileID: 796492145}
 --- !u!1 &1952189357
 GameObject:
   m_ObjectHideFlags: 0

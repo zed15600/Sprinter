@@ -115,3 +115,56 @@ public class UnirseIngles : Idioma {
         return determinadorDeIdiomas;
     }
 }
+
+public class DailyIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Daily Scrum");
+        determinadorDeIdiomas.Add("criterios", "Acceptance Criteria");
+        determinadorDeIdiomas.Add("problemas", "In Trouble:");
+        determinadorDeIdiomas.Add("desarrollo", "Development Starts in:");
+        determinadorDeIdiomas.Add("dia", "Day: ");
+        determinadorDeIdiomas.Add("continuar", "Continue");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class MinijuegoIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Minigame");
+        determinadorDeIdiomas.Add("diseño", "Design");
+        determinadorDeIdiomas.Add("construccion", "Development");
+        determinadorDeIdiomas.Add("pruebas", "Testing");
+        determinadorDeIdiomas.Add("criterios", "Acceptance Criteria");
+        determinadorDeIdiomas.Add("seleccionar", "Toggle the Completed Criteria");
+        determinadorDeIdiomas.Add("continuar", "Continue");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class ResultadosIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Results");
+        determinadorDeIdiomas.Add("puntos", "Points");
+        determinadorDeIdiomas.Add("criterios", "Acceptance Criteria");
+        determinadorDeIdiomas.Add("continuar", "Continue");
+        determinadorDeIdiomas.Add("completa","¡Done!");
+        determinadorDeIdiomas.Add("incompleta","¡Incomplete!");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class RetrospectivaIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Retrospective");
+        determinadorDeIdiomas.Add("buen trabajo", "You completed all stories in the Sprint! \n" +
+                        "The client is very satisfied with the work done, Congratulations. :D");
+        determinadorDeIdiomas.Add("mal trabajo", "It seems some stories in the Sprint remain uncompleted. :( \n" +
+                        "The client is expecting more commitment from you.");
+        determinadorDeIdiomas.Add("continuar", "Continue");
+        return determinadorDeIdiomas;
+    }
+}

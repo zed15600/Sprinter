@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaMinijuegos:ClientElement {
+public class VistaMinijuegos:ClientElement, IVista {
+
+    private Idioma idioma;
+
     [SerializeField]
     private Text historia;
     
@@ -20,6 +23,11 @@ public class VistaMinijuegos:ClientElement {
     public VerticalLayoutGroup colCriterios;
     public VerticalLayoutGroup colCriteriosT;
 
+    //Campos Sensibles a Idioma
+    public Text minijuego, criteriosSTR, seleccionar;
+    public Button continuar1, continuar2;
+    private string diseño, construccion, pruebas;
+
     int count = 0;
     float targetTime = 0;
     bool descontar = true;
@@ -31,6 +39,7 @@ public class VistaMinijuegos:ClientElement {
     }
 
     void OnEnable() {
+        inicializarVista();
         controlador.cargarDialogoInteracion(6);
         dialogoFueActivo = true;
         restart();
@@ -70,7 +79,7 @@ public class VistaMinijuegos:ClientElement {
         switch(count) {
             case 0:
                 incrementarContador();
-                category.text="Diseño";
+                category.text=diseño;
                 category.color=colores[1];
                 gato.sprite=gatos[1];
                 gato.color = colores[1];
@@ -78,7 +87,7 @@ public class VistaMinijuegos:ClientElement {
                 break;
             case 1:
                 incrementarContador();
-                category.text="Construcción";
+                category.text=construccion;
                 category.color=colores[2];
                 gato.sprite=gatos[2];
                 gato.color = colores[2];
@@ -86,7 +95,7 @@ public class VistaMinijuegos:ClientElement {
                 break;
             case 2:
                 incrementarContador();
-                category.text="Pruebas";
+                category.text=pruebas;
                 category.color=colores[0];
                 gato.sprite=gatos[0];
                 gato.color = colores[0];
@@ -162,4 +171,19 @@ public class VistaMinijuegos:ClientElement {
         controlador.mostrarVistaResultados();
     }
 
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        minijuego.text = map["titulo"];
+        criteriosSTR.text = map["criterios"];
+        seleccionar.text = map["seleccionar"];
+        diseño = map["diseño"];
+        construccion = map["construccion"];
+        pruebas = map["pruebas"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar1, map["continuar"]);
+        CambiadorBoton.cambiarBotonesAnimados(continuar2, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
 }

@@ -115,3 +115,56 @@ public class UnirseEspañol : Idioma {
         return determinadorDeIdiomas;
     }
 }
+
+public class DailyEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Reunión Diaria");
+        determinadorDeIdiomas.Add("criterios", "Criterios de Aceptación");
+        determinadorDeIdiomas.Add("problemas", "En Problemas;");
+        determinadorDeIdiomas.Add("desarrollo", "El desarrollo empieza en:");
+        determinadorDeIdiomas.Add("continuar", "Continuar");
+        determinadorDeIdiomas.Add("dia","Día: ");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class MinijuegoEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Minijuego");
+        determinadorDeIdiomas.Add("diseño","Diseño");
+        determinadorDeIdiomas.Add("construccion", "Construcción");
+        determinadorDeIdiomas.Add("pruebas", "Pruebas");
+        determinadorDeIdiomas.Add("criterios","Criterios de Aceptación");
+        determinadorDeIdiomas.Add("seleccionar","Selecciona los criterios cumplidos");
+        determinadorDeIdiomas.Add("continuar","Continuar");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class ResultadosEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Resultados");
+        determinadorDeIdiomas.Add("puntos", "Puntos");
+        determinadorDeIdiomas.Add("criterios", "Criterios de Aceptación");
+        determinadorDeIdiomas.Add("continuar", "Continuar");
+        determinadorDeIdiomas.Add("completa", "¡Completada!");
+        determinadorDeIdiomas.Add("incompleta", "¡Incompleta!");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class RetrospectivaEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Retrospectiva");
+        determinadorDeIdiomas.Add("buen trabajo", "Lograron completar todas las historias del Sprint! \n" +
+                        "El cliente esta muy satisfecho con el trabajo hecho, Felicidades. :D");
+        determinadorDeIdiomas.Add("mal trabajo", "Parece que faltaron algunas historias por completar. :( \n" +
+                        "El cliente espera más compromiso de parte de ustedes.");
+        determinadorDeIdiomas.Add("continuar", "Continuar");
+        return determinadorDeIdiomas;
+    }
+}
