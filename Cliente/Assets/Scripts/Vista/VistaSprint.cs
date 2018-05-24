@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaSprint : ClientElement{
+public class VistaSprint : ClientElement, IVista {
+    Idioma idioma;
 
     public GameObject pnlVotos;
     public GameObject prefabHistoria;
     public Text dias;
     public VerticalLayoutGroup tablaHistorias;
 
+    public Text story;
+    public Text prio;
+    public Text points;
+    public Button continuar;
+
+    private string tiempoRestante;
+    private string diaStr;
+    private string diasStr;
+
     void OnEnable(){
+        inicializarVista();
         controlador.cargarDialogoInteracion(4);
         int dia = controlador.obtenerDiaActual();
-        dias.text = "Tiempo restante: " + dia + (dia==1?" día.":" días.");
+        dias.text = tiempoRestante + dia + (dia==1?diaStr:diasStr);
         llenarTabla();
     }
 
@@ -47,5 +58,20 @@ public class VistaSprint : ClientElement{
         pnlVotos.SetActive(false);
         this.gameObject.SetActive(false);
         controlador.iniciarReunion();
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        story.text = map["historia"];
+        prio.text = map["prioridad"];
+        points.text = map["puntos"];
+        tiempoRestante = map["STRtrestante"];
+        diaStr = map["STRDia"];
+        diasStr = map["STRDias"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

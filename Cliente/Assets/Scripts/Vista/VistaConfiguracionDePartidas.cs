@@ -2,15 +2,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaConfiguracionDePartidas : ClientElement {
+public class VistaConfiguracionDePartidas : ClientElement, IVista {
+    private Idioma idioma;
+
     public InputField nombreJugador;
     public InputField nombrePartida;
     public Dropdown proyectosDropdown;
+
+    public Text titulo;
+    public Text nombre;
+    public Text partida;
+    public Text proyectos;
+    public Button volver;
+    public Button continuar;
 
     void Start() {
         controlador.pedirProyectos();
         llenarDropdown();
     }
+
+    void OnEnable() {
+        inicializarVista();
+    }
+
     public void llenarDropdown() {
         List<string> nombresProyecto = controlador.obtenerProyectos();
         proyectosDropdown.AddOptions(nombresProyecto);
@@ -27,7 +41,17 @@ public class VistaConfiguracionDePartidas : ClientElement {
         this.gameObject.SetActive(false);
     }
 
-    public void cambiarVista() {
-        throw new System.NotImplementedException();
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["titulo"];
+        nombre.text = map["nombre"];
+        partida.text = map["partida"];
+        proyectos.text = map["proyecto"];
+        CambiadorBoton.cambiarBotonesAnimados(volver, map["volver"]);
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

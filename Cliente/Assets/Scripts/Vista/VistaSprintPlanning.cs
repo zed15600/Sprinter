@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaSprintPlanning : ClientElement {
+public class VistaSprintPlanning : ClientElement, IVista {
+    Idioma idioma;
 
     [SerializeField]
     private Text restantes = null;
@@ -18,10 +19,22 @@ public class VistaSprintPlanning : ClientElement {
     //Verifica que ya se ha activado el dialogo, previene que el update de esta vista se inicie
     //automaticamente.
     private bool dialogoFueActivo;
+
+    public Text story;
+    public Text prio;
+    public Text points;
+    public Text status;
+    public Button continuar;
+    private string sprintRestantesString1;
+    private string sprintRestantesString2;
+    private string sprintNumeroString1;
+    private string sprintNumeroString2;
+
     public void establecerSprint()
     {
-        restantes.text = "Quedan " + controlador.obtenerSprintsRestantes() + " Sprints.";
-        actual.text = "Sprint Número: " + controlador.obtenerActual() + ".";
+        restantes.text = sprintRestantesString1 + controlador.obtenerSprintsRestantes() +
+            sprintRestantesString2;
+        actual.text = sprintNumeroString1 + controlador.obtenerActual() + sprintNumeroString2;
     }
 
     public void llenarTabla()
@@ -52,6 +65,7 @@ public class VistaSprintPlanning : ClientElement {
     }
 
     void OnEnable() {
+        inicializarVista();
         controlador.cargarDialogoInteracion(2);
         establecerSprint();
         while (controlador.obtenerHistorias().ToArray().Length == 0) {
@@ -72,5 +86,22 @@ public class VistaSprintPlanning : ClientElement {
             dialogoVacio = true;
             dialogoFueActivo = false;
         }
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        story.text = map["historia"];
+        prio.text = map["prioridad"];
+        points.text = map["puntos"];
+        status.text = map["status"];
+        sprintNumeroString1 = map["numeroSTR1"];
+        sprintNumeroString2 = map["numeroSTR2"];
+        sprintRestantesString1 = map["restantesSTR1"];
+        sprintRestantesString2 = map["restantesSTR2"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["votos"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

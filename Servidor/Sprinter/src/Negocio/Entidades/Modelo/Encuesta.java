@@ -16,6 +16,7 @@ public class Encuesta {
     private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
     
     public void empezarEncuesta(IntegranteScrumTeam integrante){
+        
     }
     
 }

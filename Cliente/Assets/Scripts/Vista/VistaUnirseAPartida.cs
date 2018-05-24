@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaUnirseAPartida : ClientElement {
+public class VistaUnirseAPartida : ClientElement, IVista {
+
+    private Idioma idioma;
 
     public HorizontalLayoutGroup grupoJugadores;
     public Text codigo;
     public Image prefabJugador;
 
     private float timer = 2.0f;
+
+    public Text titulo;
+    public Button volver;
+    public Button continuar;
 
     public void ponerCodigo() {
         string codigoPartida = controlador.obtenerCodigoPartida();
@@ -36,6 +42,7 @@ public class VistaUnirseAPartida : ClientElement {
     }
 
 	void OnEnable () {
+        inicializarVista();
         ponerCodigo();
 	}
 
@@ -52,5 +59,16 @@ public class VistaUnirseAPartida : ClientElement {
         controlador.empezarPartida();
         this.gameObject.SetActive(false);
         controlador.mostrarVistaScrumPlanning();
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["titulo"];
+        CambiadorBoton.cambiarBotonesAnimados(volver, map["volver"]);
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
     }
 }

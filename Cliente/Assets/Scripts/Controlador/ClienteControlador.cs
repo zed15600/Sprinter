@@ -280,6 +280,10 @@ public class ClienteControlador : ClientElement {
     public bool obtenerDialogoImpedimento() {
         return vista.dialogoGlobal.getDialogosImpedimento();
     }
+
+    public void cambiarIdioma(Idioma idioma) {
+        vista.cambiarIdioma(idioma);
+    }
     /*public void iniciarNuevoSprint() {
         vista.vistaSprint.gameObject.SetActive(true);
     }
