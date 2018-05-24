@@ -108,4 +108,12 @@ public class ControladorPrincipal {
         return controladorPartidas.terminarDia(partidaID);
     }
     
+    public String empezarEncuesta(int partidaID){
+        return controladorEncuesta.empezarEncuesta(partidaID);
+    }
+    
+    public String siguientePregunta(int partidaID){
+        return controladorEncuesta.siguientePregunta(partidaID);
+    }
+    
 }

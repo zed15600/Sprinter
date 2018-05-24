@@ -42,7 +42,7 @@ public class Partida {
     }
     
     public Partida(int codigo, String nombre, Proyecto proyecto,
-            ScrumMaster scrumMaster){
+            ScrumMaster scrumMaster, ArrayList<Pregunta> preguntasEncuesta){
         this.codigo = codigo;
         this.listaJugadores = new ArrayList();
         this.nombre = nombre;
@@ -59,6 +59,8 @@ public class Partida {
         votacion = false;
         tipoVotacion = 0;
         estado = "conexion";
+        
+        encuesta = new Encuesta(preguntasEncuesta);
     }
 
     public ScrumMaster getScrumMaster() {
@@ -160,6 +162,10 @@ public class Partida {
     
     public void setEstado(String estado){
         this.estado = estado;
+    }
+
+    public Encuesta getEncuesta() {
+        return encuesta;
     }
     
 }

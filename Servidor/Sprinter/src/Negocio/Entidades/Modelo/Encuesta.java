@@ -13,10 +13,29 @@ import java.util.ArrayList;
  */
 public class Encuesta {
     
-    private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
+    private ArrayList<Pregunta> preguntas = new ArrayList<>();
+    private int preguntaActual;
     
-    public void empezarEncuesta(IntegranteScrumTeam integrante){
-        
+    public Encuesta(ArrayList<Pregunta> preguntasEncuesta){
+        for(Pregunta p : preguntasEncuesta){
+            preguntas.add(p.clone());
+        }
     }
     
+    public void empezarEncuesta(){
+        preguntaActual = 1;
+    }
+    
+    public boolean siguientePregunta(){
+        preguntaActual ++;
+        return preguntaActual <= preguntas.size();
+    }
+
+    public int getNumeroPreguntaActual() {
+        return preguntaActual;
+    }
+    
+    public Pregunta getPreguntaActual(int id){
+        return preguntas.get(id);
+    }
 }

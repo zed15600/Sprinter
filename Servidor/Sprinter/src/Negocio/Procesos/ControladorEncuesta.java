@@ -6,6 +6,8 @@
 package Negocio.Procesos;
 
 import Negocio.Entidades.Modelo.Configuracion;
+import Negocio.Entidades.Modelo.Encuesta;
+import Negocio.Entidades.Modelo.Partida;
 
 /**
  *
@@ -15,6 +17,23 @@ public class ControladorEncuesta extends Controlador{
     
     public ControladorEncuesta(IMensajes respuestas, Configuracion configuracion) {
         super(respuestas, configuracion);
+    }
+    
+    public String empezarEncuesta(int partidaID){
+        Partida p = configuracion.obtenerPartida(partidaID);
+        p.setEstado("encuesta");
+        Encuesta e = p.getEncuesta();
+        e.empezarEncuesta();
+        return respuestas.empezarEncuesta(e.getPreguntaActual
+            (e.getNumeroPreguntaActual()-1));
+    }
+    
+    public String siguientePregunta(int partidaID){
+        Partida p = configuracion.obtenerPartida(partidaID);
+        Encuesta e = p.getEncuesta();
+        boolean terminamos = e.siguientePregunta();
+        return respuestas.siguientePregunta(terminamos,
+                e.getPreguntaActual(e.getNumeroPreguntaActual()-1));
     }
     
 }

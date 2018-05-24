@@ -80,6 +80,10 @@ public class ProcesadorJSON implements IProceso {
                 case 17:
                     Main.getControlador().empezarPartida(pID);
                     break;
+                case 18:
+                    return Main.getControlador().empezarEncuesta(pID);
+                case 19:
+                    return Main.getControlador().siguientePregunta(pID);
             }
         }
         return "";

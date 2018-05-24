@@ -20,7 +20,7 @@ public class ClienteVista : ClientElement, IVista {
     public VistaMinijuegos minijuegos;
     public VistaReunionDiaria reunion;
     public VistaConfiguracion configuracion;
-    //public VistaEncuesta encuesta;
+    public VistaEncuesta encuesta;
 
     public PanelHistorias panelHistorias;
     public PanelDialogoGlobal dialogoGlobal;

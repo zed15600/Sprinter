@@ -272,6 +272,33 @@ public class WebClient : ClientElement {
         }
     }
 
+    public void iniciarEncuesta(string partidaID) {
+        string json = JsonString.empezarEncuesta(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            establecerPregunta(jsRes);
+        }
+    }
+
+    public void siguientePregunta(string partidaID) {
+        string json = JsonString.siguientePregunta(partidaID);
+        setupSocket();
+        writeSocket(json);
+        string dataIn = readSocket();
+        closeSocket();
+        if(dataIn !="") {
+            JSONObject jsRes = JSONObject.Parse(dataIn);
+            if(!jsRes["terminado"].Boolean) {
+                establecerPregunta(jsRes);
+            } else {
+
+            }
+        }
+    }
 
 
 
@@ -288,5 +315,14 @@ public class WebClient : ClientElement {
             jugadores.Add(jugador);
         }
         return jugadores;
+    }
+
+    public void establecerPregunta(JSONObject json) {
+        Pregunta p = controlador.obtenerPregunta();
+        p.Descripcion = json["pregunta"].Str;
+        JSONArray res = json["respuestas"].Array;
+        for(int i=0; i<4;i++) {
+            p.Respuestas[i] = res[i].Str;
+        }
     }
 }

@@ -101,4 +101,20 @@ public class JsonString : ClientElement {
             "}";
         return res;
     }
+    
+    public static string empezarEncuesta(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0018," +
+            "\"partidaID\":" + partidaID +
+            "}";
+        return res;
+    }
+
+    public static string siguientePregunta(string partidaID) {
+        string res = "{" +
+            "\"codigo\":0019," +
+            "\"partidaID\":" + partidaID +
+            "}";
+        return res;
+    }
 }
