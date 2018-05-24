@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaResultados : ClientElement {
-
-    public Text completitud;
-    public Image gato;
-    public Text puntos;
-    public Text completada;
-    public Text incompleta;
-    public Text puntosPrefab;
-    public Image gatoAzul;
-    public Image gatoNaranja;
+public class VistaResultados : ClientElement, IVista {
+    private Idioma idioma = new ResultadosEspañol();
+    public Image gato, gatoAzul, gatoNaranja;
+    public Text completada, incompleta, puntosPrefab, completitud, puntos, criterio;
     public VerticalLayoutGroup criterios;
-    public Text criterio;
     public GameObject checkMark;
-    public Color rojo;
-    public Color verde;
+    public Color rojo, verde;
+
+    public Text titulo, puntosSTR, criteriosSTR;
+    public Button continuar;
+    string completa, incompletaSTR;
+
     private bool dialogoActivo = false;
 
     void OnEnable () {
+        inicializarVista();
         puntos.text = "0";
         controlador.cargarDialogoInteracion(8);
         foreach(Transform child in criterios.transform) {
             GameObject.Destroy(child.gameObject);
         }
         if (verificarCompletitud()) {
-            completitud.text = completada.text;
+            completitud.text = completa;
             completitud.color = verde;
             gato.sprite = gatoAzul.sprite;
             gato.color = verde;
@@ -36,7 +34,7 @@ public class VistaResultados : ClientElement {
             controlador.resetearIntentos();
 
         } else{
-            completitud.text = incompleta.text;
+            completitud.text = incompletaSTR;
             completitud.color = rojo;
             gato.sprite = gatoNaranja.sprite;
             gato.color = rojo;
@@ -116,5 +114,19 @@ public class VistaResultados : ClientElement {
             dialogoActivo = false;
             this.gameObject.SetActive(false);
         }
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["titulo"];
+        criteriosSTR.text = map["criterios"];
+        puntosSTR.text = map["puntos"];
+        completa = map["completa"];
+        incompletaSTR = map["incompleta"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

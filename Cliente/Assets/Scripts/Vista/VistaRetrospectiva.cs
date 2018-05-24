@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaRetrospectiva : ClientElement {
+public class VistaRetrospectiva : ClientElement, IVista {
+
+    private Idioma idioma = new RetrospectivaIngles();
 
     public GameObject tabla;
     public GameObject historiaPrefab;
     public Text textoDelGato;
+    private string bueno, malo;
+    public Button continuar;
 
     List<HistoriaDeUsuario> historiasDeSprint;
     private bool dialogoActivo = false;
 
+    public Text titulo;
     // Use this for initialization
     void OnEnable () {
+        inicializarVista();
         controlador.cargarDialogoFinal(11);
         historiasDeSprint = controlador.obtenerHistoriasSprint();
         mostrarDialogoCliente();
@@ -37,11 +43,9 @@ public class VistaRetrospectiva : ClientElement {
 
     public void mostrarDialogoCliente() {
         if (controlador.verificarSprintTotalmenteCompleto()) {
-            textoDelGato.text = "Lograron completar todas las historias del Sprint! \n" +
-                        "El cliente esta muy satisfecho con el trabajo hecho, Felicidades. :D";
+            textoDelGato.text = bueno;
         } else {
-            textoDelGato.text = "Parece que faltaron algunas historias por completar. :( \n" +
-                        "El cliente espera más compromiso de parte de ustedes.";
+            textoDelGato.text = malo;
         }
     }
 
@@ -61,5 +65,17 @@ public class VistaRetrospectiva : ClientElement {
     public void cambiarVista() {
         controlador.cargarDialogoFinal(12);
         dialogoActivo = true;
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["titulo"];
+        bueno = map["buen trabajo"];
+        malo = map["mal trabajo"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }
