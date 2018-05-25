@@ -55,6 +55,6 @@ public class Encuesta {
         if(respuestasDeJugador.size()==(preguntaActual-1)){
             respuestasDeJugador.add(opcion);
         }
-        return preguntaActual > preguntas.size();
+        return preguntaActual >= preguntas.size();
     }
 }

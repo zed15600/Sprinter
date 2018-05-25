@@ -132,8 +132,8 @@ public class WebClient : ClientElement {
         closeSocket();
     }
 
-    public void enviarRespuesta(string pID, int player, int pregunta, string opcion) {
-        string json = JsonString.enviarRespuesta(pID, player, pregunta, opcion);
+    public void enviarRespuesta(string pID, int player, string opcion) {
+        string json = JsonString.enviarRespuesta(pID, player, opcion);
         setupSocket();
         writeSocket(json);
         string dataIn = readSocket();
@@ -143,8 +143,6 @@ public class WebClient : ClientElement {
             if(jsRes["terminamos"].Boolean) {
                 controlador.ocultarEncuesta();
                 controlador.mostrarInicio();
-            } else {
-                controlador.establecerPreguntaActual((int)jsRes["pregunta"].Number);
             }
         }
     }

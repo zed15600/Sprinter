@@ -29,12 +29,11 @@
         return res;
     }
 
-    public static string enviarRespuesta(string partidaID, int jugador, int pregunta, string opcion) {
+    public static string enviarRespuesta(string partidaID, int jugador, string opcion) {
         string res = "{" +
             "\"codigo\":0020," +
             "\"partidaID\":" + partidaID + "," +
             "\"player\":"+ jugador + "," +
-            "\"pregunta\":" + pregunta + "," +
             "\"opcion\":\"" + opcion + "\"" +
             "}";
         return res;

@@ -55,6 +55,10 @@ public class VistaEstado : ClientElement {
                             descripcion.color = azulNormal;
                         }
                         break;
+                    case "encuesta":
+                        this.gameObject.SetActive(false);
+                        controlador.mostrarEncuesta();
+                    break;
                 }
             }
         }

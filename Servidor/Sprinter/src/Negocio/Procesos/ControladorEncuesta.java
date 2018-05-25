@@ -33,15 +33,14 @@ public class ControladorEncuesta extends Controlador{
         Encuesta e = p.getEncuesta();
         boolean terminamos = e.siguientePregunta();
         return respuestas.siguientePregunta(terminamos,
-                e.getPreguntaActual(e.getNumeroPreguntaActual()-1));
+            terminamos?null:e.getPreguntaActual(e.getNumeroPreguntaActual()-1));
     }
     
     public String registrarRespuesta(int partidaID, int jugador, String opcion){
         Partida p = configuracion.obtenerPartida(partidaID);
         Encuesta e = p.getEncuesta();
         boolean terminamos = e.registrarRespuesta(jugador, opcion);
-        return respuestas.responderRespuesta(terminamos,
-                e.getNumeroPreguntaActual());
+        return respuestas.responderRespuesta(terminamos);
     }
     
 }

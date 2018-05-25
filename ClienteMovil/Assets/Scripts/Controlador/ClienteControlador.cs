@@ -66,12 +66,9 @@ public class ClienteControlador : MonoBehaviour {
         }
         i.Afectado = afectado;
     }
-    public void establecerPreguntaActual(int pregunta) {
-        modelo.getPartida().PreguntaID = pregunta;
-    }
     public void enviarRespuesta(string opcion) {
         Partida p = modelo.getPartida();
-        webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), p.PreguntaID, opcion);
+        webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), opcion);
     }
 
     public void ocultarEncuesta() {
@@ -80,5 +77,8 @@ public class ClienteControlador : MonoBehaviour {
 
     public void mostrarInicio() {
         vista.conectarse.gameObject.SetActive(true);
+    }
+    public void mostrarEncuesta() {
+        vista.encuesta.gameObject.SetActive(true);
     }
 }

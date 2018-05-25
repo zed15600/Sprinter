@@ -231,17 +231,16 @@ public class JSONMensajes implements IMensajes {
     public String siguientePregunta(boolean terminamos, Pregunta pregunta) {
         JSONObject json = new JSONObject();
         json.put("terminado", terminamos);
-        ponerPregunta(json, pregunta);
+        if(!terminamos){
+            ponerPregunta(json, pregunta);
+        }
         return json.toJSONString();
     }
     
     @Override
-    public String responderRespuesta(boolean terminado, int preguntaActual) {
+    public String responderRespuesta(boolean terminado) {
         JSONObject json = new JSONObject();
         json.put("terminamos", terminado);
-        if(!terminado){
-            json.put("pregunta", preguntaActual);
-        }
         return json.toJSONString();
     }
     

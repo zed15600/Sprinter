@@ -296,6 +296,12 @@ public class ClienteControlador : ClientElement {
         webClient.iniciarEncuesta(modelo.getPartida().Id);
         vista.encuesta.gameObject.SetActive(true);
     }
+    public void ocultarVistaEncuesta() {
+        vista.encuesta.gameObject.SetActive(false);
+    }
+    public void mostrarInicio() {
+        vista.vistaPerfil.gameObject.SetActive(true);
+    }
 
 
     //Llamadas que contienen procesamiento

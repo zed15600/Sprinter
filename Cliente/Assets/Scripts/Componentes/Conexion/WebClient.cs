@@ -295,7 +295,8 @@ public class WebClient : ClientElement {
             if(!jsRes["terminado"].Boolean) {
                 establecerPregunta(jsRes);
             } else {
-
+                controlador.ocultarVistaEncuesta();
+                controlador.mostrarInicio();
             }
         }
     }
