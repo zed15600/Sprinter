@@ -4,18 +4,11 @@ using UnityEngine.UI;
 
 public class ClienteModelo : ClientElement {
 
-    public string[] nombres;
-    public Sprite[] avatares;
-
     private Partida partida;
     private Jugador jugador = new Jugador();
-    private Dictionary<string, Sprite> mapaAvatares = new Dictionary<string, Sprite>();
 
     void Awake() {
         partida = new Partida("");
-        for(int i=0; i<nombres.Length;i++) {
-            mapaAvatares.Add(nombres[i], avatares[i]);
-        }
     }
 
     public Partida getPartida(){
@@ -33,11 +26,6 @@ public class ClienteModelo : ClientElement {
     public void setJugador(int id) {
         jugador.setId(id);
     }
-
-    public Sprite getAvatar(string id) {
-        return mapaAvatares[id];
-    }
-
 }
 
 
@@ -73,6 +61,7 @@ public class Jugador {
 
     public Jugador() {
         Estado = new Impedimento();
+        avatar = "none";
     }
 
     public void setId(int id) {

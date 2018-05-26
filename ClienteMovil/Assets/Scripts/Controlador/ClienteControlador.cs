@@ -7,6 +7,10 @@ public class ClienteControlador : MonoBehaviour {
     public ClienteModelo modelo;
     public ClienteVista vista;
 
+    public string obtenerAvatar() {
+        return modelo.getJugador().getAvatar();
+    }
+
     public void conectarPartida(string codigo, string nombreJugador) {
         webClient.unirsePartida(codigo, nombreJugador, modelo.getPartida().DeviceID);
     }
@@ -71,14 +75,21 @@ public class ClienteControlador : MonoBehaviour {
         webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), opcion);
     }
 
-    public void ocultarEncuesta() {
+
+    public void mostrarVistaConectarse() {
+        vista.conectarse.gameObject.SetActive(true);
+    }
+    public void ocultarVistaEncuesta() {
         vista.encuesta.gameObject.SetActive(false);
     }
 
-    public void mostrarInicio() {
+    public void mostrarVistaInicio() {
         vista.conectarse.gameObject.SetActive(true);
     }
-    public void mostrarEncuesta() {
+    public void mostrarVistaEncuesta() {
         vista.encuesta.gameObject.SetActive(true);
+    }
+    public void mostrarVistaConfiguracion() {
+        vista.configuracion.gameObject.SetActive(true);
     }
 }
