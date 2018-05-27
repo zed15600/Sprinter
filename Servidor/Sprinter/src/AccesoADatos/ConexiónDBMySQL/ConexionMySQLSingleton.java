@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -66,6 +67,15 @@ public final class ConexionMySQLSingleton {
     public static void cerrar(ResultSet r, Statement t, Connection c){
         try {
             r.close();
+            t.close();
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionMySQLSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+        public static void cerrar(Statement t, Connection c){
+        try {
             t.close();
             c.close();
         } catch (SQLException ex) {

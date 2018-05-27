@@ -7,9 +7,11 @@ package AccesoADatos.FuncionesDAOMySQL;
 
 import Negocio.Entidades.DAO.DAOFachada;
 import Negocio.Entidades.DAO.ImpedimentoDAO;
+import Negocio.Entidades.DAO.PartidaDAO;
 import Negocio.Entidades.DAO.PreguntaDAO;
 import Negocio.Entidades.DAO.ProyectoDAO;
 import Negocio.Entidades.Modelo.Impedimento;
+import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
@@ -23,11 +25,13 @@ public class DAOFachadaMySQL implements DAOFachada {
     private final ProyectoDAO proDAO;
     private final ImpedimentoDAO impDAO;
     private final PreguntaDAO preDAO;
+    private final PartidaDAO parDAO;
     
     public DAOFachadaMySQL(){
         this.proDAO = new ProyectoDAOMySQL();
         this.impDAO = new ImpedimentoDAOMySQL();
         this.preDAO = new PreguntaDAOMySQL();
+        this.parDAO = new PartidaDAOMySQL();
     }
     
     @Override
@@ -49,5 +53,12 @@ public class DAOFachadaMySQL implements DAOFachada {
     public ArrayList<Pregunta> obtenerPreguntasEncuesta() {
         return preDAO.obtenerPreguntas();
     }
+
+    @Override
+    public void enviarResultadosPartida(Partida partida) {
+        parDAO.enviarResultadosPartida(partida);
+    }
+    
+    
     
 }

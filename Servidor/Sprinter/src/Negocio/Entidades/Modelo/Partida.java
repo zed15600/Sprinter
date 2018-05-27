@@ -32,6 +32,7 @@ public class Partida {
                                */
     private String estado;
     private Encuesta encuesta;
+    
 
     public ArrayList<IntegranteScrumTeam> getListaJugadores() {
         return listaJugadores;
@@ -118,6 +119,14 @@ public class Partida {
             }
         }
         return jugadores;
+    }
+    
+    public int calcularPuntuacion(){
+        int puntaje = 0;
+        for (HistoriaDeUsuario h: proyecto.getProductBacklog().getHistorias()){
+            puntaje += h.getPuntuacion();
+        }
+        return puntaje;
     }
     
     public int getCodigo(){

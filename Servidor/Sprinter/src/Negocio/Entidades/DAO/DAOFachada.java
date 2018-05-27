@@ -6,6 +6,7 @@
 package Negocio.Entidades.DAO;
 
 import Negocio.Entidades.Modelo.Impedimento;
+import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
@@ -19,4 +20,5 @@ public interface DAOFachada {
     public ArrayList<Impedimento> obtenerImpedimentos();
     public Proyecto obtenerProyecto(String nombre);
     public ArrayList<Pregunta> obtenerPreguntasEncuesta();
+    public void enviarResultadosPartida(Partida partida);
 }
