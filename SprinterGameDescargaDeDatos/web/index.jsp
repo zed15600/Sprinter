@@ -14,5 +14,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <%int a = 2;%>
+        <h1><%= a %></h1>
     </body>
 </html>

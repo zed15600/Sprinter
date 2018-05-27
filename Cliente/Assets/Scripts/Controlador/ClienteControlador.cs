@@ -235,21 +235,21 @@ public class ClienteControlador : ClientElement {
     public void cargarDialogoFinal(int indice) {
         if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosFinales()) {
             vista.dialogoGlobal.cargarDialogoFinSprint(indice);
-            vista.dialogoGlobal.gameObject.SetActive(true);
+            vista.dialogoGlobal.mostrarDialogo();
         }
     }
 
     public void cargarDialogoImpedimento() {
         if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosImpedimento()) {
             vista.dialogoGlobal.cargarDialogoImpedimento();
-            vista.dialogoGlobal.gameObject.SetActive(true);
+            vista.dialogoGlobal.mostrarDialogo();
         }
     }
 
     public void cargarDialogoInteracion(int indice) {
         if (_dialogosPermitidos && vista.dialogoGlobal.getDialogosIteracion()) {
             vista.dialogoGlobal.cargarDialogosIteracion(indice);
-            vista.dialogoGlobal.gameObject.SetActive(true);
+            vista.dialogoGlobal.mostrarDialogo();
         }
     }
 
@@ -302,7 +302,6 @@ public class ClienteControlador : ClientElement {
     public void mostrarInicio() {
         vista.vistaPerfil.gameObject.SetActive(true);
     }
-
 
     //Llamadas que contienen procesamiento
 

@@ -150,8 +150,8 @@ public class ResultadosIngles : Idioma {
         determinadorDeIdiomas.Add("puntos", "Points");
         determinadorDeIdiomas.Add("criterios", "Acceptance Criteria");
         determinadorDeIdiomas.Add("continuar", "Continue");
-        determinadorDeIdiomas.Add("completa","¡Done!");
-        determinadorDeIdiomas.Add("incompleta","¡Incomplete!");
+        determinadorDeIdiomas.Add("completa","Done!");
+        determinadorDeIdiomas.Add("incompleta","Incomplete!");
         return determinadorDeIdiomas;
     }
 }
@@ -165,6 +165,41 @@ public class RetrospectivaIngles : Idioma {
         determinadorDeIdiomas.Add("mal trabajo", "It seems some stories in the Sprint remain uncompleted. :( \n" +
                         "The client is expecting more commitment from you.");
         determinadorDeIdiomas.Add("continuar", "Continue");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class FinIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo","Game Over");
+        determinadorDeIdiomas.Add("victoria", "Victory!");
+        determinadorDeIdiomas.Add("derrota", "Defeat!");
+        determinadorDeIdiomas.Add("descripcion", "Congratulations, you completed a project in Sprinter Game!" +
+                                    "\n Independently of the results, you learned and improved in Scrum, you will do better next time!" +
+                                    "See you soon!");
+        determinadorDeIdiomas.Add("continuar", "Continue");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class EncuestaIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("poll", "Poll");
+        determinadorDeIdiomas.Add("movil", "Answer in your phone...");
+        determinadorDeIdiomas.Add("siguiente", "Next question in ");
+        determinadorDeIdiomas.Add("segundos", " seconds.");
+        determinadorDeIdiomas.Add("segundo", " second.");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class PanelHistoriasIngles : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("prioridad", "Priority: ");
+        determinadorDeIdiomas.Add("puntos", "Points: ");
         return determinadorDeIdiomas;
     }
 }

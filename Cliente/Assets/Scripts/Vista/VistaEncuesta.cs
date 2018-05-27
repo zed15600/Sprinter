@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaEncuesta : ClientElement {
+public class VistaEncuesta : ClientElement, IVista {
+    Idioma idioma;
 
     public Text pregunta;
     public Text a;
@@ -12,9 +13,27 @@ public class VistaEncuesta : ClientElement {
     public Text d;
     public Text tiempo;
 
+
+    public Text titulo, respondeMovil;
     float tiempoPorPregunta = 20f;
-    
-	void OnEnable () {
+
+    private string siguiente, segundos, segundo;
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["poll"];
+        respondeMovil.text = map["movil"];
+        siguiente = map["siguiente"];
+        segundos = map["segundos"];
+        segundo = map["segundo"];
+    }
+
+    void OnEnable () {
+        inicializarVista();
         Pregunta p = controlador.obtenerPregunta();
 		pregunta.text = p.Descripcion;
         a.text = p.Respuestas[0];
@@ -28,7 +47,7 @@ public class VistaEncuesta : ClientElement {
 		if(tiempoPorPregunta >=0) {
             tiempoPorPregunta -= Time.deltaTime;
             int t = (int)tiempoPorPregunta;
-            tiempo.text = "Siguiente pregunta en " + t + (t==1?" segundo.":" segundos.");
+            tiempo.text = siguiente + t + (t==1?segundo:segundos);
         } else {
             tiempoPorPregunta = 20f;
             controlador.siguientePregunta();

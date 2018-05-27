@@ -168,3 +168,38 @@ public class RetrospectivaEspañol : Idioma {
         return determinadorDeIdiomas;
     }
 }
+
+public class FinEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("titulo", "Fin de Juego");
+        determinadorDeIdiomas.Add("victoria", "¡Victoria!");
+        determinadorDeIdiomas.Add("derrota", "¡Derrota!");
+        determinadorDeIdiomas.Add("descripcion", "Felicidades, han terminado un proyecto en Sprinter Game." +
+                                    "\n Independientemente de los resultados, han adquirido y reforzado conceptos, y seguramente la próxima vez lo harán mejor!" +
+                                    "¡Nos vemos!");
+        determinadorDeIdiomas.Add("continuar", "Continuar");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class EncuestaEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("poll", "Encuesta");
+        determinadorDeIdiomas.Add("movil", "Responde en tu móvil...");
+        determinadorDeIdiomas.Add("siguiente", "Siguiente pregunta en ");
+        determinadorDeIdiomas.Add("segundos", " segundos.");
+        determinadorDeIdiomas.Add("segundo", " segundo.");
+        return determinadorDeIdiomas;
+    }
+}
+
+public class PanelHistoriasEspañol : Idioma {
+    public Dictionary<string, string> traerRecursos() {
+        Dictionary<string, string> determinadorDeIdiomas = new Dictionary<string, string>();
+        determinadorDeIdiomas.Add("prioridad", "Prioridad: ");
+        determinadorDeIdiomas.Add("puntos", "Puntos: ");
+        return determinadorDeIdiomas;
+    }
+}

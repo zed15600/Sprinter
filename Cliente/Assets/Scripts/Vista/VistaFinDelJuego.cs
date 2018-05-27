@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VistaFinDelJuego : ClientElement {
+public class VistaFinDelJuego : ClientElement, IVista {
 
+    Idioma idioma;
+    public Text titulo;
     public Text resultado;
     public Color verde;
     public Color rojo;
 
+    public Text descripcion;
+    private string victoria, derrota;
+    public Button continuar;
+
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
+        inicializarVista();
         if(revisarHistorias()) {
-            resultado.text = "¡Victoria!";
+            resultado.text = victoria;
             resultado.color = verde;
         } else {
-            resultado.text = "Derrota";
+            resultado.text = derrota;
             resultado.color = rojo;
         }
 	}
@@ -40,5 +47,18 @@ public class VistaFinDelJuego : ClientElement {
     public void cambiarVista() {
         this.gameObject.SetActive(false);
         controlador.mostrarVistaEncuesta();
+    }
+
+    public void inicializarVista() {
+        Dictionary<string, string> map = idioma.traerRecursos();
+        titulo.text = map["titulo"];
+        victoria = map["victoria"];
+        derrota = map["derrota"];
+        descripcion.text = map["descripcion"];
+        CambiadorBoton.cambiarBotonesAnimados(continuar, map["continuar"]);
+    }
+
+    public void cambiarIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 }

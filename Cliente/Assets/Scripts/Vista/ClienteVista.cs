@@ -44,6 +44,10 @@ public class ClienteVista : ClientElement, IVista {
                 minijuegos.cambiarIdioma(new MinijuegoEspañol());
                 resultados.cambiarIdioma(new ResultadosEspañol());
                 retrospectiva.cambiarIdioma(new RetrospectivaEspañol());
+                finDelJuego.cambiarIdioma(new FinEspañol());
+                encuesta.cambiarIdioma(new EncuestaEspañol());
+                panelHistorias.cambiarIdioma(new PanelHistoriasEspañol());
+                dialogoGlobal.cambiarIdioma(new DialogoEspañol());
                 return;
 
             case "ingles":
@@ -60,6 +64,10 @@ public class ClienteVista : ClientElement, IVista {
                 minijuegos.cambiarIdioma(new MinijuegoIngles());
                 resultados.cambiarIdioma(new ResultadosIngles());
                 retrospectiva.cambiarIdioma(new RetrospectivaIngles());
+                finDelJuego.cambiarIdioma(new FinIngles());
+                encuesta.cambiarIdioma(new EncuestaIngles());
+                panelHistorias.cambiarIdioma(new PanelHistoriasEspañol());
+                dialogoGlobal.cambiarIdioma(new DialogoIngles());
                 return;
         }
     }

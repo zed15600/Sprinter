@@ -12197,9 +12197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a55d6f3dddb504b99a5500af65b5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titulo: {fileID: 719298082}
   resultado: {fileID: 1707107230}
   verde: {r: 0, g: 0.85294116, b: 0.53529406, a: 1}
   rojo: {r: 1, g: 0.19117647, b: 0.19117647, a: 1}
+  descripcion: {fileID: 122389515}
+  continuar: {fileID: 322306732}
 --- !u!1 &829225863
 GameObject:
   m_ObjectHideFlags: 0
@@ -12466,7 +12469,7 @@ GameObject:
   - component: {fileID: 836427131}
   - component: {fileID: 836427130}
   - component: {fileID: 836427129}
-  - component: {fileID: 836427135}
+  - component: {fileID: 836427132}
   m_Layer: 0
   m_Name: Dialogo Global
   m_TagString: Untagged
@@ -12548,7 +12551,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &836427135
+--- !u!114 &836427132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -15985,7 +15988,7 @@ MonoBehaviour:
   configuracion: {fileID: 110076966}
   encuesta: {fileID: 1339355108}
   panelHistorias: {fileID: 1110661934}
-  dialogoGlobal: {fileID: 836427135}
+  dialogoGlobal: {fileID: 836427132}
   panelVotacionSPlanning: {fileID: 731114937}
   panelVotacionDia: {fileID: 876668922}
   pnlMenssage: {fileID: 688910748}
@@ -16536,6 +16539,8 @@ MonoBehaviour:
   descripcion: {fileID: 2006151919}
   prioridad: {fileID: 423674359}
   puntos: {fileID: 552221544}
+  prioridadSTR: {fileID: 423674359}
+  puntosSTR: {fileID: 552221544}
 --- !u!1 &1112596098
 GameObject:
   m_ObjectHideFlags: 0
@@ -18759,6 +18764,8 @@ MonoBehaviour:
   c: {fileID: 1884572709}
   d: {fileID: 797798700}
   tiempo: {fileID: 1651959308}
+  titulo: {fileID: 1861188802}
+  respondeMovil: {fileID: 1479588959}
 --- !u!1 &1342472908
 GameObject:
   m_ObjectHideFlags: 0
