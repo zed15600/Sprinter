@@ -8,7 +8,6 @@ public class VistaConectarse : ClientElement {
 
     public void verificarCodigo(string codigo) {
         string nombreJugador = nombre.text;
-        //Debug.Log("VistaConectarse.verificarCodigo() -> Jugador: " + nombreJugador);
         if(codigo.Contains("-2")) {
             Debug.Log("VistaConectarse.verficarCodigo() -> Código inválido");
         }

@@ -17,18 +17,12 @@ public class VistaEstado : ClientElement {
     private Color rojoImpedimento = new Color(1, 0.4470001f, 0.2971698f);
     float refreshTime = 3.0f;
     bool votar = false;
-	// Use this for initialization
-	void Start () {
-		//votar = false;
-	}
 
     void OnEnable() {
-        //Debug.Log("VistaEstado.OnEnable() -> Avatar: " + app.modelo.getJugador().getAvatar());
-        avatar.sprite = controlador.modelo.getAvatar(controlador.modelo.getJugador().getAvatar());
+        avatar.sprite = StaticComponents.avatares[controlador.modelo.getJugador().getAvatar()];
         votar = false;
     }
-
-    // Update is called once per frame
+    
     void Update () {
         if(!votar){
             if(refreshTime>0) {
@@ -57,7 +51,7 @@ public class VistaEstado : ClientElement {
                         break;
                     case "encuesta":
                         this.gameObject.SetActive(false);
-                        controlador.mostrarEncuesta();
+                        controlador.mostrarVistaEncuesta();
                     break;
                 }
             }

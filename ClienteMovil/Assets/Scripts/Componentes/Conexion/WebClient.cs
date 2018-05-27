@@ -141,8 +141,8 @@ public class WebClient : ClientElement {
         if(dataIn !="") {
             JSONObject jsRes = JSONObject.Parse(dataIn);
             if(jsRes["terminamos"].Boolean) {
-                controlador.ocultarEncuesta();
-                controlador.mostrarInicio();
+                controlador.ocultarVistaEncuesta();
+                controlador.mostrarVistaInicio();
             }
         }
     }
