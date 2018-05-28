@@ -36,9 +36,6 @@ public class ClienteControlador : MonoBehaviour {
         return modelo.getPartida().getEstado();
     }
 
-    public void responderConexion(bool aceptado) {
-        vista.conectarse.respuestaConexion(aceptado);
-    }
 
     public void establecerIdJugador(int id) {
         modelo.getJugador().setId(id);
@@ -52,18 +49,6 @@ public class ClienteControlador : MonoBehaviour {
         webClient.actualizarEstado(modelo.getPartida().getID(), modelo.getJugador().getId());
     }
 
-    public void mostrarVotacion(string[] HUNombres) {
-        vista.estado.mostrarVotacion(HUNombres);
-    }
-    public void mostrarVistaEstado() {
-        vista.estado.gameObject.SetActive(true);
-    }
-    public void ocultarVotacion() {
-        vista.estado.ocultarVotacion();
-    }
-    public void verificarCodigo(string codigo) {
-        vista.conectarse.verificarCodigo(codigo);
-    }
 
     public void enviarVoto(string HUid) {
         webClient.enviarVoto(modelo.getPartida().getID(), HUid, modelo.getJugador().getId());
@@ -88,18 +73,16 @@ public class ClienteControlador : MonoBehaviour {
         Partida p = modelo.getPartida();
         webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), opcion);
     }
-    public void ocultarVistaEstado() {
-        vista.estado.gameObject.SetActive(false);
+
+    //llamadas a Vista
+    public void mostrarVistaInicio() {
+        vista.inicio.gameObject.SetActive(true);
     }
     public void mostrarVistaConectarse() {
         vista.conectarse.gameObject.SetActive(true);
     }
-    public void ocultarVistaEncuesta() {
-        vista.encuesta.gameObject.SetActive(false);
-    }
-
-    public void mostrarVistaInicio() {
-        vista.inicio.gameObject.SetActive(true);
+    public void mostrarVistaEstado() {
+        vista.estado.gameObject.SetActive(true);
     }
     public void mostrarVistaEncuesta() {
         vista.encuesta.gameObject.SetActive(true);
@@ -107,12 +90,40 @@ public class ClienteControlador : MonoBehaviour {
     public void mostrarVistaConfiguracion() {
         vista.configuracion.gameObject.SetActive(true);
     }
+    public void ocultarVistaConectarse() {
+        vista.conectarse.gameObject.SetActive(false);
+    }
+    public void ocultarVistaEstado() {
+        vista.estado.gameObject.SetActive(false);
+    }
+    public void ocultarVistaEncuesta() {
+        vista.encuesta.gameObject.SetActive(false);
+    }
+    public void mostrarVotacion(string[] HUNombres) {
+        vista.estado.mostrarVotacion(HUNombres);
+    }
+    public void ocultarVotacion() {
+        vista.estado.ocultarVotacion();
+    }
+    public void verificarCodigo(string codigo) {
+        vista.conectarse.verificarCodigo(codigo);
+    }
+    public void responderConexion(bool aceptado) {
+        vista.conectarse.respuestaConexion(aceptado);
+    }
     public void actualizarLenguaje() {
-        Debug.Log("Actualizando las vistas");
         vista.inicio.actualizar();
         vista.conectarse.actualizar();
         vista.estado.actualizar();
         vista.encuesta.actualizar();
         vista.configuracion.actualizar();
+    }
+    public void abandonarJuego() {
+        ocultarVistaConectarse();
+        ocultarVistaEstado();
+        ocultarVistaEncuesta();
+        mostrarVistaInicio();
+        modelo.getPartida().borrarDatos();
+        modelo.getJugador().borrarDatos();
     }
 }

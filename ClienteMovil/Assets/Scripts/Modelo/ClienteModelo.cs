@@ -53,6 +53,11 @@ public class Partida{
     public void setEstado(string estado) {
         this.estado = estado;
     }
+    public void borrarDatos() {
+        id = "";
+        estado = "null";
+        TipoPregunta = false;
+    }
 
 }
 
@@ -72,28 +77,26 @@ public class Jugador {
     public void setId(int id) {
         this.id = id;
     }
-
     public int getId() {
         return id;
     }
-
     public void setNombre(string nombre) {
         this.nombre = nombre;
     }
-
     public string getNombre() {
         return nombre;
     }
-
     public void setAvatar(string avatar) {
-        //Debug.Log("ClienteModelo.Jugador.setAvatar() -> avatar: " + avatar);
         this.avatar = avatar;
     }
-
     public string getAvatar() {
         return avatar;
     }
-
+    public void borrarDatos() {
+        id = 0;
+        avatar = "none";
+        Estado = new Impedimento();
+    }
 }
 
 public class Impedimento {
@@ -106,27 +109,5 @@ public class Impedimento {
         Nombre = "Estado: Normal";
         Descripcion = "No estás siendo afectado por ninguna eventualidad.";
         Afectado = false;
-    }
-}
-
-public class HistoriaDeUsuario{
-
-    private string nombre;
-
-    private string descripcion;
-
-    public HistoriaDeUsuario (string nombre, string descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        }
-
-    public string getNombre()
-    {
-        return nombre;
-    }
-
-    public string getDescripcion()
-    {
-        return descripcion;
     }
 }

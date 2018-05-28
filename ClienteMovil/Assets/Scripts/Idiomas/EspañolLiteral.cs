@@ -5,6 +5,7 @@ using UnityEngine;
 public class EspañolLiteral : LangLiteral {
 
     public const string btnUnirseAPartida = "Unirse a\nPartida";
+    public const string btnAbandonar = "Abandonar\nPartida";
     public const string btnConfiguracion = "Configuración";
     public const string btnContinuar = "Continuar";
     public const string btnCancelar = "Cancelar";

@@ -23,15 +23,12 @@ public class WebClient : ClientElement {
 
     public bool proyectoObtenido = false;
 
-    void OnApplicationQuit()
-    {
+    void OnApplicationQuit(){
         closeSocket();
     }
 
-    public void setupSocket()
-    {
-        try
-        {
+    public void setupSocket(){
+        try{
             tcp_socket = new TcpClient(useLocal?localhost:amazonHost, port);
 
             net_stream = tcp_socket.GetStream();
@@ -39,16 +36,13 @@ public class WebClient : ClientElement {
             socket_reader = new StreamReader(net_stream);
 
             socket_ready = true;
-        }
-        catch (Exception e)
-        {
+        }catch (Exception e){
             // Something went wrong
             Debug.Log("Socket error: " + e);
         }
     }
 
-    public void writeSocket(string line)
-    {
+    public void writeSocket(string line){
         if (!socket_ready)
             return;
 
@@ -57,10 +51,8 @@ public class WebClient : ClientElement {
         socket_writer.Flush();
     }
 
-    public String readSocket()
-    {
-        if (!socket_ready)
-        {
+    public String readSocket(){
+        if (!socket_ready){
             return "";
         }
 
@@ -72,8 +64,7 @@ public class WebClient : ClientElement {
         //return "";
     }
 
-    public void closeSocket()
-    {
+    public void closeSocket(){
         if (!socket_ready)
             return;
 

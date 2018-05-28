@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnglishLiteral : LangLiteral {
     
     public const string btnUnirseAPartida = "Join\nGame";
+    public const string btnAbandonar = "Leave\nGame";
     public const string btnConfiguracion = "Configuration";
     public const string btnContinuar = "Continue";
     public const string btnCancelar = "Cancel";

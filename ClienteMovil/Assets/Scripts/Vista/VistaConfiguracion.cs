@@ -18,6 +18,8 @@ public class VistaConfiguracion : ClientElement {
     public Text btnGuardarPH;
     public Text btnCancelar;
     public Text btnCancelarPH;
+    public Text btnAbandonar;
+    public Text btnAbandonarPH;
     
 
     void OnEnable () {
@@ -27,13 +29,10 @@ public class VistaConfiguracion : ClientElement {
         volumen.value = StaticComponents.volumen;
         idioma.value = StaticComponents.idiomas[StaticComponents.idioma];
 	}
-	
-	void Update () {
-		
-	}
 
     public void salir() {
         StaticComponents.loadConfig();
+        controlador.actualizarLenguaje();
         gameObject.SetActive(false);
     }
 
@@ -47,8 +46,12 @@ public class VistaConfiguracion : ClientElement {
         PlayerPrefs.SetFloat("volumen", volumen.value);
         PlayerPrefs.SetString("idioma", idioma.captionText.text);
         PlayerPrefs.Save();
-        StaticComponents.loadConfig();
         salir();
+    }
+
+    public void abandonarJuego() {
+        salir();
+        controlador.abandonarJuego();
     }
 
     public void actualizar() {
@@ -60,5 +63,7 @@ public class VistaConfiguracion : ClientElement {
         btnGuardarPH.text = (string)t.GetField("btnGuardar").GetValue(null);
         btnCancelar.text = (string)t.GetField("btnCancelar").GetValue(null);
         btnCancelarPH.text = (string)t.GetField("btnCancelar").GetValue(null);
+        btnAbandonar.text = (string)t.GetField("btnAbandonar").GetValue(null);
+        btnAbandonarPH.text = (string)t.GetField("btnAbandonar").GetValue(null);
     }
 }

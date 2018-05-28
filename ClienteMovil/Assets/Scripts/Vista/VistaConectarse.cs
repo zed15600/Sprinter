@@ -12,6 +12,7 @@ public class VistaConectarse : ClientElement {
 
     void OnEnable() {
         actualizar();
+        nombre.text = StaticComponents.nombre;
     }
 
     public void verificarCodigo(string codigo) {
@@ -25,6 +26,7 @@ public class VistaConectarse : ClientElement {
     public void respuestaConexion(bool respuesta) {
         if(respuesta) {
             PlayerPrefs.SetString("nombre", nombre.text);
+            PlayerPrefs.Save();
             StaticComponents.loadConfig();
             this.gameObject.SetActive(false);
             controlador.mostrarVistaEstado();
