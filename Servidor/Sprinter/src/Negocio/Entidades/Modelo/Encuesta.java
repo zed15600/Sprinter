@@ -56,6 +56,11 @@ public class Encuesta {
            preguntaActual<preguntas.size()?preguntas.get(preguntaActual-1):null;
     }
     
+    public Pregunta getSiguientePregunta(){
+        return 
+           preguntaActual<preguntas.size()?preguntas.get(preguntaActual):null;
+    }
+    
     /**
      *
      */

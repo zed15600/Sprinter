@@ -21,7 +21,7 @@ public class VistaConectarse : ClientElement {
     public void respuestaConexion(bool respuesta) {
         if(respuesta) {
             this.gameObject.SetActive(false);
-            controlador.ocultarVistaEstado();
+            controlador.mostrarVistaEstado();
         }
     }
     public void actualizar(){

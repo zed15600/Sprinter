@@ -39,7 +39,7 @@ public class ControladorEncuesta extends Controlador{
     public String registrarRespuesta(int partidaID, int jugador, String opcion){
         Partida p = configuracion.obtenerPartida(partidaID);
         Encuesta e = p.getEncuesta();
-        Pregunta pr = e.getPreguntaActual();
+        Pregunta pr = e.getSiguientePregunta();
         boolean terminamos = e.registrarRespuesta(jugador, opcion);
         return respuestas.responderRespuesta(terminamos,
                 pr!=null?pr.isTipo():false);

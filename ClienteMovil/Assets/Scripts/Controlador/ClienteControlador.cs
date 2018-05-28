@@ -55,7 +55,9 @@ public class ClienteControlador : MonoBehaviour {
     public void mostrarVotacion(string[] HUNombres) {
         vista.estado.mostrarVotacion(HUNombres);
     }
-
+    public void mostrarVistaEstado() {
+        vista.estado.gameObject.SetActive(true);
+    }
     public void ocultarVotacion() {
         vista.estado.ocultarVotacion();
     }
@@ -97,7 +99,7 @@ public class ClienteControlador : MonoBehaviour {
     }
 
     public void mostrarVistaInicio() {
-        vista.conectarse.gameObject.SetActive(true);
+        vista.inicio.gameObject.SetActive(true);
     }
     public void mostrarVistaEncuesta() {
         vista.encuesta.gameObject.SetActive(true);
