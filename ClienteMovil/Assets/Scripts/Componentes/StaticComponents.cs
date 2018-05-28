@@ -32,7 +32,6 @@ public class StaticComponents : MonoBehaviour {
         nombre = PlayerPrefs.GetString("nombre", "");
         volumen = PlayerPrefs.GetFloat("volumen", 50f);
         idioma = PlayerPrefs.GetString("idioma", "Español");
-        lang = (LangLiteral)Activator.CreateInstance(Type.GetType(idioma+"Literal"));
         instanciarIdioma();
     }
 

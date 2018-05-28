@@ -10,6 +10,10 @@ public class VistaConectarse : ClientElement {
 
     public UnityEngine.UI.InputField nombre;
 
+    void OnEnable() {
+        actualizar();
+    }
+
     public void verificarCodigo(string codigo) {
         string nombreJugador = nombre.text;
         if(codigo.Contains("-2")) {
@@ -20,6 +24,8 @@ public class VistaConectarse : ClientElement {
 
     public void respuestaConexion(bool respuesta) {
         if(respuesta) {
+            PlayerPrefs.SetString("nombre", nombre.text);
+            StaticComponents.loadConfig();
             this.gameObject.SetActive(false);
             controlador.mostrarVistaEstado();
         }

@@ -53,7 +53,7 @@ public class Encuesta {
     
     public Pregunta getPreguntaActual(){
         return 
-           preguntaActual<preguntas.size()?preguntas.get(preguntaActual-1):null;
+          preguntaActual<=preguntas.size()?preguntas.get(preguntaActual-1):null;
     }
     
     public Pregunta getSiguientePregunta(){

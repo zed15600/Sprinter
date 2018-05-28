@@ -11,6 +11,7 @@ import Negocio.Entidades.Modelo.Configuracion;
 import java.io.IOException;
 import AccesoADatos.FuncionesDAOMySQL.DAOFachadaMySQL;
 import Negocio.Entidades.DAO.DAOFachada;
+import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Procesos.IConexion;
 import Negocio.Procesos.IMensajes;
 import Negocio.Procesos.ControladorPrincipal;

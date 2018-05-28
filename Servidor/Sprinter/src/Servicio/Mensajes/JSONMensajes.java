@@ -255,7 +255,7 @@ public class JSONMensajes implements IMensajes {
         json.put("pregunta", p.getEnunciado());
         JSONArray arr = new JSONArray();
         for(String s : p.getRespuestas()){
-            arr.add(s);
+            arr.add(s!=null?s:"");
         }
         json.put("respuestas", arr);
     }

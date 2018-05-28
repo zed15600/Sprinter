@@ -135,6 +135,13 @@ public class WebClient : ClientElement {
     }
 
     public void enviarRespuesta(string pID, int player, string opcion) {
+        if(controlador.obtenerTipoPregunta()) {
+            if(opcion.Equals("A")) {
+                opcion = "V";
+            } else {
+                opcion = "F";
+            }
+        }
         string json = JsonString.enviarRespuesta(pID, player, opcion);
         setupSocket();
         writeSocket(json);

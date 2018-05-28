@@ -33,6 +33,7 @@ public class VistaConfiguracion : ClientElement {
 	}
 
     public void salir() {
+        StaticComponents.loadConfig();
         gameObject.SetActive(false);
     }
 
