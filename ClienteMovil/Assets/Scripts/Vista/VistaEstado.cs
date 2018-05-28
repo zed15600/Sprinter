@@ -1,9 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VistaEstado : ClientElement {
+
+    public Text txtBienvenida;
+    public Text txtMSGVotacion;
+    public Text btnSalir;
+    public Text btnSalirPH;
 
     public GameObject bienvenida;
     public GameObject detalle;
@@ -19,7 +24,8 @@ public class VistaEstado : ClientElement {
     bool votar = false;
 
     void OnEnable() {
-        avatar.sprite = StaticComponents.avatares[controlador.modelo.getJugador().getAvatar()];
+        actualizar();
+        avatar.sprite = StaticComponents.avatares[controlador.obtenerAvatar()];
         votar = false;
     }
     
@@ -79,4 +85,11 @@ public class VistaEstado : ClientElement {
         }
     }
 
+    public void actualizar(){
+        Type t = StaticComponents.lang.GetType();
+        txtBienvenida.text = (string)t.GetField("mensajeBienvenida").GetValue(null);
+        txtMSGVotacion.text = (string)t.GetField("mensajeVotacion").GetValue(null);
+        btnSalir.text = (string)t.GetField("btnSalir").GetValue(null);
+        btnSalirPH.text = (string)t.GetField("btnSalir").GetValue(null);
+    }
 }

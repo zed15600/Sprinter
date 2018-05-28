@@ -51,8 +51,9 @@ public class Encuesta {
         return preguntaActual;
     }
     
-    public Pregunta getPreguntaActual(int id){
-        return preguntas.get(id);
+    public Pregunta getPreguntaActual(){
+        return 
+           preguntaActual<preguntas.size()?preguntas.get(preguntaActual-1):null;
     }
     
     /**

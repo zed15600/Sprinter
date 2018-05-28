@@ -8,6 +8,7 @@ package Negocio.Procesos;
 import Negocio.Entidades.Modelo.Configuracion;
 import Negocio.Entidades.Modelo.Encuesta;
 import Negocio.Entidades.Modelo.Partida;
+import Negocio.Entidades.Modelo.Pregunta;
 
 /**
  *
@@ -24,8 +25,7 @@ public class ControladorEncuesta extends Controlador{
         p.setEstado("encuesta");
         Encuesta e = p.getEncuesta();
         e.empezarEncuesta();
-        return respuestas.empezarEncuesta(e.getPreguntaActual
-            (e.getNumeroPreguntaActual()-1));
+        return respuestas.empezarEncuesta(e.getPreguntaActual());
     }
     
     public String siguientePregunta(int partidaID){
@@ -33,14 +33,16 @@ public class ControladorEncuesta extends Controlador{
         Encuesta e = p.getEncuesta();
         boolean terminamos = e.siguientePregunta();
         return respuestas.siguientePregunta(terminamos,
-            terminamos?null:e.getPreguntaActual(e.getNumeroPreguntaActual()-1));
+            terminamos?null:e.getPreguntaActual());
     }
     
     public String registrarRespuesta(int partidaID, int jugador, String opcion){
         Partida p = configuracion.obtenerPartida(partidaID);
         Encuesta e = p.getEncuesta();
+        Pregunta pr = e.getPreguntaActual();
         boolean terminamos = e.registrarRespuesta(jugador, opcion);
-        return respuestas.responderRespuesta(terminamos);
+        return respuestas.responderRespuesta(terminamos,
+                pr!=null?pr.isTipo():false);
     }
     
 }

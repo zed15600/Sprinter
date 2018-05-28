@@ -233,14 +233,16 @@ public class JSONMensajes implements IMensajes {
         json.put("terminado", terminamos);
         if(!terminamos){
             ponerPregunta(json, pregunta);
+            json.put("tipoPregunta", pregunta.isTipo());
         }
         return json.toJSONString();
     }
     
     @Override
-    public String responderRespuesta(boolean terminado) {
+    public String responderRespuesta(boolean terminado, boolean tipoPregunta) {
         JSONObject json = new JSONObject();
         json.put("terminamos", terminado);
+        json.put("tipoPregunta", tipoPregunta);
         return json.toJSONString();
     }
     

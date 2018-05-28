@@ -8,9 +8,10 @@ using System.Text;
 using Boomlagoon.JSON;
 
 public class WebClient : ClientElement {
-    // Use this for initialization
-    public String host;
-    public Int32 port;
+    public string localhost = "localhost";
+    public string amazonHost = "ec2-18-231-48-175.sa-east-1.compute.amazonaws.com";
+    public bool useLocal = true;
+    public int port = 5173;
 
     internal Boolean socket_ready = false;
 
@@ -31,7 +32,7 @@ public class WebClient : ClientElement {
     {
         try
         {
-            tcp_socket = new TcpClient(host, port);
+            tcp_socket = new TcpClient(useLocal?localhost:amazonHost, port);
 
             net_stream = tcp_socket.GetStream();
             socket_writer = new StreamWriter(net_stream);

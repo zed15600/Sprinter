@@ -16,12 +16,14 @@ public class Pregunta implements Cloneable{
     
     private int id;
     private String enunciado;
+    private boolean tipo;
     private String[] respuestas;
     
-    public Pregunta(int id, String enunciado, String[] respuestas){
+    public Pregunta(int id, String enunciado, String[] respuestas, boolean tipo){
         this.id = id;
         this.enunciado = enunciado;
         this.respuestas = respuestas;
+        this.tipo = tipo;
     }
 
     public int getId() {
@@ -34,6 +36,10 @@ public class Pregunta implements Cloneable{
 
     public String[] getRespuestas() {
         return respuestas;
+    }
+
+    public boolean isTipo() {
+        return tipo;
     }
     
     @Override

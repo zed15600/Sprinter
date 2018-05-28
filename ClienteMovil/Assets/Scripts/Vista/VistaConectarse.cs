@@ -1,8 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VistaConectarse : ClientElement {
+
+    public Text txtCodigo;
+    public Text txtNombre;
 
     public UnityEngine.UI.InputField nombre;
 
@@ -17,7 +21,12 @@ public class VistaConectarse : ClientElement {
     public void respuestaConexion(bool respuesta) {
         if(respuesta) {
             this.gameObject.SetActive(false);
-            controlador.vista.estado.gameObject.SetActive(true);
+            controlador.ocultarVistaEstado();
         }
+    }
+    public void actualizar(){
+        Type t = StaticComponents.lang.GetType();
+        txtNombre.text = (string)t.GetField("nombre").GetValue(null);
+        txtCodigo.text = (string)t.GetField("mensajeCodigo").GetValue(null);
     }
 }

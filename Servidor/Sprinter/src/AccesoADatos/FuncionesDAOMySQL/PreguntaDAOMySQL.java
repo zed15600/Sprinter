@@ -37,7 +37,8 @@ public class PreguntaDAOMySQL implements PreguntaDAO{
                 String pregunta =  r.getString(2);
                 String[] respuestas = new String[]{r.getString(3), 
                     r.getString(4), r.getString(5), r.getString(6)};
-                Pregunta p = new Pregunta(id, pregunta, respuestas);
+                boolean tipo = r.getBoolean(7);
+                Pregunta p = new Pregunta(id, pregunta, respuestas, tipo);
                 preguntas.add(p);
             }
         } catch (SQLException ex) {

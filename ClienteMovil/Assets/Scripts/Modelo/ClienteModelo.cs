@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ClienteModelo : ClientElement {
 
     private Partida partida;
-    private Jugador jugador = new Jugador();
+    private Jugador jugador;
 
     void Awake() {
         partida = new Partida("");
+    }
+    void Start() {
+        jugador = new Jugador(StaticComponents.nombre);
     }
 
     public Partida getPartida(){
@@ -33,11 +35,13 @@ public class Partida{
     private string id;
     private string estado;
     public string DeviceID { get; private set; }
+    public bool TipoPregunta { get; set; }
 
     public Partida(string id) { 
         this.id = id;
         estado = "conexion";
         DeviceID = SystemInfo.deviceUniqueIdentifier;
+        TipoPregunta = false;
     }
 
     public string getID() {
@@ -59,7 +63,8 @@ public class Jugador {
     private string avatar;
     public Impedimento Estado { get; private set; }
 
-    public Jugador() {
+    public Jugador(string nombre) {
+        this.nombre = nombre;
         Estado = new Impedimento();
         avatar = "none";
     }

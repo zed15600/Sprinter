@@ -2,13 +2,22 @@
 using UnityEngine;
 
 public class ClienteControlador : MonoBehaviour {
-
-    public WebClient webClient;
-    public ClienteModelo modelo;
-    public ClienteVista vista;
+    [SerializeField]
+    private WebClient webClient;
+    [SerializeField]
+    private ClienteModelo modelo;
+    [SerializeField]
+    private ClienteVista vista;
 
     public string obtenerAvatar() {
         return modelo.getJugador().getAvatar();
+    }
+
+    public void establecerTipoPregunta(bool tipoPregunta) {
+        modelo.getPartida().TipoPregunta = tipoPregunta;
+    }
+    public bool obtenerTipoPregunta() {
+        return modelo.getPartida().TipoPregunta;
     }
 
     public void conectarPartida(string codigo, string nombreJugador) {
@@ -50,6 +59,9 @@ public class ClienteControlador : MonoBehaviour {
     public void ocultarVotacion() {
         vista.estado.ocultarVotacion();
     }
+    public void verificarCodigo(string codigo) {
+        vista.conectarse.verificarCodigo(codigo);
+    }
 
     public void enviarVoto(string HUid) {
         webClient.enviarVoto(modelo.getPartida().getID(), HUid, modelo.getJugador().getId());
@@ -74,8 +86,9 @@ public class ClienteControlador : MonoBehaviour {
         Partida p = modelo.getPartida();
         webClient.enviarRespuesta(p.getID(), modelo.getJugador().getId(), opcion);
     }
-
-
+    public void ocultarVistaEstado() {
+        vista.estado.gameObject.SetActive(false);
+    }
     public void mostrarVistaConectarse() {
         vista.conectarse.gameObject.SetActive(true);
     }
@@ -91,5 +104,13 @@ public class ClienteControlador : MonoBehaviour {
     }
     public void mostrarVistaConfiguracion() {
         vista.configuracion.gameObject.SetActive(true);
+    }
+    public void actualizarLenguaje() {
+        Debug.Log("Actualizando las vistas");
+        vista.inicio.actualizar();
+        vista.conectarse.actualizar();
+        vista.estado.actualizar();
+        vista.encuesta.actualizar();
+        vista.configuracion.actualizar();
     }
 }

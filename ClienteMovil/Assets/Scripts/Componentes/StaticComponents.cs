@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,12 @@ public class StaticComponents : MonoBehaviour {
     public string[] nombres;
     public Sprite[] avataresSprites;
 
+    public static LangLiteral lang;
+
     public static Dictionary<string, int> idiomas = new Dictionary<string, int>();
     public static Dictionary<string, Sprite> avatares = new Dictionary<string, Sprite>();
     public static string nombre;
-    public static float volument;
+    public static float volumen;
     public static string idioma;
 
     void Awake() {
@@ -22,9 +25,18 @@ public class StaticComponents : MonoBehaviour {
         for(int i=0; i<idiomasText.Length;i++) {
             idiomas.Add(idiomasText[i], id[i]);
         }
-        nombre = PlayerPrefs.GetString("nombre", "");
-        volument = PlayerPrefs.GetFloat("volumen", 50f);
-        idioma = PlayerPrefs.GetString("idioma", "Español");
+        loadConfig();
     }
-    
+
+    public static void loadConfig() {
+        nombre = PlayerPrefs.GetString("nombre", "");
+        volumen = PlayerPrefs.GetFloat("volumen", 50f);
+        idioma = PlayerPrefs.GetString("idioma", "Español");
+        lang = (LangLiteral)Activator.CreateInstance(Type.GetType(idioma+"Literal"));
+        instanciarIdioma();
+    }
+
+    public static void instanciarIdioma() {
+        lang = (LangLiteral)Activator.CreateInstance(Type.GetType(idioma+"Literal"));
+    }
 }

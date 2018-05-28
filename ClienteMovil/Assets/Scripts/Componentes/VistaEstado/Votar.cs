@@ -9,6 +9,6 @@ public class Votar : ClientElement {
 
     public void enviarVoto() {
         controlador.enviarVoto(txt.text);
-        controlador.vista.estado.ocultarVotacion();
+        controlador.ocultarVotacion();
     }
 }
