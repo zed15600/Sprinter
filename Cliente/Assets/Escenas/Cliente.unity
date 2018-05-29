@@ -23081,7 +23081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localhost: localhost
   amazonHost: ec2-18-231-48-175.sa-east-1.compute.amazonaws.com
-  useLocal: 1
+  useLocal: 0
   port: 5173
   proyectoObtenido: 0
 --- !u!1 &1665738874

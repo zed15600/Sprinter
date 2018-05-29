@@ -18,9 +18,6 @@ public class IntegranteScrumTeam extends Jugador {
     private boolean votar; //true -> puede votar
     private Impedimento Impedimento;
     
-    public void votar(HistoriaDeUsuario HU){
-    }
-    
     public IntegranteScrumTeam(String nombre, int assignedID, String avatar,
             String deviceID) {
         super(nombre, assignedID, deviceID);
