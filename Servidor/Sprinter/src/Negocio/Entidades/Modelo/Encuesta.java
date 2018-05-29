@@ -84,4 +84,8 @@ public class Encuesta {
         }
         return preguntaActual >= preguntas.size();
     }
+
+    public ArrayList<ArrayList<String>> getRespuestas() {
+        return respuestas;
+    }
 }

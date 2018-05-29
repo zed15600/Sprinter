@@ -28,8 +28,8 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
     //local
     private ArrayList<Criterio> listaCriterios;
     
-    public HistoriaDeUsuario(){
-    }
+    /*public HistoriaDeUsuario(){
+    }*/
     
     public HistoriaDeUsuario(String descripcion, String puntosHistoria,
             int prioridad, ArrayList<Criterio> listaCriterios, String nombre){

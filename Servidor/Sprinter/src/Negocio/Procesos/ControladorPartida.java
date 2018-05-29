@@ -74,4 +74,8 @@ public class ControladorPartida extends Controlador {
             (p.getJugadoresConImpedimentos());
     }
     
+    public void enviarDatosDePartida(int partidaID){
+        configuracion.enviarDatosDePartida(partidaID);
+    }
+    
 }

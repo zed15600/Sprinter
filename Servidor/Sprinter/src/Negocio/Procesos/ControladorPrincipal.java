@@ -120,4 +120,8 @@ public class ControladorPrincipal {
         return controladorEncuesta.registrarRespuesta(partidaID, jugador, respuesta);
     }
     
+    public void enviarDatosDePartida(int partidaID){
+        controladorPartidas.enviarDatosDePartida(partidaID);
+    }
+    
 }

@@ -72,7 +72,7 @@ public class ProyectoDAOMySQL implements ProyectoDAO {
                 int durSprints = r.getInt(4);
                 r.close();
                 Backlog backlog = new Backlog(impl.obtenerHistorias(id));
-                proyecto = new Proyecto(nombre, descripcion, durSprints,
+                proyecto = new Proyecto(id, nombre, descripcion, durSprints,
                         backlog, nSprints);
             }
             

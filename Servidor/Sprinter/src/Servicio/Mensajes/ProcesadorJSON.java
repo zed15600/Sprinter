@@ -88,6 +88,9 @@ public class ProcesadorJSON implements IProceso {
                     int player = (int)(long)json.get("player");
                     String opcion = (String)json.get("opcion");
                     return Main.getControlador().registrarRespuesta(pID, player, opcion);
+                case 21:
+                    Main.getControlador().enviarDatosDePartida(pID);
+                    break;
             }
         }
         return "";

@@ -22,6 +22,17 @@ import javax.swing.JOptionPane;
  */
 public final class ConexionMySQLSingleton {
     
+    private final static String IP =
+            "sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com";
+    private final static String puerto = "3306";
+    private final static String baseDeDatos = "sprinter";
+    private final static String conector = "jdbc:mysql://"
+            + IP
+            + ":" + puerto 
+            + "/" + baseDeDatos;
+    private final static String usuario = "rrazopardc";
+    private final static String contraseña = "Azopardo234432qw";
+    
     private static Connection conexion;
     /**
      * Método Para Hacer la Conexión a la Base de Datos de MySQL.
@@ -37,15 +48,7 @@ public final class ConexionMySQLSingleton {
         Connection conn = null;
         try {
         Class.forName("com.mysql.jdbc.Driver");
-        String IP = "sprinter-game-db.c7twxi4xnwzx.sa-east-1.rds.amazonaws.com";
-        String puerto = "3306";
-        String baseDeDatos = "sprinter";
-        String conector = "jdbc:mysql://"
-                + IP
-                + ":" + puerto 
-                + "/" + baseDeDatos;
-        String usuario = "rrazopardc";
-        String contraseña = "Azopardo234432qw";
+        
         conn = DriverManager.getConnection(conector, usuario, contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex,
@@ -53,6 +56,17 @@ public final class ConexionMySQLSingleton {
                             + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }        
         conexion = conn;
+    }
+    public static Connection crearConexionSecundaria(){
+        Connection conn = null;
+        try {
+        conn = DriverManager.getConnection(conector, usuario, contraseña);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex,
+                    "Error en la conexión con la" + "base de datos: "
+                            + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }  
+        return conn;
     }
 
     public static Connection abrirConexion(){

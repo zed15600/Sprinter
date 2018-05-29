@@ -10,8 +10,12 @@ import Servicio.Mensajes.JSONMensajes;
 import Negocio.Entidades.Modelo.Configuracion;
 import java.io.IOException;
 import AccesoADatos.FuncionesDAOMySQL.DAOFachadaMySQL;
+import AccesoADatos.FuncionesDAOMySQL.PartidaDAOMySQL;
 import Negocio.Entidades.DAO.DAOFachada;
+import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Pregunta;
+import Negocio.Entidades.Modelo.Proyecto;
+import Negocio.Entidades.Modelo.ScrumMaster;
 import Negocio.Procesos.IConexion;
 import Negocio.Procesos.IMensajes;
 import Negocio.Procesos.ControladorPrincipal;
@@ -62,6 +66,7 @@ public class Main {
         /*--------------------Fin De Implementaciones-------------------------*/
         Configuracion configuracion = new Configuracion(DAO);
         //Controlador global de la aplicación.
+        
         controlador = new ControladorPrincipal(implMensajes,implConexion,configuracion);
         controlador.conectar();
     }

@@ -51,7 +51,6 @@ public class ClienteControlador : ClientElement {
     
 
     //Llamadas a Modelo
-
         public List<string> obtenerProyectos() {
             return modelo.getProyectos();
         }
@@ -70,15 +69,12 @@ public class ClienteControlador : ClientElement {
         public Dictionary<string, Sprite> obtenerMapaAvatares() {
             return modelo.getMapaAvatares();
         }
-
         public void establecerScrumMaster(string nombre) {
             modelo.setScrumMaster(nombre);
         }
-
         public string obtenerScrumMaster() {
             return modelo.getScrumMaster();
         }
-
         public void establecerJugadoresEnProblemas(List<Jugador> jugadores) {
             modelo.getMinijuego().setJugadoresEnProblemas(jugadores);
         }
@@ -86,8 +82,7 @@ public class ClienteControlador : ClientElement {
             return modelo.Preg;
         }
 
-    //Partida
-
+        //Partida
         public void setIdPartida(string ID) {
             modelo.getPartida().Id = ID;
         }
@@ -99,7 +94,6 @@ public class ClienteControlador : ClientElement {
         }
 
         //proyecto
-
         public void establecerProyecto(Proyecto proyecto) {
             modelo.setProyecto(proyecto);
         }
@@ -144,7 +138,6 @@ public class ClienteControlador : ClientElement {
         }
 
         //Minijuego
-
         public HistoriaDeUsuario obtenerHistoriaActual() {
             return modelo.getMinijuego().getHistoriaActual();
         }
@@ -164,11 +157,9 @@ public class ClienteControlador : ClientElement {
             modelo.getMinijuego().completarCriterio(descripcion);
         }
         public int obtenerPuntosHMinijuego(){
-            //Debug.Log("ClienteControlador.obtenerPuntosHMinijuego() -> Puntos de Historia de minijuego: " + modelo.getMinijuego().getHistoriaActual().getPuntos());
             return int.Parse(modelo.getMinijuego().getHistoriaActual().getPuntos());
         }
         public int obtenerPrioridadMinijuego(){
-            //Debug.Log("ClienteControlador.obtenerPuntosHMinijuego() -> Prioridad de Historia de minijuego: " + modelo.getMinijuego().getHistoriaActual().getPrioridad());
             return modelo.getMinijuego().getHistoriaActual().getPrioridad();
         }
         public void establecerTiempo(float tiempo){
@@ -188,7 +179,9 @@ public class ClienteControlador : ClientElement {
         }
 
     //Llamadas a Vista
-
+    public void mostrarVistaConfiguracion() {
+        vista.configuracion.gameObject.SetActive(true);
+    }
     public void mostrarVistaUnirseAPartida() {
         vista.unirseAPartida.gameObject.SetActive(true);
     }
@@ -329,5 +322,23 @@ public class ClienteControlador : ClientElement {
         } else {
             mostrarVistaRetrospectiva();
         }
+    }
+    public void salirDePartida() {
+        vista.vistaMenuJugador.gameObject.SetActive(false);
+        vista.vistaMenuInvestigador.gameObject.SetActive(false);
+        vista.configuracionDePartida.gameObject.SetActive(false);
+        vista.unirseAPartida.gameObject.SetActive(false);
+        vista.scrumPlanning.gameObject.SetActive(false);
+        vista.sprintPlanning.gameObject.SetActive(false);
+        vista.vistaSprint.gameObject.SetActive(false);
+        vista.reunion.gameObject.SetActive(false);
+        vista.minijuegos.gameObject.SetActive(false);
+        vista.resultados.gameObject.SetActive(false);
+        vista.retrospectiva.gameObject.SetActive(false);
+        vista.finDelJuego.gameObject.SetActive(false);
+        vista.encuesta.gameObject.SetActive(false);
+        vista.configuracion.gameObject.SetActive(false);
+        vista.vistaPerfil.gameObject.SetActive(true);
+        //Aquí reiniciar los valores de partida.
     }
 }

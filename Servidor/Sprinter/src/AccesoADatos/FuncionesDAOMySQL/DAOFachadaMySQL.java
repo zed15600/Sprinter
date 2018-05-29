@@ -15,6 +15,7 @@ import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -25,13 +26,12 @@ public class DAOFachadaMySQL implements DAOFachada {
     private final ProyectoDAO proDAO;
     private final ImpedimentoDAO impDAO;
     private final PreguntaDAO preDAO;
-    private final PartidaDAO parDAO;
+    private PartidaDAO parDAO;
     
     public DAOFachadaMySQL(){
         this.proDAO = new ProyectoDAOMySQL();
         this.impDAO = new ImpedimentoDAOMySQL();
         this.preDAO = new PreguntaDAOMySQL();
-        this.parDAO = new PartidaDAOMySQL();
     }
     
     @Override
@@ -55,8 +55,9 @@ public class DAOFachadaMySQL implements DAOFachada {
     }
 
     @Override
-    public void enviarResultadosPartida(Partida partida) {
-        parDAO.enviarResultadosPartida(partida);
+    public void enviarResultadosPartida(Partida partida, Map mapa) {
+        parDAO = new PartidaDAOMySQL(partida, mapa);
+        new Thread(parDAO).start();
     }
     
     

@@ -11,6 +11,6 @@ import Negocio.Entidades.Modelo.Partida;
  *
  * @author usuario
  */
-public interface PartidaDAO {
-    public void enviarResultadosPartida(Partida partida);
+public interface PartidaDAO extends Runnable{
+    public void enviarResultadosPartida();
 }

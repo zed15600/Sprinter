@@ -76,4 +76,8 @@ public class Configuracion {
     public ArrayList<Impedimento> getImpedimentos() {
         return impedimentos;
     }
+    
+    public void enviarDatosDePartida(int idPartida){
+        fachadaImpl.enviarResultadosPartida(obtenerPartida(idPartida), mapaDePartidas);
+    }
 }

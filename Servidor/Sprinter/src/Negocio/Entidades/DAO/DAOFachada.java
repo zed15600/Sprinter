@@ -10,6 +10,7 @@ import Negocio.Entidades.Modelo.Partida;
 import Negocio.Entidades.Modelo.Pregunta;
 import Negocio.Entidades.Modelo.Proyecto;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -20,5 +21,5 @@ public interface DAOFachada {
     public ArrayList<Impedimento> obtenerImpedimentos();
     public Proyecto obtenerProyecto(String nombre);
     public ArrayList<Pregunta> obtenerPreguntasEncuesta();
-    public void enviarResultadosPartida(Partida partida);
+    public void enviarResultadosPartida(Partida partida, Map mapa);
 }
