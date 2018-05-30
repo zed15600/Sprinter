@@ -57,8 +57,8 @@ public class ControladorPrincipal {
         return controladorProyectos.sprintPlanning(partidaID);
     }
     
-    public void establecerCompletada(int partidaID, String nombreHistoria) {
-        controladorProyectos.establecerCompletada(partidaID, nombreHistoria);
+    public void establecerCompletada(int partidaID, String nombreHistoria, int puntos) {
+        controladorProyectos.establecerCompletada(partidaID, nombreHistoria, puntos);
     }
     
     public String unirsePartida(int codigo, String nombreJugador, 
@@ -122,6 +122,10 @@ public class ControladorPrincipal {
     
     public void enviarDatosDePartida(int partidaID){
         controladorPartidas.enviarDatosDePartida(partidaID);
+    }
+    
+    public void actualizarEstadoPartida(int pID, String estado){
+        controladorPartidas.actualizarEstadoPartida(pID, estado);
     }
     
 }

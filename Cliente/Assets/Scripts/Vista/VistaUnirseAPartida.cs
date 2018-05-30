@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class VistaUnirseAPartida : ClientElement, IVista {
 
     private Idioma idioma;
-
+    public GameObject vistasPartidas;
     public HorizontalLayoutGroup grupoJugadores;
-    public Text codigo;
+    public Text codigo, codigoJuego;
     public Image prefabJugador;
 
     private float timer = 2.0f;
@@ -21,6 +21,7 @@ public class VistaUnirseAPartida : ClientElement, IVista {
         string codigoPartida = controlador.obtenerCodigoPartida();
         //Debug.Log("VistaUnirseAPartida.ponerCodigo() -> Código de partida: " + codigoPartida);
         codigo.text = codigoPartida;
+        codigoJuego.text = controlador.obtenerCodigoPartida();
     }
 
     public void llenarGrupo() {
@@ -56,6 +57,7 @@ public class VistaUnirseAPartida : ClientElement, IVista {
 	}
 
     public void cambiarVista() {
+        controlador.mostrarVistasPartidas();
         controlador.empezarPartida();
         this.gameObject.SetActive(false);
         controlador.mostrarVistaScrumPlanning();

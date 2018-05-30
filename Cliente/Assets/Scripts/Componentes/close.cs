@@ -5,11 +5,11 @@ using UnityEngine;
 public class close : MonoBehaviour {
 
     public void cerrar() {
-        if (UnityEditor.EditorApplication.isPlaying) {
+        /*if (UnityEditor.EditorApplication.isPlaying) {
             UnityEditor.EditorApplication.isPlaying = false;
         } else {
             Application.Quit();
-        }
-
+        }*/
+        Application.Quit();
     }
 }

@@ -40,7 +40,8 @@ public class ProcesadorJSON implements IProceso {
                 case 6:  return Main.getControlador().sprintPlanning(pID);
                 case 7:  
                     String nombre = (String)json.get("nombre");
-                    Main.getControlador().establecerCompletada(pID, nombre);
+                    int puntos = (Integer)json.get("puntos");
+                    Main.getControlador().establecerCompletada(pID, nombre,puntos);
                     break;
                 case 8:
                     String nombreJugador = (String)json.get("nombreJugador");
@@ -90,6 +91,10 @@ public class ProcesadorJSON implements IProceso {
                     return Main.getControlador().registrarRespuesta(pID, player, opcion);
                 case 21:
                     Main.getControlador().enviarDatosDePartida(pID);
+                    break;
+                case 22:
+                    String resultado = (String)json.get("resultado");
+                    Main.getControlador().actualizarEstadoPartida(pID, resultado);
                     break;
             }
         }

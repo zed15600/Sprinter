@@ -78,4 +78,8 @@ public class ControladorPartida extends Controlador {
         configuracion.enviarDatosDePartida(partidaID);
     }
     
+    public void actualizarEstadoPartida(int pID, String resultado){
+        configuracion.obtenerPartida(pID).setEstado(resultado);
+    }
+    
 }

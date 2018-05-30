@@ -302,7 +302,7 @@ public class ClienteControlador : ClientElement {
 
     public void terminarHistoria(HistoriaDeUsuario historia){
         historia.cambiarEstado();
-        webClient.establecerCompletada(historia.getNombre());
+        webClient.establecerCompletada(historia.getNombre(), historia.getPuntaje());
     }
 
     //Modelo
@@ -323,22 +323,30 @@ public class ClienteControlador : ClientElement {
             mostrarVistaRetrospectiva();
         }
     }
+
+    public void mostrarVistasPartidas() {
+        vista.vistaPartidas.gameObject.SetActive(true);
+    }
+
+    public void actualizarEstadoPartida() {
+    }
+
     public void salirDePartida() {
-        vista.vistaMenuJugador.gameObject.SetActive(false);
-        vista.vistaMenuInvestigador.gameObject.SetActive(false);
-        vista.configuracionDePartida.gameObject.SetActive(false);
-        vista.unirseAPartida.gameObject.SetActive(false);
+        vista.vistaConfiguracionEnJuego.gameObject.SetActive(false);
         vista.scrumPlanning.gameObject.SetActive(false);
         vista.sprintPlanning.gameObject.SetActive(false);
         vista.vistaSprint.gameObject.SetActive(false);
         vista.reunion.gameObject.SetActive(false);
         vista.minijuegos.gameObject.SetActive(false);
+        vista.panelHistorias.gameObject.SetActive(false);
+        vista.panelVotacionDia.gameObject.SetActive(false);
+        vista.panelVotacionSPlanning.gameObject.SetActive(false);
         vista.resultados.gameObject.SetActive(false);
         vista.retrospectiva.gameObject.SetActive(false);
         vista.finDelJuego.gameObject.SetActive(false);
         vista.encuesta.gameObject.SetActive(false);
-        vista.configuracion.gameObject.SetActive(false);
-        vista.vistaPerfil.gameObject.SetActive(true);
+        vista.vistaMenuJugador.gameObject.SetActive(true);
+        vista.vistaPartidas.gameObject.SetActive(false);
         //Aquí reiniciar los valores de partida.
     }
 }

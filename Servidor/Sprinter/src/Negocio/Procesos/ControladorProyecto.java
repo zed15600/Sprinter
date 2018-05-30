@@ -42,12 +42,12 @@ public class ControladorProyecto extends Controlador {
         return respuestas.sprintPlanning(restantes, actual);
     }
 
-    void establecerCompletada(int partidaID, String nombreHistoria) {
+    void establecerCompletada(int partidaID, String nombreHistoria, int puntos) {
         Proyecto p = configuracion.obtenerProyectoDePartida(partidaID);
         ArrayList<HistoriaDeUsuario> historias = p.obtenerHistorias();
         for (HistoriaDeUsuario historia : historias){
             if (historia.getNombre().equals(nombreHistoria)){
-                historia.terminarHU();
+                historia.terminarHU(puntos);
                 return;
             }
         }

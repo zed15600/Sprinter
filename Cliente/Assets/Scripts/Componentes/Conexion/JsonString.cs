@@ -35,12 +35,13 @@ public class JsonString : ClientElement {
         return res;
     }*/
 
-    public static string establecerCompletada(string partida, string historiaNombre){
+    public static string establecerCompletada(string partida, string historiaNombre, int puntos){
         string res = "{"
         + "\"codigo\":0007, "
         + "\"partidaID\":\"" + partida + "\","
         + "\"nombre\":\"" + historiaNombre + "\""
-        + "}\n";
+        + "\"puntos\":" + puntos 
+        + "}";
         return res;
     }
 
@@ -114,6 +115,15 @@ public class JsonString : ClientElement {
         string res = "{" +
             "\"codigo\":0019," +
             "\"partidaID\":" + partidaID +
+            "}";
+        return res;
+    }
+
+    public static string actualizarEstadoPartida(string partidaID, string resultado) {
+        string res = "{" +
+            "\"codigo\":0022, " +
+            "\"partidaID\":" + partidaID + ", " +
+            "\"resultado\":\"" + resultado + "\""+
             "}";
         return res;
     }

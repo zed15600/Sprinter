@@ -41,10 +41,10 @@
                     lineasDeDialogo = new string[] {
                     "Bienvenidos al Scrum Team!",
                     "Vamos a construir un proyecto en equipo utilizando el Marco Ágil Scrum!",
-                    "Yo seré el Product Owner del equipo y he recopilado los deseos del cliente!",
+                    "Yo seré el Product Owner del equipo y he recopilado y documentado los deseos del cliente!",
                     "A estos deseos les llamamos Historias de Usuario, tienen prioridad y puntos basados en tiempo y esfuerzo.",
-                    scrumMaster + "sera su Scrum Master y les facilitara los conceptos de Scrum. :D",
-                    "Deben las Historias de Usuario cumplirlos para completar el proyecto y ganar!",
+                    scrumMaster + " sera su Scrum Master y les facilitara los conceptos de Scrum. :D",
+                    "Deben completar las Historias de Usuario para terminar el proyecto y ganar!",
                     "Mucha Suerte!\n" +
                     "Meow! (=^･ｪ･^=))ﾉ彡☆ ",
                     ""};
@@ -82,7 +82,7 @@
                 //Reunion Diaria - Listo
                 case 5:
                     lineasDeDialogo = new string[] {
-                    "En Scrum el equipo se reúne diariamente para gestionar el trabajo e informar impedimentos",
+                    "En Scrum el Scrum Team se reúne diariamente para gestionar el trabajo e informar impedimentos",
                     "Esta reunión se conoce como la reunión diaria o el Daily Scrum",
                     "Debemos aprovechar este tiempo de reunión para discutir que haremos el día de hoy y como completaremos la historia de usuario.",
                     "Para completar la historia de usuario deben cumplir todos sus criterios de aceptación!",

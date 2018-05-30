@@ -21,6 +21,8 @@ public class ClienteVista : ClientElement, IVista {
     public VistaReunionDiaria reunion;
     public VistaConfiguracion configuracion;
     public VistaEncuesta encuesta;
+    public VistaConfiguracionEnJuego vistaConfiguracionEnJuego;
+    public GameObject vistaPartidas;
 
     public PanelHistorias panelHistorias;
     public PanelDialogoGlobal dialogoGlobal;
@@ -48,6 +50,7 @@ public class ClienteVista : ClientElement, IVista {
                 encuesta.cambiarIdioma(new EncuestaEspañol());
                 panelHistorias.cambiarIdioma(new PanelHistoriasEspañol());
                 dialogoGlobal.cambiarIdioma(new DialogoEspañol());
+                vistaConfiguracionEnJuego.cambiarIdioma(new ConfiguracionEspañol());
                 return;
 
             case "ingles":
@@ -68,6 +71,7 @@ public class ClienteVista : ClientElement, IVista {
                 encuesta.cambiarIdioma(new EncuestaIngles());
                 panelHistorias.cambiarIdioma(new PanelHistoriasEspañol());
                 dialogoGlobal.cambiarIdioma(new DialogoIngles());
+                vistaConfiguracionEnJuego.cambiarIdioma(new ConfiguracionIngles());
                 return;
         }
     }

@@ -36,10 +36,10 @@ public class VistaEncuesta : ClientElement, IVista {
         inicializarVista();
         Pregunta p = controlador.obtenerPregunta();
 		pregunta.text = p.Descripcion;
-        a.text = p.Respuestas[0];
-        b.text = p.Respuestas[1];
-        c.text = p.Respuestas[2];
-        d.text = p.Respuestas[3];
+        a.text = (p.Respuestas[1].Equals("")?"":"A. ")+ p.Respuestas[0];
+        b.text = (p.Respuestas[1].Equals("")?"":"B. ")+p.Respuestas[1];
+        c.text = (p.Respuestas[1].Equals("") ? "" : "C. ")+p.Respuestas[2];
+        d.text = (p.Respuestas[1].Equals("") ? "" : "D. ")+p.Respuestas[3];
 	}
 	
 	// Update is called once per frame
@@ -51,6 +51,7 @@ public class VistaEncuesta : ClientElement, IVista {
         } else {
             tiempoPorPregunta = 20f;
             controlador.siguientePregunta();
+            Debug.Log(controlador.obtenerPregunta());
             OnEnable();
         }
 	}

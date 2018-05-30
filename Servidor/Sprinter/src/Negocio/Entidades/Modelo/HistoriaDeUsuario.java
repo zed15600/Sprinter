@@ -69,7 +69,8 @@ public class HistoriaDeUsuario implements Comparable<HistoriaDeUsuario>{
         return prioridad;
     }
     
-    public void terminarHU(){
+    public void terminarHU(int puntos){
+        this.puntuacion = puntos;
         this.estado = true;
     }
     

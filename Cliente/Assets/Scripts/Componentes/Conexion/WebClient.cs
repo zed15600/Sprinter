@@ -123,9 +123,9 @@ public class WebClient : ClientElement {
 
     }
 
-    public void establecerCompletada(String HUNombre){
+    public void establecerCompletada(String HUNombre, int puntos){
         setupSocket();
-        string json = JsonString.establecerCompletada(controlador.obtenerPartida().Id, HUNombre);
+        string json = JsonString.establecerCompletada(controlador.obtenerPartida().Id, HUNombre, puntos);
         writeSocket(json);
         closeSocket();
     }
@@ -297,14 +297,10 @@ public class WebClient : ClientElement {
                 establecerPregunta(jsRes);
             } else {
                 controlador.ocultarVistaEncuesta();
-                controlador.mostrarInicio();
+                controlador.salirDePartida();
             }
         }
     }
-
-
-
-
 
     public List<Jugador> hacerListaDeJugadores(JSONObject json) {
         JSONArray nombres = json.GetArray("jugadores");

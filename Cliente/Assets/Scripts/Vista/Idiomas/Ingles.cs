@@ -48,6 +48,7 @@ public class ConfiguracionIngles : Idioma {
         determinadorDeIdiomas.Add("dialogos", "Dialogues");
         determinadorDeIdiomas.Add("volver", "Back");
         determinadorDeIdiomas.Add("aplicar", "Apply");
+        determinadorDeIdiomas.Add("","");
         return determinadorDeIdiomas;
     }
 }

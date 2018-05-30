@@ -58,7 +58,7 @@
                     "These iterations are called Sprints.",
                     "At the end of every Sprint we must have a functional product that the client can try! :D",
                     "We must select which stories are going to be developed in the first Sprint.",
-                    "As the Product Owner I have priorized them, please choose based on the workload you think you can manage and what would make a good first prototype" +
+                    "As the Product Owner I have priorized them, please choose them based on the workload you think you can manage and what would make a good first prototype" +
                     " for the client.",
                     "We must communicate as a team to select these stories! (=^･ω･^=)," +
                     ""};
